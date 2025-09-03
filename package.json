@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "LINK DE DIAGRAMA FLUJO: \"https://miro.com/app/board/uXjVIrEC4SI=/?share_link_id=774515287886\" (Copiar y pegar en Google)",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -16,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/MateoSilber/SUKI---Proyecto-TIC/issues"
   },
-  "homepage": "https://github.com/MateoSilber/SUKI---Proyecto-TIC#readme"
+  "homepage": "https://github.com/MateoSilber/SUKI---Proyecto-TIC#readme",
+  "dependencies": {
+    "soquetic": "^1.4.1"
+  }
 }
