@@ -1,0 +1,20 @@
+{
+  "name": "suki---proyecto-tic-2",
+  "version": "1.0.0",
+  "description": "LINK DE DIAGRAMA FLUJO: \"https://miro.com/app/board/uXjVIrEC4SI=/?share_link_id=774515287886\" (Copiar y pegar en Google)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MateoSilber/SUKI---Proyecto-TIC.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MateoSilber/SUKI---Proyecto-TIC/issues"
+  },
+  "homepage": "https://github.com/MateoSilber/SUKI---Proyecto-TIC#readme"
+}
