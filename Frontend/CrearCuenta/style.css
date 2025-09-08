@@ -22,7 +22,7 @@ body {
   text-align: center;
 }
 
-/* Botones e inputs */
+
 .btn {
   display: block;
   width: 200px;
@@ -47,12 +47,12 @@ body {
   text-align: center;
 }
 
-/* Inputs con error */
+
 input:invalid {
   border-color: red;
 }
 
-/* Mensajes de error */
+
 .error {
   color: red;
   font-size: 12px;
@@ -65,7 +65,7 @@ input:invalid {
   margin-right: auto;
 }
 
-/* Modal */
+
 .modal {
   display: none; 
   position: fixed; 
