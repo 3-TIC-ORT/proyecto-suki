@@ -1,4 +1,4 @@
-function usuarios(usuario, contraseña, mail, fecha){
+export function usuarios(usuario, contraseña, mail, fecha){
     let usuario = {
         nombre: nombre,
         contraseña: contraseña,
@@ -12,3 +12,4 @@ fs.writeFileSync("data/pedidos.json",datosJSON );
 objok = {ok:true};
 return objok;
 }
+
