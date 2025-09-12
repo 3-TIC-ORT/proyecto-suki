@@ -16,13 +16,18 @@ subscribePOSTEvent("crear", (usuario, contraseña, mail, fecha) => {
     return objok;
 });
 
-let datousuario = JSON.parse(fs.readFileSync("data/usuarios.json", "utf-8"))
+let listausuario = JSON.parse(fs.readFileSync("data/usuarios.json", "utf-8"))
 
-subscribePOSTEvent("login", (email, contraseña) => {
-if (email === && contraseña === ){
-
-} else if (email === && contraseña === )
-
-
-
-})
+subscribePOSTEvent("login", (mail, contraseña) => {
+    objok =  {ok: false};
+    for (let i = 0; i < listausuario.length; i++) {
+        let usuario = listausuario[i];
+    
+        if (usuario.mail === mail && usuario.contraseña === contraseña) {
+          objok = {ok: true};
+        return objok;
+}else if (usuario.mail !== mail && usuario.contraseña !== contraseña){
+    objok = {ok: false};
+    return objok;
+}
+}})
