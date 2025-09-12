@@ -22,17 +22,8 @@ for (let i = 0; i < datos.length; i++){
 if (datos[i].includes(usuario) && datos[i].includes(contraseña)){
     objok = {ok:true}
     return objok;
-} else {
-    objok = {ok:false}
+}
+}
     return objok;
-}
-
-
-}
-
-
-
-
-
 })
 startServer(3000, true);
