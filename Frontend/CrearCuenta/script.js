@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Si todo ok → enviar al backend con SoqueTIC
     if (valido) {
-      const data = { usuario, mail, contraseña, fechaNacimiento: fecha };
+      const data = { usuario, mail, contraseña, fecha };
 
       postEvent("crear", data, (respuesta) => {
         if (respuesta.ok) {

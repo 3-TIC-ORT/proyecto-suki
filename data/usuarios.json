@@ -1,1 +1,8 @@
-[]
+[
+  {
+    "usuario": "Mateo",
+    "contraseña": "Mateo1234",
+    "mail": "mateo@gmail.com",
+    "fecha": "2020-12-12"
+  }
+]
