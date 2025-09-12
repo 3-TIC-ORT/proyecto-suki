@@ -69,15 +69,21 @@ document.addEventListener("DOMContentLoaded", () => {
       valido = false;
     }
 
-    // Si todo ok, guardar y redirigir
+    // Si todo ok → enviar al backend con SoqueTIC
     if (valido) {
-      localStorage.setItem("usuario", usuario);
-      localStorage.setItem("mail", mail);
-      localStorage.setItem("contraseña", contraseña);
-      localStorage.setItem("fechaNacimiento", fecha);
+      const data = { usuario, mail, contraseña, fechaNacimiento: fecha };
 
-      alert("Cuenta creada con éxito ");
-      window.location.href = "../menu principal/indexMenuPrincipal.html";
+      postEvent("crear", data, (respuesta) => {
+        if (respuesta.ok) {
+          alert("Cuenta creada con éxito");
+          window.location.href = "../menu principal/indexMenuPrincipal.html";
+        } else {
+          alert("Error al registrar: " + respuesta.error);
+        }
+      });
     }
   });
+
+  // Conectar con el backend (puerto por defecto 3000)
+  connect2Server();
 });
