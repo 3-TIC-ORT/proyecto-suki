@@ -1,15 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <script src="script.js"></script>
-    <title>SUKI</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="style.css">
+
+  <!-- Librería de Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script defer src="script.js"></script>
+
+  <title>SUKI</title>
 </head>
+
 <body>
-   
-    
-    <script src="script.js"></script>
+  <header>
+    <div class="izquierda">
+      <div class="logo">
+        <img src="logo.png" alt="Logo SUKI" />
+      </div>
+      <div class="icono-carrito">
+        <img src="Vector.png" alt="Carrito de compras" />
+      </div>
+    </div>
+    <div class="derecha">
+      <div class="nombre-usuario">Usuario</div>
+      <div class="foto-perfil">
+        <img src="image 4.png" alt="Foto de perfil" />
+      </div>
+      <div class="icono-menu" id="menuBtn">&#9776;</div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Botón completar + progreso -->
+    <div class="contenedor-progreso">
+      <div class="boton-completar" id="botonCompletar">Completar</div>
+      <div class="puntos-progreso" id="puntosProgreso"></div>
+    </div>
+
+    <!-- Tarjetas -->
+    <section class="tarjetas">
+      <div class="tarjeta">
+        <h3>Calendario de racha</h3>
+        <div class="calendario" id="calendario"></div>
+      </div>
+      <div class="tarjeta">
+        <h3>Total de veces completado</h3>
+        <p id="totalCompletado">0</p>
+      </div>
+      <div class="tarjeta">
+        <h3>Progreso del mes</h3>
+        <canvas id="graficoProgreso"></canvas>
+      </div>
+      <div class="tarjeta">
+        <h3>Racha más larga</h3>
+        <p id="rachaLarga">0</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <a href="../Usuario/IndexUsuario.html">Usuario</a>
+    <a href="../Inventario/IndexInventario.html">Inventario</a>
+    <a href="../Tienda/IndexTienda.html">Tienda</a>
+    <a href="../Logros/IndexLogros.html">Logros</a>
+    <a href="../Ajustes/IndexAjustes.html">Ajustes</a>
+    <a href="../AcercaDe/IndexAcercaDe.html">Acerca De</a>
+    <img src="perroSidebar.png" alt="perroSidebar">
+  </div>
+
+  <div class="overlay" id="overlay"></div>
 </body>
 </html>
