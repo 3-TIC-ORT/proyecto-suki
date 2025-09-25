@@ -4,24 +4,31 @@ import { devolverobjetivos } from "./funciones.js";
 
 subscribeGETEvent("objetivos", devolverobjetivos);
 
+
+
+let datosusuario = JSON.parse(fs.readFileSync("data/usuarios.json", "utf-8"));
 subscribePOSTEvent("crear", ({idusuario, usuario, contraseña, mail, fecha}) => {
     let objok = {ok:false};
-    let objusuario = {
-        usuario: usuario,
-        id: idusuario,
-        contraseña: contraseña,
-        mail: mail,
-        fecha: fecha,
-        racha: null,
-        logrosdesbloqueados: null,
-        skinscompradas: null
-    };
-    let datosusuario = JSON.parse(fs.readFileSync("data/usuarios.json", "utf-8"));
-    datosusuario.push(objusuario);
-    let datosusuarioJSON = JSON.stringify(datosusuario, null, 2);
-    fs.writeFileSync("data/usuarios.json", datosusuarioJSON);
-    objok = { ok: true};
-    return objok;
+    for (let i = 0; i < datosusuario.length; i++){
+        if(datosusuario[i].mail === mail){
+         return objok;
+        }}
+        let objusuario = {
+            usuario: usuario,
+            id: idusuario,
+            contraseña: contraseña,
+            mail: mail,
+            fecha: fecha,
+            racha: null,
+            logrosdesbloqueados: null,
+            skinscompradas: null
+        };
+        datosusuario.push(objusuario);
+        let datosusuarioJSON = JSON.stringify(datosusuario, null, 2);
+        fs.writeFileSync("data/usuarios.json", datosusuarioJSON);
+        objok = { ok: true};
+        return objok;
+    
 });
 
 subscribePOSTEvent("login", ({email, contraseña}) => {
