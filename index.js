@@ -1,19 +1,19 @@
 import fs from "fs";
 import { subscribeGETEvent, subscribePOSTEvent, realTimeEvent, startServer } from "soquetic";
 import { devolverobjetivos } from "./funciones.js";
-
-subscribeGETEvent("objetivos", devolverobjetivos);
+idusuario = 1;
+subscribePOSTEvent("objetivos", devolverobjetivos);
 
 
 
 let datosusuario = JSON.parse(fs.readFileSync("data/usuarios.json", "utf-8"));
-subscribePOSTEvent("crear", ({idusuario, usuario, contraseña, mail, fecha}) => {
+subscribePOSTEvent("crear", ({usuario, contraseña, mail, fecha}) => {
     let objok = {ok:false};
     for (let i = 0; i < datosusuario.length; i++){
         if(datosusuario[i].mail === mail){
          return objok;
         }}
-        let objusuario = {
+        idusuario = {
             usuario: usuario,
             id: idusuario,
             contraseña: contraseña,
@@ -41,6 +41,7 @@ subscribePOSTEvent("crear", ({idusuario, usuario, contraseña, mail, fecha}) => 
         datosusuario.push(objusuario);
         let datosusuarioJSON = JSON.stringify(datosusuario, null, 2);
         fs.writeFileSync("data/usuarios.json", datosusuarioJSON);
+        id = id + 1;
         objok = { ok: true};
         return objok;
 });
