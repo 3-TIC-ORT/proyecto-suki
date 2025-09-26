@@ -1,4 +1,4 @@
-// -------- MENÚ --------
+
 const menuBtn = document.getElementById("menuBtn");
 const sidebar = document.getElementById("sidebar");
 const overlay = document.getElementById("overlay");
@@ -12,7 +12,7 @@ overlay.addEventListener("click", () => {
   overlay.classList.remove("show");
 });
 
-// -------- PROGRESO --------
+
 const botonCompletar = document.getElementById("botonCompletar");
 const puntosProgreso = document.getElementById("puntosProgreso");
 const calendario = document.getElementById("calendario");
@@ -23,14 +23,14 @@ let progresoHoy = 0;
 let ultimaFechaCompletada = null;
 let diasCompletados = 0;
 
-// Crear puntos de progreso
+
 for (let i = 0; i < metaPorDia; i++) {
   const punto = document.createElement("div");
   punto.classList.add("punto");
   puntosProgreso.appendChild(punto);
 }
 
-// Generar calendario según mes actual
+
 function generarCalendario() {
   const fecha = new Date();
   const anio = fecha.getFullYear();
@@ -48,7 +48,7 @@ function generarCalendario() {
 }
 const diasMes = generarCalendario();
 
-// -------- GRÁFICO PIE --------
+
 const ctx = document.getElementById("graficoProgreso").getContext("2d");
 const grafico = new Chart(ctx, {
   type: "pie",
@@ -63,14 +63,14 @@ const grafico = new Chart(ctx, {
   options: { responsive: true }
 });
 
-// -------- Botón Completar --------
+
 botonCompletar.addEventListener("click", () => {
   const hoy = new Date().toDateString();
   const diaActual = new Date().getDate();
   const puntos = document.querySelectorAll(".punto");
 
   if (ultimaFechaCompletada === hoy) {
-    alert("Ya completaste este día ✅");
+    alert("Ya completaste este día");
     return;
   }
 

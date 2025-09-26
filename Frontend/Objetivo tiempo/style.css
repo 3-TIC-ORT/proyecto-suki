@@ -3,7 +3,7 @@ body {
   font-family: Arial, sans-serif;
 }
 
-/* ---------- Header ---------- */
+
 header {
   display: flex;
   align-items: center;
@@ -53,7 +53,7 @@ header {
   cursor: pointer;
 }
 
-/* ---------- Sidebar ---------- */
+
 .sidebar {
   position: fixed;
   top: 0;
@@ -85,7 +85,6 @@ header {
   visibility: visible;
 }
 
-/* ---------- Botón completar ---------- */
 .contenedor-progreso {
   margin: 20px auto;
   text-align: center;
@@ -112,7 +111,7 @@ header {
 }
 .punto.activo { background: limegreen; }
 
-/* ---------- Tarjetas ---------- */
+
 .tarjetas {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -127,7 +126,6 @@ header {
   text-align: center;
 }
 
-/* ---------- Calendario ---------- */
 .calendario {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -149,6 +147,85 @@ header {
 .dia.activo {
   background: limegreen;
   color: white;
+}
+
+
+.contenedor-progreso {
+  margin: 20px auto;
+  text-align: center;
+}
+
+.timer-container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 0 auto 15px;
+}
+
+.timer-svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg); /* Rotación inicial para el stroke */
+}
+
+.timer-bg {
+  stroke: #ccc;
+}
+
+.timer-progress {
+  transition: stroke-dashoffset 1s linear; /* Animación suave al actualizar */
+  stroke: #3b82f6; /* Azul para progreso */
+}
+
+.timer-display {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.timer-time {
+  font-size: 2.5em;
+  font-weight: bold;
+  color: #000;
+  font-family: Arial, sans-serif;
+  margin-bottom: 5px;
+}
+
+.timer-status {
+  font-size: 0.9em;
+  color: #6b7280;
+  font-family: Arial, sans-serif;
+}
+
+
+.timer-controls {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.btn-timer {
+  background: black;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: none;
+  font-size: 14px;
+  transition: background 0.3s;
+}
+
+.btn-timer:hover:not(:disabled) {
+  background: #333;
+}
+
+.btn-timer:disabled {
+  background: #ccc;
+  color: #666;
+  cursor: not-allowed;
 }
 
 

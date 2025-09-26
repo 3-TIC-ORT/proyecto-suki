@@ -5,8 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="style.css">
-
-  <!-- Librería de Chart.js -->
+  
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script defer src="script.js"></script>
 
@@ -33,13 +32,55 @@
   </header>
 
   <main>
-    <!-- Botón completar + progreso -->
+    <!-- Timer circular + controles (reemplaza el botón Completar) -->
     <div class="contenedor-progreso">
-      <div class="boton-completar" id="botonCompletar">Completar</div>
+      <!-- Timer circular -->
+      <div class="timer-container" id="timerContainer">
+        <svg class="timer-svg" viewBox="0 0 200 200">
+          <!-- Fondo del círculo -->
+          <circle
+            class="timer-bg"
+            cx="100"
+            cy="100"
+            r="80"
+            stroke="#e2e8f0"
+            stroke-width="12"
+            fill="none"
+          />
+          <!-- Círculo de progreso (se anima) -->
+          <circle
+            class="timer-progress"
+            cx="100"
+            cy="100"
+            r="80"
+            stroke="#3b82f6"
+            stroke-width="12"
+            fill="none"
+            stroke-linecap="round"
+            stroke-dasharray="502.65"  <!-- Circunferencia: 2 * π * 80 ≈ 502.65 -->
+            stroke-dashoffset="502.65"
+            transform="rotate(-90 100 100)"
+          />
+        </svg>
+        
+        <!-- Tiempo en el centro -->
+        <div class="timer-display">
+          <div class="timer-time" id="timerTime">01:00</div>
+          <div class="timer-status" id="timerStatus">Listo</div>
+        </div>
+      </div>
+
+      <!-- Botones debajo del timer -->
+      <div class="timer-controls">
+        <button id="btnComenzar" class="btn-timer">Comenzar</button>
+        <button id="btnFrenar" class="btn-timer" disabled>Frenar</button>
+      </div>
+
+      <!-- Puntos de progreso (se mantiene) -->
       <div class="puntos-progreso" id="puntosProgreso"></div>
     </div>
 
-    <!-- Tarjetas -->
+    <!-- Tarjetas (se mantiene igual) -->
     <section class="tarjetas">
       <div class="tarjeta">
         <h3>Calendario de racha</h3>
@@ -60,7 +101,7 @@
     </section>
   </main>
 
-  <!-- Sidebar -->
+  <!-- Sidebar (se mantiene igual) -->
   <div class="sidebar" id="sidebar">
     <a href="../Usuario/IndexUsuario.html">Usuario</a>
     <a href="../Inventario/IndexInventario.html">Inventario</a>
