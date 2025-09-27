@@ -1,7 +1,7 @@
 import fs from "fs";
 import { subscribeGETEvent, subscribePOSTEvent, realTimeEvent, startServer } from "soquetic";
 import { devolverobjetivos } from "./funciones.js";
-idusuario = 1;
+let idusuario = 1;
 subscribePOSTEvent("objetivos", devolverobjetivos);
 
 
@@ -13,7 +13,7 @@ subscribePOSTEvent("crear", ({usuario, contraseña, mail, fecha}) => {
         if(datosusuario[i].mail === mail){
          return objok;
         }}
-        idusuario = {
+       let objusuario = {
             usuario: usuario,
             id: idusuario,
             contraseña: contraseña,
@@ -41,7 +41,8 @@ subscribePOSTEvent("crear", ({usuario, contraseña, mail, fecha}) => {
         datosusuario.push(objusuario);
         let datosusuarioJSON = JSON.stringify(datosusuario, null, 2);
         fs.writeFileSync("data/usuarios.json", datosusuarioJSON);
-        id = id + 1;
+        idusuario = idusuario + 1;
+        objusuario = objusuario + 1;
         objok = { ok: true};
         return objok;
 });

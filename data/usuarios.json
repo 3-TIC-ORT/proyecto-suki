@@ -1,1 +1,71 @@
-[]
+[
+  {
+    "usuario": "Alex",
+    "id": 1,
+    "contraseña": "Alex123",
+    "mail": "mulleralex204@gmail.com",
+    "fecha": "2025-09-05",
+    "racha": 0,
+    "logrosdesbloqueados": 0,
+    "skinscompradas": 0,
+    "skins": {
+      "suki": false,
+      "trump": false,
+      "flash": false,
+      "turro": false,
+      "sullivan": false,
+      "bikini": false,
+      "rabino": false,
+      "bizarrap": false,
+      "oro": false,
+      "gato": false
+    },
+    "logros": {}
+  },
+  {
+    "usuario": "Lucas",
+    "id": 2,
+    "contraseña": "Jajaja2",
+    "mail": "lucas@gmail.com",
+    "fecha": "2025-09-11",
+    "racha": 0,
+    "logrosdesbloqueados": 0,
+    "skinscompradas": 0,
+    "skins": {
+      "suki": false,
+      "trump": false,
+      "flash": false,
+      "turro": false,
+      "sullivan": false,
+      "bikini": false,
+      "rabino": false,
+      "bizarrap": false,
+      "oro": false,
+      "gato": false
+    },
+    "logros": {}
+  },
+  {
+    "usuario": "Mateo",
+    "id": 3,
+    "contraseña": "JAJAJAAJ3",
+    "mail": "mateo@gmail.com",
+    "fecha": "2025-08-31",
+    "racha": 0,
+    "logrosdesbloqueados": 0,
+    "skinscompradas": 0,
+    "skins": {
+      "suki": false,
+      "trump": false,
+      "flash": false,
+      "turro": false,
+      "sullivan": false,
+      "bikini": false,
+      "rabino": false,
+      "bizarrap": false,
+      "oro": false,
+      "gato": false
+    },
+    "logros": {}
+  }
+]
