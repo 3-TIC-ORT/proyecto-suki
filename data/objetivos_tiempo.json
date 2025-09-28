@@ -1,1 +1,9 @@
-[]
+[
+  {
+    "idusuario": 1,
+    "titulo": "Objetivo de tiempo",
+    "tipodeobjetivo": "tiempo",
+    "frecuencia": "diaria",
+    "estado": "activo"
+  }
+]

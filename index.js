@@ -1,8 +1,20 @@
 import fs from "fs";
 import { subscribeGETEvent, subscribePOSTEvent, realTimeEvent, startServer } from "soquetic";
-import { devolverobjetivos } from "./funciones.js";
 let idusuario = 1;
-subscribePOSTEvent("objetivos", devolverobjetivos);
+subscribePOSTEvent("objetivos", ({idusuario}) => {
+        idusuario = Number(idusuario);
+        let  objetivosaccion = JSON.parse(fs.readFileSync("data/objetivos_accion.json", "utf-8"));
+        let objetivostiempo = JSON.parse(fs.readFileSync("data/objetivos_tiempo.json", "utf-8"));
+        let objetivos = objetivosaccion.concat(objetivostiempo);
+        let objetivousuarios = [];
+        for (let i = 0; i < objetivos.length; i++){
+            if (objetivos[i].idusuario === idusuario){
+                objetivousuarios.push(objetivos[i]);
+            }
+        }
+    
+        return objetivousuarios;
+    });
 
 
 
@@ -59,7 +71,7 @@ if (datosusuario[i].mail === email && datosusuario[i].contraseña === contraseñ
     return objok;
 })
 
-subscribePOSTEvent("crearobjetivo", ({idusuario, titulo, estado, tipodeobjetivo, frecuencia,}) => {
+subscribePOSTEvent("crearobjetivo", ({idusuario, titulo, estado, tipodeobjetivo, frecuencia}) => {
     let objok = {ok:false};
     let objetivo = {
     idusuario: idusuario,
