@@ -6,8 +6,9 @@ subscribePOSTEvent("objetivos", devolverobjetivos);
 
 
 
-let datosusuario = JSON.parse(fs.readFileSync("data/usuarios.json", "utf-8"));
+
 subscribePOSTEvent("crear", ({usuario, contraseña, mail, fecha}) => {
+    let datosusuario = JSON.parse(fs.readFileSync("data/usuarios.json", "utf-8"));
     let objok = {ok:false};
     for (let i = 0; i < datosusuario.length; i++){
         if(datosusuario[i].mail === mail){
@@ -42,7 +43,6 @@ subscribePOSTEvent("crear", ({usuario, contraseña, mail, fecha}) => {
         let datosusuarioJSON = JSON.stringify(datosusuario, null, 2);
         fs.writeFileSync("data/usuarios.json", datosusuarioJSON);
         idusuario = idusuario + 1;
-        objusuario = objusuario + 1;
         objok = { ok: true};
         return objok;
 });
