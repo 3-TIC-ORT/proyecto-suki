@@ -1,1 +1,9 @@
-[]
+[
+  {
+    "idusuario": 2,
+    "titulo": "tomar 3 vasos",
+    "tipodeobjetivo": "accion",
+    "frecuencia": "semanal",
+    "estado": "activo"
+  }
+]

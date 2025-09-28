@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crear Objetivo</title>
+</head>
+<body>
+  <h2>Crear Objetivo</h2>
+
+  <form id="form-objetivo">
+    <label>
+      ID Usuario:
+      <input type="number" id="idusuario" required>
+    </label><br><br>
+
+    <label>
+      Título:
+      <input type="text" id="titulo" required>
+    </label><br><br>
+
+    <label>
+      Tipo de Objetivo:
+      <select id="tipodeobjetivo" required>
+        <option value="tiempo">Tiempo</option>
+        <option value="accion">Acción</option>
+      </select>
+    </label><br><br>
+
+    <label>
+      Frecuencia:
+      <input type="text" id="frecuencia" required>
+    </label><br><br>
+
+    <label>
+      Estado:
+      <input type="text" id="estado" required>
+    </label><br><br>
+
+    <button type="submit">Crear Objetivo</button>
+  </form>
+
+  <div id="resultado" style="margin-top:20px;color:green;"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.8.1/socket.io.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/JZylber/SoqueTIC-Client@v1.4.2/soquetic-client.js"></script>
+  <script src="crearObjetivo.js"></script>
+</body>
+</html>

@@ -5,5 +5,12 @@
     "tipodeobjetivo": "tiempo",
     "frecuencia": "diaria",
     "estado": "activo"
+  },
+  {
+    "idusuario": 1,
+    "titulo": "Hola",
+    "tipodeobjetivo": "tiempo",
+    "frecuencia": "diaria",
+    "estado": "activo"
   }
 ]
