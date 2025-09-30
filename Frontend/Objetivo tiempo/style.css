@@ -1,8 +1,10 @@
+/* Reset básico */
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f9f4f2; /* tono claro parecido al fondo del segundo diseño */
+  color: #000; /* texto negro */
 }
-
 
 header {
   display: flex;
@@ -12,13 +14,14 @@ header {
   border-bottom: 2px solid black;
 }
 
-.izquierda, .derecha {
+.izquierda, 
+.derecha {
   display: flex;
   align-items: center;
 }
 
 .logo img {
-  width: 50px;
+  width: 50px; 
   height: auto;
   margin-right: 15px;
 }
@@ -37,7 +40,7 @@ header {
 .foto-perfil {
   width: 40px;
   height: 40px;
-  border-radius: 50%;
+  border-radius: 50%; 
   overflow: hidden;
   margin-right: 10px;
 }
@@ -64,10 +67,33 @@ header {
   color: white;
   padding: 20px;
   z-index: 1001;
-  transform: translateX(100%);
-  transition: transform 0.3s ease;
+
+  transform: translateX(100%); 
+  transition: transform 0.3s ease; 
 }
-.sidebar.open { transform: translateX(0); }
+
+.sidebar.open {
+  transform: translateX(0); 
+}
+
+.sidebar h2 {
+  margin-top: 0;
+  font-size: 20px;
+}
+
+.sidebar a {
+  display: block;
+  color: white;
+  text-decoration: none;
+  margin: 15px 0;
+  font-size: 16px;
+}
+
+.sidebar a:hover {
+  text-decoration: underline;
+}
+
+
 .overlay {
   position: fixed;
   top: 0;
@@ -80,80 +106,115 @@ header {
   transition: opacity 0.3s ease;
   z-index: 1000;
 }
+
 .overlay.show {
   opacity: 1;
   visibility: visible;
 }
 
+.sidebar img {
+  width: 100%;
+  max-width: 200px; /* para que no se deforme */
+  margin: 20px auto 0 auto;
+  display: block;
+}
+
+
+/* Contenedor progreso y puntos */
 .contenedor-progreso {
   margin: 20px auto;
   text-align: center;
+  max-width: 400px;
+  color: #000;
 }
 .boton-completar {
-  background: black;
-  color: white;
+  background: #000;
+  color: #ffcc00;
   padding: 15px 25px;
-  border-radius: 10px;
+  border-radius: 12px;
   cursor: pointer;
   display: inline-block;
   margin-bottom: 15px;
+  font-weight: 700;
+  font-size: 1.1em;
+  border: none;
+  transition: background 0.3s;
 }
+.boton-completar:hover {
+  background: #222;
+}
+
 .puntos-progreso {
   display: flex;
   justify-content: center;
-  gap: 8px;
+  gap: 10px;
 }
 .punto {
   width: 20px;
   height: 20px;
-  border-radius: 5px;
+  border-radius: 10px;
   background: #ccc;
+  border: 2px solid #ff3b3b; /* rojo */
+  transition: background-color 0.3s;
 }
-.punto.activo { background: limegreen; }
+.punto.activo {
+  background: #ff3b3b; /* rojo vivo */
+  border-color: #ff3b3b;
+}
 
-
+/* Tarjetas */
 .tarjetas {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 15px;
   padding: 20px;
-}
-.tarjeta {
-  background: #f1f1f1;
-  padding: 20px;
-  border-radius: 10px;
-  font-size: 14px;
-  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
+.tarjeta {
+  background: #fff;
+  padding: 25px 20px;
+  border-radius: 18px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+  font-size: 1em;
+  text-align: center;
+  color: #000;
+  font-weight: 600;
+  user-select: none;
+}
+
+/* Calendario */
 .calendario {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 5px;
+  gap: 6px;
   margin-top: 10px;
   justify-items: center;
 }
+
 .dia {
-  width: 30px;
-  height: 30px;
-  background: #ddd;
-  border-radius: 5px;
+  width: 32px;
+  height: 32px;
+  background: #eaeaea;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 12px;
+  font-size: 13px;
   cursor: pointer;
+  user-select: none;
+  color: #333;
+  font-weight: 600;
+  transition: background 0.35s;
 }
 .dia.activo {
-  background: limegreen;
-  color: white;
+  background: #4ade80; /* verde parecido con el diseño */
+  color: #fff;
+  font-weight: 700;
 }
 
-
-.contenedor-progreso {
-  margin: 20px auto;
-  text-align: center;
-}
+/* Timer */
 
 .timer-container {
   position: relative;
@@ -165,16 +226,18 @@ header {
 .timer-svg {
   width: 100%;
   height: 100%;
-  transform: rotate(-90deg); /* Rotación inicial para el stroke */
+  transform: rotate(-90deg);
 }
 
 .timer-bg {
-  stroke: #ccc;
+  stroke: #ffcc00; /* amarillo */
+  stroke-width: 15;
 }
 
 .timer-progress {
-  transition: stroke-dashoffset 1s linear; /* Animación suave al actualizar */
-  stroke: #3b82f6; /* Azul para progreso */
+  transition: stroke-dashoffset 1s linear;
+  stroke: #ff3b3b; /* rojo */
+  stroke-width: 15;
 }
 
 .timer-display {
@@ -183,49 +246,80 @@ header {
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
+  user-select: none;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .timer-time {
-  font-size: 2.5em;
-  font-weight: bold;
+  font-size: 3em;
+  font-weight: 700;
   color: #000;
-  font-family: Arial, sans-serif;
   margin-bottom: 5px;
 }
 
 .timer-status {
-  font-size: 0.9em;
-  color: #6b7280;
-  font-family: Arial, sans-serif;
+  font-size: 1em;
+  color: #777;
 }
 
-
+/* Controles timer */
 .timer-controls {
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 15px;
   margin-bottom: 15px;
 }
 
 .btn-timer {
-  background: black;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 10px;
+  background: #000;
+  color: #ffcc00;
+  padding: 12px 24px;
+  border-radius: 14px;
   cursor: pointer;
   border: none;
-  font-size: 14px;
+  font-size: 16px;
+  font-weight: 700;
   transition: background 0.3s;
+  user-select: none;
 }
 
 .btn-timer:hover:not(:disabled) {
-  background: #333;
+  background: #222;
 }
 
 .btn-timer:disabled {
   background: #ccc;
-  color: #666;
+  color: #999;
   cursor: not-allowed;
 }
 
+/* Ajustes para íconos y elementos en general */
 
+.icono-menu:hover,
+.icono-carrito img:hover,
+.boton-completar:hover,
+.btn-timer:hover {
+  filter: brightness(120%);
+  transition: filter 0.2s ease-in-out;
+}
+
+/* Texto adicional estilo similar al ejemplo */
+.tarjeta p strong, .tarjeta p b {
+  font-size: 3em;
+  font-weight: 900;
+  color: #000;
+  line-height: 1;
+}
+
+/* Pie de texto pequeño similar a etiquetas de leyenda */
+.letras-completados, .letras-no-completados {
+  font-size: 0.75em;
+  font-weight: 600;
+  text-align: center;
+}
+.letras-completados {
+  color: #ffcc00; /* amarillo */
+}
+.letras-no-completados {
+  color: #ff3b3b; /* rojo */
+}

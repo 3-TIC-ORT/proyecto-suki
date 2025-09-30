@@ -140,6 +140,8 @@ function startTimer() {
   timeLeft = DURACION_TIMER;
   btnComenzar.disabled = true;
   btnFrenar.disabled = false;
+  btnFrenar.textContent = "Frenar";
+  timerStatusEl.textContent = "Corriendo...";
   updateTimer();
   
   intervalId = setInterval(() => {
@@ -150,20 +152,24 @@ function startTimer() {
   }, 1000);
 }
 
-// Frenar/Pausar (toggle)
+// Pausar o reanudar timer (toggle)
 function toggleTimer() {
-  if (!isRunning || timeLeft === 0) return;
-  
-  isRunning = !isRunning;
+  if (timeLeft === 0) return; // No hacer nada si el timer terminó
+
   if (isRunning) {
-    btnFrenar.textContent = "Frenar";
-    updateTimer();
-  } else {
+    // Pausar
+    isRunning = false;
     btnFrenar.textContent = "Reanudar";
+    timerStatusEl.textContent = "Pausado";
+  } else {
+    // Reanudar
+    isRunning = true;
+    btnFrenar.textContent = "Frenar";
+    timerStatusEl.textContent = "Corriendo...";
   }
 }
 
-
+// Resetear timer
 function resetTimer() {
   clearInterval(intervalId);
   isRunning = false;
@@ -171,8 +177,7 @@ function resetTimer() {
   btnComenzar.disabled = false;
   btnFrenar.disabled = true;
   btnFrenar.textContent = "Frenar";
-  btnReanudar.disabled = true;
-  btnReanudar.textContent = "Reanudar";
+  timerStatusEl.textContent = "Listo";
   updateTimer();
 }
 
@@ -204,10 +209,8 @@ function completarTarea() {
   }
 }
 
-
+// Eventos
 btnComenzar.addEventListener("click", startTimer);
 btnFrenar.addEventListener("click", toggleTimer);
-btnReanudar.addEventListener("click", startTimer);
-
 
 updateTimer();
