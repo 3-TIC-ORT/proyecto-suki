@@ -1,6 +1,31 @@
 import fs from "fs";
 import { subscribeGETEvent, subscribePOSTEvent, realTimeEvent, startServer } from "soquetic";
 let idusuario = 1;
+let idobjetivo = 1;
+
+subscribePOSTEvent("borrarobjetivo", ({idobjetivo, tipodeobjetivo}) => {
+    let objok = {ok:false};
+    let archivo = "";
+    idobjetivo = Number(idobjetivo);
+
+    if (tipodeobjetivo === "tiempo"){
+        archivo = "data/objetivos_tiempo.json";
+    } else if (tipodeobjetivo === "accion"){
+        archivo = "data/objetivos_accion.json";
+    }
+
+     let objetivo = JSON.parse(fs.readFileSync(archivo, "utf-8"));
+      for (let i = 0; i < objetivo.length; i++){
+            if (objetivo[i].idobjetivo === idobjetivo){
+               objetivo.splice(i, 1);
+            }
+}
+let objetivoJSON = JSON.stringify(objetivo, null, 2);
+            fs.writeFileSync(archivo, objetivoJSON);
+            objok = {ok:true};
+            return objok;
+});
+
 subscribePOSTEvent("objetivos", ({idusuario}) => {
         idusuario = Number(idusuario);
         let  objetivosaccion = JSON.parse(fs.readFileSync("data/objetivos_accion.json", "utf-8"));
@@ -62,7 +87,9 @@ subscribePOSTEvent("crear", ({usuario, contraseña, mail, fecha}) => {
                 ganador: false,
                 extraganador: false,
                 extasis: false
-            }
+            },
+            rachamaslarga: 0,
+            cantidadobjetivoscreados: 0
         };
         datosusuario.push(objusuario);
         let datosusuarioJSON = JSON.stringify(datosusuario, null, 2);
@@ -87,7 +114,8 @@ if (datosusuario[i].mail === email && datosusuario[i].contraseña === contraseñ
 subscribePOSTEvent("crearobjetivo", ({idusuario, titulo, estado, tipodeobjetivo, frecuencia, tiempo, veces, icono, color}) => {
     let objok = {ok:false};
     let objetivo = {
-    idusuario: idusuario,
+    idusuario: Number(idusuario),
+    idobjetivo: idobjetivo,
     titulo: titulo,
     tipodeobjetivo: tipodeobjetivo,
     frecuencia: frecuencia,
@@ -113,6 +141,7 @@ if (tipodeobjetivo === "tiempo"){
     objok = {ok:true};
     return objok;
 } 
+idobjetivo = idobjetivo + 1;
 });
 
 startServer(3000, true);
