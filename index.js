@@ -48,7 +48,19 @@ subscribePOSTEvent("crear", ({usuario, contraseña, mail, fecha}) => {
         gato: false
             },
             logros:{
-                
+                primerpaso: false,
+                racha3: false,
+                racha7: false,
+                racha30: false,
+                iniciador: false,
+                creador: false,
+                coleccionista: false,
+                explorador: false,
+                legendario: false,
+                centenario: false,
+                ganador: false,
+                extraganador: false,
+                extasis: false
             }
         };
         datosusuario.push(objusuario);
@@ -71,7 +83,7 @@ if (datosusuario[i].mail === email && datosusuario[i].contraseña === contraseñ
     return objok;
 })
 
-subscribePOSTEvent("crearobjetivo", ({idusuario, titulo, estado, tipodeobjetivo, frecuencia}) => {
+subscribePOSTEvent("crearobjetivo", ({idusuario, titulo, estado, tipodeobjetivo, frecuencia, tiempo, veces, icono, color}) => {
     let objok = {ok:false};
     let objetivo = {
     idusuario: idusuario,
@@ -79,6 +91,11 @@ subscribePOSTEvent("crearobjetivo", ({idusuario, titulo, estado, tipodeobjetivo,
     tipodeobjetivo: tipodeobjetivo,
     frecuencia: frecuencia,
     estado: estado,
+    tiempo: tiempo,
+    veces: veces,
+    color: color,
+    icono: icono
+
 };
 if (tipodeobjetivo === "tiempo"){
     let datosobjetivostiempo = JSON.parse(fs.readFileSync("data/objetivos_tiempo.json","utf-8"));

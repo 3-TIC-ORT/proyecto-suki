@@ -1,9 +1,13 @@
 [
   {
-    "idusuario": 2,
-    "titulo": "tomar 3 vasos",
+    "idusuario": 1,
+    "titulo": "Cantidad de agua tomada",
     "tipodeobjetivo": "accion",
-    "frecuencia": "semanal",
-    "estado": "activo"
+    "frecuencia": "diaria",
+    "estado": "activo",
+    "tiempo": null,
+    "veces": 3,
+    "color": "red",
+    "icono": "👍"
   }
 ]

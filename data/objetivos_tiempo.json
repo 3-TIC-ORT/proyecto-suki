@@ -1,16 +1,13 @@
 [
   {
-    "idusuario": 1,
-    "titulo": "Objetivo de tiempo",
+    "idusuario": 2,
+    "titulo": "Leer 30 minutos",
     "tipodeobjetivo": "tiempo",
     "frecuencia": "diaria",
-    "estado": "activo"
-  },
-  {
-    "idusuario": 1,
-    "titulo": "Hola",
-    "tipodeobjetivo": "tiempo",
-    "frecuencia": "diaria",
-    "estado": "activo"
+    "estado": "activo",
+    "tiempo": 30,
+    "veces": null,
+    "color": "red",
+    "icono": "✌"
   }
 ]
