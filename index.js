@@ -35,6 +35,7 @@ subscribePOSTEvent("crear", ({usuario, contraseña, mail, fecha}) => {
             racha: 0,
             logrosdesbloqueados: 0,
             skinscompradas: 0,
+            dinero: 0,
             skins: {
         suki: false,
         trump: false,

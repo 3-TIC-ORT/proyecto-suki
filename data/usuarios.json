@@ -1,1 +1,78 @@
-[]
+[
+  {
+    "usuario": "Mateo",
+    "id": 1,
+    "contraseña": "Mateo1234",
+    "mail": "mateo@gmail.com",
+    "fecha": "2025-09-12",
+    "racha": 0,
+    "logrosdesbloqueados": 0,
+    "skinscompradas": 0,
+    "dinero": 0,
+    "skins": {
+      "suki": false,
+      "trump": false,
+      "flash": false,
+      "turro": false,
+      "sullivan": false,
+      "bikini": false,
+      "rabino": false,
+      "bizarrap": false,
+      "oro": false,
+      "gato": false
+    },
+    "logros": {
+      "primerpaso": false,
+      "racha3": false,
+      "racha7": false,
+      "racha30": false,
+      "iniciador": false,
+      "creador": false,
+      "coleccionista": false,
+      "explorador": false,
+      "legendario": false,
+      "centenario": false,
+      "ganador": false,
+      "extraganador": false,
+      "extasis": false
+    }
+  },
+  {
+    "usuario": "Lucas",
+    "id": 2,
+    "contraseña": "Lucas1234",
+    "mail": "lucas@gmail.com",
+    "fecha": "2025-10-03",
+    "racha": 0,
+    "logrosdesbloqueados": 0,
+    "skinscompradas": 0,
+    "dinero": 0,
+    "skins": {
+      "suki": false,
+      "trump": false,
+      "flash": false,
+      "turro": false,
+      "sullivan": false,
+      "bikini": false,
+      "rabino": false,
+      "bizarrap": false,
+      "oro": false,
+      "gato": false
+    },
+    "logros": {
+      "primerpaso": false,
+      "racha3": false,
+      "racha7": false,
+      "racha30": false,
+      "iniciador": false,
+      "creador": false,
+      "coleccionista": false,
+      "explorador": false,
+      "legendario": false,
+      "centenario": false,
+      "ganador": false,
+      "extraganador": false,
+      "extasis": false
+    }
+  }
+]
