@@ -1,7 +1,39 @@
 import fs from "fs";
 import { subscribeGETEvent, subscribePOSTEvent, realTimeEvent, startServer } from "soquetic";
 let idusuario = 1;
-let idobjetivo = 1;
+let idobjetivo = 1
+;
+
+subscribePOSTEvent("completarobjetivo",({idusuario, idobjetivo, tipodeobjetivo}) =>{
+    let objok = {ok:false};
+    let archivo = "";
+    idobjetivo = Number(idobjetivo);
+    idusuario = Number(idusuario);
+    if (tipodeobjetivo === "tiempo"){
+        archivo = "data/objetivos_tiempo.json";
+    } else if (tipodeobjetivo === "accion"){
+        archivo = "data/objetivos_accion.json";
+    }
+
+let objetivostotal = JSON.parse(fs.readFileSync(archivo, "utf-8"));
+let objetivoelegido = null; 
+for (let i = 0; i < objetivostotal.length; i++){
+    if (objetivostotal[i].idobjetivo === idobjetivo && objetivostotal[i].idusuario === idusuario){
+        objetivoelegido = objetivostotal[i];
+        break;
+    } 
+    if (!objetivoelegido){
+return objok;
+    }
+    objetivoelegido.vecescompletadas++;
+    objetivoelegido.dinero += 10;
+
+
+
+
+
+}})
+
 
 subscribePOSTEvent("borrarobjetivo", ({idobjetivo, tipodeobjetivo}) => {
     let objok = {ok:false};
@@ -61,6 +93,7 @@ subscribePOSTEvent("crear", ({usuario, contraseña, mail, fecha}) => {
             logrosdesbloqueados: 0,
             skinscompradas: 0,
             dinero: 0,
+            fechadecreacion: new Date().toLocaleDateString("es-AR"),
             skins: {
         suki: false,
         trump: false,
@@ -89,6 +122,8 @@ subscribePOSTEvent("crear", ({usuario, contraseña, mail, fecha}) => {
                 extasis: false
             },
             rachamaslarga: 0,
+            rachaactual: 0,
+            ultimodiaderacha: null,
             cantidadobjetivoscreados: 0
         };
         datosusuario.push(objusuario);
@@ -122,6 +157,7 @@ subscribePOSTEvent("crearobjetivo", ({idusuario, titulo, estado, tipodeobjetivo,
     estado: estado,
     tiempo: tiempo,
     veces: veces,
+    vecescompletadas: 0,
     color: color,
     icono: icono
 
@@ -132,6 +168,7 @@ if (tipodeobjetivo === "tiempo"){
     let datosobjetivostiempoJSON = JSON.stringify(datosobjetivostiempo, null, 2);
     fs.writeFileSync("data/objetivos_tiempo.json", datosobjetivostiempoJSON);
     objok = {ok:true};
+    idobjetivo = idobjetivo + 1;
     return objok;
 } else if (tipodeobjetivo === "accion"){
     let datosobjetivosaccion = JSON.parse(fs.readFileSync("data/objetivos_accion.json","utf-8"));
@@ -139,9 +176,10 @@ if (tipodeobjetivo === "tiempo"){
     let datosobjetivosaccionJSON = JSON.stringify(datosobjetivosaccion, null, 2);
     fs.writeFileSync("data/objetivos_accion.json", datosobjetivosaccionJSON);
     objok = {ok:true};
+    idobjetivo = idobjetivo + 1;
     return objok;
 } 
-idobjetivo = idobjetivo + 1;
+
 });
 
 startServer(3000, true);
