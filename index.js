@@ -2,6 +2,11 @@ import fs from "fs";
 import { subscribeGETEvent, subscribePOSTEvent, realTimeEvent, startServer } from "soquetic";
 let idusuario = 1;
 let idobjetivo = 1
+let logrosArray = [
+  "primerpaso", "racha3", "racha7", "racha30",
+  "iniciador", "creador", "coleccionista", "explorador",
+  "legendario", "centenario", "ganador", "extraganador", "extasis"
+];
 ;
 
 subscribePOSTEvent("completarobjetivo",({idusuario, idobjetivo, tipodeobjetivo}) =>{
@@ -59,6 +64,8 @@ subscribePOSTEvent("completarobjetivo",({idusuario, idobjetivo, tipodeobjetivo})
 
     usuarioelegido.ultimodiaderacha = hoy;
 
+   
+
     if (usuarioelegido.rachaactual === 3 && !usuarioelegido.logros.racha3) {
         usuarioelegido.logros.racha3 = true;
         usuarioelegido.logrosdesbloqueados++;
@@ -75,9 +82,36 @@ subscribePOSTEvent("completarobjetivo",({idusuario, idobjetivo, tipodeobjetivo})
         usuarioelegido.logrosdesbloqueados++;
         usuarioelegido.dinero += 50; 
     }
+
+let totalLogros = 0;
+for (let i = 0; i < logrosArray.length; i++) {
+    if (usuarioelegido.logros[logrosArray[i]] === true) {
+        totalLogros++;
+    }
+}
+
+if (totalLogros >= 5 && !usuarioelegido.logros.ganador) {
+    usuarioelegido.logros.ganador = true;
+    usuarioelegido.logrosdesbloqueados++;
+    usuarioelegido.dinero += 50;
+}
+if (totalLogros >= 10 && !usuarioelegido.logros.extraganador) {
+    usuarioelegido.logros.extraganador = true;
+    usuarioelegido.logrosdesbloqueados++;
+    usuarioelegido.dinero += 100;
+}
+if (totalLogros === logrosArray.length && !usuarioelegido.logros.extasis) {
+    usuarioelegido.logros.extasis = true;
+    usuarioelegido.logrosdesbloqueados++;
+    usuarioelegido.dinero += 200;
+}
+
+
+
     fs.writeFileSync(archivo, JSON.stringify(objetivostotal, null, 2));
     fs.writeFileSync("data/usuarios.json", JSON.stringify(usuarios, null, 2));
-    return {ok:true,
+    objok = {ok:true};
+    return {objok,
         dinero: usuarioelegido.dinero,
         racha: usuarioelegido.rachaactual,
         rachamaslarga: usuarioelegido.rachamaslarga,
@@ -191,7 +225,7 @@ subscribePOSTEvent("login", ({email, contraseña}) => {
 let datosusuario = JSON.parse(fs.readFileSync("data/usuarios.json", "utf-8"));
 for (let i = 0; i < datosusuario.length; i++){
 if (datosusuario[i].mail === email && datosusuario[i].contraseña === contraseña){
-    objok = {ok:true};
+    objok = {ok:true, id: datosusuario[i].id, usuario: datosusuario[i].usuario};
     return objok;
 }
 }
@@ -200,6 +234,13 @@ if (datosusuario[i].mail === email && datosusuario[i].contraseña === contraseñ
 
 subscribePOSTEvent("crearobjetivo", ({idusuario, titulo, estado, tipodeobjetivo, frecuencia, tiempo, veces, icono, color}) => {
     let objok = {ok:false};
+    let archivo = "";
+    idusuario = Number(idusuario);
+    if (tipodeobjetivo === "tiempo"){
+        archivo = "data/objetivos_tiempo.json";
+    } else if (tipodeobjetivo === "accion"){
+        archivo = "data/objetivos_accion.json";
+    }
     let objetivo = {
     idusuario: idusuario,
     idobjetivo: idobjetivo,
@@ -214,23 +255,71 @@ subscribePOSTEvent("crearobjetivo", ({idusuario, titulo, estado, tipodeobjetivo,
     icono: icono
 
 };
-if (tipodeobjetivo === "tiempo"){
-    let datosobjetivostiempo = JSON.parse(fs.readFileSync("data/objetivos_tiempo.json","utf-8"));
-    datosobjetivostiempo.push(objetivo);
-    let datosobjetivostiempoJSON = JSON.stringify(datosobjetivostiempo, null, 2);
-    fs.writeFileSync("data/objetivos_tiempo.json", datosobjetivostiempoJSON);
-    objok = {ok:true};
+    let objetivos = JSON.parse(fs.readFileSync(archivo, "utf-8"));
+    objetivos.push(objetivo);
+    let objetivoJSON = JSON.stringify(objetivos, null, 2);
+    fs.writeFileSync(archivo, objetivoJSON);
     idobjetivo = idobjetivo + 1;
-    return objok;
-} else if (tipodeobjetivo === "accion"){
-    let datosobjetivosaccion = JSON.parse(fs.readFileSync("data/objetivos_accion.json","utf-8"));
-    datosobjetivosaccion.push(objetivo);
-    let datosobjetivosaccionJSON = JSON.stringify(datosobjetivosaccion, null, 2);
-    fs.writeFileSync("data/objetivos_accion.json", datosobjetivosaccionJSON);
-    objok = {ok:true};
-    idobjetivo = idobjetivo + 1;
-    return objok;
-} 
+
+    let usuarios = JSON.parse(fs.readFileSync("data/usuarios.json", "utf-8"));
+    let usuarioelegido = null;
+    for (let i = 0; i < usuarios.length; i++) {
+        if (usuarios[i].id === idusuario) {
+            usuarioelegido = usuarios[i];
+            break;
+        }
+    }
+    if (!usuarioelegido) {
+        return objok; 
+    }
+
+ usuarioelegido.cantidadobjetivoscreados++;
+
+
+   if (usuarioelegido.cantidadobjetivoscreados === 1 && !usuarioelegido.logros.iniciador) {
+        usuarioelegido.logros.iniciador = true;
+        usuarioelegido.logrosdesbloqueados++;
+        usuarioelegido.dinero += 10;
+    }
+
+     if (usuarioelegido.cantidadobjetivoscreados === 5 && !usuarioelegido.logros.creador) {
+        usuarioelegido.logros.creador = true;
+        usuarioelegido.logrosdesbloqueados++;
+        usuarioelegido.dinero += 20;
+    }
+
+let totalLogros = 0;
+for (let i = 0; i < logrosArray.length; i++) {
+    if (usuarioelegido.logros[logrosArray[i]] === true) {
+        totalLogros++;
+    }
+}
+
+if (totalLogros >= 5 && !usuarioelegido.logros.ganador) {
+    usuarioelegido.logros.ganador = true;
+    usuarioelegido.logrosdesbloqueados++;
+    usuarioelegido.dinero += 50;
+}
+if (totalLogros >= 10 && !usuarioelegido.logros.extraganador) {
+    usuarioelegido.logros.extraganador = true;
+    usuarioelegido.logrosdesbloqueados++;
+    usuarioelegido.dinero += 100;
+}
+if (totalLogros === logrosArray.length && !usuarioelegido.logros.extasis) {
+    usuarioelegido.logros.extasis = true;
+    usuarioelegido.logrosdesbloqueados++;
+    usuarioelegido.dinero += 200;
+}
+
+fs.writeFileSync("data/usuarios.json", JSON.stringify(usuarios, null, 2));
+objok = {ok:true};
+return {objok,
+        dinero: usuarioelegido.dinero,
+        racha: usuarioelegido.rachaactual,
+        rachamaslarga: usuarioelegido.rachamaslarga,
+        logros: usuarioelegido.logros,
+        logrosdesbloqueados: usuarioelegido.logrosdesbloqueados
+        }
 
 });
 
