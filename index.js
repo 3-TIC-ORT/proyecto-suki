@@ -14,25 +14,77 @@ subscribePOSTEvent("completarobjetivo",({idusuario, idobjetivo, tipodeobjetivo})
     } else if (tipodeobjetivo === "accion"){
         archivo = "data/objetivos_accion.json";
     }
-
-let objetivostotal = JSON.parse(fs.readFileSync(archivo, "utf-8"));
-let objetivoelegido = null; 
-for (let i = 0; i < objetivostotal.length; i++){
-    if (objetivostotal[i].idobjetivo === idobjetivo && objetivostotal[i].idusuario === idusuario){
-        objetivoelegido = objetivostotal[i];
-        break;
-    } 
-    if (!objetivoelegido){
-return objok;
+ 
+    let objetivostotal = JSON.parse(fs.readFileSync(archivo, "utf-8"));
+    let objetivoelegido = null; 
+    for (let i = 0; i < objetivostotal.length; i++) {
+        if (objetivostotal[i].idobjetivo === idobjetivo && objetivostotal[i].idusuario === idusuario) {
+            objetivoelegido = objetivostotal[i];
+            break;
+        }
     }
-    objetivoelegido.vecescompletadas++;
-    objetivoelegido.dinero += 10;
+    if (!objetivoelegido) {
+        return objok;
+    }
+
+    let usuarios = JSON.parse(fs.readFileSync("data/usuarios.json", "utf-8"));
+    let usuarioelegido = null;
+    for (let i = 0; i < usuarios.length; i++) {
+        if (usuarios[i].id === idusuario) {
+            usuarioelegido = usuarios[i];
+            break;
+        }
+    }
+    if (!usuarioelegido) {
+        return objok; 
+    }
 
 
+    usuarioelegido.vecescompletadas++;
+    usuarioelegido.dinero += 10;
 
+    let hoy = new Date().toISOString().split("T")[0];
+    let ayer = new Date(Date.now() - 86400000).toISOString().split("T")[0];
 
+ if (usuarioelegido.ultimodiaderacha === hoy) {
+    } else if (usuarioelegido.ultimodiaderacha === ayer) {
+        usuarioelegido.rachaactual+=1;
+    } else {
+        usuarioelegido.rachaactual = 1;
+    }
 
-}})
+ if (usuarioelegido.rachaactual > usuarioelegido.rachamaslarga) {
+        usuarioelegido.rachamaslarga = usuarioelegido.rachaactual;
+    }
+
+    usuarioelegido.ultimodiaderacha = hoy;
+
+    if (usuarioelegido.rachaactual === 3 && !usuarioelegido.logros.racha3) {
+        usuarioelegido.logros.racha3 = true;
+        usuarioelegido.logrosdesbloqueados++;
+        usuarioelegido.dinero += 20; 
+    }
+
+    if (usuarioelegido.rachaactual === 7 && !usuarioelegido.logros.racha7) {
+        usuarioelegido.logros.racha7 = true;
+        usuarioelegido.logrosdesbloqueados++;
+        usuarioelegido.dinero += 30; 
+    }
+    if (usuarioelegido.rachaactual === 30 && !usuarioelegido.logros.racha30) {
+        usuarioelegido.logros.racha30 = true;
+        usuarioelegido.logrosdesbloqueados++;
+        usuarioelegido.dinero += 50; 
+    }
+    fs.writeFileSync(archivo, JSON.stringify(objetivostotal, null, 2));
+    fs.writeFileSync("data/usuarios.json", JSON.stringify(usuarios, null, 2));
+    return {ok:true,
+        dinero: usuarioelegido.dinero,
+        racha: usuarioelegido.rachaactual,
+        rachamaslarga: usuarioelegido.rachamaslarga,
+        logros: usuarioelegido.logros,
+        logrosdesbloqueados: usuarioelegido.logrosdesbloqueados
+        }
+});
 
 
 subscribePOSTEvent("borrarobjetivo", ({idobjetivo, tipodeobjetivo}) => {
@@ -93,7 +145,7 @@ subscribePOSTEvent("crear", ({usuario, contraseña, mail, fecha}) => {
             logrosdesbloqueados: 0,
             skinscompradas: 0,
             dinero: 0,
-            fechadecreacion: new Date().toLocaleDateString("es-AR"),
+            fechadecreacion: new Date().toISOString().split("T")[0],
             skins: {
         suki: false,
         trump: false,
@@ -149,7 +201,7 @@ if (datosusuario[i].mail === email && datosusuario[i].contraseña === contraseñ
 subscribePOSTEvent("crearobjetivo", ({idusuario, titulo, estado, tipodeobjetivo, frecuencia, tiempo, veces, icono, color}) => {
     let objok = {ok:false};
     let objetivo = {
-    idusuario: Number(idusuario),
+    idusuario: idusuario,
     idobjetivo: idobjetivo,
     titulo: titulo,
     tipodeobjetivo: tipodeobjetivo,
