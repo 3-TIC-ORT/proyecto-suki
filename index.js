@@ -46,16 +46,19 @@ subscribePOSTEvent("completarobjetivo",({idusuario, idobjetivo, tipodeobjetivo})
 
 
     usuarioelegido.vecescompletadas++;
-    usuarioelegido.dinero += 10;
+    
 
     let hoy = new Date().toISOString().split("T")[0];
     let ayer = new Date(Date.now() - 86400000).toISOString().split("T")[0];
 
  if (usuarioelegido.ultimodiaderacha === hoy) {
+   
     } else if (usuarioelegido.ultimodiaderacha === ayer) {
         usuarioelegido.rachaactual+=1;
+        usuarioelegido.dinero += 10;
     } else {
         usuarioelegido.rachaactual = 1;
+        usuarioelegido.dinero += 10;
     }
 
  if (usuarioelegido.rachaactual > usuarioelegido.rachamaslarga) {
