@@ -23,4 +23,17 @@ document.getElementById("loginForm").addEventListener("submit", function(e) {
         mensaje.textContent = "❌ Usuario o contraseña incorrectos.";
         mensaje.style.color = "red";
     }
-});
+    if(valido){
+        postEvent("crear", {mail, contraseña}, (objok) => {
+          if (objok.ok === true) {
+            alert("El usuario ha sido creado exitosamente");
+          } else {
+            alert("Hubo un error al crear el usuario");
+       
+        });
+    });    
+});        
+
+
+
+
