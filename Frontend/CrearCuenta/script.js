@@ -70,18 +70,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     
    
-   
-    PostEvent("crear"),{usuario,mail,contraseña,fecha}, (data) => {
-    if (objok === true  ){
-
-    alert("usuario creado con exito")  
-    
-    
-    }
-  connect2Server();
-
+    PostEvent("crear", {usuario, mail, contraseña, fecha}, (objok) => {
+      if (objok.ok === true) {
+        alert("El usuario ha sido creado exitosamente");
+      } else {
+        alert("Hubo un error al crear el usuario");
+      }
+    });
   
     
+    connect2Server(3000)
   });
-
-¿
+});
