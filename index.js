@@ -2,12 +2,55 @@ import fs from "fs";
 import { subscribeGETEvent, subscribePOSTEvent, realTimeEvent, startServer } from "soquetic";
 let idusuario = 1;
 let idobjetivo = 1
-let logrosArray = [
+let logroslista = [
   "primerpaso", "racha3", "racha7", "racha30",
   "iniciador", "creador", "coleccionista", "explorador",
   "legendario", "centenario", "ganador", "extraganador", "extasis"
 ];
-;
+let skinslista = {
+    suki: 150,
+    trump: 150,
+    flash: 200,
+    turro: 150,
+    sullivan: 200,
+    bikini: 300,
+    rabino: 300,
+    bizarrap: 150,
+    oro: 1000,
+    gato: 200
+}
+
+subscribePOSTEvent("comprar", ({idusuario, skin}) => {
+let objok = {ok: false}
+idusuario = Number(idusuario)
+let usuarios = JSON.parse(fs.readFileSync("data/usuarios.json", "utf-8"));
+let usuarioelegido = null;
+for (let i = 0; i < usuarios.length; i++) {
+    if (usuarios[i].id === idusuario) {
+        usuarioelegido = usuarios[i];
+        break;
+    }
+}
+
+let precio = skinslista[skin]
+
+if (usuarioelegido.dinero < precio) {
+    return objok;
+  }
+
+  usuarioelegido.dinero -= precio;
+  usuarioelegido.skins[skin] = true;
+  usuarioelegido.skinscompradas++;
+  
+  fs.writeFileSync("data/usuarios.json", JSON.stringify(usuarios, null, 2));
+
+  objok = {
+    ok: true,
+    dinero: usuarioelegido.dinero,
+    skins: usuarioelegido.skins
+  };
+  return objok;
+})
 
 subscribePOSTEvent("completarobjetivo",({idusuario, idobjetivo, tipodeobjetivo}) =>{
     let objok = {ok:false};
@@ -39,9 +82,6 @@ subscribePOSTEvent("completarobjetivo",({idusuario, idobjetivo, tipodeobjetivo})
             usuarioelegido = usuarios[i];
             break;
         }
-    }
-    if (!usuarioelegido) {
-        return objok; 
     }
 
 
@@ -87,8 +127,8 @@ subscribePOSTEvent("completarobjetivo",({idusuario, idobjetivo, tipodeobjetivo})
     }
 
 let totalLogros = 0;
-for (let i = 0; i < logrosArray.length; i++) {
-    if (usuarioelegido.logros[logrosArray[i]] === true) {
+for (let i = 0; i < logroslista.length; i++) {
+    if (usuarioelegido.logros[logroslista[i]] === true) {
         totalLogros++;
     }
 }
@@ -103,7 +143,7 @@ if (totalLogros >= 10 && !usuarioelegido.logros.extraganador) {
     usuarioelegido.logrosdesbloqueados++;
     usuarioelegido.dinero += 100;
 }
-if (totalLogros === logrosArray.length && !usuarioelegido.logros.extasis) {
+if (totalLogros === logroslista.length && !usuarioelegido.logros.extasis) {
     usuarioelegido.logros.extasis = true;
     usuarioelegido.logrosdesbloqueados++;
     usuarioelegido.dinero += 200;
@@ -292,8 +332,8 @@ subscribePOSTEvent("crearobjetivo", ({idusuario, titulo, estado, tipodeobjetivo,
     }
 
 let totalLogros = 0;
-for (let i = 0; i < logrosArray.length; i++) {
-    if (usuarioelegido.logros[logrosArray[i]] === true) {
+for (let i = 0; i < logroslista.length; i++) {
+    if (usuarioelegido.logros[logroslista[i]] === true) {
         totalLogros++;
     }
 }
@@ -308,7 +348,7 @@ if (totalLogros >= 10 && !usuarioelegido.logros.extraganador) {
     usuarioelegido.logrosdesbloqueados++;
     usuarioelegido.dinero += 100;
 }
-if (totalLogros === logrosArray.length && !usuarioelegido.logros.extasis) {
+if (totalLogros === logroslista.length && !usuarioelegido.logros.extasis) {
     usuarioelegido.logros.extasis = true;
     usuarioelegido.logrosdesbloqueados++;
     usuarioelegido.dinero += 200;
