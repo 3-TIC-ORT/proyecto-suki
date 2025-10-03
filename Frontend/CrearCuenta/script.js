@@ -1,9 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
+  connect2Server(3000)
   const form = document.getElementById("form-registro");
   const terminos = document.getElementById("terminos");
   const modal = document.getElementById("modal-terminos");
   const cerrarModal = document.getElementById("cerrar-modal");
   const verTerminos = document.getElementById("ver-terminos");
+  let valido = true
 
   
   verTerminos.addEventListener("click", (e) => {
@@ -69,8 +71,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     
-   
-    PostEvent("crear", {usuario, mail, contraseña, fecha}, (objok) => {
+   if(valido){
+    postEvent("crear", {usuario, mail, contraseña, fecha}, (objok) => {
       if (objok.ok === true) {
         alert("El usuario ha sido creado exitosamente");
       } else {
@@ -78,7 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   
-    
-    connect2Server(3000)
+  }
+
   });
 });
