@@ -8,7 +8,6 @@ let logroslista = [
   "legendario", "centenario", "ganador", "extraganador", "extasis"
 ];
 let skinslista = {
-    suki: 150,
     trump: 150,
     flash: 200,
     turro: 150,
@@ -17,8 +16,44 @@ let skinslista = {
     rabino: 300,
     bizarrap: 150,
     oro: 1000,
-    gato: 200
+    minecraft: 200
 }
+
+subscribePOSTEvent("devolverusuario", ({idusuario}) => {
+    let objok = {ok: false}
+    idusuario = Number(idusuario)
+    let usuarios = JSON.parse(fs.readFileSync("data/usuarios.json", "utf-8"));
+    let usuarioelegido = null;
+    for (let i = 0; i < usuarios.length; i++) {
+        if (usuarios[i].id === idusuario) {
+            usuarioelegido = usuarios[i];
+            break;
+        }
+}
+   objok = {ok: true}
+return {
+    objok,
+    usuario: usuarioelegido
+};
+})
+
+subscribePOSTEvent("nuevaskinelegida", ({idusuario, }) => {
+    let objok = {ok: false}
+    idusuario = Number(idusuario)
+    let usuarios = JSON.parse(fs.readFileSync("data/usuarios.json", "utf-8"));
+    let usuarioelegido = null;
+    for (let i = 0; i < usuarios.length; i++) {
+        if (usuarios[i].id === idusuario) {
+            usuarioelegido = usuarios[i];
+            break;
+        }
+    }
+    objok = {ok: true}
+    return {
+    objok,
+    skinseleccionada: usuarioelegido.skinseleccionada
+    }
+});
 
 subscribePOSTEvent("comprar", ({idusuario, skin}) => {
 let objok = {ok: false}
@@ -297,7 +332,8 @@ subscribePOSTEvent("crear", ({usuario, contraseña, mail, fecha}) => {
             rachamaslarga: 0,
             rachaactual: 0,
             ultimodiaderacha: null,
-            cantidadobjetivoscreados: 0
+            cantidadobjetivoscreados: 0,
+            skinseleccionada: "suki"
         };
         datosusuario.push(objusuario);
         let datosusuarioJSON = JSON.stringify(datosusuario, null, 2);
