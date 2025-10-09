@@ -42,12 +42,56 @@ if (usuarioelegido.dinero < precio) {
   usuarioelegido.skins[skin] = true;
   usuarioelegido.skinscompradas++;
   
+  if (usuarioelegido.skinscompradas === 1 && !usuarioelegido.logros.coleccionista) {
+    usuarioelegido.logros.coleccionista = true;
+    usuarioelegido.logrosdesbloqueados++;
+    usuarioelegido.dinero += 20; 
+}
+
+if (usuarioelegido.rachaactual === 5 && !usuarioelegido.logros.explorador) {
+    usuarioelegido.logros.explorador = true;
+    usuarioelegido.logrosdesbloqueados++;
+    usuarioelegido.dinero += 30; 
+}
+if (usuarioelegido.rachaactual === 10 && !usuarioelegido.logros.legendario) {
+    usuarioelegido.logros.legendario = true;
+    usuarioelegido.logrosdesbloqueados++;
+    usuarioelegido.dinero += 50; 
+}
+
+let totalLogros = 0;
+for (let i = 0; i < logroslista.length; i++) {
+    if (usuarioelegido.logros[logroslista[i]] === true) {
+        totalLogros++;
+    }
+}
+
+if (totalLogros >= 5 && !usuarioelegido.logros.ganador) {
+    usuarioelegido.logros.ganador = true;
+    usuarioelegido.logrosdesbloqueados++;
+    usuarioelegido.dinero += 50;
+}
+if (totalLogros >= 10 && !usuarioelegido.logros.extraganador) {
+    usuarioelegido.logros.extraganador = true;
+    usuarioelegido.logrosdesbloqueados++;
+    usuarioelegido.dinero += 100;
+}
+if (totalLogros === logroslista.length && !usuarioelegido.logros.extasis) {
+    usuarioelegido.logros.extasis = true;
+    usuarioelegido.logrosdesbloqueados++;
+    usuarioelegido.dinero += 200;
+}
+
+
+
   fs.writeFileSync("data/usuarios.json", JSON.stringify(usuarios, null, 2));
 
   objok = {
     ok: true,
     dinero: usuarioelegido.dinero,
-    skins: usuarioelegido.skins
+    skins: usuarioelegido.skins,
+    logros: usuarioelegido.logros,
+    logrosdesbloqueados: usuarioelegido.logrosdesbloqueados
   };
   return objok;
 })
@@ -95,10 +139,10 @@ subscribePOSTEvent("completarobjetivo",({idusuario, idobjetivo, tipodeobjetivo})
    
     } else if (usuarioelegido.ultimodiaderacha === ayer) {
         usuarioelegido.rachaactual+=1;
-        usuarioelegido.dinero += 10;
+        usuarioelegido.dinero += 25;
     } else {
         usuarioelegido.rachaactual = 1;
-        usuarioelegido.dinero += 10;
+        usuarioelegido.dinero += 25;
     }
 
  if (usuarioelegido.rachaactual > usuarioelegido.rachamaslarga) {

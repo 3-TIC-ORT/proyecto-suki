@@ -10,7 +10,7 @@
     "skinscompradas": 0,
     "dinero": 0,
     "skins": {
-      "suki": false,
+      "suki": true,
       "trump": false,
       "flash": false,
       "turro": false,
