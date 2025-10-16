@@ -37,7 +37,7 @@ return {
 };
 })
 
-subscribePOSTEvent("nuevaskinelegida", ({idusuario, }) => {
+subscribePOSTEvent("nuevaskinelegida", ({idusuario, nuevaskin }) => {
     let objok = {ok: false}
     idusuario = Number(idusuario)
     let usuarios = JSON.parse(fs.readFileSync("data/usuarios.json", "utf-8"));
@@ -48,10 +48,11 @@ subscribePOSTEvent("nuevaskinelegida", ({idusuario, }) => {
             break;
         }
     }
+    usuarioelegido.skinelegida = nuevaskin
     objok = {ok: true}
     return {
-    objok,
-    skinseleccionada: usuarioelegido.skinseleccionada
+      objok,
+      skindelusuario: usuarioelegido.skinelegida
     }
 });
 
