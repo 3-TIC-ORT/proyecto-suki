@@ -48,7 +48,11 @@ subscribePOSTEvent("nuevaskinelegida", ({idusuario, nuevaskin }) => {
             break;
         }
     }
+    if (!usuarioelegido) {
+        return objok; 
+    }
     usuarioelegido.skinelegida = nuevaskin
+    fs.writeFileSync("data/usuarios.json", JSON.stringify(usuarios, null, 2));
     objok = {ok: true}
     return {
       objok,
