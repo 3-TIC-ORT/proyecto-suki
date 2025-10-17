@@ -37,7 +37,7 @@ return {
 };
 })
 
-subscribePOSTEvent("nuevaskinelegida", ({idusuario, nuevaskin }) => {
+subscribePOSTEvent("nuevaskinelegida", ({idusuario, nuevaskin}) => {
     let objok = {ok: false}
     idusuario = Number(idusuario)
     let usuarios = JSON.parse(fs.readFileSync("data/usuarios.json", "utf-8"));
