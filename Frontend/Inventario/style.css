@@ -111,4 +111,39 @@ body {
     margin: 20px auto 0 auto;
     display: block;
   }
+  .tarjetas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+    gap: 20px;
+  }
+  
+  .tarjeta {
+    width: 200px;
+    border: 2px solid #000;
+    border-radius: 10px;
+    text-align: center;
+    background-color: #fff;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+    padding: 10px;
+  }
+  
+  .tarjeta img {
+    width: 100%;
+    border-radius: 10px;
+  }
+  
+  .tarjeta button {
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px;
+    cursor: pointer;
+  }
+  
+  .tarjeta button:hover {
+    background-color: #555;
+  }
   
