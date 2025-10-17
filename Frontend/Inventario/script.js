@@ -11,3 +11,11 @@ overlay.addEventListener("click", () => {
   sidebar.classList.remove("open");
   overlay.classList.remove("show");
 });
+
+const tarjetas = document.querySelectorAll(".tarjeta");
+const plata = document.getElementById("plata");
+
+let perros = [    
+
+
+];

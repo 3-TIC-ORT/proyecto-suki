@@ -1,7 +1,6 @@
 
 
-const emailValido = "test@gmail.com";
-const contraseñaValida = "1234";
+   
 
 document.getElementById("loginForm").addEventListener("submit", function(e) {
     e.preventDefault(); 
