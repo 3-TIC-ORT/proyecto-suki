@@ -18,6 +18,18 @@ const dineroSpan = document.getElementById("dinero");
 
 let dineroActual = 0;
 
+let skinslista = {
+  trump: 150,
+  flash: 200,
+  turro: 150,
+  sullivan: 200,
+  bikini: 300,
+  rabino: 300,
+  bizarrap: 150,
+  oro: 1000,
+  minecraft: 200
+}
+
 postEvent("obtenerUsuario", {}, (res) => {
   if (res.ok) {
     dineroActual = res.usuario.dinero;
@@ -80,7 +92,7 @@ function comprarProducto(idProducto, precio) {
 
   postEvent("comprarProducto", { id: idProducto }, (res) => {
     if (res.ok) {
-      alert("Compra realizada con éxito 🛍️");
+      alert("Compra realizada con éxito ");
       dineroActual -= precio;
       dineroSpan.textContent = dineroActual;
       mostrarInventario(res.inventarioActualizado);
