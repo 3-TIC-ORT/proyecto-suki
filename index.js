@@ -308,7 +308,7 @@ subscribePOSTEvent("crear", ({usuario, contraseña, mail, fecha}) => {
             dinero: 0,
             fechadecreacion: new Date().toISOString().split("T")[0],
             skins: {
-        suki: false,
+        suki: true,
         trump: false,
         flash: false,
         turro: false,
