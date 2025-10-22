@@ -19,6 +19,67 @@ let skinslista = {
     minecraft: 200
 }
 
+subscribePOSTEvent("modificarusuario",({idusuario, usuario}) => {
+    let objok = {ok: false}
+    idusuario = Number(idusuario)
+    let usuarios = JSON.parse(fs.readFileSync("data/usuarios.json", "utf-8"));
+    let usuarioelegido = null;
+    for (let i = 0; i < usuarios.length; i++) {
+        if (usuarios[i].id === idusuario) {
+            usuarioelegido = usuarios[i];
+            break;
+        }
+}
+usuarioelegido.usuario = usuario
+fs.writeFileSync("data/usuarios.json", JSON.stringify(usuarios, null, 2));
+objok = {ok: true};
+return{
+    objok,
+    usuario: usuarioelegido.usuario
+}
+
+})
+subscribePOSTEvent("modificarmail",({idusuario, mail}) => {
+    let objok = {ok: false}
+    idusuario = Number(idusuario)
+    let usuarios = JSON.parse(fs.readFileSync("data/usuarios.json", "utf-8"));
+    let usuarioelegido = null;
+    for (let i = 0; i < usuarios.length; i++) {
+        if (usuarios[i].id === idusuario) {
+            usuarioelegido = usuarios[i];
+            break;
+        }
+}
+
+usuarioelegido.mail = mail
+fs.writeFileSync("data/usuarios.json", JSON.stringify(usuarios, null, 2));
+objok = {ok: true};
+return{
+    objok,
+    mail: usuarioelegido.mail
+}
+})
+subscribePOSTEvent("modificarfecha",({idusuario, fecha}) => {
+    let objok = {ok: false}
+    idusuario = Number(idusuario)
+    let usuarios = JSON.parse(fs.readFileSync("data/usuarios.json", "utf-8"));
+    let usuarioelegido = null;
+    for (let i = 0; i < usuarios.length; i++) {
+        if (usuarios[i].id === idusuario) {
+            usuarioelegido = usuarios[i];
+            break;
+        }
+}
+
+usuarioelegido.fecha = fecha
+fs.writeFileSync("data/usuarios.json", JSON.stringify(usuarios, null, 2));
+objok = {ok: true};
+return{
+    objok,
+    fecha: usuarioelegido.fecha
+}
+})
+
 subscribePOSTEvent("devolverusuario", ({idusuario}) => {
     let objok = {ok: false}
     idusuario = Number(idusuario)
