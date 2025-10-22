@@ -111,8 +111,136 @@ body {
   
   .sidebar img {
     width: 100%;
-    max-width: 200px; /* para que no se deforme */
+    max-width: 200px; 
     margin: 20px auto 0 auto;
     display: block;
+  }
+  
+  .perfilContainer {
+    background-color: #f6f0ed;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+  }
+  
+  .perfilFondo {
+    background: linear-gradient(#8fe6ff 60%, #9edb33 40%);
+    height: 200px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 25px;
+  }
+  
+  .perfilInfo {
+    text-align: center;
+  }
+  
+  .nombreUsuario {
+    margin: 0;
+    font-size: 26px;
+    font-weight: bold;
+  }
+  
+  .btnModificar {
+    background-color: #ccc;
+    border: none;
+    border-radius: 10px;
+    padding: 6px 12px;
+    cursor: pointer;
+    margin-top: 5px;
+  }
+  
+  .btnModificar:hover {
+    background-color: #aaa;
+  }
+  
+  .contenidoPerfil {
+    max-width: 900px;
+    margin: 0 auto;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+  }
+  
+  .perfilDatos {
+    background-color: #f2f2f2;
+    padding: 20px 30px;
+    border-radius: 15px;
+    width: 100%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .filaDato {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .rachaContainer {
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 20px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .diasSemana,
+  .marcasDias {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .marcasDias {
+    margin-top: 10px;
+  }
+  
+  .marcasDias div {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+  }
+  
+  .verde {
+    background-color: #4caf50;
+  }
+  
+  .gris {
+    background-color: #ccc;
+  }
+  
+  .rachaTexto {
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  
+  .logrosContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    width: 100%;
+    justify-items: center;
+  }
+  
+  .logroBox {
+    background-color: #f7b500;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    width: 180px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .logroBox img {
+    width: 55px;
+    height: 55px;
+  }
+  
+  .logroBox p {
+    margin-top: 10px;
+    font-weight: bold;
   }
   

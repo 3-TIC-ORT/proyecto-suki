@@ -111,7 +111,7 @@ body {
   
   .sidebar img {
     width: 100%;
-    max-width: 200px; /* para que no se deforme */
+    max-width: 200px; 
     margin: 20px auto 0 auto;
     display: block;
   }
