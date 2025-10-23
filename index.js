@@ -112,12 +112,12 @@ subscribePOSTEvent("nuevaskinelegida", ({idusuario, nuevaskin}) => {
     if (!usuarioelegido) {
         return objok; 
     }
-    usuarioelegido.skinelegida = nuevaskin
+    usuarioelegido.skinseleccionada = nuevaskin
     fs.writeFileSync("data/usuarios.json", JSON.stringify(usuarios, null, 2));
     objok = {ok: true}
     return {
       objok,
-      skindelusuario: usuarioelegido.skinelegida
+      skindelusuario: usuarioelegido.skinseleccionada
     }
 });
 
@@ -378,7 +378,7 @@ subscribePOSTEvent("crear", ({usuario, contraseña, mail, fecha}) => {
         rabino: false,
         bizarrap: false,
         oro: false,
-        gato: false
+        minecraft: false
             },
             logros:{
                 primerpaso: false,
