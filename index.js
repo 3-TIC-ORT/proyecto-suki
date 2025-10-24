@@ -17,7 +17,7 @@ let skinslista = {
     minecraft: 200
 }
 
-subscribePOSTEvent("modificarusuario",({idusuario, usuario}) => {
+subscribePOSTEvent("modificarusuario",({idusuario, nuevousuario}) => {
     let objok = {ok: false}
     idusuario = Number(idusuario)
     let usuarios = JSON.parse(fs.readFileSync("data/usuarios.json", "utf-8"));
@@ -33,7 +33,7 @@ if (!usuarioelegido) {
     return objok; 
 }
 
-usuarioelegido.usuario = usuario
+usuarioelegido.usuario = nuevousuario
 fs.writeFileSync("data/usuarios.json", JSON.stringify(usuarios, null, 2));
 objok = {ok: true};
 return{
@@ -42,7 +42,7 @@ return{
 }
 
 })
-subscribePOSTEvent("modificarmail",({idusuario, mail}) => {
+subscribePOSTEvent("modificarmail",({idusuario, nuevomail}) => {
     let objok = {ok: false}
     idusuario = Number(idusuario)
     let usuarios = JSON.parse(fs.readFileSync("data/usuarios.json", "utf-8"));
@@ -58,7 +58,7 @@ if (!usuarioelegido) {
     return objok; 
 }
 
-usuarioelegido.mail = mail
+usuarioelegido.mail = nuevomail
 fs.writeFileSync("data/usuarios.json", JSON.stringify(usuarios, null, 2));
 objok = {ok: true};
 return{
@@ -66,7 +66,7 @@ return{
     mail: usuarioelegido.mail
 }
 })
-subscribePOSTEvent("modificarfecha",({idusuario, fecha}) => {
+subscribePOSTEvent("modificarfecha",({idusuario, nuevafecha}) => {
     let objok = {ok: false}
     idusuario = Number(idusuario)
     let usuarios = JSON.parse(fs.readFileSync("data/usuarios.json", "utf-8"));
@@ -82,7 +82,7 @@ if (!usuarioelegido) {
     return objok; 
 }
 
-usuarioelegido.fecha = fecha
+usuarioelegido.fecha = nuevafecha
 fs.writeFileSync("data/usuarios.json", JSON.stringify(usuarios, null, 2));
 objok = {ok: true};
 return{

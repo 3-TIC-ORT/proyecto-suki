@@ -11,6 +11,10 @@ let veces = 10;
 let icono = "💧";
 let color = "#0000FF";
 let idobjetivo = 1761331590535;
+let nuevaskin = "trump";
+let nuevousuario = "Felipe";
+let nuevomail = "felipe@gmail.com";
+let nuevafecha = "15/08/2023";
 connect2Server(3000);
 //Copiar y Pegar
 postEvent("", {}, (data) => {
@@ -80,3 +84,47 @@ postEvent("borrarobjetivo", { idobjetivo, tipodeobjetivo }, (data) => {
         console.log("Error al borrar objetivo");
     }
 })});
+
+//NUEVA SKIN ELEGIDA
+document.getElementById("nuevaskinelegida").addEventListener("click", () => {
+    postEvent("nuevaskinelegida", { idusuario, nuevaskin }, (data) => {
+        if (data.objok.ok) {
+            console.log("Skin elegida actualizada");
+        } else {
+            console.log("Error al actualizar skin elegida");
+        }
+})});
+
+//MODIFICAR USUARIO
+document.getElementById("modificarusuario").addEventListener("click", () => {
+    postEvent("modificarusuario", { idusuario, nuevousuario }, (data) => {
+        if (data.objok.ok) {
+            console.log("Usuario modificado");
+        } else {
+            console.log("Error al modificar usuario");
+        }
+    });
+});
+
+//MODIFICAR MAIL
+document.getElementById("modificarmail").addEventListener("click", () => {
+    postEvent("modificarmail", { idusuario, nuevomail }, (data) => {
+        if (data.objok.ok) {
+            console.log("Mail modificado");
+        } else {
+            console.log("Error al modificar mail");
+        }
+    });
+});
+
+//MODIFICAR FECHA
+document.getElementById("modificarfecha").addEventListener("click", () => {
+    postEvent("modificarfecha", { idusuario, nuevafecha }, (data) => {
+        if (data.objok.ok) {
+            console.log("Fecha modificada");
+        } else {
+            console.log("Error al modificar fecha");
+        }
+    });
+});
+
