@@ -1,51 +1,64 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="style.css" />
     <title>SUKI</title>
   </head>
   <body>
+  
     <header>
       <div class="izquierda">
         <div class="logo">
           <img src="logo.png" alt="Logo SUKI" />
         </div>
+        <span class="brand-nombre">Suki</span>
         <div class="icono-carrito">
           <img src="Vector.png" alt="Carrito de compras" />
         </div>
       </div>
       <div class="derecha">
-        <div class="nombre-usuario">Usuario</div>
+        <div class="nombre-usuario">nombre</div>
         <div class="foto-perfil">
           <img src="image 4.png" alt="Foto de perfil" />
         </div>
         <div class="icono-menu" id="menuBtn">&#9776;</div>
       </div>
     </header>
-    
-    
+
+   
     <div class="sidebar" id="sidebar">
-      
       <a href="../Usuario/IndexUsuario.html">Usuario</a>
       <a href="../Inventario/IndexInventario.html">Inventario</a>
       <a href="../Tienda/IndexTienda.html">Tienda</a>
       <a href="../Logros/IndexLogros.html">Logros</a>
       <a href="../Ajustes/IndexAjustes.html">Ajustes</a>
       <a href="../AcercaDe/IndexAcercaDe.html">Acerca De</a>
-      
-      
-        <img src="perroSidebar.png" alt="perroSidebar">
-      
+      <img src="perroSidebar.png" alt="perroSidebar">
     </div>
 
-    <!-- Overlay -->
+
     <div class="overlay" id="overlay"></div>
 
-    <script src="script.js"></script>
 
+ <main id="principal">
+  <section class="estado-vacio-centro">
+    <p class="texto-vacio">No hay objetivos creados todavía</p>
+    <button id="botonCrear" class="boton-crear">Crear +</button>
+  </section>
+</main>
+
+   
+    <script src="script.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.8.1/socket.io.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/JZylber/SoqueTIC-Client@v1.4.1/soquetic-client.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/JZylber/SoqueTIC-Client@v1.4.1/soquetic-client.js"></script>
   </body>
 </html>
+
