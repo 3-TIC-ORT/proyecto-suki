@@ -1,7 +1,5 @@
 import fs from "fs";
 import { subscribeGETEvent, subscribePOSTEvent, realTimeEvent, startServer } from "soquetic";
-let idusuario = 1;
-let idobjetivo = 1
 let logroslista = [
   "primerpaso", "racha3", "racha7", "racha30",
   "iniciador", "creador", "coleccionista", "explorador",
@@ -30,6 +28,11 @@ subscribePOSTEvent("modificarusuario",({idusuario, usuario}) => {
             break;
         }
 }
+
+if (!usuarioelegido) {
+    return objok; 
+}
+
 usuarioelegido.usuario = usuario
 fs.writeFileSync("data/usuarios.json", JSON.stringify(usuarios, null, 2));
 objok = {ok: true};
@@ -49,6 +52,10 @@ subscribePOSTEvent("modificarmail",({idusuario, mail}) => {
             usuarioelegido = usuarios[i];
             break;
         }
+}
+
+if (!usuarioelegido) {
+    return objok; 
 }
 
 usuarioelegido.mail = mail
@@ -71,6 +78,10 @@ subscribePOSTEvent("modificarfecha",({idusuario, fecha}) => {
         }
 }
 
+if (!usuarioelegido) {
+    return objok; 
+}
+
 usuarioelegido.fecha = fecha
 fs.writeFileSync("data/usuarios.json", JSON.stringify(usuarios, null, 2));
 objok = {ok: true};
@@ -91,6 +102,11 @@ subscribePOSTEvent("devolverusuario", ({idusuario}) => {
             break;
         }
 }
+
+if (!usuarioelegido) {
+    return objok; 
+}
+
    objok = {ok: true}
 return {
     objok,
@@ -131,6 +147,10 @@ for (let i = 0; i < usuarios.length; i++) {
         usuarioelegido = usuarios[i];
         break;
     }
+}
+
+if (!usuarioelegido) {
+    return objok; 
 }
 
 let precio = skinslista[skin]
@@ -229,6 +249,9 @@ subscribePOSTEvent("completarobjetivo",({idusuario, idobjetivo, tipodeobjetivo})
         }
     }
 
+    if (!usuarioelegido) {
+        return objok; 
+    }
 
     usuarioelegido.vecescompletadas++;
     
@@ -324,6 +347,7 @@ subscribePOSTEvent("borrarobjetivo", ({idobjetivo, tipodeobjetivo}) => {
       for (let i = 0; i < objetivo.length; i++){
             if (objetivo[i].idobjetivo === idobjetivo){
                objetivo.splice(i, 1);
+               break;
             }
 }
 let objetivoJSON = JSON.stringify(objetivo, null, 2);
@@ -359,7 +383,7 @@ subscribePOSTEvent("crear", ({usuario, contraseña, mail, fecha}) => {
         }}
        let objusuario = {
             usuario: usuario,
-            id: idusuario,
+            id: Date.now(),
             contraseña: contraseña,
             mail: mail,
             fecha: fecha,
@@ -404,7 +428,6 @@ subscribePOSTEvent("crear", ({usuario, contraseña, mail, fecha}) => {
         datosusuario.push(objusuario);
         let datosusuarioJSON = JSON.stringify(datosusuario, null, 2);
         fs.writeFileSync("data/usuarios.json", datosusuarioJSON);
-        idusuario = idusuario + 1;
         objok = { ok: true};
         return objok;
 });
@@ -432,7 +455,7 @@ subscribePOSTEvent("crearobjetivo", ({idusuario, titulo, estado, tipodeobjetivo,
     }
     let objetivo = {
     idusuario: idusuario,
-    idobjetivo: idobjetivo,
+    idobjetivo: Date.now(),
     titulo: titulo,
     tipodeobjetivo: tipodeobjetivo,
     frecuencia: frecuencia,
@@ -448,7 +471,6 @@ subscribePOSTEvent("crearobjetivo", ({idusuario, titulo, estado, tipodeobjetivo,
     objetivos.push(objetivo);
     let objetivoJSON = JSON.stringify(objetivos, null, 2);
     fs.writeFileSync(archivo, objetivoJSON);
-    idobjetivo = idobjetivo + 1;
 
     let usuarios = JSON.parse(fs.readFileSync("data/usuarios.json", "utf-8"));
     let usuarioelegido = null;
