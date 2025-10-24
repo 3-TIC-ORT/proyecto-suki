@@ -42,5 +42,49 @@
     "ultimodiaderacha": null,
     "cantidadobjetivoscreados": 0,
     "skinseleccionada": "suki"
+  },
+  {
+    "usuario": "Luis",
+    "id": 1761329384427,
+    "contraseña": "JAJAJA23  ",
+    "mail": "luis@gmail.com",
+    "fecha": "20/06/2024",
+    "racha": 0,
+    "logrosdesbloqueados": 0,
+    "skinscompradas": 0,
+    "dinero": 0,
+    "fechadecreacion": "2025-10-24",
+    "skins": {
+      "suki": true,
+      "trump": false,
+      "flash": false,
+      "turro": false,
+      "sullivan": false,
+      "bikini": false,
+      "rabino": false,
+      "bizarrap": false,
+      "oro": false,
+      "minecraft": false
+    },
+    "logros": {
+      "primerpaso": false,
+      "racha3": false,
+      "racha7": false,
+      "racha30": false,
+      "iniciador": false,
+      "creador": false,
+      "coleccionista": false,
+      "explorador": false,
+      "legendario": false,
+      "centenario": false,
+      "ganador": false,
+      "extraganador": false,
+      "extasis": false
+    },
+    "rachamaslarga": 0,
+    "rachaactual": 0,
+    "ultimodiaderacha": null,
+    "cantidadobjetivoscreados": 0,
+    "skinseleccionada": "suki"
   }
 ]
