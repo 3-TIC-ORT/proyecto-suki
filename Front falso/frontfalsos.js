@@ -1,11 +1,13 @@
 import fs from "fs";
-import { subscribeGETEvent, subscribePOSTEvent, startServer } from "soquetic";
+connect2server(3000);
+//Copiar y Pegar
+postEvent("", {}, (data) => {
 
-postEVENT
+})
+postEvent("crear", {usuario, mail, contraseña, fecha}, (data) => {})
 
 
 
 
 
 
-startServer(3000, true);
