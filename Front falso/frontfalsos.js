@@ -15,6 +15,7 @@ let nuevaskin = "trump";
 let nuevousuario = "Felipe";
 let nuevomail = "felipe@gmail.com";
 let nuevafecha = "15/08/2023";
+let skin = "oro";
 connect2Server(3000);
 //Copiar y Pegar
 postEvent("", {}, (data) => {
@@ -127,4 +128,17 @@ document.getElementById("modificarfecha").addEventListener("click", () => {
         }
     });
 });
+
+//COMPRAR SKIN
+document.getElementById("comprar").addEventListener("click", () => {
+    postEvent("comprar", { idusuario, skin }, (data) => {
+        if (data.objok.ok) {
+            console.log("Skin comprada");
+        } else {
+            console.log("Error al comprar skin");
+        }
+    });
+});
+
+//COMPLETAR OBJETIVO
 

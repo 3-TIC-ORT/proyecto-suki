@@ -207,14 +207,14 @@ if (totalLogros === logroslista.length && !usuarioelegido.logros.extasis) {
 
   fs.writeFileSync("data/usuarios.json", JSON.stringify(usuarios, null, 2));
 
-  objok = {
-    ok: true,
+  objok = {ok: true};
+  return {
+    objok,
     dinero: usuarioelegido.dinero,
     skins: usuarioelegido.skins,
     logros: usuarioelegido.logros,
     logrosdesbloqueados: usuarioelegido.logrosdesbloqueados
   };
-  return objok;
 })
 
 subscribePOSTEvent("completarobjetivo",({idusuario, idobjetivo, tipodeobjetivo}) =>{
