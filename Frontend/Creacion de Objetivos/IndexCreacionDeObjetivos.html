@@ -43,20 +43,19 @@
     <main>
 
       <form id="form-registro" class="card">
-        <input type="text" placeholder="Nombre de OBJETIVO" id="usuario" class="btn">
-        <span id="error-usuario" class="error"></span>
-        
-        <button type=" placeholder="Mail" id="mail" class="btn"> </button>
-        <span id="error-mail" class="error"></span>
-        
-    
-        
-    
-<button type="submit" id="btn-acceder" class="btn">Crear</button>
+        <label for="">Crea tu objetivo</label>
+        <input type="text" placeholder="Nombre de tu objetivo" id="usuario" class="btn">
+         <select name="" id="objetivo" class="obj">
+      <option value="" disabled selected hidden>Tipo de objetivo</option>
+      <a href="../">      <option value="">Accion</option></a>
+      <option value="">Tiempo</option>
+
+         </select>
+<button type="submit" id="btn-acceder" class="btn">Siguiente</button>
       </form>
     </main>
 
-    <!-- Overlay -->
+    
     <div class="overlay" id="overlay"></div>
 
     <script src="script.js"></script>
