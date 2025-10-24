@@ -10,7 +10,7 @@ let tiempo = null;
 let veces = 10;
 let icono = "💧";
 let color = "#0000FF";
-let idobjetivo = 1761331590535;
+let idobjetivo = 1761331652154;
 let nuevaskin = "trump";
 let nuevousuario = "Felipe";
 let nuevomail = "felipe@gmail.com";
@@ -141,4 +141,13 @@ document.getElementById("comprar").addEventListener("click", () => {
 });
 
 //COMPLETAR OBJETIVO
+document.getElementById("completarobjetivo").addEventListener("click", () => {
+    postEvent("completarobjetivo", { idusuario, idobjetivo, tipodeobjetivo }, (data) => {
+        if (data.objok.ok) {
+            console.log("Objetivo completado");
+        } else {
+            console.log("Error al completar objetivo");
+        }
+    });
+});
 

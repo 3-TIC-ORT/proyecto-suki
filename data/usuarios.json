@@ -51,8 +51,8 @@
     "fecha": "15/08/2023",
     "racha": 0,
     "logrosdesbloqueados": 2,
-    "skinscompradas": 2,
-    "dinero": 8870,
+    "skinscompradas": 3,
+    "dinero": 7895,
     "fechadecreacion": "2025-10-24",
     "skins": {
       "suki": true,
@@ -81,9 +81,9 @@
       "extraganador": false,
       "extasis": false
     },
-    "rachamaslarga": 0,
-    "rachaactual": 0,
-    "ultimodiaderacha": null,
+    "rachamaslarga": 1,
+    "rachaactual": 1,
+    "ultimodiaderacha": "2025-10-24",
     "cantidadobjetivoscreados": 4,
     "skinseleccionada": "trump"
   }

@@ -253,7 +253,7 @@ subscribePOSTEvent("completarobjetivo",({idusuario, idobjetivo, tipodeobjetivo})
         return objok; 
     }
 
-    usuarioelegido.vecescompletadas++;
+    objetivoelegido.vecescompletadas++;
     
 
     let hoy = new Date().toISOString().split("T")[0];
