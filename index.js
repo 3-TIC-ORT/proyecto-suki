@@ -432,11 +432,11 @@ subscribePOSTEvent("crear", ({usuario, contraseña, mail, fecha}) => {
         return objok;
 });
 
-subscribePOSTEvent("login", ({email, contraseña}) => {
+subscribePOSTEvent("login", ({mail, contraseña}) => {
     let objok = {ok:false};
 let datosusuario = JSON.parse(fs.readFileSync("data/usuarios.json", "utf-8"));
 for (let i = 0; i < datosusuario.length; i++){
-if (datosusuario[i].mail === email && datosusuario[i].contraseña === contraseña){
+if (datosusuario[i].mail === mail && datosusuario[i].contraseña === contraseña){
     objok = {ok:true, id: datosusuario[i].id, usuario: datosusuario[i].usuario};
     return objok;
 }
