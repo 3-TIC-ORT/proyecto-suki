@@ -1,13 +1,13 @@
 [
   {
-    "idusuario": 2,
-    "titulo": "Leer 30 minutos",
+    "idusuario": 1761329384427,
+    "idobjetivo": 1761330624303,
+    "titulo": "Ver television",
     "tipodeobjetivo": "tiempo",
-    "frecuencia": "diaria",
-    "estado": "activo",
-    "tiempo": 30,
+    "tiempo": "30 minutos",
     "veces": null,
-    "color": "red",
-    "icono": "✌"
+    "vecescompletadas": 0,
+    "color": "#0000FF",
+    "icono": "💧"
   }
 ]

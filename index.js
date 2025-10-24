@@ -356,7 +356,8 @@ let objetivoJSON = JSON.stringify(objetivo, null, 2);
             return objok;
 });
 
-subscribePOSTEvent("objetivos", ({idusuario}) => {
+subscribePOSTEvent("devolverobjetivos", ({idusuario}) => {
+    let objok = {ok:false};
         idusuario = Number(idusuario);
         let  objetivosaccion = JSON.parse(fs.readFileSync("data/objetivos_accion.json", "utf-8"));
         let objetivostiempo = JSON.parse(fs.readFileSync("data/objetivos_tiempo.json", "utf-8"));
@@ -367,8 +368,12 @@ subscribePOSTEvent("objetivos", ({idusuario}) => {
                 objetivousuarios.push(objetivos[i]);
             }
         }
-    
-        return objetivousuarios;
+
+        objok = {ok:true};
+        return {
+        objok,
+        objetivos: objetivousuarios
+        };
     });
 
 
@@ -444,7 +449,7 @@ if (datosusuario[i].mail === mail && datosusuario[i].contraseña === contraseña
     return objok;
 })
 
-subscribePOSTEvent("crearobjetivo", ({idusuario, titulo, estado, tipodeobjetivo, frecuencia, tiempo, veces, icono, color}) => {
+subscribePOSTEvent("crearobjetivo", ({idusuario, titulo, tipodeobjetivo, tiempo, veces, icono, color}) => {
     let objok = {ok:false};
     let archivo = "";
     idusuario = Number(idusuario);
@@ -458,8 +463,6 @@ subscribePOSTEvent("crearobjetivo", ({idusuario, titulo, estado, tipodeobjetivo,
     idobjetivo: Date.now(),
     titulo: titulo,
     tipodeobjetivo: tipodeobjetivo,
-    frecuencia: frecuencia,
-    estado: estado,
     tiempo: tiempo,
     veces: veces,
     vecescompletadas: 0,

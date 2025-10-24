@@ -1,13 +1,13 @@
 [
   {
-    "idusuario": 1,
-    "titulo": "Cantidad de agua tomada",
+    "idusuario": 1761329384427,
+    "idobjetivo": 1761331652154,
+    "titulo": "Ver television",
     "tipodeobjetivo": "accion",
-    "frecuencia": "diaria",
-    "estado": "activo",
     "tiempo": null,
-    "veces": 3,
-    "color": "red",
-    "icono": "👍"
+    "veces": 10,
+    "vecescompletadas": 0,
+    "color": "#0000FF",
+    "icono": "💧"
   }
 ]

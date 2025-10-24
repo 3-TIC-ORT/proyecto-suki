@@ -50,9 +50,9 @@
     "mail": "luis@gmail.com",
     "fecha": "20/06/2024",
     "racha": 0,
-    "logrosdesbloqueados": 0,
+    "logrosdesbloqueados": 1,
     "skinscompradas": 0,
-    "dinero": 0,
+    "dinero": 10,
     "fechadecreacion": "2025-10-24",
     "skins": {
       "suki": true,
@@ -71,7 +71,7 @@
       "racha3": false,
       "racha7": false,
       "racha30": false,
-      "iniciador": false,
+      "iniciador": true,
       "creador": false,
       "coleccionista": false,
       "explorador": false,
@@ -84,7 +84,7 @@
     "rachamaslarga": 0,
     "rachaactual": 0,
     "ultimodiaderacha": null,
-    "cantidadobjetivoscreados": 0,
+    "cantidadobjetivoscreados": 4,
     "skinseleccionada": "suki"
   }
 ]
