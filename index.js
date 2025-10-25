@@ -17,6 +17,38 @@ let skinslista = {
     minecraft: 200
 }
 
+subscribePOSTEvent("nuevodiseño", ({idobjetivo, nuevoicono, nuevocolor, tipodeobjetivo}) => {
+    let objok = {ok: false}
+    idobjetivo = Number(idobjetivo)
+   let objetivostiempo = JSON.parse(fs.readFileSync("data/objetivos_tiempo.json", "utf-8"));
+   let objetivosaccion = JSON.parse(fs.readFileSync("data/objetivos_accion.json", "utf-8"));
+   let objetivos = objetivostiempo.concat(objetivosaccion);
+   let objetivoelegido = null;
+   for (let i = 0; i < objetivos.length; i++) {
+       if (objetivos[i].idobjetivo === idobjetivo) {
+           objetivoelegido = objetivos[i];
+           break;
+       }
+   }
+
+   if (!objetivoelegido) {
+       return objok;
+   }
+
+   objetivoelegido.icono = nuevoicono;
+   objetivoelegido.color = nuevocolor;
+  if (tipodeobjetivo === "tiempo") {
+    fs.writeFileSync("data/objetivos_tiempo.json", JSON.stringify(objetivostiempo, null, 2));
+  } else {
+    fs.writeFileSync("data/objetivos_accion.json", JSON.stringify(objetivosaccion, null, 2));
+  }
+   objok = {ok: true};
+   return {
+       objok,
+       objetivo: objetivoelegido
+   };
+});
+
 subscribePOSTEvent("modificarusuario",({idusuario, nuevousuario}) => {
     let objok = {ok: false}
     idusuario = Number(idusuario)

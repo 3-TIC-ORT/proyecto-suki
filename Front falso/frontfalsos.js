@@ -3,19 +3,21 @@ let usuario = "Luis";
 let mail = "luis@gmail.com";
 let contraseña = "JAJAJA23  ";
 let fecha = "20/06/2024";
-let idusuario = 1761329384427;
+let idusuario = 1761331652154;
 let titulo = "Ver television";
 let tipodeobjetivo = "accion";
 let tiempo = null;
 let veces = 10;
 let icono = "💧";
-let color = "#0000FF";
+let color = "blue";
 let idobjetivo = 1761331652154;
 let nuevaskin = "trump";
 let nuevousuario = "Felipe";
 let nuevomail = "felipe@gmail.com";
 let nuevafecha = "15/08/2023";
 let skin = "oro";
+let nuevoicono = "😜";
+let nuevocolor = "brown";
 connect2Server(3000);
 //Copiar y Pegar
 postEvent("", {}, (data) => {
@@ -150,4 +152,13 @@ document.getElementById("completarobjetivo").addEventListener("click", () => {
         }
     });
 });
-
+//NUEVO DISEÑO
+document.getElementById("nuevodiseño").addEventListener("click", () => {
+    postEvent("nuevodiseño", { idobjetivo, tipodeobjetivo, nuevoicono, nuevocolor }, (data) => {
+        if (data.objok.ok) {
+            console.log("Diseño de objetivo modificado");
+        } else {
+            console.log("Error al modificar diseño de objetivo");
+        }
+    })
+});
