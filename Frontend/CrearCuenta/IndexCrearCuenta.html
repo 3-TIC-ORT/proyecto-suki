@@ -7,9 +7,15 @@
   <title>SUKI</title>
 </head>
 <body>
-  <div class="logo-info">Logo + info</div>
+<main>
+  
   
   <form id="form-registro" class="card">
+    <div class="logo-info">
+      <H2>Bienvenido</H2>
+      <p>¡Créa tu cuenta para plantear tus objetivos!</p>
+    
+    </div>
     <input type="text" placeholder="Nombre de usuario" id="usuario" class="btn">
     <span id="error-usuario" class="error"></span>
     
@@ -22,21 +28,25 @@
     <input type="date" id="calendario" class="btn">
     <span id="error-fecha" class="error"></span>
 
-    <label>
-      <input type="checkbox" id="terminos"> Aceptar los <a href="#" id="ver-terminos">términos y condiciones</a>
-    </label>
+   
     <span id="error-terminos" class="error"></span>
 
     <button type="submit" id="btn-acceder" class="btn">Crear</button>
   </form>
-  
-  <div class="info">info</div>
+</main>
+<footer>
 
-  <!-- Modal -->
+</footer>
+  <div class="info">
+    <p>Tus datos nunca se comparten. No hay mensajes de spam.</p>
+    <label>
+      <div id="terminos"> Al continuar, aceptas los <a href="#" id="ver-terminos">Terminos de uso</a> 
+    </label>
+
   <div id="modal-terminos" class="modal">
     <div class="modal-content">
-      <span class="close" id="cerrar-modal">&times;</span>
-      <h2>Términos y Condiciones</h2>
+      <div class="close" id="cerrar-modal">&times;</div>
+      <h2>Términos y Politicas de Privacidad</h2>
       <p>
         Última actualización: (7/9/2025)
 1. Aceptación de los términos
@@ -72,8 +82,11 @@ El titular podrá modificar estos Términos y Condiciones en cualquier momento. 
 Estos Términos se rigen por las leyes de la República Argentina. Cualquier controversia será sometida a los tribunales competentes de la Ciudad Autónoma de Buenos Aires.
 
       </p>
+      
     </div>
   </div>
+  </div>
+  </footer>
 
   <script src="script.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.8.1/socket.io.js"></script>

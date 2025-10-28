@@ -61,7 +61,7 @@ header {
 .nombre-usuario {
   margin-right: 4px;
   font-weight: bold;
-  text-transform: lowercase; /* coincide con tu captura "nombre" */
+  text-transform: lowercase; 
 }
 
 .foto-perfil {
@@ -116,7 +116,6 @@ header {
   display: block;
 }
 
-/* Overlay */
 .overlay {
   position: fixed;
   top: 0;
@@ -142,14 +141,16 @@ header {
 .estado-vacio-centro{ text-align: center; }
 
 .texto-vacio{
-  color: #6b6b6b;
+  color: #000000;
+  font-weight: bold;
   margin-bottom: 16px;
   font-size: 16px;
 }
 
 
 .boton-crear{
-  width: 140px;          
+  width: 110px;
+  padding: 20px;          
   height: 50px;          
   display: inline-flex;
   justify-content: center;

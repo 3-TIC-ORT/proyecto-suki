@@ -1,11 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
   connect2Server(3000)
   const form = document.getElementById("form-registro");
-  const terminos = document.getElementById("terminos");
   const modal = document.getElementById("modal-terminos");
   const cerrarModal = document.getElementById("cerrar-modal");
   const verTerminos = document.getElementById("ver-terminos");
-  let valido = true
+ 
 
   
   verTerminos.addEventListener("click", (e) => {
@@ -65,10 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     
-    if (!terminos.checked) {
-      document.getElementById("error-terminos").textContent = "Debe aceptar los términos";
-      valido = false;
-    }
+  
 
     
    if(valido){
