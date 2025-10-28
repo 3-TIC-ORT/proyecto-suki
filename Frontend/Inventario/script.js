@@ -86,7 +86,7 @@ function mostrarInventario(inventario) {
 
 function comprarProducto(idProducto, precio) {
   if (dineroActual < precio) {
-    alert("No tenés suficiente dinero 💸");
+    alert("No tenés suficiente dinero ");
     return;
   }
 
