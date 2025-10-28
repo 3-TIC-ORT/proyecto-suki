@@ -1,16 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
     <title>SUKI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Signika:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <header>
       <div class="izquierda">
         <div class="logo">
           <img src="logo.png" alt="Logo SUKI" />
+          <span class="logo-text">Suki</span>
         </div>
         <div class="icono-carrito">
           <img src="Vector.png" alt="Carrito de compras" />
@@ -24,39 +26,59 @@
         <div class="icono-menu" id="menuBtn">&#9776;</div>
       </div>
     </header>
-    
-    
+
     <div class="sidebar" id="sidebar">
-      
       <a href="../Usuario/IndexUsuario.html">Usuario</a>
       <a href="../Inventario/IndexInventario.html">Inventario</a>
       <a href="../Logros/IndexLogros.html">Logros</a>
       <a href="../Ajustes/IndexAjustes.html">Ajustes</a>
       <a href="../AcercaDe/IndexAcercaDe.html">Acerca De</a>
-      
-      
-        <img src="perroSidebar.png" alt="perroSidebar">
-      
+      <img src="perroSidebar.png" alt="perroSidebar">
     </div>
 
     <main>
-
-      <form id="form-registro" class="card">
-        <label for="">Crea tu objetivo</label>
-        <input type="text" placeholder="Nombre de tu objetivo" id="usuario" class="btn">
-         <select name="" id="objetivo" class="obj">
-      <option value="" disabled selected hidden>Tipo de objetivo</option>
-      <a href="../">      <option value="">Accion</option></a>
-      <option value="">Tiempo</option>
-
-         </select>
-<button type="submit" id="btn-acceder" class="btn">Siguiente</button>
+      <form id="form-seleccion" class="card">
+        <label for="nombreObjetivo">Crea tu objetivo</label>
+        <input type="text" placeholder="Nombre de tu objetivo" id="nombreObjetivo" class="btn" required>
+        <select id="tipoObjetivo" class="obj" required>
+          <option value="" disabled selected hidden>Tipo de objetivo</option>
+          <option value="accion">Acción</option>
+          <option value="tiempo">Tiempo</option>
+        </select>
+        <button type="button" id="btnSiguienteSeleccion" class="btn">Siguiente</button>
       </form>
+
+      <div id="form-tiempo" class="card oculto">
+        <label for="duracionTiempo">Crea tu objetivo de tiempo</label>
+        <input type="text" placeholder="Duración (ej: 30 días)" id="duracionTiempo" class="btn" required>
+        <button type="button" id="btnSiguienteTiempo" class="btn">Siguiente</button>
+        <button type="button" class="btn volver">Volver</button>
+      </div>
+
+      <div id="form-accion" class="card oculto">
+        <label for="descripcionAccion">Crea tu objetivo de acción</label>
+        <input type="text" placeholder="Describe tu acción" id="descripcionAccion" class="btn" required>
+        <button type="button" id="btnSiguienteAccion" class="btn">Siguiente</button>
+        <button type="button" class="btn volver">Volver</button>
+      </div>
+
+      <div id="menu-disenio" class="card oculto">
+        <label>Elegí un color para tu objetivo</label>
+        <select id="colorObjetivo" class="color-select" required>
+          <option value="" disabled selected hidden>Seleccioná un color</option>
+          <option value="#FFCC00">Amarillo</option>
+          <option value="#CB30E0">Violeta</option>
+          <option value="#002AB8">Azul</option>
+          <option value="#34C759">Verde</option>
+          <option value="#FF383C">Rojo</option>
+          <option value="#6B2A14">Marrón</option>
+        </select>
+        <button type="button" class="btn volver">Volver</button>
+        <button type="button" class="btn listo">Listo</button>
+      </div>
     </main>
 
-    
     <div class="overlay" id="overlay"></div>
-
     <script src="script.js"></script>
   </body>
 </html>
