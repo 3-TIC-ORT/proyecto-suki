@@ -13,3 +13,17 @@ overlay.addEventListener("click", () => {
   overlay.classList.remove("show");
 });
 
+connect2server(3000);
+
+postEvent("devolverusuario", {idusuario}, (data) => {
+  if (data.ok === true) {
+    let idusuario = data.id;
+container.innerHtml
+
+  } else {
+    ""
+}
+});
+
+
+
