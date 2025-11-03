@@ -11,6 +11,7 @@ overlay.addEventListener("click", () => {
   sidebar.classList.remove("open");
   overlay.classList.remove("show");
 });
+
 connect2server(3000)
 
 let idusuario = Number(sessionStorage.getItem("idusuario") || localStorage.getItem("idusuario") || 1)
@@ -82,9 +83,9 @@ function setLogrosDestacados(logrosObj) {
     const c = document.getElementById(`logro${i + 1}`)
     const hecho = !!logrosObj[l.clave]
     c.innerHTML = `
-      <img src="imagenes/trofeo.png" alt="trofeo">
+      <img src="../imagenes/Frame/ 71.png" alt="trofeo">
       <p>${l.nombre}</p>
-      <small>${hecho ? "Completado ✅" : "Pendiente"}</small>
+      <small>${hecho ? "Completado " : "Pendiente"}</small>
     `
   })
 }
