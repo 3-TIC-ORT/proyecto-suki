@@ -13,7 +13,7 @@
 
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: signika-negative, system-ui, -apple-system, Arial, sans-serif;
   background: var(--fondo);
   color: var(--texto);
 }
@@ -44,7 +44,7 @@ header {
 
 
 .brand-nombre{
-  font-family: "Baloo 2", system-ui, -apple-system, Arial, sans-serif;
+  font-family: "signika-negative", system-ui, -apple-system, Arial, sans-serif;
   font-weight: 700;
   font-size: 22px;
   letter-spacing: 0.2px;

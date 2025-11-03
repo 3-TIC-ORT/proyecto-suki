@@ -43,56 +43,67 @@
     
     <div class="overlay" id="overlay"></div>
     
-    <main class="perfilContainer">
+<main id="main">
+  <section class="superior">
+    <div class="perro">
+      <img id="imgPerro" src="" alt="skin actual">
+    </div>
+    <div class="usuario">
+      <p class="nombre" id="nombreUsuario">usuario</p>
+      <button id="btnCambiarNombre" class="btn">Modificar</button>
+      <p id="skinTexto">Skin</p>
+    </div>
+  </section>
 
-      <div class="perfilFondo">
-        <div class="perfilInfo">
-          <h2 class="nombreUsuario">Usuario</h2>
-          <p>Skin</p>
-          <button class="btnModificar">Modificar</button>
-        </div>
+  <section class="inferior">
+    <div class="columna1">
+      <p>E-Mail:</p>
+      <div class="fila">
+        <p id="mailUsuario">—</p>
+        <button id="btnMail" class="btn">Modificar</button>
       </div>
-    
-      <div class="perfilDatos">
-        
+
+      <p>Objetivos creados en total:</p>
+      <p id="totalObjetivos">0</p>
+
+      <p>Cumpleaños:</p>
+      <div class="fila">
+        <p id="cumple">—</p>
+        <button id="btnFecha" class="btn">Modificar</button>
       </div>
-    
-      <div class="rachaContainer">
-        <div class="diasSemana">
-          <p>D</p><p>L</p><p>M</p><p>M</p><p>J</p><p>V</p><p>S</p>
-        </div>
-    
-        <div class="marcasDias">
-          <div class="gris"></div><div class="verde"></div><div class="verde"></div>
-          <div class="verde"></div><div class="gris"></div><div class="gris"></div><div class="verde"></div>
-          <div class="gris"></div><div class="gris"></div><div class="verde"></div>
-          <div class="verde"></div><div class="verde"></div><div class="gris"></div><div class="gris"></div>
-        </div>
-    
-        <p class="rachaTexto">Racha actual: 3 días</p>
+
+      <p>Logros completados:</p>
+      <p id="logrosCompletados">0/13</p>
+
+      <p>Fecha de creación del perfil:</p>
+      <p id="fechaPerfil">—</p>
+
+      <p>Skins:</p>
+      <p id="skinsCantidad">0/0</p>
+
+      <p>Racha más larga:</p>
+      <p id="rachaLarga">0 días</p>
+    </div>
+
+    <div class="columna2">
+      <div class="dias">
+        <div>D</div><div>L</div><div>M</div><div>M</div><div>J</div><div>V</div><div>S</div>
       </div>
-    
-      <div class="logrosContainer">
-        <div class="logroBox">
-          <img src="trofeo.png" alt="trofeo">
-          <p>Nombre logro</p>
-        </div>
-        <div class="logroBox">
-          <img src="trofeo.png" alt="trofeo">
-          <p>Nombre logro</p>
-        </div>
-        <div class="logroBox">
-          <img src="trofeo.png" alt="trofeo">
-          <p>Nombre logro</p>
-        </div>
-        <div class="logroBox">
-          <img src="trofeo.png" alt="trofeo">
-          <p>Nombre logro</p>
-        </div>
+      <div id="calendarioDias" class="grilla"></div>
+      <p id="rachaActual" class="racha">Racha actual: 0 Días</p>
+    </div>
+
+    <div class="columna3">
+      <div class="tarjetas">
+        <div class="tarjeta" id="logro1"></div>
+        <div class="tarjeta" id="logro2"></div>
+        <div class="tarjeta" id="logro3"></div>
+        <div class="tarjeta" id="logro4"></div>
       </div>
-    
-    </main>
-    
+    </div>
+  </section>
+</main>
+
     <script src="script.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.8.1/socket.io.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/JZylber/SoqueTIC-Client@v1.4.2/soquetic-client.js"></script>
