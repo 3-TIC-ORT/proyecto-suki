@@ -1,41 +1,65 @@
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
+    margin: 0px;
+    padding: 0%;
+    font-family: "Signika", sans-serif;
+    display: flex;
+
+  }
+  
+  .izquierda{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-color: #fff;
-  }
-  
-  .logo-info {
-    text-align: center;
-    margin-bottom: 20px;
-    font-weight: bold;
+    background-color: #F3EAE8;
+    text-decoration: none;
+    width: 50%;
+    height: 100%;
   }
   
   .card {
-    border: 1px solid #000;
-    border-radius: 10px;
-    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    border-radius: 20px;
+    margin: 45px;
     text-align: center;
     text-decoration: none;
+    background-color: #fff;
+    filter: drop-shadow(0px 4px 20px rgba(0, 0, 0, 0.233));
+  }
+  h2{
+    font-weight: bold;
+    font-size: 30px;
+    margin-bottom: 0px;
   }
   
+  #textoinfo{
+    margin-top: 0px;
+  }
+
   .btn {
     display: block;
-    width: 200px;
+    margin: 15px;
+    width: 300px;
     padding: 12px;
-    margin: 10px auto;
-    background-color: #000;
-    color: white;
+    border-radius: 33.37px;
     border: none;
     border-radius: 6px;
     font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.2s;
-    
+  }
+
+  #button-entrar{
+    background-color: #FFCC00;
+    color: #000;
+  }
+  #button-registrar{
+    background-color: #000000;
+    color: #fff;
   }
   
   .btn:hover {
@@ -43,8 +67,12 @@ body {
   }
   
   .info {
-    margin-top: 20px;
     font-size: 14px;
     text-align: center;
+  }
+  .tuApp{
+
+    width: 100%;
+    height: 100%;
   }
   
