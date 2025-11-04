@@ -1,6 +1,21 @@
+const modal = document.getElementById("modal-terminos");
+const cerrarModal = document.getElementById("cerrar-modal");
+const verTerminos = document.getElementById("ver-terminos");
 
 
-   connect2Server(3000);
+
+verTerminos.addEventListener("click", (e) => {
+  e.preventDefault();
+  modal.style.display = "block";
+});
+
+
+cerrarModal.addEventListener("click", () => {
+  modal.style.display = "none";
+});
+
+
+connect2Server(3000);
 
 document.getElementById("loginForm").addEventListener("submit", function(e) {
     e.preventDefault(); 

@@ -394,5 +394,49 @@
     "ultimodiaderacha": null,
     "cantidadobjetivoscreados": 0,
     "skinseleccionada": "suki"
+  },
+  {
+    "usuario": "Matias",
+    "id": 1762266173595,
+    "contraseña": "Pepe10",
+    "mail": "49961473@gmail.com",
+    "fecha": "2009-12-06",
+    "racha": 0,
+    "logrosdesbloqueados": 0,
+    "skinscompradas": 0,
+    "dinero": 0,
+    "fechadecreacion": "2025-11-04",
+    "skins": {
+      "suki": true,
+      "trump": false,
+      "flash": false,
+      "turro": false,
+      "sullivan": false,
+      "bikini": false,
+      "rabino": false,
+      "bizarrap": false,
+      "oro": false,
+      "minecraft": false
+    },
+    "logros": {
+      "primerpaso": false,
+      "racha3": false,
+      "racha7": false,
+      "racha30": false,
+      "iniciador": false,
+      "creador": false,
+      "coleccionista": false,
+      "explorador": false,
+      "legendario": false,
+      "centenario": false,
+      "ganador": false,
+      "extraganador": false,
+      "extasis": false
+    },
+    "rachamaslarga": 0,
+    "rachaactual": 0,
+    "ultimodiaderacha": null,
+    "cantidadobjetivoscreados": 0,
+    "skinseleccionada": "suki"
   }
 ]
