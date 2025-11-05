@@ -16,23 +16,19 @@ overlay.addEventListener("click", () => {
 const formSeleccion = document.getElementById("form-seleccion");
 const formTiempo = document.getElementById("form-tiempo");
 const formAccion = document.getElementById("form-accion");
-const menuTiempo = document.getElementById("menu-tiempo");
-const menuAccion = document.getElementById("menu-accion");
+const menuDisenio = document.getElementById("menu-disenio");
 
 const nombreObjetivo = document.getElementById("nombreObjetivo");
 const tipoObjetivo = document.getElementById("tipoObjetivo");
 const duracionTiempo = document.getElementById("duracionTiempo");
 const descripcionAccion = document.getElementById("descripcionAccion");
-const colorTiempo = document.getElementById("colorTiempo");
-const colorAccion = document.getElementById("colorAccion");
-
+const colorObjetivo = document.getElementById("colorObjetivo");
 
 document.getElementById("btnSiguienteSeleccion").addEventListener("click", () => {
   if (nombreObjetivo.value.trim() === "" || tipoObjetivo.value === "") {
     alert("Completá todos los campos antes de continuar");
     return;
   }
-
   if (tipoObjetivo.value === "tiempo") {
     formSeleccion.classList.add("oculto");
     formTiempo.classList.remove("oculto");
@@ -48,7 +44,7 @@ document.getElementById("btnSiguienteTiempo").addEventListener("click", () => {
     return;
   }
   formTiempo.classList.add("oculto");
-  menuTiempo.classList.remove("oculto");
+  menuDisenio.classList.remove("oculto");
 });
 
 document.getElementById("btnSiguienteAccion").addEventListener("click", () => {
@@ -57,7 +53,7 @@ document.getElementById("btnSiguienteAccion").addEventListener("click", () => {
     return;
   }
   formAccion.classList.add("oculto");
-  menuAccion.classList.remove("oculto");
+  menuDisenio.classList.remove("oculto");
 });
 
 document.querySelectorAll(".volver").forEach(btn => {
@@ -65,20 +61,59 @@ document.querySelectorAll(".volver").forEach(btn => {
     formSeleccion.classList.remove("oculto");
     formTiempo.classList.add("oculto");
     formAccion.classList.add("oculto");
-    menuTiempo.classList.add("oculto");
-    menuAccion.classList.add("oculto");
+    menuDisenio.classList.add("oculto");
   });
 });
 
+function obtenerIdUsuario() {
+  try {
+    const u = JSON.parse(localStorage.getItem("usuario") || "null");
+    return (u && (u.id ?? u._id ?? u.uid)) ?? JSON.parse(localStorage.getItem("idusuario") || "null");
+  } catch {
+    return JSON.parse(localStorage.getItem("idusuario") || "null");
+  }
+}
+
+function setNombreUsuarioHeader() {
+  try {
+    const u = JSON.parse(localStorage.getItem("usuario") || "null");
+    const nombre = (u && (u.nombre ?? u.name ?? u.username ?? u.email)) || "Usuario";
+    const el = document.getElementById("nombreUsuarioHeader");
+    if (el) el.textContent = nombre;
+  } catch {}
+}
+setNombreUsuarioHeader();
+
 document.querySelectorAll(".listo").forEach(btn => {
   btn.addEventListener("click", () => {
-    if ((btn.closest("#menu-tiempo") && !colorTiempo.value) ||
-        (btn.closest("#menu-accion") && !colorAccion.value)) {
+    if (!colorObjetivo.value) {
       alert("Seleccioná un color para tu objetivo");
       return;
     }
+    const titulo = nombreObjetivo.value.trim();
+    const tipodeobjetivo = tipoObjetivo.value;
+    const idusuario = obtenerIdUsuario();
+    if (!idusuario) {
+      alert("No se encontró el idusuario en localStorage. Iniciá sesión nuevamente.");
+      return;
+    }
+    let tiempo = null, veces = null, icono = null, color = null;
+    if (tipodeobjetivo === "tiempo") {
+      tiempo = Number(duracionTiempo.value);
+    } else if (tipodeobjetivo === "accion") {
+      const v = descripcionAccion.value.trim();
+      const n = Number(v);
+      veces = Number.isNaN(n) ? v : n;
+    }
+    color = colorObjetivo.value;
 
-    alert(" Objetivo creado con éxito");
-    window.location.reload();
+    postEvent("crearobjetivo", { idusuario, titulo, tipodeobjetivo, tiempo, veces, icono, color }, (data) => {
+      if (data?.ok === true) {
+        alert("Objetivo creado con éxito");
+        window.location.href = "../menu principal/indexMenuPrincipal.html";
+      } else {
+        alert(data?.message || "No se pudo crear el objetivo.");
+      }
+    });
   });
 });
