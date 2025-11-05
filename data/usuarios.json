@@ -6,9 +6,9 @@
     "mail": "lucas@gmail.com",
     "fecha": "2025-10-22",
     "racha": 0,
-    "logrosdesbloqueados": 0,
+    "logrosdesbloqueados": 2,
     "skinscompradas": 0,
-    "dinero": 0,
+    "dinero": 30,
     "fechadecreacion": "2025-10-17",
     "skins": {
       "suki": false,
@@ -27,8 +27,8 @@
       "racha3": false,
       "racha7": false,
       "racha30": false,
-      "iniciador": false,
-      "creador": false,
+      "iniciador": true,
+      "creador": true,
       "coleccionista": false,
       "explorador": false,
       "legendario": false,
@@ -40,7 +40,7 @@
     "rachamaslarga": 0,
     "rachaactual": 0,
     "ultimodiaderacha": null,
-    "cantidadobjetivoscreados": 0,
+    "cantidadobjetivoscreados": 5,
     "skinseleccionada": "trump"
   },
   {

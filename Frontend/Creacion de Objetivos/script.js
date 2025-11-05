@@ -3,6 +3,8 @@ const menuBtn = document.getElementById("menuBtn");
 const sidebar = document.getElementById("sidebar");
 const overlay = document.getElementById("overlay");
 
+connect2Server(3000);
+
 menuBtn.addEventListener("click", () => {
   sidebar.classList.toggle("open");
   overlay.classList.toggle("show");
@@ -108,7 +110,7 @@ document.querySelectorAll(".listo").forEach(btn => {
     color = colorObjetivo.value;
 
     postEvent("crearobjetivo", { idusuario, titulo, tipodeobjetivo, tiempo, veces, icono, color }, (data) => {
-      if (data?.ok === true) {
+      if (data?.ok || data?.objok || data?.success) {
         alert("Objetivo creado con éxito");
         window.location.href = "../menu principal/indexMenuPrincipal.html";
       } else {
@@ -117,3 +119,21 @@ document.querySelectorAll(".listo").forEach(btn => {
     });
   });
 });
+
+getEvent("obtenericonos", (data) => {
+  if (data?.ok && Array.isArray(data.iconos)) {
+    const contenedorIconos = document.getElementById("contenedorIconos");
+    data.iconos.forEach(icono => {
+      const div = document.createElement("div");
+      div.classList.add("icono-opcion");
+      div.innerHTML = `<img src="${icono.url}" alt="Icono ${icono._id}">`;
+      div.addEventListener("click", () => {
+        document.querySelectorAll(".icono-opcion").forEach(el => el.classList.remove("seleccionado"));
+        div.classList.add("seleccionado");
+       div.dataset.seleccionado = icono._id;
+      });
+      contenedorIconos.appendChild(div);
+    });
+  }
+});   
+

@@ -19,6 +19,6 @@
   },
   "homepage": "https://github.com/MateoSilber/SUKI---Proyecto-TIC#readme",
   "dependencies": {
-    "soquetic": "^1.4.1"
+    "soquetic": "^1.4.2"
   }
 }
