@@ -3,6 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Signika:wght@300..700&display=swap" rel="stylesheet">    
     <link rel="stylesheet" href="style.css" />
     <title>SUKI</title>
   </head>
@@ -44,43 +46,53 @@
 <main id="main">
   <section class="superior">
     <div class="perro">
-      <img id="imgPerro" src="" alt="skin actual">
+      <img id="imgPerro" src="../imagenes/skins/normal=Suki.png" alt="skin actual">
     </div>
     <div class="usuario">
+      
+      <div class="fila">
       <p class="nombre" id="nombreUsuario">usuario</p>
       <button id="btnCambiarNombre" class="btn">Modificar</button>
+      </div>
       <p id="skinTexto">Skin</p>
     </div>
   </section>
 
   <section class="inferior">
     <div class="columna1">
-      <p>E-Mail:</p>
       <div class="fila">
+      <p>E-Mail:</p>
         <p id="mailUsuario">—</p>
         <button id="btnMail" class="btn">Modificar</button>
       </div>
-
+      <div class="fila">
       <p>Objetivos creados en total:</p>
       <p id="totalObjetivos">0</p>
-
-      <p>Cumpleaños:</p>
+    </div>
       <div class="fila">
+      <p>Cumpleaños:</p>
         <p id="cumple">—</p>
         <button id="btnFecha" class="btn">Modificar</button>
       </div>
-
+      <div class="fila">
       <p>Logros completados:</p>
       <p id="logrosCompletados">0/13</p>
-
+      </div>
+      
+      <div class="fila">
       <p>Fecha de creación del perfil:</p>
       <p id="fechaPerfil">—</p>
-
+      </div>
+      
+      <div class="fila">
       <p>Skins:</p>
       <p id="skinsCantidad">0/0</p>
-
+      </div>
+      
+      <div class="fila">
       <p>Racha más larga:</p>
       <p id="rachaLarga">0 días</p>
+      </div>
     </div>
 
     <div class="columna2">
@@ -93,10 +105,22 @@
 
     <div class="columna3">
       <div class="tarjetas">
-        <div class="tarjeta" id="logro1"></div>
-        <div class="tarjeta" id="logro2"></div>
-        <div class="tarjeta" id="logro3"></div>
-        <div class="tarjeta" id="logro4"></div>
+        <div class="tarjeta" id="logro1">
+          <img src="../imagenes/Frame 71.png" alt="" class="Iconologro">
+          <p>Nombre objetivo</p>
+        </div>
+        <div class="tarjeta" id="logro2">
+          <img src="../imagenes/Frame 71.png" alt="" class="Iconologro">
+          <p>Nombre objetivo</p>
+        </div>
+        <div class="tarjeta" id="logro3">
+          <img src="../imagenes/Frame 71.png" alt="" class="Iconologro">
+          <p>Nombre objetivo</p>
+        </div>
+        <div class="tarjeta" id="logro4">
+          <img src="../imagenes/Frame 71.png" alt="" class="Iconologro">
+          <p>Nombre objetivo</p>
+        </div>
       </div>
     </div>
   </section>
