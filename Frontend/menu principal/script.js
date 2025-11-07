@@ -1,65 +1,80 @@
-connect2Server(3000);
+document.addEventListener('DOMContentLoaded', () => {
+  connect2Server(3000);
 
-const menuBtn = document.getElementById("menuBtn");
-const sidebar = document.getElementById("sidebar");
-const overlay = document.getElementById("overlay");
+  const menuBtn = document.getElementById("menuBtn");
+  const sidebar = document.getElementById("sidebar");
+  const overlay = document.getElementById("overlay");
+  const estadoVacio = document.getElementById("estadoVacio");
+  const listaObjetivos = document.getElementById("listaObjetivos");
+  const cont = document.getElementById("objetivos");
 
-menuBtn.addEventListener("click", () => {
-  sidebar.classList.toggle("open");
-  overlay.classList.toggle("show");
-});
-
-overlay.addEventListener("click", () => {
-  sidebar.classList.remove("open");
-  overlay.classList.remove("show");
-});
-
-let botonCrear = document.getElementById('botonCrear');
-
-let rutaCrearObjetivo = '..//Creacion de Objetivos/IndexCreacionDeObjetivos.html';
-
-if (botonCrear) {
-  botonCrear.addEventListener('click', function () {
-    window.location.href = rutaCrearObjetivo;
-  });
-}
-
-const RUTAS_POR_TIPO = {
-  accion: '..//Objetivo Accion/indexObjetivoAccion.html',
-  tiempo: '..//Objetivo Tiempo/indexObjetivoTiempo.html'
-};
-
-function appendObjetivoCard(obj) {
-  const cont = document.getElementById('objetivos');
-  if (!cont) return;
-
-  const destino = RUTAS_POR_TIPO[(obj?.tipo || '').toLowerCase()];
-
-  const card = document.createElement('button');
-  card.type = 'button';
-  card.className = 'objetivo-card';
-  card.textContent = obj?.nombre || 'Objetivo';
-
-  if (destino) {
-    card.addEventListener('click', () => {
-      if (obj?.idObjetivo) localStorage.setItem('idObjetivo', obj.idObjetivo);
-      window.location.href = destino;
+  if (menuBtn && sidebar && overlay) {
+    menuBtn.addEventListener("click", () => {
+      sidebar.classList.toggle("open");
+      overlay.classList.toggle("show");
     });
-  } else {
-    card.disabled = true;
+    overlay.addEventListener("click", () => {
+      sidebar.classList.remove("open");
+      overlay.classList.remove("show");
+    });
   }
 
-  cont.appendChild(card);
-}
+  const irACrear = () => {
+    window.location.href = "../Creacion de Objetivos/IndexCreacionDeObjetivos.html";
+  };
 
-postEvent("menu_principal_loaded", idusuario, (res) => {
-  const cont = document.getElementById('objetivos');
-  if (!cont) return;
-  cont.innerHTML = '';
-  const objetivos = Array.isArray(res) ? res : (res?.objetivos || []);
-  for (let i = 0; i < objetivos.length; i++) {
-    const obj = objetivos[i];
-    appendObjetivoCard(obj);
-    if (obj?.idUsuario) localStorage.setItem('idUsuario', obj.idUsuario);
+  document.getElementById("botonCrear")?.addEventListener("click", irACrear);
+  document.getElementById("botonCrearInferior")?.addEventListener("click", irACrear);
+
+  const RUTAS_POR_TIPO = {
+    accion: "../Objetivo Accion/indexObjetivoAccion.html",
+    tiempo: "../Objetivo Tiempo/indexObjetivoTiempo.html",
+  };
+
+  function appendObjetivoCard(obj) {
+    const card = document.createElement("button");
+    card.type = "button";
+    card.className = "objetivo-card";
+    card.textContent = obj?.nombre || "Objetivo";
+
+    const tipo = (obj?.tipo || "").toLowerCase();
+    const destino = RUTAS_POR_TIPO[tipo];
+
+    if (destino) {
+      card.addEventListener("click", () => {
+        if (obj?.idObjetivo) localStorage.setItem("idObjetivo", obj.idObjetivo);
+        window.location.href = destino;
+      });
+    } else {
+      card.disabled = true;
+      card.title = `Tipo desconocido: ${tipo}`;
+    }
+
+    cont.appendChild(card);
   }
+
+  postEvent("devolverobjetivos", idusuario, (res) => {
+    const objetivos =
+      Array.isArray(res) ? res :
+      Array.isArray(res?.objetivos) ? res.objetivos :
+      Array.isArray(res?.data?.objetivos) ? res.data.objetivos :
+      [];
+
+    if (!objetivos.length) {
+      estadoVacio.classList.remove("oculto");
+      listaObjetivos.classList.add("oculto");
+      return;
+    }
+
+    const firstWithUser = objetivos.find(o => o?.idUsuario);
+    if (firstWithUser) localStorage.setItem("idUsuario", firstWithUser.idUsuario);
+
+    estadoVacio.classList.add("oculto");
+    listaObjetivos.classList.remove("oculto");
+    cont.innerHTML = "";
+
+    objetivos.forEach(obj => {
+      if (obj && typeof obj === "object") appendObjetivoCard(obj);
+    });
+  });
 });
