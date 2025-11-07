@@ -154,7 +154,7 @@ label {
   width: 90%;
 }
 
-.btn, .obj {
+.btn, .obj, .color-select {
   display: block;
   margin: 8px 0;
   width: 400px;
@@ -178,7 +178,7 @@ label {
   color: #877771;
   text-align: center;
 }
-#tipoObjetivo {
+#tipoObjetivo, .color-select {
   background-color: #000;
   color: #fff;
   text-align: center;
@@ -204,6 +204,22 @@ label {
   
   .color-select option[value="#CB30E0"] {
     background-color: #CB30E0;
+    color: #fff;
+  }
+  .color-select option[value="#002AB8"] {
+    background-color: #002AB8;
+    color: #fff;
+  }
+  .color-select option[value="#34C759"] {
+    background-color: #34C759;
+    color: #fff;
+  }
+  .color-select option[value="#FF383C"] {
+    background-color: #FF383C;
+    color: #fff;
+  }
+  .color-select option[value="#6B2A14"] {
+    background-color: #6B2A14;
     color: #fff;
   }
   
