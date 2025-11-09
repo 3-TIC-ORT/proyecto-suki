@@ -119,5 +119,16 @@
     "vecescompletadas": 0,
     "color": "#CB30E0",
     "icono": null
+  },
+  {
+    "idusuario": 1,
+    "idobjetivo": 1762664328016,
+    "titulo": "ssd",
+    "tipodeobjetivo": "accion",
+    "tiempo": null,
+    "veces": "e",
+    "vecescompletadas": 0,
+    "color": "#CB30E0",
+    "icono": null
   }
 ]

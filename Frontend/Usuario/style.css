@@ -183,48 +183,63 @@ main {
   gap: 10px;
 }
 
-
 .columna2 {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
-
 .dias {
   display: grid;
-  grid-template-columns: repeat(7, 26px);
-  gap: 8px;
+  grid-template-columns: repeat(7, 28px);
+  gap: 10px;
+  justify-content: center;
   color: #6a6a6a;
-  font-weight: 600;
-  text-align: center;
+  font-weight: 700;
+  letter-spacing: 1px;
+  user-select: none;
 }
 
 .grilla {
+  margin-top: 6px;
   display: grid;
-  grid-template-columns: repeat(7, 26px);
-  gap: 8px;
+  grid-template-columns: repeat(7, 28px);
+  grid-auto-rows: 28px;
+  gap: 10px;
   justify-content: center;
 }
 
 .punto {
-  width: 26px;
-  height: 26px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
-  background: #cfcfcf;
+  background: #d9d9d9;
 }
-
 .punto.ok {
-  background: #4caf50;
+  background: #35b24a;
 }
-
+.punto.negro {
+  background: #000;
+}
 .punto.vacio {
   background: transparent;
 }
-
-.racha {
-  margin-top: 10px;
-  font-weight: 700;
-  text-align: center;
+.fuego {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  line-height: 28px;
+}
+.punto.hoy {
+  background: #2db043;
+  box-shadow: 0 0 0 2px #ffd54a inset;
+}
+.racha span {
+  color: #f6c52d;
+  font-weight: 800;
 }
 
 
@@ -269,8 +284,19 @@ main {
 }
 
 
-@media (max-width: 900px) {
-  .inferior { grid-template-columns: 1fr; }
-  .superior { flex-direction: column; text-align: center; }
-  .perro img { width: 130px; }
+.boton-cerrar {
+  width: 100%;
+  background: #ff4444;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background 0.2s ease;
+}
+
+.boton-cerrar:hover {
+  background: #e13b3b;
 }

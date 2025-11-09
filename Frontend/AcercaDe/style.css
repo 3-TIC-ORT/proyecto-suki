@@ -136,4 +136,19 @@ body {
     padding: 0px;
     margin: 1px;
   }
-  
+  .boton-cerrar {
+  width: 100%;
+  background: #ff4444;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background 0.2s ease;
+}
+
+.boton-cerrar:hover {
+  background: #e13b3b;
+}

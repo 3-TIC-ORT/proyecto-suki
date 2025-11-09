@@ -18,6 +18,15 @@ document.addEventListener('DOMContentLoaded', () => {
       overlay.classList.remove("show");
     });
   }
+const btnCerrarSesion = document.getElementById("btnCerrarSesion");
+if (btnCerrarSesion) {
+  btnCerrarSesion.addEventListener("click", () => {
+    localStorage.removeItem("idusuario");
+    localStorage.removeItem("usuario");
+    window.location.href = "..//InicioSesion/IndexInicioSesion.html?logout=1";
+  });
+}
+
 
   const irACrear = () => {
     window.location.href = "../Creacion de Objetivos/IndexCreacionDeObjetivos.html";

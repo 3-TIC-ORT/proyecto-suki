@@ -12,6 +12,14 @@ overlay.addEventListener("click", () => {
   sidebar.classList.remove("open");
   overlay.classList.remove("show");
 });
+const btnCerrarSesion = document.getElementById("btnCerrarSesion");
+if (btnCerrarSesion) {
+  btnCerrarSesion.addEventListener("click", () => {
+    localStorage.removeItem("idusuario");
+    localStorage.removeItem("usuario");
+    window.location.href = "..//InicioSesion/IndexInicioSesion.html?logout=1";
+  });
+}
 
 const idusuario = JSON.parse(localStorage.getItem("idusuario") || "null");
 

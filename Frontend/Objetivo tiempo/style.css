@@ -1,9 +1,9 @@
-/* Reset básico */
+
 body {
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #f9f4f2; /* tono claro parecido al fondo del segundo diseño */
-  color: #000; /* texto negro */
+  background: #f9f4f2; 
+  color: #000;
 }
 
 header {
@@ -114,13 +114,12 @@ header {
 
 .sidebar img {
   width: 100%;
-  max-width: 200px; /* para que no se deforme */
+  max-width: 200px; 
   margin: 20px auto 0 auto;
   display: block;
 }
 
 
-/* Contenedor progreso y puntos */
 .contenedor-progreso {
   margin: 20px auto;
   text-align: center;
@@ -154,15 +153,14 @@ header {
   height: 20px;
   border-radius: 10px;
   background: #ccc;
-  border: 2px solid #ff3b3b; /* rojo */
+  border: 2px solid #ff3b3b; 
   transition: background-color 0.3s;
 }
 .punto.activo {
-  background: #ff3b3b; /* rojo vivo */
+  background: #ff3b3b; 
   border-color: #ff3b3b;
 }
 
-/* Tarjetas */
 .tarjetas {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -209,12 +207,12 @@ header {
   transition: background 0.35s;
 }
 .dia.activo {
-  background: #4ade80; /* verde parecido con el diseño */
+  background: #4ade80; 
   color: #fff;
   font-weight: 700;
 }
 
-/* Timer */
+
 
 .timer-container {
   position: relative;
@@ -230,13 +228,13 @@ header {
 }
 
 .timer-bg {
-  stroke: #ffcc00; /* amarillo */
+  stroke: #ffcc00; 
   stroke-width: 15;
 }
 
 .timer-progress {
   transition: stroke-dashoffset 1s linear;
-  stroke: #ff3b3b; /* rojo */
+  stroke: #ff3b3b; 
   stroke-width: 15;
 }
 
@@ -262,7 +260,6 @@ header {
   color: #777;
 }
 
-/* Controles timer */
 .timer-controls {
   display: flex;
   justify-content: center;
@@ -293,7 +290,7 @@ header {
   cursor: not-allowed;
 }
 
-/* Ajustes para íconos y elementos en general */
+
 
 .icono-menu:hover,
 .icono-carrito img:hover,
@@ -303,7 +300,7 @@ header {
   transition: filter 0.2s ease-in-out;
 }
 
-/* Texto adicional estilo similar al ejemplo */
+
 .tarjeta p strong, .tarjeta p b {
   font-size: 3em;
   font-weight: 900;
@@ -311,15 +308,31 @@ header {
   line-height: 1;
 }
 
-/* Pie de texto pequeño similar a etiquetas de leyenda */
+
 .letras-completados, .letras-no-completados {
   font-size: 0.75em;
   font-weight: 600;
   text-align: center;
 }
 .letras-completados {
-  color: #ffcc00; /* amarillo */
+  color: #ffcc00; 
 }
 .letras-no-completados {
-  color: #ff3b3b; /* rojo */
+  color: #ff3b3b; 
+}
+.boton-cerrar {
+  width: 100%;
+  background: #ff4444;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background 0.2s ease;
+}
+
+.boton-cerrar:hover {
+  background: #e13b3b;
 }
