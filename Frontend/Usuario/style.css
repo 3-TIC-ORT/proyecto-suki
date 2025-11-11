@@ -19,10 +19,11 @@ header {
 }
 
 .logo img {
-  width: 50px;
+  width: 15vh;
   height: auto;
   margin-right: 15px;
 }
+
 
 .icono-carrito img {
   width: 28px;
@@ -299,4 +300,23 @@ main {
 
 .boton-cerrar:hover {
   background: #e13b3b;
+}
+.plata-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 12px;
+}
+
+.plata-icono {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+#plataHeaderValor {
+  color: #ffcc33;
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 1;
 }

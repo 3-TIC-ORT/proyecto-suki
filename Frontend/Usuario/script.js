@@ -15,23 +15,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const raw = JSON.parse(localStorage.getItem("idusuario") || "null")
   const idusuario = typeof raw === "number" ? raw : raw?.idusuario ?? null
-  const nombreGuardado =
-    (typeof raw === "object" && raw?.nombre) ||
-    JSON.parse(localStorage.getItem("usuario") || "{}")?.usuario ||
-    "Usuario"
-  if (!idusuario) {
-    window.location.href = "../Login/indexLogin.html?force=1"
-    return
-  }
-
-  const setNombreHeader = (nombre) => {
-    const el = document.querySelector(".nombre-usuario")
-    if (el) el.textContent = nombre || "Usuario"
-  }
-  setNombreHeader(nombreGuardado)
+  const nombreGuardado = (typeof raw === "object" && raw?.nombre) || JSON.parse(localStorage.getItem("usuario") || "{}")?.usuario || "Usuario"
+  if (!idusuario) { window.location.href = "../Login/indexLogin.html?force=1"; return }
 
   const contarActivos = (o) => Object.values(o || {}).filter(Boolean).length
   const total = (o) => Object.keys(o || {}).length
+
+  const rutaIconoHeader = (clave) => {
+    const mapa = {
+      suki: "SUKI",
+      trump: "TRUMP",
+      rabino: "rabino",
+      oro: "oro",
+      flash: "FLASH",
+      turro: "TURRO",
+      sullivan: "solivan",
+      bizarrap: "BzRP",
+      minecraft: "minecraft"
+    }
+    const nombre = mapa[clave] || "SUKI"
+    return `../imagenes/Imagenesheader/${encodeURIComponent(nombre)}.png`
+  }
+
   const rutaSkin = (clave) => {
     const mapa = {
       suki: "Suki",
@@ -42,29 +47,38 @@ document.addEventListener("DOMContentLoaded", () => {
       trump: "salchitrump",
       turro: "salchiturro",
       sullivan: "salchivan",
-      bizarrap: "BzRP",
+      bizarrap: "BzRP"
     }
     const nombre = mapa[clave] || "Suki"
     return `../imagenes/skins/${encodeURIComponent(nombre)}.png`
   }
 
+  const setNombreHeader = (nombre) => {
+    const el = document.getElementById("nombreHeader") || document.querySelector(".nombre-usuario")
+    if (el) el.textContent = nombre || "Usuario"
+  }
+
+  const setHeaderSkin = (clave) => {
+    const img = document.getElementById("imgHeaderSkin") || document.querySelector(".foto-perfil img")
+    if (img) img.src = rutaIconoHeader(clave)
+  }
+
+  const setPlataHeader = (n) => {
+    const caja = document.getElementById("plataHeaderValor")
+    if (caja) caja.textContent = String(n ?? 0)
+  }
+
   const claveISO = (d) => d.toISOString().slice(0, 10)
-  const inicioDia = (d) => {
-    const x = new Date(d)
-    x.setHours(0, 0, 0, 0)
-    return x
-  }
-  const sumarDias = (d, n) => {
-    const x = new Date(d)
-    x.setDate(x.getDate() + n)
-    return x
-  }
+  const inicioDia = (d) => { const x = new Date(d); x.setHours(0,0,0,0); return x }
+  const sumarDias = (d, n) => { const x = new Date(d); x.setDate(x.getDate() + n); return x }
+
   function inicioCuadricula(ultimoISO) {
     const ref = ultimoISO ? new Date(ultimoISO + "T00:00:00") : new Date()
     const fin = inicioDia(ref)
     const domingoFin = sumarDias(fin, -fin.getDay())
     return sumarDias(domingoFin, -3 * 7)
   }
+
   function armarFechas(ultimoISO) {
     const ini = inicioCuadricula(ultimoISO)
     const out = []
@@ -74,17 +88,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     return out
   }
+
   function diasDeRacha(racha, ultimoISO) {
     const set = new Set()
     if (!racha) return set
-    const base = inicioDia(
-      new Date((ultimoISO || claveISO(new Date())) + "T00:00:00")
-    )
-    for (let i = 0; i < Number(racha || 0); i++) {
-      set.add(claveISO(sumarDias(base, -i)))
-    }
+    const base = inicioDia(new Date((ultimoISO || claveISO(new Date())) + "T00:00:00"))
+    for (let i = 0; i < Number(racha || 0); i++) set.add(claveISO(sumarDias(base, -i)))
     return set
   }
+
   function pintarCalendarioEstilo(racha, ultimoISO, faltasISO = []) {
     const cont = document.getElementById("calendarioDias")
     if (!cont) return
@@ -95,43 +107,25 @@ document.addEventListener("DOMContentLoaded", () => {
     cont.innerHTML = ""
     fechas.forEach((d, idx) => {
       const el = document.createElement("div")
-      if (d === null) {
-        el.className = "punto vacio"
-        cont.appendChild(el)
-        return
-      }
+      if (d === null) { el.className = "punto vacio"; cont.appendChild(el); return }
       const iso = claveISO(d)
       const esUltimaFila = idx >= 28
       const enRacha = setRacha.has(iso)
-      if (setFaltas.has(iso)) {
-        el.className = "punto negro"
-      } else if (enRacha && esUltimaFila) {
-        el.className = "fuego"
-        el.textContent = "🔥"
-      } else if (enRacha) {
-        el.className = "punto ok"
-      } else {
-        el.className = "punto"
-      }
-      if (iso === hoy && !enRacha) {
-        el.classList.add("hoy")
-      }
+      if (setFaltas.has(iso)) el.className = "punto negro"
+      else if (enRacha && esUltimaFila) { el.className = "fuego"; el.textContent = "🔥" }
+      else if (enRacha) el.className = "punto ok"
+      else el.className = "punto"
+      if (iso === hoy && !enRacha) el.classList.add("hoy")
       cont.appendChild(el)
     })
     const num = Number(racha || 0)
     const ley = document.getElementById("rachaActual")
-    if (ley)
-      ley.innerHTML = `Racha actual: <span>${num} Día${num === 1 ? "" : "s"}</span>`
+    if (ley) ley.innerHTML = `Racha actual: <span>${num} Día${num === 1 ? "" : "s"}</span>`
   }
 
   const setLogrosDestacados = (logrosObj) => {
     const claves = ["racha3", "racha7", "coleccionista", "ganador"]
-    const nombres = {
-      racha3: "Racha 3",
-      racha7: "Racha 7",
-      coleccionista: "Coleccionista",
-      ganador: "Ganador",
-    }
+    const nombres = { racha3: "Racha 3", racha7: "Racha 7", coleccionista: "Coleccionista", ganador: "Ganador" }
     claves.forEach((k, i) => {
       const c = document.getElementById(`logro${i + 1}`)
       if (!c) return
@@ -141,20 +135,31 @@ document.addEventListener("DOMContentLoaded", () => {
     })
   }
 
-  const cargarPerfil = () => {
+  function cargarPerfil() {
     postEvent("devolverusuario", { idusuario }, (data) => {
       if (!data?.objok || !data.usuario) return
       const u = data.usuario
-      document.getElementById("nombreUsuario").textContent = u.usuario
-      document.getElementById("mailUsuario").textContent = u.mail || "—"
-      document.getElementById("cumple").textContent = u.fecha || "—"
-      document.getElementById("fechaPerfil").textContent = u.fechadecreacion || "—"
-      document.getElementById("skinsCantidad").textContent = `${contarActivos(u.skins)}/${total(u.skins)}`
-      document.getElementById("skinTexto").textContent = `Skin: ${u.skinseleccionada}`
-      document.getElementById("imgPerro").src = rutaSkin(u.skinseleccionada)
-      document.getElementById("logrosCompletados").textContent = `${contarActivos(u.logros)}/${total(u.logros)}`
-      document.getElementById("rachaLarga").textContent = `${u.rachamaslarga || 0} días`
       setNombreHeader(u.usuario)
+      setHeaderSkin(u.skinseleccionada)
+      setPlataHeader(u.dinero || 0)
+      const elNombre = document.getElementById("nombreUsuario")
+      const elMail = document.getElementById("mailUsuario")
+      const elCumple = document.getElementById("cumple")
+      const elFechaPerf = document.getElementById("fechaPerfil")
+      const elSkinsCant = document.getElementById("skinsCantidad")
+      const elSkinTxt = document.getElementById("skinTexto")
+      const elPerro = document.getElementById("imgPerro")
+      const elLogrosComp = document.getElementById("logrosCompletados")
+      const elRachaLarga = document.getElementById("rachaLarga")
+      if (elNombre) elNombre.textContent = u.usuario
+      if (elMail) elMail.textContent = u.mail || "—"
+      if (elCumple) elCumple.textContent = u.fecha || "—"
+      if (elFechaPerf) elFechaPerf.textContent = u.fechadecreacion || "—"
+      if (elSkinsCant) elSkinsCant.textContent = `${contarActivos(u.skins)}/${total(u.skins)}`
+      if (elSkinTxt) elSkinTxt.textContent = `Skin: ${u.skinseleccionada}`
+      if (elPerro) elPerro.src = rutaSkin(u.skinseleccionada)
+      if (elLogrosComp) elLogrosComp.textContent = `${contarActivos(u.logros)}/${total(u.logros)}`
+      if (elRachaLarga) elRachaLarga.textContent = `${u.rachamaslarga || 0} días`
       pintarCalendarioEstilo(u.rachaactual || 0, u.ultimodiaderacha || null, [])
       setLogrosDestacados(u.logros)
     })
@@ -170,9 +175,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!nuevo) return
     postEvent("modificarusuario", { idusuario, nuevousuario: nuevo }, (resp) => {
       if (!resp?.objok?.ok) return
-      document.getElementById("nombreUsuario").textContent = resp.usuario || nuevo
-      setNombreHeader(resp.usuario || nuevo)
-      const guardado = typeof raw === "number" ? { idusuario } : { idusuario, nombre: resp.usuario || nuevo }
+      const v = resp.usuario || nuevo
+      const elNombre = document.getElementById("nombreUsuario")
+      if (elNombre) elNombre.textContent = v
+      setNombreHeader(v)
+      const guardado = typeof raw === "number" ? { idusuario } : { idusuario, nombre: v }
       localStorage.setItem("idusuario", JSON.stringify(guardado))
     })
   })
@@ -183,7 +190,8 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!nuevo) return
     postEvent("modificarmail", { idusuario, nuevomail: nuevo }, (resp) => {
       if (!resp?.objok?.ok) return
-      document.getElementById("mailUsuario").textContent = resp.mail || nuevo
+      const elMail = document.getElementById("mailUsuario")
+      if (elMail) elMail.textContent = resp.mail || nuevo
     })
   })
 
@@ -193,31 +201,35 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!nuevo) return
     postEvent("modificarfecha", { idusuario, nuevafecha: nuevo }, (resp) => {
       if (!resp?.objok?.ok) return
-      document.getElementById("cumple").textContent = resp.fecha || nuevo
+      const elCumple = document.getElementById("cumple")
+      if (elCumple) elCumple.textContent = resp.fecha || nuevo
     })
   })
 
-  window.completarobjetivo = (idobjetivo, tipodeobjetivo) => {
-    postEvent("completarobjetivo", { idusuario, idobjetivo, tipodeobjetivo }, (resp) => {
-      if (!resp?.objok?.ok) return
-      const hoyISO = new Date().toISOString().slice(0, 10)
-      pintarCalendarioEstilo(resp.racha || 0, hoyISO, [])
-      document.getElementById("rachaLarga").textContent = `${resp.rachamaslarga || 0} días`
-      if (resp.logros) {
-        document.getElementById("logrosCompletados").textContent = `${Object.values(resp.logros).filter(Boolean).length}/${Object.keys(resp.logros).length}`
-        setLogrosDestacados(resp.logros)
-      }
+  window.actualizarHeaderDesdeServidor = () => {
+    postEvent("devolverusuario", { idusuario }, (d) => {
+      if (!d?.objok || !d.usuario) return
+      setNombreHeader(d.usuario.usuario)
+      setHeaderSkin(d.usuario.skinseleccionada)
+      setPlataHeader(d.usuario.dinero || 0)
+    })
+  }
+
+  window.equiparSkin = (clave) => {
+    postEvent("nuevaskinelegida", { idusuario, nuevaskin: clave }, (r) => {
+      if (!r?.objok?.ok) return
+      setHeaderSkin(r.skindelusuario || clave)
+      window.actualizarHeaderDesdeServidor()
     })
   }
 
   const btnCerrarSesion = document.getElementById("btnCerrarSesion")
-  if (btnCerrarSesion) {
-    btnCerrarSesion.addEventListener("click", () => {
-      localStorage.removeItem("idusuario")
-      localStorage.removeItem("usuario")
-      window.location.href = "../Login/indexLogin.html?logout=1"
-    })
-  }
+  btnCerrarSesion?.addEventListener("click", () => {
+    localStorage.removeItem("idusuario")
+    localStorage.removeItem("usuario")
+    window.location.href = "../Login/indexLogin.html?logout=1"
+  })
 
+  setNombreHeader(nombreGuardado)
   cargarPerfil()
 })

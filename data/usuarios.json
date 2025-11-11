@@ -6,12 +6,12 @@
     "mail": "lucas@gmail.com",
     "fecha": "2025-10-22",
     "racha": 0,
-    "logrosdesbloqueados": 2,
-    "skinscompradas": 0,
-    "dinero": 30,
+    "logrosdesbloqueados": 3,
+    "skinscompradas": 1,
+    "dinero": null,
     "fechadecreacion": "2025-10-17",
     "skins": {
-      "suki": false,
+      "suki": true,
       "trump": false,
       "flash": false,
       "turro": false,
@@ -29,7 +29,7 @@
       "racha30": false,
       "iniciador": true,
       "creador": true,
-      "coleccionista": false,
+      "coleccionista": true,
       "explorador": false,
       "legendario": false,
       "centenario": false,
@@ -41,7 +41,7 @@
     "rachaactual": 0,
     "ultimodiaderacha": null,
     "cantidadobjetivoscreados": 12,
-    "skinseleccionada": "trump"
+    "skinseleccionada": "suki"
   },
   {
     "usuario": "Felipe",

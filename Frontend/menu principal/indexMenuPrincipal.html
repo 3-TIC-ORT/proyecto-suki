@@ -3,72 +3,61 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Signika:wght@300..700&display=swap" rel="stylesheet">
-
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Signika:wght@300..700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
     <title>SUKI</title>
   </head>
   <body>
-  
     <header>
       <div class="izquierda">
         <div class="logo">
           <img src="logo.png" alt="Logo SUKI" />
         </div>
-        <span class="brand-nombre">Suki</span>
         <div class="icono-carrito">
           <img src="Vector.png" alt="Carrito de compras" />
         </div>
+        <div class="plata-header">
+          <img class="plata-icono" src="Plata.png" alt="Plata" />
+          <div id="plataHeaderValor">0</div>
+        </div>
       </div>
       <div class="derecha">
-        <div class="nombre-usuario">nombre</div>
+        <div class="nombre-usuario" id="nombreHeader">Usuario</div>
         <div class="foto-perfil">
-          <img src="image 4.png" alt="Foto de perfil" />
+          <img id="imgHeaderSkin" src="../imagenes/Imagenesheader/SUKI.png" alt="Skin" />
         </div>
         <div class="icono-menu" id="menuBtn">&#9776;</div>
       </div>
     </header>
 
-   
     <div class="sidebar" id="sidebar">
       <a href="../menu principal/indexMenuPrincipal.html">Objetivos</a>
       <a href="../Usuario/IndexUsuario.html">Usuario</a>
       <a href="../Inventario/IndexInventario.html">Inventario</a>
       <a href="../Logros/IndexLogros.html">Logros</a>
       <a href="../AcercaDe/IndexAcercaDe.html">Acerca De</a>
-        <button id="btnCerrarSesion" class="boton-cerrar">Cerrar sesión</button>
-      <img src="perroSidebar.png" alt="perroSidebar">
+      <button id="btnCerrarSesion" class="boton-cerrar">Cerrar sesión</button>
+      <img src="perroSidebar.png" alt="perroSidebar" />
     </div>
-
 
     <div class="overlay" id="overlay"></div>
 
-
- <main id="principal">
-  <section class="estado-vacio-centro">
-    <p class="texto-vacio">No hay objetivos creados todavía</p>
-    <button id="botonCrear" class="boton-crear">Crear +</button>
-  </section>
+    <main id="principal">
+      <section id="estadoVacio" class="estado-vacio-centro">
+        <p class="texto-vacio">No hay objetivos creados todavía</p>
+        <button id="botonCrear" class="boton-crear">Crear +</button>
+      </section>
 
       <div id="listaObjetivos" class="lista-objetivos oculto">
         <div id="objetivos"></div>
         <button id="botonCrearInferior" class="boton-crear">Crear +</button>
       </div>
+    </main>
 
-</main>
-
-
-   
-   
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.8.1/socket.io.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/JZylber/SoqueTIC-Client@v1.4.1/soquetic-client.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
-
