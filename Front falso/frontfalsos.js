@@ -3,14 +3,14 @@ let usuario = "Luis";
 let mail = "luis@gmail.com";
 let contraseña = "JAJAJA23  ";
 let fecha = "20/06/2024";
-let idusuario = 1761331652154;
+let idusuario = 1762866660188;
 let titulo = "Ver television";
 let tipodeobjetivo = "accion";
 let tiempo = null;
 let veces = 10;
 let icono = "💧";
 let color = "blue";
-let idobjetivo = 1761331652154;
+let idobjetivo = 1762866953586;
 let nuevaskin = "trump";
 let nuevousuario = "Felipe";
 let nuevomail = "felipe@gmail.com";
@@ -144,7 +144,7 @@ document.getElementById("comprar").addEventListener("click", () => {
 
 //COMPLETAR OBJETIVO
 document.getElementById("completarobjetivo").addEventListener("click", () => {
-    postEvent("completarobjetivo", { idusuario, idobjetivo, tipodeobjetivo }, (data) => {
+    postEvent("completarobjetivo", { idusuario, idobjetivo}, (data) => {
         if (data.objok.ok) {
             console.log("Objetivo completado");
         } else {

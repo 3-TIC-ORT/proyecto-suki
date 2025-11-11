@@ -1,1 +1,46 @@
-[]
+[
+  {
+    "usuario": "Felipe",
+    "id": 1762866660188,
+    "contraseña": "JAJAJA23  ",
+    "mail": "felipe@gmail.com",
+    "fecha": "15/08/2023",
+    "racha": 0,
+    "logrosdesbloqueados": 2,
+    "skinscompradas": 1,
+    "dinero": 2520,
+    "fechadecreacion": "2025-11-11",
+    "skins": {
+      "suki": true,
+      "trump": false,
+      "flash": false,
+      "turro": false,
+      "sullivan": false,
+      "bikini": false,
+      "rabino": false,
+      "bizarrap": false,
+      "oro": true,
+      "minecraft": false
+    },
+    "logros": {
+      "primerpaso": false,
+      "racha3": false,
+      "racha7": false,
+      "racha30": false,
+      "iniciador": true,
+      "creador": false,
+      "coleccionista": true,
+      "explorador": false,
+      "legendario": false,
+      "centenario": false,
+      "ganador": false,
+      "extraganador": false,
+      "extasis": false
+    },
+    "rachamaslarga": 1,
+    "rachaactual": 1,
+    "ultimodiaderacha": "2025-11-11",
+    "cantidadobjetivoscreados": 2,
+    "skinseleccionada": "trump"
+  }
+]
