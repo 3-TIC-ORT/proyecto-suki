@@ -17,12 +17,10 @@ let skinslista = {
     minecraft: 200
 }
 
-subscribePOSTEvent("nuevodiseño", ({idobjetivo, nuevoicono, nuevocolor, tipodeobjetivo}) => {
+subscribePOSTEvent("nuevodiseño", ({idobjetivo, nuevoicono, nuevocolor}) => {
     let objok = {ok: false}
     idobjetivo = Number(idobjetivo)
-   let objetivostiempo = JSON.parse(fs.readFileSync("data/objetivos_tiempo.json", "utf-8"));
-   let objetivosaccion = JSON.parse(fs.readFileSync("data/objetivos_accion.json", "utf-8"));
-   let objetivos = objetivostiempo.concat(objetivosaccion);
+    let objetivos = JSON.parse(fs.readFileSync("data/objetivos.json", "utf-8"));
    let objetivoelegido = null;
    for (let i = 0; i < objetivos.length; i++) {
        if (objetivos[i].idobjetivo === idobjetivo) {
@@ -37,11 +35,7 @@ subscribePOSTEvent("nuevodiseño", ({idobjetivo, nuevoicono, nuevocolor, tipodeo
 
    objetivoelegido.icono = nuevoicono;
    objetivoelegido.color = nuevocolor;
-  if (tipodeobjetivo === "tiempo") {
-    fs.writeFileSync("data/objetivos_tiempo.json", JSON.stringify(objetivostiempo, null, 2));
-  } else {
-    fs.writeFileSync("data/objetivos_accion.json", JSON.stringify(objetivosaccion, null, 2));
-  }
+   fs.writeFileSync("data/objetivos.json", JSON.stringify(objetivos, null, 2));
    objok = {ok: true};
    return {
        objok,
@@ -249,17 +243,11 @@ if (totalLogros === logroslista.length && !usuarioelegido.logros.extasis) {
   };
 })
 
-subscribePOSTEvent("completarobjetivo",({idusuario, idobjetivo, tipodeobjetivo}) =>{
+subscribePOSTEvent("completarobjetivo",({idusuario, idobjetivo}) =>{
     let objok = {ok:false};
-    let archivo = "";
+    let archivo = "data/objetivos.json";
     idobjetivo = Number(idobjetivo);
     idusuario = Number(idusuario);
-    if (tipodeobjetivo === "tiempo"){
-        archivo = "data/objetivos_tiempo.json";
-    } else if (tipodeobjetivo === "accion"){
-        archivo = "data/objetivos_accion.json";
-    }
- 
     let objetivostotal = JSON.parse(fs.readFileSync(archivo, "utf-8"));
     let objetivoelegido = null; 
     for (let i = 0; i < objetivostotal.length; i++) {
@@ -364,16 +352,12 @@ if (totalLogros === logroslista.length && !usuarioelegido.logros.extasis) {
 });
 
 
-subscribePOSTEvent("borrarobjetivo", ({idobjetivo, tipodeobjetivo}) => {
+subscribePOSTEvent("borrarobjetivo", ({idobjetivo}) => {
     let objok = {ok:false};
-    let archivo = "";
+    let archivo = "data/objetivos.json";
     idobjetivo = Number(idobjetivo);
 
-    if (tipodeobjetivo === "tiempo"){
-        archivo = "data/objetivos_tiempo.json";
-    } else if (tipodeobjetivo === "accion"){
-        archivo = "data/objetivos_accion.json";
-    }
+
 
      let objetivo = JSON.parse(fs.readFileSync(archivo, "utf-8"));
       for (let i = 0; i < objetivo.length; i++){
@@ -391,9 +375,7 @@ let objetivoJSON = JSON.stringify(objetivo, null, 2);
 subscribePOSTEvent("devolverobjetivos", ({idusuario}) => {
     let objok = {ok:false};
         idusuario = Number(idusuario);
-        let  objetivosaccion = JSON.parse(fs.readFileSync("data/objetivos_accion.json", "utf-8"));
-        let objetivostiempo = JSON.parse(fs.readFileSync("data/objetivos_tiempo.json", "utf-8"));
-        let objetivos = objetivosaccion.concat(objetivostiempo);
+        let objetivos = JSON.parse(fs.readFileSync("data/objetivos.json", "utf-8"));
         let objetivousuarios = [];
         for (let i = 0; i < objetivos.length; i++){
             if (objetivos[i].idusuario === idusuario){
@@ -483,13 +465,8 @@ if (datosusuario[i].mail === mail && datosusuario[i].contraseña === contraseña
 
 subscribePOSTEvent("crearobjetivo", ({idusuario, titulo, tipodeobjetivo, tiempo, veces, icono, color}) => {
     let objok = {ok:false};
-    let archivo = "";
+    let archivo = "data/objetivos.json";
     idusuario = Number(idusuario);
-    if (tipodeobjetivo === "tiempo"){
-        archivo = "data/objetivos_tiempo.json";
-    } else if (tipodeobjetivo === "accion"){
-        archivo = "data/objetivos_accion.json";
-    }
     let objetivo = {
     idusuario: idusuario,
     idobjetivo: Date.now(),
