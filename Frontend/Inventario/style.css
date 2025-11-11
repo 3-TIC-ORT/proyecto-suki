@@ -1,152 +1,111 @@
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-  }
-  
-  header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 15px;
-    border-bottom: 2px solid black;
-  }
-  
-  .izquierda, 
-  .derecha {
-    display: flex;
-    align-items: center;
-  }
-  
-  .logo img {
-    width: 50px; 
-    height: auto;
-    margin-right: 15px;
-  }
-  
-  .icono-carrito img {
-    width: 28px;
-    height: 28px;
-    cursor: pointer;
-  }
-  
-  .nombre-usuario {
-    margin-right: 10px;
-    font-weight: bold;
-  }
-  
-  .foto-perfil {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%; 
-    overflow: hidden;
-    margin-right: 10px;
-  }
-  
-  .foto-perfil img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
-  .icono-menu {
-    font-size: 28px;
-    cursor: pointer;
-  }
-  
-  
-  .sidebar {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 250px;
-    height: 100%;
-    background: #333;
-    color: white;
-    padding: 20px;
-    z-index: 1001;
-  
-    transform: translateX(100%); 
-    transition: transform 0.3s ease; 
-  }
-  
-  .sidebar.open {
-    transform: translateX(0); 
-  }
-  
- 
-  .sidebar a {
-    display: block;
-    color: white;
-    text-decoration: none;
-    margin: 15px 0;
-    font-size: 16px;
-  }
-  
-  .sidebar a:hover {
-    text-decoration: underline;
-  }
-  
-  
-  .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.5);
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease;
-    z-index: 1000;
-  }
-  
-  .overlay.show {
-    opacity: 1;
-    visibility: visible;
-  }
-  
-  .sidebar img {
-    width: 100%;
-    max-width: 200px; /* para que no se deforme */
-    margin: 20px auto 0 auto;
-    display: block;
-  }
-  .tarjetas {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 20px;
-    gap: 20px;
-  }
-  
-  .tarjeta {
-    width: 200px;
-    border: 2px solid #000;
-    border-radius: 10px;
-    text-align: center;
-    background-color: #fff;
-    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
-    padding: 10px;
-  }
-  
-  .tarjeta img {
-    width: 100%;
-    border-radius: 10px;
-  }
-  
-  .tarjeta button {
-    background-color: #333;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 8px;
-    cursor: pointer;
-  }
-  
-  .tarjeta button:hover {
-    background-color: #555;
-  }
-  .boton-cerrar {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 15px;
+  border-bottom: 2px solid black;
+  background: #fff;
+}
+
+.izquierda,
+.derecha {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  width: 15vh;
+  height: auto;
+  margin-right: 15px;
+}
+
+.icono-carrito img {
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+}
+
+.nombre-usuario {
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.foto-perfil {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 10px;
+}
+
+.foto-perfil img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.icono-menu {
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 250px;
+  height: 100%;
+  background: #333;
+  color: white;
+  padding: 20px;
+  z-index: 1001;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+}
+
+.sidebar.open {
+  transform: translateX(0);
+}
+
+.sidebar a {
+  display: block;
+  color: white;
+  text-decoration: none;
+  margin: 15px 0;
+  font-size: 16px;
+}
+
+.sidebar img {
+  width: 100%;
+  max-width: 200px;
+  margin: 20px auto 0 auto;
+  display: block;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+  z-index: 1000;
+}
+
+.overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.boton-cerrar {
   width: 100%;
   background: #ff4444;
   color: #fff;
@@ -161,4 +120,134 @@ body {
 
 .boton-cerrar:hover {
   background: #e13b3b;
+}
+
+.plata-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 12px;
+}
+
+.plata-icono {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+.plata-valor,
+#dinero {
+  color: #ffcc33;
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.hero-skin {
+  background: url("../imagenes/Frame 79.png") center/cover no-repeat;
+  height: 240px;
+  border-radius: 16px;
+  margin: 16px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+.hero-skin img {
+  height: 190px;
+  object-fit: contain;
+  display: block;
+}
+
+#gridSkins {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 22px;
+  padding: 18px;
+}
+
+.tarjeta-skin {
+  border-radius: 16px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  transition: transform 0.15s ease;
+}
+
+.tarjeta-skin:hover {
+  transform: translateY(-3px);
+}
+
+.tarjeta-skin.propia {
+  background: #ffd54a;
+}
+
+.tarjeta-skin.bloqueada {
+  background: #d9d9d9;
+}
+
+.tarjeta-skin.equipada {
+  outline: 3px solid #111;
+  outline-offset: 2px;
+}
+
+.imagen-skin img {
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+  display: block;
+}
+
+.titulo-skin {
+  font-weight: 800;
+  font-size: 20px;
+  margin: 10px 0;
+  text-align: center;
+}
+
+.acciones-skin {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.boton {
+  background: #111;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-weight: 700;
+  cursor: pointer;
+  min-width: 160px;
+  transition: background 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.boton:hover {
+  background: #242424;
+}
+
+.boton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.icono-hueso {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  margin-left: 6px;
+  margin-right: 4px;
+}
+
+.monto {
+  color: #ffcc33;
+  font-weight: 800;
 }
