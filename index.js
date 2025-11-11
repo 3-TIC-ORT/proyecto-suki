@@ -195,12 +195,12 @@ if (usuarioelegido.dinero < precio) {
     usuarioelegido.dinero += 20; 
 }
 
-if (usuarioelegido.rachaactual === 5 && !usuarioelegido.logros.explorador) {
+if (usuarioelegido.skinscompradas === 5 && !usuarioelegido.logros.explorador) {
     usuarioelegido.logros.explorador = true;
     usuarioelegido.logrosdesbloqueados++;
     usuarioelegido.dinero += 30; 
 }
-if (usuarioelegido.rachaactual === 10 && !usuarioelegido.logros.legendario) {
+if (usuarioelegido.skinscompradas === 10 && !usuarioelegido.logros.legendario) {
     usuarioelegido.logros.legendario = true;
     usuarioelegido.logrosdesbloqueados++;
     usuarioelegido.dinero += 50; 
