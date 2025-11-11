@@ -105,12 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
       <img src="../imagenes/Frame 71.png" alt="trofeo"><p>
           <h3>${l.nombre}</h3>
           <p>${l.descripcion}</p>
-          ${l.meta ? `
-            <div class="barra-progreso">
-              <div class="relleno" style="width:${progresoAncho};"></div>
-            </div>
-            <div class="texto-progreso">${progresoTexto}</div>
-          ` : ""}
+          
         </div>
       `;
     });
