@@ -42,5 +42,49 @@
     "ultimodiaderacha": "2025-11-11",
     "cantidadobjetivoscreados": 2,
     "skinseleccionada": "trump"
+  },
+  {
+    "usuario": "Lucas",
+    "id": 1762884106180,
+    "contraseña": "Ziaraysuki1",
+    "mail": "lucasschniper@gmail.com",
+    "fecha": "2009-11-12",
+    "racha": 0,
+    "logrosdesbloqueados": 1,
+    "skinscompradas": 2,
+    "dinero": 2570,
+    "fechadecreacion": "2025-11-11",
+    "skins": {
+      "suki": true,
+      "trump": true,
+      "flash": false,
+      "turro": false,
+      "sullivan": false,
+      "bikini": false,
+      "rabino": true,
+      "bizarrap": false,
+      "oro": false,
+      "minecraft": false
+    },
+    "logros": {
+      "primerpaso": false,
+      "racha3": false,
+      "racha7": false,
+      "racha30": false,
+      "iniciador": false,
+      "creador": false,
+      "coleccionista": true,
+      "explorador": false,
+      "legendario": false,
+      "centenario": false,
+      "ganador": false,
+      "extraganador": false,
+      "extasis": false
+    },
+    "rachamaslarga": 0,
+    "rachaactual": 0,
+    "ultimodiaderacha": null,
+    "cantidadobjetivoscreados": 0,
+    "skinseleccionada": "trump"
   }
 ]

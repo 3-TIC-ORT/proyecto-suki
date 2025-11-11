@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const rawId = JSON.parse(localStorage.getItem("idusuario") || "null")
   const idusuario = typeof rawId === "number" ? rawId : rawId?.idusuario ?? null
   if (!idusuario) {
-    window.location.href = "../Login/indexLogin.html?force=1"
+    window.location.href = "../InicioSesion/indexInicioSesion.html?force=1"
     return
   }
 
@@ -114,4 +114,3 @@ document.addEventListener("DOMContentLoaded", () => {
   cargarHeader()
   cargarObjetivos()
 })
-nod

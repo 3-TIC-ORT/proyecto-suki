@@ -1,187 +1,109 @@
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-  }
-  
-  header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 15px;
-    border-bottom: 2px solid black;
-  }
-  
-  .izquierda, 
-  .derecha {
-    display: flex;
-    align-items: center;
-  }
-  
-  .logo img {
-    width: 15vh; 
-    height: auto;
-    margin-right: 15px;
-  }
-  
-  .icono-carrito img {
-    width: 28px;
-    height: 28px;
-    cursor: pointer;
-  }
-  
-  .nombre-usuario {
-    margin-right: 10px;
-    font-weight: bold;
-  }
-  
-  .foto-perfil {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%; 
-    overflow: hidden;
-    margin-right: 10px;
-  }
-  
-  .foto-perfil img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
-  .icono-menu {
-    font-size: 28px;
-    cursor: pointer;
-  }
-  
-  
-  .sidebar {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 250px;
-    height: 100%;
-    background: #333;
-    color: white;
-    padding: 20px;
-    z-index: 1001;
-  
-    transform: translateX(100%); 
-    transition: transform 0.3s ease; 
-  }
-  
-  .sidebar.open {
-    transform: translateX(0); 
-  }
-  
-  .sidebar h2 {
-    margin-top: 0;
-    font-size: 20px;
-  }
-  
-  .sidebar a {
-    display: block;
-    color: white;
-    text-decoration: none;
-    margin: 15px 0;
-    font-size: 16px;
-  }
-  
-  .sidebar a:hover {
-    text-decoration: underline;
-  }
-  
-  
-  .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.5);
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease;
-    z-index: 1000;
-  }
-  
-  .overlay.show {
-    opacity: 1;
-    visibility: visible;
-  }
-  
-  .sidebar img {
-    width: 100%;
-    max-width: 200px; /* para que no se deforme */
-    margin: 20px auto 0 auto;
-    display: block;
-  }
-  .cuadradosLogros {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 30px;
-    padding: 40px;
-    justify-items: center;
-  }
-  
-  .logro {
-    width: 230px;
-    height: 290px;
-    background-color: #ffcc00;
-    border-radius: 20px;
-    text-align: center;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-  
-  .logro:hover {
-    transform: scale(1.03);
-    box-shadow: 0 6px 12px rgba(0,0,0,0.25);
-  }
-  
-  .logro.bloqueado {
-    background-color: #8a7c77;
-    filter: grayscale(60%);
-  }
-  
-  .icono-logro {
-    width: 120px;
-    height: 120px;
-    background-color: #d9d9d9;
-    border-radius: 50%;
-    margin: 0 auto 15px auto;
-  }
-  
-  .logro h3 {
-    font-size: 20px;
-    margin: 10px 0 5px;
-    font-weight: bold;
-  }
-  
-  .logro p {
-    font-size: 14px;
-    font-weight: 600;
-    margin-bottom: 10px;
-  }
-  
-  .barra-progreso {
-    width: 80%;
-    height: 12px;
-    background-color: #c9a965;
-    border-radius: 10px;
-    margin: 0 auto 5px auto;
-    overflow: hidden;
-  }
-  
-  .barra-progreso .relleno {
-    height: 100%;
-    background-color: #6b5b4c;
-  }
-  
-  .texto-progreso {
-    font-size: 12px;
-    color: #000;
-  }
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 15px;
+  border-bottom: 2px solid black;
+  background: #fff;
+}
+
+.izquierda, .derecha {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  width: 15vh;
+  height: auto;
+  margin-right: 15px;
+}
+
+.icono-carrito img {
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+}
+
+.nombre-usuario {
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.foto-perfil {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 10px;
+}
+
+.foto-perfil img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.icono-menu {
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 250px;
+  height: 100%;
+  background: #333;
+  color: white;
+  padding: 20px;
+  z-index: 1001;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+}
+
+.sidebar.open {
+  transform: translateX(0);
+}
+
+.sidebar a {
+  display: block;
+  color: white;
+  text-decoration: none;
+  margin: 15px 0;
+  font-size: 16px;
+}
+
+.sidebar img {
+  width: 100%;
+  max-width: 200px;
+  margin: 20px auto 0 auto;
+  display: block;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+  z-index: 1000;
+}
+
+.overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
 .boton-cerrar {
   width: 100%;
   background: #ff4444;
@@ -197,4 +119,93 @@ body {
 
 .boton-cerrar:hover {
   background: #e13b3b;
+}
+
+.plata-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 12px;
+}
+
+.plata-icono {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+#plataHeaderValor {
+  color: #ffcc33;
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 1;
+}
+
+
+.cuadradosLogros {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 4fr));
+  gap: 30px;
+  padding: 40px;
+  justify-items: center;
+}
+
+.logro {
+  width: 230px;
+  height: 290px;
+  background-color: #ffcc00;
+  border-radius: 20px;
+  text-align: center;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.logro:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+}
+
+.logro.bloqueado {
+  background-color: #8a7c77;
+  filter: grayscale(60%);
+}
+
+.icono-logro {
+  width: 120px;
+  height: 120px;
+  background-color: #d9d9d9;
+  border-radius: 50%;
+  margin: 0 auto 15px auto;
+}
+
+.logro h3 {
+  font-size: 20px;
+  margin: 10px 0 5px;
+  font-weight: bold;
+}
+
+.logro p {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.barra-progreso {
+  width: 80%;
+  height: 12px;
+  background-color: #c9a965;
+  border-radius: 10px;
+  margin: 0 auto 5px auto;
+  overflow: hidden;
+}
+
+.barra-progreso .relleno {
+  height: 100%;
+  background-color: #6b5b4c;
+}
+
+.texto-progreso {
+  font-size: 12px;
+  color: #000;
 }
