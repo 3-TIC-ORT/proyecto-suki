@@ -7,6 +7,7 @@ body {
   flex-direction: column;
   min-height: 100vh;
   background-color: #F3EAE8;
+  
 }
 
 
@@ -237,4 +238,23 @@ label {
 
 .boton-cerrar:hover {
   background: #e13b3b;
+}
+.plata-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 12px;
+}
+
+.plata-icono {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+#plataHeaderValor {
+  color: #ffcc33;
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 1;
 }

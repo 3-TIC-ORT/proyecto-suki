@@ -46,13 +46,13 @@
   {
     "usuario": "Lucas",
     "id": 1762884106180,
-    "contraseña": "Ziaraysuki1",
+    "contraseña": "Zairaysuki1",
     "mail": "lucasschniper@gmail.com",
     "fecha": "2009-11-12",
     "racha": 0,
     "logrosdesbloqueados": 1,
-    "skinscompradas": 2,
-    "dinero": 2570,
+    "skinscompradas": 3,
+    "dinero": 2420,
     "fechadecreacion": "2025-11-11",
     "skins": {
       "suki": true,
@@ -62,7 +62,7 @@
       "sullivan": false,
       "bikini": false,
       "rabino": true,
-      "bizarrap": false,
+      "bizarrap": true,
       "oro": false,
       "minecraft": false
     },
@@ -85,6 +85,6 @@
     "rachaactual": 0,
     "ultimodiaderacha": null,
     "cantidadobjetivoscreados": 0,
-    "skinseleccionada": "trump"
+    "skinseleccionada": "bizarrap"
   }
 ]

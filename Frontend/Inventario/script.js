@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const sesion = JSON.parse(localStorage.getItem("idusuario") || "null")
   const idusuario = typeof sesion === "number" ? sesion : sesion?.idusuario ?? null
-  if (!idusuario) { window.location.href = "../Login/indexLogin.html?force=1"; return }
+  if (!idusuario) { window.location.href = "../InicioSesion/indexInicioSesion.html?force=1"; return }
 
   const rutaSkinTienda = (clave) => {
     const mapa = {
