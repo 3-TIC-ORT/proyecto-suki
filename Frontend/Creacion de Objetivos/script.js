@@ -23,14 +23,12 @@ document.addEventListener("DOMContentLoaded", () => {
     window.location.href = "../Login/indexLogin.html?logout=1";
   });
 
-
   const sesion = JSON.parse(localStorage.getItem("idusuario") || "null");
   const idusuario = typeof sesion === "number" ? sesion : sesion?.idusuario ?? null;
   if (!idusuario) {
     window.location.href = "../Login/indexLogin.html?force=1";
     return;
   }
-
 
   const rutaIconoHeader = (clave) => {
     const mapa = {
@@ -47,33 +45,22 @@ document.addEventListener("DOMContentLoaded", () => {
     return `../imagenes/Imagenesheader/${mapa[clave] || "SUKI.png"}`;
   };
 
-
   const setHeader = (nombre, skin, dinero) => {
     const elNombre = document.getElementById("nombreHeader");
     const elImg = document.getElementById("imgHeaderSkin");
     const plata = document.getElementById("plataHeaderValor");
-
     if (elNombre) elNombre.textContent = nombre || "Usuario";
     if (elImg) elImg.src = rutaIconoHeader(skin);
     if (plata) plata.textContent = dinero ?? 0;
   };
 
- 
-  postEvent("devolverusuario", { idusuario }, (data) => {
-    if (!data.objok || !data.usuario) {
-      contenedorLogros.innerHTML = "<p>Error al cargar logros.</p>";
-      return;
-    }
 
-    const usuario = data.usuario;
-    setHeader(usuario.usuario, usuario.skinseleccionada, usuario.dinero);
-  });
 });
+
 const formSeleccion = document.getElementById("form-seleccion");
 const formTiempo = document.getElementById("form-tiempo");
 const formAccion = document.getElementById("form-accion");
 const menuDisenio = document.getElementById("menu-disenio");
-
 const nombreObjetivo = document.getElementById("nombreObjetivo");
 const tipoObjetivo = document.getElementById("tipoObjetivo");
 const duracionTiempo = document.getElementById("duracionTiempo");
@@ -162,9 +149,8 @@ document.querySelectorAll(".listo").forEach(btn => {
       veces = Number.isNaN(n) ? v : n;
     }
     color = colorObjetivo.value;
-
-    postEvent("crearobjetivo", { idusuario, titulo, tipodeobjetivo, tiempo, veces, icono, color }, (data) => {
-      if (data?.ok || data?.objok || data?.success) {
+    postEvent("crearobjetivo", {idusuario, titulo, tipodeobjetivo, tiempo, veces, icono, color}, (data) => {
+      if (data?.ok || data?.objok) {
         alert("Objetivo creado con éxito");
         window.location.href = "../menu principal/indexMenuPrincipal.html";
       } else {
@@ -184,10 +170,9 @@ getEvent("obtenericonos", (data) => {
       div.addEventListener("click", () => {
         document.querySelectorAll(".icono-opcion").forEach(el => el.classList.remove("seleccionado"));
         div.classList.add("seleccionado");
-       div.dataset.seleccionado = icono._id;
+        div.dataset.seleccionado = icono._id;
       });
       contenedorIconos.appendChild(div);
     });
   }
-});   
-
+});

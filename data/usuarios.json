@@ -51,15 +51,15 @@
     "fecha": "2009-11-12",
     "racha": 0,
     "logrosdesbloqueados": 1,
-    "skinscompradas": 3,
-    "dinero": 2420,
+    "skinscompradas": 4,
+    "dinero": 2220,
     "fechadecreacion": "2025-11-11",
     "skins": {
       "suki": true,
       "trump": true,
       "flash": false,
       "turro": false,
-      "sullivan": false,
+      "sullivan": true,
       "bikini": false,
       "rabino": true,
       "bizarrap": true,
@@ -85,6 +85,6 @@
     "rachaactual": 0,
     "ultimodiaderacha": null,
     "cantidadobjetivoscreados": 0,
-    "skinseleccionada": "bizarrap"
+    "skinseleccionada": "sullivan"
   }
 ]
