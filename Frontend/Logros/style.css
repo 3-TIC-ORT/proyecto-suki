@@ -143,18 +143,20 @@ header {
   line-height: 1;
 }
 
-
 .cuadradosLogros {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 4fr));
+  grid-template-columns: repeat(auto-fit, 200px);
   gap: 30px;
   padding: 40px;
   justify-items: center;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
 }
 
 .logro {
-  width: 230px;
-  height: 290px;
+  width: 180px;
+  height: 260px;
   background-color: #ffcc00;
   border-radius: 20px;
   text-align: center;
