@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
   btnCerrarSesion?.addEventListener("click", () => {
     localStorage.removeItem("idusuario")
     localStorage.removeItem("usuario")
-    window.location.href = "..//InicioSesion/IndexInicioSesion.html?logout=1"
+    window.location.href = "../InicioSesion/IndexInicioSesion.html?logout=1"
   })
 
   const rawId = JSON.parse(localStorage.getItem("idusuario") || "null")
@@ -72,8 +72,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   const rutasPorTipo = {
-    accion: "../Objetivo Accion/indexObjetivoAccion.html",
-    tiempo: "../Objetivo Tiempo/indexObjetivoTiempo.html"
+    accion: "../Objetivo Accion/IndexObjetivoAccion.html",
+    tiempo: "../Objetivo Tiempo/IndexObjetivoTiempo.html"
   }
 
   function appendObjetivoCard(obj) {

@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", () => {
   connect2Server(3000);
 
@@ -26,9 +27,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const sesion = JSON.parse(localStorage.getItem("idusuario") || "null");
   const idusuario = typeof sesion === "number" ? sesion : sesion?.idusuario ?? null;
   if (!idusuario) {
-    window.location.href = "../Login/indexLogin.html?force=1";
+    window.location.href = "../InicioSesion/IndexInicioSesion.html?force=1";
     return;
   }
+
+
+
 
   const rutaIconoHeader = (clave) => {
     const mapa = {
@@ -45,16 +49,27 @@ document.addEventListener("DOMContentLoaded", () => {
     return `../imagenes/Imagenesheader/${mapa[clave] || "SUKI.png"}`;
   };
 
+
   const setHeader = (nombre, skin, dinero) => {
     const elNombre = document.getElementById("nombreHeader");
     const elImg = document.getElementById("imgHeaderSkin");
     const plata = document.getElementById("plataHeaderValor");
+
     if (elNombre) elNombre.textContent = nombre || "Usuario";
     if (elImg) elImg.src = rutaIconoHeader(skin);
     if (plata) plata.textContent = dinero ?? 0;
   };
 
+ 
+  postEvent("devolverusuario", { idusuario }, (data) => {
+    if (!data.objok || !data.usuario) {
+      contenedorLogros.innerHTML = "<p>Error al cargar logros.</p>";
+      return;
+    }
 
+    const usuario = data.usuario;
+    setHeader(usuario.usuario, usuario.skinseleccionada, usuario.dinero);
+  });
 });
 
 const formSeleccion = document.getElementById("form-seleccion");
@@ -108,24 +123,9 @@ document.querySelectorAll(".volver").forEach(btn => {
   });
 });
 
-function obtenerIdUsuario() {
-  try {
-    const u = JSON.parse(localStorage.getItem("usuario") || "null");
-    return (u && (u.id ?? u._id ?? u.uid)) ?? JSON.parse(localStorage.getItem("idusuario") || "null");
-  } catch {
-    return JSON.parse(localStorage.getItem("idusuario") || "null");
-  }
-}
 
-function setNombreUsuarioHeader() {
-  try {
-    const u = JSON.parse(localStorage.getItem("usuario") || "null");
-    const nombre = (u && (u.nombre ?? u.name ?? u.username ?? u.email)) || "Usuario";
-    const el = document.getElementById("nombreUsuarioHeader");
-    if (el) el.textContent = nombre;
-  } catch {}
-}
-setNombreUsuarioHeader();
+
+
 
 document.querySelectorAll(".listo").forEach(btn => {
   btn.addEventListener("click", () => {
@@ -133,13 +133,7 @@ document.querySelectorAll(".listo").forEach(btn => {
       alert("Seleccioná un color para tu objetivo");
       return;
     }
-    const titulo = nombreObjetivo.value.trim();
-    const tipodeobjetivo = tipoObjetivo.value;
-    const idusuario = obtenerIdUsuario();
-    if (!idusuario) {
-      alert("No se encontró el idusuario en localStorage. Iniciá sesión nuevamente.");
-      return;
-    }
+
     let tiempo = null, veces = null, icono = null, color = null;
     if (tipodeobjetivo === "tiempo") {
       tiempo = Number(duracionTiempo.value);
@@ -150,7 +144,7 @@ document.querySelectorAll(".listo").forEach(btn => {
     }
     color = colorObjetivo.value;
     postEvent("crearobjetivo", {idusuario, titulo, tipodeobjetivo, tiempo, veces, icono, color}, (data) => {
-      if (data?.ok || data?.objok) {
+      if (data?.objok.ok) {
         alert("Objetivo creado con éxito");
         window.location.href = "../menu principal/indexMenuPrincipal.html";
       } else {
@@ -158,21 +152,4 @@ document.querySelectorAll(".listo").forEach(btn => {
       }
     });
   });
-});
-
-getEvent("obtenericonos", (data) => {
-  if (data?.ok && Array.isArray(data.iconos)) {
-    const contenedorIconos = document.getElementById("contenedorIconos");
-    data.iconos.forEach(icono => {
-      const div = document.createElement("div");
-      div.classList.add("icono-opcion");
-      div.innerHTML = `<img src="${icono.url}" alt="Icono ${icono._id}">`;
-      div.addEventListener("click", () => {
-        document.querySelectorAll(".icono-opcion").forEach(el => el.classList.remove("seleccionado"));
-        div.classList.add("seleccionado");
-        div.dataset.seleccionado = icono._id;
-      });
-      contenedorIconos.appendChild(div);
-    });
-  }
 });
