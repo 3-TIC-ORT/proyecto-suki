@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SUKI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Signika:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <div class="izquierda">
+      <div class="logo">
+        <img src="logo.png" alt="Logo SUKI" />
+      </div>
+      <div class="icono-carrito">
+        <img src="Vector.png" alt="Carrito de compras" />
+      </div>
+      <div class="plata-header">
+        <img class="plata-icono" src="Plata.png" alt="Plata" />
+        <div id="plataHeaderValor">0</div>
+      </div>
+    </div>
+    <div class="derecha">
+      <div class="nombre-usuario" id="nombreHeader">nombre</div>
+      <div class="foto-perfil">
+        <img id="imgHeaderSkin" src="../imagenes/Imagenesheader/SUKI.png" alt="Skin" />
+      </div>
+      <div class="icono-menu" id="menuBtn">&#9776;</div>
+    </div>
+  </header>
+
+  <main>
+    <section id="heroObjetivo">
+      <button id="btnBorrar" class="btn-borrar" title="Borrar"></button>
+      <div class="hero-centro">
+        <div class="estado-circulo" id="estadoCirculo">Completar</div>
+        <div class="puntos-progreso" id="puntosProgreso"></div>
+      </div>
+      <img class="hero-perro" src="perro-hero.png" alt="">
+    </section>
+
+    <section class="tarjetas">
+      <div class="tarjeta">
+        <div class="tarjeta-titulo">Calendario de racha</div>
+        <div class="calendario" id="calendario"></div>
+        <div class="leyenda-racha">Racha actual: <span id="rachaActualNum">0</span> Días</div>
+      </div>
+
+      <div class="tarjeta">
+        <div class="tarjeta-titulo">haz completado este objetivo</div>
+        <div class="valor-grande" id="totalCompletado">0</div>
+        <div class="sufijo-grande">veces</div>
+      </div>
+
+      <div class="tarjeta">
+        <div class="tarjeta-titulo">Progreso del mes</div>
+        <canvas id="graficoProgreso"></canvas>
+        <div class="leyenda-torta">
+          <span class="ok">Días completados</span>
+          <span class="pend">Días no completados</span>
+        </div>
+      </div>
+
+      <div class="tarjeta">
+        <div class="tarjeta-titulo">tu racha mas larga fue de</div>
+        <div class="valor-grande" id="rachaLarga">0</div>
+        <div class="sufijo-grande">días</div>
+        <button id="btnEditar" class="btn-editar">editar</button>
+      </div>
+    </section>
+  </main>
+
+  <div class="sidebar" id="sidebar">
+    <a href="../menu principal/indexMenuPrincipal.html">Objetivos</a>
+    <a href="../Usuario/IndexUsuario.html">Usuario</a>
+    <a href="../Inventario/IndexInventario.html">Inventario</a>
+    <a href="../Logros/IndexLogros.html">Logros</a>
+    <a href="../AcercaDe/IndexAcercaDe.html">Acerca De</a>
+    <button id="btnCerrarSesion" class="boton-cerrar">Cerrar sesión</button>
+    <img src="perroSidebar.png" alt="perroSidebar">
+  </div>
+
+  <div class="overlay" id="overlay"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.8.1/socket.io.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/JZylber/SoqueTIC-Client@v1.4.2/soquetic-client.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
