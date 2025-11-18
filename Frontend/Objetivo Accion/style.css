@@ -163,7 +163,7 @@
     padding: 0 16px 32px 16px;
   }
 
-  /* HERO OBJETIVO */
+
 
   #heroObjetivo {
     margin-top: 12px;
@@ -250,7 +250,7 @@
     object-fit: contain;
   }
 
-  /* TARJETAS */
+
 
   .tarjetas {
     display: grid;
@@ -270,13 +270,13 @@
     flex-direction: column;
   }
 
-  /* Tarjeta 2: que el contenido ocupe todo el espacio */
+
   .tarjetas .tarjeta:nth-child(2) {
     display: flex;
     flex-direction: column;
   }
 
-  /* Contenedor interno que crece y centra todo en la tarjeta 2 */
+
   .tarjetas .tarjeta:nth-child(2) > * {
     margin: 0;
   }
@@ -290,7 +290,7 @@
     justify-content: center;
   }
 
-  /* Ajustes de texto para que se vea bien */
+ 
   .tarjetas .tarjeta:nth-child(2) .tarjeta-titulo {
     font-size: 16px;
     font-weight: 700;
@@ -298,6 +298,7 @@
     max-width: 180px;
     margin: 0 auto;
     text-align: center;
+
   }
 
   .tarjetas .tarjeta:nth-child(2) .valor-grande {
@@ -307,7 +308,10 @@
 
   .tarjetas .tarjeta:nth-child(2) .sufijo-grande {
     font-size: 16px;
-    font-weight: 800;
+    font-weight: 700;
+    line-height: 1.1;
+    margin: 0;
+    text-align: center;
   }
 
   .valor-grande {
@@ -322,7 +326,7 @@
     margin-top: 4px;
   }
 
-  /* CALENDARIO */
+
 
   .calendario-encabezados {
     display: grid;
