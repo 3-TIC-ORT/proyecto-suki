@@ -336,6 +336,11 @@ if (totalLogros === logroslista.length && !usuarioelegido.logros.extasis) {
     usuarioelegido.logrosdesbloqueados++;
     usuarioelegido.dinero += 200;
 }
+if (usuarioelegido.objetivoscompletados === 1 && !usuarioelegido.logros.primerpaso) {
+    usuarioelegido.logros.primerpaso = true;
+    usuarioelegido.logrosdesbloqueados++;
+    usuarioelegido.dinero += 10;
+}
 
 
 
@@ -442,7 +447,8 @@ subscribePOSTEvent("crear", ({usuario, contraseña, mail, fecha}) => {
             rachaactual: 0,
             ultimodiaderacha: null,
             cantidadobjetivoscreados: 0,
-            skinseleccionada: "suki"
+            skinseleccionada: "suki",
+            objetivoscompletados: 0
         };
         datosusuario.push(objusuario);
         let datosusuarioJSON = JSON.stringify(datosusuario, null, 2);

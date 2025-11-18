@@ -86,5 +86,50 @@
     "ultimodiaderacha": "2025-11-18",
     "cantidadobjetivoscreados": 16,
     "skinseleccionada": "rabino"
+  },
+  {
+    "usuario": "Alex",
+    "id": 1763494848812,
+    "contraseña": "KAKA23",
+    "mail": "mulleralex204@gmail.com",
+    "fecha": "2010-05-17",
+    "racha": 0,
+    "logrosdesbloqueados": 1,
+    "skinscompradas": 0,
+    "dinero": 35,
+    "fechadecreacion": "2025-11-18",
+    "skins": {
+      "suki": true,
+      "trump": false,
+      "flash": false,
+      "turro": false,
+      "sullivan": false,
+      "bikini": false,
+      "rabino": false,
+      "bizarrap": false,
+      "oro": false,
+      "minecraft": false
+    },
+    "logros": {
+      "primerpaso": false,
+      "racha3": false,
+      "racha7": false,
+      "racha30": false,
+      "iniciador": true,
+      "creador": false,
+      "coleccionista": false,
+      "explorador": false,
+      "legendario": false,
+      "centenario": false,
+      "ganador": false,
+      "extraganador": false,
+      "extasis": false
+    },
+    "rachamaslarga": 1,
+    "rachaactual": 1,
+    "ultimodiaderacha": "2025-11-18",
+    "cantidadobjetivoscreados": 1,
+    "skinseleccionada": "suki",
+    "objetivoscompletados": 0
   }
 ]
