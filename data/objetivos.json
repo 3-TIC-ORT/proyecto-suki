@@ -423,7 +423,7 @@
     "tipodeobjetivo": "accion",
     "tiempo": null,
     "veces": 2,
-    "vecescompletadas": 1,
+    "vecescompletadas": 7,
     "color": "#CB30E0",
     "icono": ""
   },
@@ -445,8 +445,8 @@
     "tipodeobjetivo": "accion",
     "tiempo": null,
     "veces": 2,
-    "vecescompletadas": 0,
-    "color": "#FFCC00",
+    "vecescompletadas": 1,
+    "color": "#6B2A14",
     "icono": ""
   },
   {
@@ -478,7 +478,7 @@
     "tipodeobjetivo": "accion",
     "tiempo": null,
     "veces": 1,
-    "vecescompletadas": 0,
+    "vecescompletadas": 6,
     "color": "#002AB8",
     "icono": ""
   }

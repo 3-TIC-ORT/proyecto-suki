@@ -4,7 +4,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const menuBtn = document.getElementById("menuBtn")
   const sidebar = document.getElementById("sidebar")
   const overlay = document.getElementById("overlay")
-  const btnCerrarSesion = document.getElementById("btnCerrarSesion")
 
   menuBtn?.addEventListener("click", () => {
     sidebar.classList.toggle("open")
@@ -14,48 +13,52 @@ document.addEventListener("DOMContentLoaded", () => {
     sidebar.classList.remove("open")
     overlay.classList.remove("show")
   })
-  btnCerrarSesion?.addEventListener("click", () => {
+
+  document.getElementById("btnCerrarSesion")?.addEventListener("click", () => {
     localStorage.removeItem("idusuario")
     localStorage.removeItem("usuario")
-    window.location.href = "../Login/indexLogin.html?logout=1"
+    window.location.href = "../InicioSesion/IndexInicioSesion.html?logout=1"
   })
 
   const sesion = JSON.parse(localStorage.getItem("idusuario") || "null")
   const idusuario = typeof sesion === "number" ? sesion : sesion?.idusuario ?? null
+  const idobjetivo = JSON.parse(localStorage.getItem("idObjetivo") || "null")
+  const modoEdicion = localStorage.getItem("modoEdicionObjetivo") === "1"
+
   if (!idusuario) {
-    window.location.href = "../InicioSesion/IndexInicioSesion.html?force=1"
+    window.location.href = "../Login/indexLogin.html?force=1"
     return
   }
 
+  const nombreHeader = document.getElementById("nombreHeader")
+  const imgHeaderSkin = document.getElementById("imgHeaderSkin")
+  const plataHeader = document.getElementById("plataHeaderValor")
+
   const rutaIconoHeader = (clave) => {
     const mapa = {
-      suki: "SUKI.png",
-      trump: "TRUMP.png",
-      rabino: "rabino.png",
-      oro: "oro.png",
-      flash: "FLASH.png",
-      turro: "TURRO.png",
-      sullivan: "solivan.png",
-      bizarrap: "BzRP.png",
-      minecraft: "minecraft.png"
+      suki: "SUKI",
+      trump: "TRUMP",
+      rabino: "rabino",
+      oro: "oro",
+      flash: "FLASH",
+      turro: "TURRO",
+      sullivan: "solivan",
+      bizarrap: "BzRP",
+      minecraft: "minecraft",
+      bikini: "bikini"
     }
-    return `../imagenes/Imagenesheader/${mapa[clave] || "SUKI.png"}`
+    const n = mapa[clave] || "SUKI"
+    return `../imagenes/Imagenesheader/${n}.png`
   }
 
-  const setHeader = (nombre, skin, dinero) => {
-    const elNombre = document.getElementById("nombreHeader")
-    const elImg = document.getElementById("imgHeaderSkin")
-    const plata = document.getElementById("plataHeaderValor")
-    if (elNombre) elNombre.textContent = nombre || "Usuario"
-    if (elImg) elImg.src = rutaIconoHeader(skin)
-    if (plata) plata.textContent = dinero ?? 0
+  function setHeader(u) {
+    if (nombreHeader) nombreHeader.textContent = u.usuario || "usuario"
+    if (imgHeaderSkin) imgHeaderSkin.src = rutaIconoHeader(u.skinseleccionada)
+    if (plataHeader) plataHeader.textContent = String(u.dinero ?? 0)
   }
 
-  postEvent("devolverusuario", { idusuario }, (data) => {
-    if (!data?.objok || !data.usuario) return
-    const u = data.usuario
-    setHeader(u.usuario, u.skinseleccionada, u.dinero)
-    localStorage.setItem("usuario", JSON.stringify({ usuario: u.usuario }))
+  postEvent("devolverusuario", { idusuario }, (r) => {
+    if (r?.objok && r.usuario) setHeader(r.usuario)
   })
 
   const formSeleccion = document.getElementById("form-seleccion")
@@ -68,25 +71,41 @@ document.addEventListener("DOMContentLoaded", () => {
   const descripcionAccion = document.getElementById("descripcionAccion")
   const colorObjetivo = document.getElementById("colorObjetivo")
 
+  let objetivoEnEdicion = null
+
+  if (modoEdicion && idobjetivo) {
+    formSeleccion.classList.add("oculto")
+    formTiempo.classList.add("oculto")
+    formAccion.classList.add("oculto")
+    menuDisenio.classList.remove("oculto")
+
+    postEvent("devolverobjetivos", { idusuario }, (res) => {
+      const lista = Array.isArray(res?.objetivos) ? res.objetivos : []
+      objetivoEnEdicion = lista.find((o) => o?.idobjetivo === idobjetivo) || null
+      if (objetivoEnEdicion && colorObjetivo) {
+        if (objetivoEnEdicion.color) colorObjetivo.value = objetivoEnEdicion.color
+      }
+    })
+  }
+
   document.getElementById("btnSiguienteSeleccion").addEventListener("click", () => {
-    const titulo = nombreObjetivo.value.trim()
-    const tipo = tipoObjetivo.value
-    if (!titulo || !tipo) {
+    if (modoEdicion) return
+    if (nombreObjetivo.value.trim() === "" || tipoObjetivo.value === "") {
       alert("Completá todos los campos antes de continuar")
       return
     }
-    if (tipo === "tiempo") {
+    if (tipoObjetivo.value === "tiempo") {
       formSeleccion.classList.add("oculto")
       formTiempo.classList.remove("oculto")
-    } else if (tipo === "accion") {
+    } else if (tipoObjetivo.value === "accion") {
       formSeleccion.classList.add("oculto")
       formAccion.classList.remove("oculto")
     }
   })
 
   document.getElementById("btnSiguienteTiempo").addEventListener("click", () => {
-    const valor = String(duracionTiempo.value || "").trim()
-    if (!valor) {
+    if (modoEdicion) return
+    if (duracionTiempo.value.trim() === "") {
       alert("Por favor completá la duración del objetivo")
       return
     }
@@ -95,17 +114,18 @@ document.addEventListener("DOMContentLoaded", () => {
   })
 
   document.getElementById("btnSiguienteAccion").addEventListener("click", () => {
-    const valor = String(descripcionAccion.value || "").trim()
-    if (!valor) {
-      alert("Por favor completá la cantidad de veces")
+    if (modoEdicion) return
+    if (descripcionAccion.value.trim() === "") {
+      alert("Por favor describí tu acción")
       return
     }
     formAccion.classList.add("oculto")
     menuDisenio.classList.remove("oculto")
   })
 
-  document.querySelectorAll(".volver").forEach((b) => {
-    b.addEventListener("click", () => {
+  document.querySelectorAll(".volver").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      if (modoEdicion) return
       formSeleccion.classList.remove("oculto")
       formTiempo.classList.add("oculto")
       formAccion.classList.add("oculto")
@@ -113,49 +133,67 @@ document.addEventListener("DOMContentLoaded", () => {
     })
   })
 
-  document.querySelector(".listo").addEventListener("click", () => {
-    const titulo = nombreObjetivo.value.trim()
-    const tipodeobjetivo = tipoObjetivo.value
-    if (!titulo || !tipodeobjetivo) {
-      alert("Completá el nombre y el tipo de objetivo")
-      return
-    }
-    if (!colorObjetivo.value) {
-      alert("Seleccioná un color para tu objetivo")
-      return
-    }
-
-    let tiempo = null
-    let veces = null
-    if (tipodeobjetivo === "tiempo") {
-      const n = Number(duracionTiempo.value)
-      if (!Number.isFinite(n) || n <= 0) {
-        alert("Ingresá una duración válida en minutos")
+  document.querySelectorAll(".listo").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      if (!colorObjetivo.value) {
+        alert("Seleccioná un color para tu objetivo")
         return
       }
-      tiempo = n
-    } else if (tipodeobjetivo === "accion") {
-      const n = Number(descripcionAccion.value)
-      if (!Number.isFinite(n) || n <= 0) {
-        alert("Ingresá una cantidad válida de veces")
+
+      if (modoEdicion && idobjetivo) {
+        const nuevocolor = colorObjetivo.value
+        const nuevoicono = objetivoEnEdicion ? objetivoEnEdicion.icono : null
+        postEvent(
+          "nuevodiseño",
+          { idobjetivo, nuevoicono, nuevocolor },
+          (data) => {
+            if (data?.objok?.ok || data?.objok) {
+              localStorage.removeItem("modoEdicionObjetivo")
+              window.location.href = "../Objetivo Accion/indexObjetivoAccion.html"
+            } else {
+              alert("No se pudo actualizar el objetivo")
+            }
+          }
+        )
         return
       }
-      veces = n
-    }
 
-    const icono = ""
-    const color = colorObjetivo.value
+      const titulo = nombreObjetivo.value.trim()
+      const tipodeobjetivo = tipoObjetivo.value
+      if (!titulo || !tipodeobjetivo) {
+        alert("Completá todos los campos")
+        return
+      }
 
-    postEvent(
-      "crearobjetivo",
-      { idusuario, titulo, tipodeobjetivo, tiempo, veces, icono, color },
-      (res) => {
-        if (res?.objok?.ok) {
-          window.location.href = "../menu principal/indexMenuPrincipal.html"
-        } else {
-          alert("No se pudo crear el objetivo")
+      let tiempo = null
+      let veces = null
+      let icono = null
+      const color = colorObjetivo.value
+
+      if (tipodeobjetivo === "tiempo") {
+        const n = Number(duracionTiempo.value)
+        if (Number.isNaN(n) || n <= 0) {
+          alert("Indicá una duración válida en minutos")
+          return
         }
+        tiempo = n
+      } else if (tipodeobjetivo === "accion") {
+        const v = descripcionAccion.value.trim()
+        const n = Number(v)
+        veces = Number.isNaN(n) ? v : n
       }
-    )
+
+      postEvent(
+        "crearobjetivo",
+        { idusuario, titulo, tipodeobjetivo, tiempo, veces, icono, color },
+        (data) => {
+          if (data?.objok) {
+            window.location.href = "../menu principal/indexMenuPrincipal.html"
+          } else {
+            alert("No se pudo crear el objetivo.")
+          }
+        }
+      )
+    })
   })
 })
