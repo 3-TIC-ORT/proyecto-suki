@@ -390,8 +390,8 @@
     "tipodeobjetivo": "tiempo",
     "tiempo": 1,
     "veces": null,
-    "vecescompletadas": 0,
-    "color": "#34C759",
+    "vecescompletadas": 1,
+    "color": "#FF383C",
     "icono": ""
   },
   {
@@ -403,17 +403,6 @@
     "veces": null,
     "vecescompletadas": 1,
     "color": "#CB30E0",
-    "icono": ""
-  },
-  {
-    "idusuario": 1762884106180,
-    "idobjetivo": 1763089000067,
-    "titulo": "erge",
-    "tipodeobjetivo": "tiempo",
-    "tiempo": 7,
-    "veces": null,
-    "vecescompletadas": 0,
-    "color": "#FF383C",
     "icono": ""
   },
   {
@@ -480,28 +469,6 @@
     "veces": 8,
     "vecescompletadas": 1,
     "color": "#FFCC00",
-    "icono": null
-  },
-  {
-    "idusuario": 1762884106180,
-    "idobjetivo": 1763491315591,
-    "titulo": "saca",
-    "tipodeobjetivo": "tiempo",
-    "tiempo": 3,
-    "veces": null,
-    "vecescompletadas": 0,
-    "color": "#FFCC00",
-    "icono": null
-  },
-  {
-    "idusuario": 1762884106180,
-    "idobjetivo": 1763491329226,
-    "titulo": "sasa",
-    "tipodeobjetivo": "accion",
-    "tiempo": null,
-    "veces": 4,
-    "vecescompletadas": 2,
-    "color": "#CB30E0",
     "icono": null
   },
   {

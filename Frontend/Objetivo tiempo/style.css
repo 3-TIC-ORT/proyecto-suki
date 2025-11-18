@@ -1,9 +1,20 @@
+:root {
+  --fondo: #f3ebe7;
+  --tarjeta: #ffffff;
+  --texto: #222;
+  --suave: #6b6b6b;
+  --borde: #e7dfdb;
+  --amarillo: #ffd24d;
+  --amarillo-texto: #5b4200;
+  --radio: 16px;
+  --sombra: 0 6px 18px rgba(0, 0, 0, 0.06);
+}
 
 body {
   margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #f9f4f2; 
-  color: #000;
+  font-family: "Signika", system-ui, -apple-system, Arial, sans-serif;
+  background-color: var(--fondo);
+  color: var(--texto);
 }
 
 header {
@@ -11,19 +22,21 @@ header {
   align-items: center;
   justify-content: space-between;
   padding: 10px 15px;
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid #000;
+  background-color: #fff;
 }
 
-.izquierda, 
+.izquierda,
 .derecha {
   display: flex;
   align-items: center;
+  gap: 10px;
 }
 
 .logo img {
-  width: 15vh; 
+  width: 15vh;
   height: auto;
-  margin-right: 15px;
+  margin-right: 5px;
 }
 
 .icono-carrito img {
@@ -33,16 +46,16 @@ header {
 }
 
 .nombre-usuario {
-  margin-right: 10px;
-  font-weight: bold;
+  margin-right: 4px;
+  font-weight: 700;
 }
 
 .foto-perfil {
   width: 40px;
   height: 40px;
-  border-radius: 50%; 
+  border-radius: 50%;
   overflow: hidden;
-  margin-right: 10px;
+  margin-right: 4px;
 }
 
 .foto-perfil img {
@@ -56,6 +69,25 @@ header {
   cursor: pointer;
 }
 
+.plata-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 8px;
+}
+
+.plata-icono {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+#plataHeaderValor {
+  color: #ffcc33;
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 1;
+}
 
 .sidebar {
   position: fixed;
@@ -64,262 +96,32 @@ header {
   width: 250px;
   height: 100%;
   background: #333;
-  color: white;
+  color: #fff;
   padding: 20px;
   z-index: 1001;
-
-  transform: translateX(100%); 
-  transition: transform 0.3s ease; 
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
 }
 
 .sidebar.open {
-  transform: translateX(0); 
-}
-
-.sidebar h2 {
-  margin-top: 0;
-  font-size: 20px;
+  transform: translateX(0);
 }
 
 .sidebar a {
   display: block;
-  color: white;
+  color: #fff;
   text-decoration: none;
   margin: 15px 0;
   font-size: 16px;
 }
 
-.sidebar a:hover {
-  text-decoration: underline;
-}
-
-
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.5);
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease;
-  z-index: 1000;
-}
-
-.overlay.show {
-  opacity: 1;
-  visibility: visible;
-}
-
 .sidebar img {
   width: 100%;
-  max-width: 200px; 
+  max-width: 200px;
   margin: 20px auto 0 auto;
   display: block;
 }
 
-
-.contenedor-progreso {
-  margin: 20px auto;
-  text-align: center;
-  max-width: 400px;
-  color: #000;
-}
-.boton-completar {
-  background: #000;
-  color: #ffcc00;
-  padding: 15px 25px;
-  border-radius: 12px;
-  cursor: pointer;
-  display: inline-block;
-  margin-bottom: 15px;
-  font-weight: 700;
-  font-size: 1.1em;
-  border: none;
-  transition: background 0.3s;
-}
-.boton-completar:hover {
-  background: #222;
-}
-
-.puntos-progreso {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-}
-.punto {
-  width: 20px;
-  height: 20px;
-  border-radius: 10px;
-  background: #ccc;
-  border: 2px solid #ff3b3b; 
-  transition: background-color 0.3s;
-}
-.punto.activo {
-  background: #ff3b3b; 
-  border-color: #ff3b3b;
-}
-
-.tarjetas {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 15px;
-  padding: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.tarjeta {
-  background: #fff;
-  padding: 25px 20px;
-  border-radius: 18px;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
-  font-size: 1em;
-  text-align: center;
-  color: #000;
-  font-weight: 600;
-  user-select: none;
-}
-
-/* Calendario */
-.calendario {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 6px;
-  margin-top: 10px;
-  justify-items: center;
-}
-
-.dia {
-  width: 32px;
-  height: 32px;
-  background: #eaeaea;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 13px;
-  cursor: pointer;
-  user-select: none;
-  color: #333;
-  font-weight: 600;
-  transition: background 0.35s;
-}
-.dia.activo {
-  background: #4ade80; 
-  color: #fff;
-  font-weight: 700;
-}
-
-
-
-.timer-container {
-  position: relative;
-  width: 200px;
-  height: 200px;
-  margin: 0 auto 15px;
-}
-
-.timer-svg {
-  width: 100%;
-  height: 100%;
-  transform: rotate(-90deg);
-}
-
-.timer-bg {
-  stroke: #ffcc00; 
-  stroke-width: 15;
-}
-
-.timer-progress {
-  transition: stroke-dashoffset 1s linear;
-  stroke: #ff3b3b; 
-  stroke-width: 15;
-}
-
-.timer-display {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  user-select: none;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.timer-time {
-  font-size: 3em;
-  font-weight: 700;
-  color: #000;
-  margin-bottom: 5px;
-}
-
-.timer-status {
-  font-size: 1em;
-  color: #777;
-}
-
-.timer-controls {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin-bottom: 15px;
-}
-
-.btn-timer {
-  background: #000;
-  color: #ffcc00;
-  padding: 12px 24px;
-  border-radius: 14px;
-  cursor: pointer;
-  border: none;
-  font-size: 16px;
-  font-weight: 700;
-  transition: background 0.3s;
-  user-select: none;
-}
-
-.btn-timer:hover:not(:disabled) {
-  background: #222;
-}
-
-.btn-timer:disabled {
-  background: #ccc;
-  color: #999;
-  cursor: not-allowed;
-}
-
-
-
-.icono-menu:hover,
-.icono-carrito img:hover,
-.boton-completar:hover,
-.btn-timer:hover {
-  filter: brightness(120%);
-  transition: filter 0.2s ease-in-out;
-}
-
-
-.tarjeta p strong, .tarjeta p b {
-  font-size: 3em;
-  font-weight: 900;
-  color: #000;
-  line-height: 1;
-}
-
-
-.letras-completados, .letras-no-completados {
-  font-size: 0.75em;
-  font-weight: 600;
-  text-align: center;
-}
-.letras-completados {
-  color: #ffcc00; 
-}
-.letras-no-completados {
-  color: #ff3b3b; 
-}
 .boton-cerrar {
   width: 100%;
   background: #ff4444;
@@ -335,4 +137,324 @@ header {
 
 .boton-cerrar:hover {
   background: #e13b3b;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+  z-index: 1000;
+}
+
+.overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+main {
+  max-width: 1200px;
+  margin: 0 auto 32px auto;
+  padding: 0 16px 32px 16px;
+}
+
+#heroObjetivo {
+  margin-top: 12px;
+  width: 100%;
+  min-height: 190px;
+  background-color: #ffcc00;
+  border-radius: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  padding: 24px 24px 20px 24px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.btn-borrar {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background-color: #ff4b4b;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  left: 24px;
+  bottom: 24px;
+}
+
+.btn-borrar::before {
+  content: "🗑";
+  color: #fff;
+  font-size: 22px;
+}
+
+.hero-centro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.estado-circulo {
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  background: #d6453b;
+  color: #fff;
+  font-size: 28px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 12px solid #f3ebe7;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+
+.estado-circulo.disabled {
+  opacity: 0.8;
+  cursor: default;
+}
+
+.puntos-progreso {
+  margin-top: 18px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.puntos-progreso .punto {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #e5e1dd;
+}
+
+.puntos-progreso .punto.activo {
+  background: #34c759;
+}
+
+.hero-perro {
+  position: absolute;
+  right: 40px;
+  bottom: 0;
+  height: 160px;
+  object-fit: contain;
+}
+
+.tarjetas {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(220px, 1fr));
+  gap: 18px;
+  margin-top: 22px;
+}
+
+.tarjeta {
+  background-color: #fff;
+  border-radius: 20px;
+  padding: 22px 22px 26px 22px;
+  box-shadow: var(--sombra);
+  position: relative;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.tarjeta-titulo {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+.tarjetas .tarjeta:nth-child(2) {
+  display: flex;
+  flex-direction: column;
+}
+
+.tarjetas .tarjeta:nth-child(2) > * {
+  margin: 0;
+}
+
+.tarjetas .tarjeta:nth-child(2) .tarjeta-titulo,
+.tarjetas .tarjeta:nth-child(2) .valor-grande,
+.tarjetas .tarjeta:nth-child(2) .sufijo-grande {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tarjetas .tarjeta:nth-child(2) .tarjeta-titulo {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.1;
+  max-width: 180px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.tarjetas .tarjeta:nth-child(2) .valor-grande {
+  font-size: 96px;
+  font-weight: 800;
+}
+
+.tarjetas .tarjeta:nth-child(2) .sufijo-grande {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.1;
+  margin: 0;
+  text-align: center;
+}
+
+.valor-grande {
+  font-size: 96px;
+  font-weight: 800;
+  margin: 4px 0;
+}
+
+.sufijo-grande {
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.calendario-encabezados {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  justify-items: center;
+  margin-bottom: 4px;
+  width: 100%;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.calendario-encabezados span {
+  text-align: center;
+}
+
+.calendario {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  justify-items: center;
+  margin-bottom: 14px;
+  width: 100%;
+  flex: 1;
+}
+
+.calendario .dia {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  max-width: 18px;
+  border-radius: 50%;
+  background: #dbd7d4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8px;
+}
+
+.calendario .dia.activo {
+  background: #34c759;
+  color: #fff;
+}
+
+.leyenda-racha {
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.leyenda-racha span {
+  color: #ffcc00;
+  font-weight: 700;
+}
+
+#graficoProgreso {
+  max-width: 230px;
+  max-height: 230px;
+  margin: 0 auto;
+}
+
+.leyenda-torta {
+  margin-top: 8px;
+  font-size: 11px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.leyenda-torta .ok {
+  color: #34c759;
+  font-weight: 600;
+}
+
+.leyenda-torta .pend {
+  color: #d6453b;
+  font-weight: 600;
+}
+
+.btn-editar {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  background: #000;
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 10px 22px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-editar:hover {
+  opacity: 0.9;
+}
+
+#heroObjetivo.modo-tiempo .puntos-progreso {
+  display: none;
+}
+
+@media (max-width: 1000px) {
+  .tarjetas {
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  main {
+    padding: 0 10px 24px 10px;
+  }
+
+  #heroObjetivo {
+    padding: 24px 16px 18px 16px;
+  }
+
+  .estado-circulo {
+    width: 160px;
+    height: 160px;
+    font-size: 22px;
+    border-width: 10px;
+  }
+
+  .hero-perro {
+    right: 10px;
+    height: 140px;
+  }
+
+  .tarjetas {
+    grid-template-columns: 1fr;
+  }
+
+  .btn-editar {
+    right: 14px;
+    bottom: 14px;
+  }
 }
