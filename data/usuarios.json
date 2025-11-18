@@ -51,14 +51,14 @@
     "fecha": "2009-11-12",
     "racha": 0,
     "logrosdesbloqueados": 4,
-    "skinscompradas": 5,
-    "dinero": 1330,
+    "skinscompradas": 6,
+    "dinero": 1180,
     "fechadecreacion": "2025-11-11",
     "skins": {
       "suki": true,
       "trump": true,
       "flash": false,
-      "turro": false,
+      "turro": true,
       "sullivan": true,
       "bikini": false,
       "rabino": true,
@@ -84,7 +84,7 @@
     "rachamaslarga": 1,
     "rachaactual": 1,
     "ultimodiaderacha": "2025-11-18",
-    "cantidadobjetivoscreados": 13,
+    "cantidadobjetivoscreados": 16,
     "skinseleccionada": "rabino"
   }
 ]

@@ -434,7 +434,7 @@
     "tipodeobjetivo": "accion",
     "tiempo": null,
     "veces": 2,
-    "vecescompletadas": 0,
+    "vecescompletadas": 1,
     "color": "#FFCC00",
     "icono": ""
   },
@@ -445,7 +445,7 @@
     "tipodeobjetivo": "accion",
     "tiempo": null,
     "veces": 2,
-    "vecescompletadas": 1,
+    "vecescompletadas": 2,
     "color": "#6B2A14",
     "icono": ""
   },
@@ -467,19 +467,41 @@
     "tipodeobjetivo": "accion",
     "tiempo": null,
     "veces": 2,
-    "vecescompletadas": 0,
+    "vecescompletadas": 1,
     "color": "#CB30E0",
     "icono": ""
   },
   {
     "idusuario": 1762884106180,
-    "idobjetivo": 1763145861937,
-    "titulo": "sdcsdc",
+    "idobjetivo": 1763484042144,
+    "titulo": "Rascarse la espalda",
     "tipodeobjetivo": "accion",
     "tiempo": null,
-    "veces": 1,
-    "vecescompletadas": 6,
-    "color": "#002AB8",
-    "icono": ""
+    "veces": 8,
+    "vecescompletadas": 1,
+    "color": "#FFCC00",
+    "icono": null
+  },
+  {
+    "idusuario": 1762884106180,
+    "idobjetivo": 1763491315591,
+    "titulo": "saca",
+    "tipodeobjetivo": "tiempo",
+    "tiempo": 3,
+    "veces": null,
+    "vecescompletadas": 0,
+    "color": "#FFCC00",
+    "icono": null
+  },
+  {
+    "idusuario": 1762884106180,
+    "idobjetivo": 1763491329226,
+    "titulo": "sasa",
+    "tipodeobjetivo": "accion",
+    "tiempo": null,
+    "veces": 4,
+    "vecescompletadas": 1,
+    "color": "#CB30E0",
+    "icono": null
   }
 ]

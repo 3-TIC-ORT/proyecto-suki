@@ -85,15 +85,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const rutaHeroSkin = (clave) => {
     const mapa = {
-        suki: "SUKI",
-      trump: "TRUMP",
-      rabino: "rabino",
-      oro: "oro",
-      flash: "FLASH",
-      turro: "TURRO",
-      sullivan: "solivan",
-      bizarrap: "BzRP",
-      minecraft: "minecraft",
+        suki: "Suki",
+      trump: "salchitump",
+      rabino: "salchirabino",
+      oro: "de oro",
+      flash: "salchiflash",
+      turro: "salchiturro",
+      sullivan: "salchivan",
+      bizarrap: "Bzrp",
+      minecraft: "SALCHICRAFT",
       bikini: "bikini"
     }
     const n = mapa[clave] || "suki-grande"
@@ -187,6 +187,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (plataHeader) plataHeader.textContent = String(payload.dinero ?? 0)
     if (rachaActualNum) rachaActualNum.textContent = String(payload.racha ?? 0)
     if (rachaLarga) rachaLarga.textContent = String(payload.rachamaslarga ?? 0)
+    
   }
 
   function cargarObjetivo() {
@@ -268,4 +269,5 @@ if (btnEditar) {
 
   aplicarColoresPie()
   cargarObjetivo()
+  
 })
