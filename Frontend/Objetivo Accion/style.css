@@ -245,9 +245,9 @@
 
 .hero-perro {
   position: absolute;
-  right: -20px;              
-  bottom: -60px;             
-  height: 300px;             
+  right: -20px;
+  bottom: -60px;
+  height: 300px;
   object-fit: contain;
   transform: rotate(7.49deg);
 }

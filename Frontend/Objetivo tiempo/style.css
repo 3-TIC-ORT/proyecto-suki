@@ -175,6 +175,7 @@ main {
   padding: 24px 24px 20px 24px;
   box-sizing: border-box;
   position: relative;
+  overflow: hidden;
 }
 
 .btn-borrar {
@@ -242,10 +243,11 @@ main {
 
 .hero-perro {
   position: absolute;
-  right: 40px;
-  bottom: 0;
-  height: 160px;
+  right: -20px;
+  bottom: -60px;
+  height: 300px;
   object-fit: contain;
+  transform: rotate(7.49deg);
 }
 
 .tarjetas {

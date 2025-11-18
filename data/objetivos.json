@@ -390,7 +390,7 @@
     "tipodeobjetivo": "tiempo",
     "tiempo": 1,
     "veces": null,
-    "vecescompletadas": 1,
+    "vecescompletadas": 2,
     "color": "#FF383C",
     "icono": ""
   },
@@ -434,7 +434,7 @@
     "tipodeobjetivo": "accion",
     "tiempo": null,
     "veces": 2,
-    "vecescompletadas": 2,
+    "vecescompletadas": 3,
     "color": "#6B2A14",
     "icono": ""
   },
