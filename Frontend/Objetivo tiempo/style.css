@@ -363,10 +363,23 @@ main {
   font-size: 8px;
 }
 
-.calendario .dia.activo {
+.calendario .dia-normal {
   background: #34c759;
-  color: #fff;
 }
+
+.calendario .dia-racha {
+  background-image: url("DÍA (1).png");  
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: transparent;
+}
+
+.calendario .dia-hoy {
+  background: #000000;
+  color: #ffffff;
+}
+
 
 .leyenda-racha {
   font-size: 14px;

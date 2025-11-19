@@ -52,7 +52,7 @@
     "racha": 0,
     "logrosdesbloqueados": 4,
     "skinscompradas": 6,
-    "dinero": 1180,
+    "dinero": 1205,
     "fechadecreacion": "2025-11-11",
     "skins": {
       "suki": true,
@@ -81,11 +81,11 @@
       "extraganador": false,
       "extasis": false
     },
-    "rachamaslarga": 1,
-    "rachaactual": 1,
-    "ultimodiaderacha": "2025-11-18",
-    "cantidadobjetivoscreados": 16,
-    "skinseleccionada": "rabino"
+    "rachamaslarga": 2,
+    "rachaactual": 2,
+    "ultimodiaderacha": "2025-11-19",
+    "cantidadobjetivoscreados": 18,
+    "skinseleccionada": "sullivan"
   },
   {
     "usuario": "Alex",
@@ -128,6 +128,51 @@
     "rachamaslarga": 1,
     "rachaactual": 1,
     "ultimodiaderacha": "2025-11-18",
+    "cantidadobjetivoscreados": 1,
+    "skinseleccionada": "suki",
+    "objetivoscompletados": 0
+  },
+  {
+    "usuario": "fer",
+    "id": 1763522846871,
+    "contraseña": "Ugarteche3001",
+    "mail": "ferschniper@gmail.com",
+    "fecha": "1970-04-22",
+    "racha": 0,
+    "logrosdesbloqueados": 1,
+    "skinscompradas": 0,
+    "dinero": 10,
+    "fechadecreacion": "2025-11-19",
+    "skins": {
+      "suki": true,
+      "trump": false,
+      "flash": false,
+      "turro": false,
+      "sullivan": false,
+      "bikini": false,
+      "rabino": false,
+      "bizarrap": false,
+      "oro": false,
+      "minecraft": false
+    },
+    "logros": {
+      "primerpaso": false,
+      "racha3": false,
+      "racha7": false,
+      "racha30": false,
+      "iniciador": true,
+      "creador": false,
+      "coleccionista": false,
+      "explorador": false,
+      "legendario": false,
+      "centenario": false,
+      "ganador": false,
+      "extraganador": false,
+      "extasis": false
+    },
+    "rachamaslarga": 0,
+    "rachaactual": 0,
+    "ultimodiaderacha": null,
     "cantidadobjetivoscreados": 1,
     "skinseleccionada": "suki",
     "objetivoscompletados": 0

@@ -329,49 +329,60 @@
   }
 
 
+.calendario-encabezados {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  justify-items: center;
+  margin-bottom: 4px;
+  width: 100%;
+  font-size: 10px;
+  font-weight: 600;
+}
 
-  .calendario-encabezados {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 6px;
-    justify-items: center;
-    margin-bottom: 4px;
-    width: 100%;
-    font-size: 10px;
-    font-weight: 600;
-  }
+.calendario-encabezados span {
+  text-align: center;
+}
 
-  .calendario-encabezados span {
-    text-align: center;
-  }
+.calendario {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  justify-items: center;
+  margin-bottom: 14px;
+  width: 100%;
+  flex: 1;
+}
 
-  .calendario {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 6px;
-    justify-items: center;
-    margin-bottom: 14px;
-    width: 100%;
-    flex: 1;
-  }
+.calendario .dia {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  max-width: 18px;
+  border-radius: 50%;
+  background: #dbd7d4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8px;
+}
 
-  .calendario .dia {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    max-width: 18px;
-    height: auto;
-    border-radius: 50%;
-    background: #dbd7d4;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 8px;
-  }
+.calendario .dia-normal {
+  background: #34c759;
+}
 
-  .calendario .dia.activo {
-    background: #34c759;
-    color: #fff;
-  }
+.calendario .dia-racha {
+  background-image: url("DÍA (1).png");  
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: transparent;
+}
+
+.calendario .dia-hoy {
+  background: #000000;
+  color: #ffffff;
+}
+
 
   .leyenda-racha {
     font-size: 14px;

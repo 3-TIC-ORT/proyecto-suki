@@ -373,105 +373,6 @@
     "icono": null
   },
   {
-    "idusuario": 1762884106180,
-    "idobjetivo": 1763086419970,
-    "titulo": "frfvr",
-    "tipodeobjetivo": "tiempo",
-    "tiempo": 1,
-    "veces": null,
-    "vecescompletadas": 0,
-    "color": "#002AB8",
-    "icono": ""
-  },
-  {
-    "idusuario": 1762884106180,
-    "idobjetivo": 1763086436406,
-    "titulo": "scasc",
-    "tipodeobjetivo": "tiempo",
-    "tiempo": 1,
-    "veces": null,
-    "vecescompletadas": 2,
-    "color": "#FF383C",
-    "icono": ""
-  },
-  {
-    "idusuario": 1762884106180,
-    "idobjetivo": 1763086454934,
-    "titulo": ".",
-    "tipodeobjetivo": "tiempo",
-    "tiempo": 4,
-    "veces": null,
-    "vecescompletadas": 1,
-    "color": "#CB30E0",
-    "icono": ""
-  },
-  {
-    "idusuario": 1762884106180,
-    "idobjetivo": 1763092415597,
-    "titulo": "sdvs",
-    "tipodeobjetivo": "accion",
-    "tiempo": null,
-    "veces": 2,
-    "vecescompletadas": 7,
-    "color": "#CB30E0",
-    "icono": ""
-  },
-  {
-    "idusuario": 1762884106180,
-    "idobjetivo": 1763145432626,
-    "titulo": "ascasc",
-    "tipodeobjetivo": "accion",
-    "tiempo": null,
-    "veces": 2,
-    "vecescompletadas": 1,
-    "color": "#FFCC00",
-    "icono": ""
-  },
-  {
-    "idusuario": 1762884106180,
-    "idobjetivo": 1763145456005,
-    "titulo": "scsascas",
-    "tipodeobjetivo": "accion",
-    "tiempo": null,
-    "veces": 2,
-    "vecescompletadas": 3,
-    "color": "#6B2A14",
-    "icono": ""
-  },
-  {
-    "idusuario": 1762884106180,
-    "idobjetivo": 1763145465807,
-    "titulo": "cdscds",
-    "tipodeobjetivo": "tiempo",
-    "tiempo": 2,
-    "veces": null,
-    "vecescompletadas": 0,
-    "color": "#CB30E0",
-    "icono": ""
-  },
-  {
-    "idusuario": 1762884106180,
-    "idobjetivo": 1763145480814,
-    "titulo": "scasc",
-    "tipodeobjetivo": "accion",
-    "tiempo": null,
-    "veces": 2,
-    "vecescompletadas": 1,
-    "color": "#CB30E0",
-    "icono": ""
-  },
-  {
-    "idusuario": 1762884106180,
-    "idobjetivo": 1763484042144,
-    "titulo": "Rascarse la espalda",
-    "tipodeobjetivo": "accion",
-    "tiempo": null,
-    "veces": 8,
-    "vecescompletadas": 1,
-    "color": "#FFCC00",
-    "icono": null
-  },
-  {
     "idusuario": 1763494848812,
     "idobjetivo": 1763495002278,
     "titulo": "Tomar agua",
@@ -479,6 +380,28 @@
     "tiempo": null,
     "veces": 2,
     "vecescompletadas": 1,
+    "color": "#CB30E0",
+    "icono": null
+  },
+  {
+    "idusuario": 1762884106180,
+    "idobjetivo": 1763522728643,
+    "titulo": "Ir al gym",
+    "tipodeobjetivo": "accion",
+    "tiempo": null,
+    "veces": 4,
+    "vecescompletadas": 1,
+    "color": "#34C759",
+    "icono": null
+  },
+  {
+    "idusuario": 1763522846871,
+    "idobjetivo": 1763522982898,
+    "titulo": "traer mas contenedores",
+    "tipodeobjetivo": "tiempo",
+    "tiempo": 4,
+    "veces": null,
+    "vecescompletadas": 0,
     "color": "#CB30E0",
     "icono": null
   }

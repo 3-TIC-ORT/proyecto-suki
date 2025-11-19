@@ -150,6 +150,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (data?.objok?.ok || data?.objok) {
               localStorage.removeItem("modoEdicionObjetivo")
               window.location.href = "../Objetivo Accion/indexObjetivoAccion.html"
+              window.location.href = "../Objetivo tiempo/indexObjetivoTiempo.html"
             } else {
               alert("No se pudo actualizar el objetivo")
             }
@@ -182,6 +183,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const n = Number(v)
         veces = Number.isNaN(n) ? v : n
       }
+      
 
       postEvent(
         "crearobjetivo",

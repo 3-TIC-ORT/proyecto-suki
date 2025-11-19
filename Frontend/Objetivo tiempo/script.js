@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const menuBtn = document.getElementById("menuBtn")
   const sidebar = document.getElementById("sidebar")
   const overlay = document.getElementById("overlay")
+  const dataEdicion = JSON.parse(localStorage.getItem("objetivoEnEdicion") || "null")
 
   menuBtn?.addEventListener("click", () => {
     sidebar.classList.toggle("open")
@@ -33,22 +34,10 @@ document.addEventListener("DOMContentLoaded", () => {
     return
   }
 
-  const hoy = new Date()
-  const hoyISO = hoy.toISOString().slice(0, 10)
+  const hoyISO = new Date().toISOString().slice(0, 10)
   const keyUltima = `ultimaComplecion_${idobjetivo}`
   let ultimaComplecion = localStorage.getItem(keyUltima) || null
   let bloqueadoHoy = ultimaComplecion === hoyISO
-
-  const fecha = new Date()
-  const anio = fecha.getFullYear()
-  const mes = fecha.getMonth()
-  const diasMes = new Date(anio, mes + 1, 0).getDate()
-  const mesClave = `${anio}${String(mes + 1).padStart(2, "0")}`
-  const keyProgreso = `progresoMes_${idusuario}_${idobjetivo}_${mesClave}`
-
-  let diasCompletadosMes = Number(localStorage.getItem(keyProgreso) || "0")
-  if (Number.isNaN(diasCompletadosMes) || diasCompletadosMes < 0) diasCompletadosMes = 0
-  if (diasCompletadosMes > diasMes) diasCompletadosMes = diasMes
 
   const nombreHeader = document.getElementById("nombreHeader")
   const imgHeaderSkin = document.getElementById("imgHeaderSkin")
@@ -68,14 +57,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let metaPorDia = 4
   let progresoHoy = 0
+
+  const fecha = new Date()
+  const anio = fecha.getFullYear()
+  const mes = fecha.getMonth()
+  const diasMes = new Date(anio, mes + 1, 0).getDate()
+
+  const keyDias = `diasCompletados_${idusuario}_${idobjetivo}_${anio}-${String(
+    mes + 1
+  ).padStart(2, "0")}`
+
+  let diasCompletadosSet = new Set(
+    JSON.parse(localStorage.getItem(keyDias) || "[]")
+  )
+  let diasCompletadosMes = diasCompletadosSet.size
+  if (diasCompletadosMes > diasMes) diasCompletadosMes = diasMes
+
   let colorCompletados = "#ffcc00"
   let colorPendientes = "#ff383c"
 
-  let esTiempo = false
-  let timerDuracionSeg = 0
-  let timerRestanteSeg = 0
-  let timerActivo = false
+  let timerTotalSegundos = 0
+  let timerRestante = 0
   let timerId = null
+  let timerEnMarcha = false
 
   const rutaIconoHeader = (clave) => {
     const mapa = {
@@ -118,6 +122,27 @@ document.addEventListener("DOMContentLoaded", () => {
     if (heroPerro) heroPerro.src = rutaHeroSkin(u.skinseleccionada)
   }
 
+  function parseTiempoToSegundos(t) {
+    if (!t) return 0
+    if (typeof t === "number") return t * 60
+    const str = String(t).trim()
+    if (!str) return 0
+    if (str.includes(":")) {
+      const [m, s] = str.split(":").map((n) => Number(n) || 0)
+      return m * 60 + s
+    }
+    const m = Number(str)
+    if (Number.isNaN(m)) return 0
+    return m * 60
+  }
+
+  function formatearSegundos(seg) {
+    const total = Math.max(0, seg | 0)
+    const m = Math.floor(total / 60)
+    const s = total % 60
+    return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`
+  }
+
   const ctx = document.getElementById("graficoProgreso").getContext("2d")
   const grafico = new Chart(ctx, {
     type: "pie",
@@ -137,7 +162,10 @@ document.addEventListener("DOMContentLoaded", () => {
   })
 
   function aplicarColoresPie() {
-    grafico.data.datasets[0].backgroundColor = [colorCompletados, colorPendientes]
+    grafico.data.datasets[0].backgroundColor = [
+      colorCompletados,
+      colorPendientes
+    ]
     grafico.update()
     if (leyendaOk) leyendaOk.style.color = colorCompletados
     if (leyendaPend) leyendaPend.style.color = colorPendientes
@@ -156,21 +184,17 @@ document.addEventListener("DOMContentLoaded", () => {
     for (let i = 0; i < metaPorDia; i++) {
       const p = document.createElement("div")
       p.className = "punto"
-      if (bloqueadoHoy && !esTiempo) p.classList.add("activo")
+      if (bloqueadoHoy) p.classList.add("activo")
       puntosProgreso.appendChild(p)
     }
     if (bloqueadoHoy) {
-      estadoCirculo.textContent = esTiempo ? "Completado" : "Completado"
       estadoCirculo.classList.add("disabled")
     } else {
-      estadoCirculo.textContent = esTiempo ? formatearTiempo(timerDuracionSeg) : "Completar"
       estadoCirculo.classList.remove("disabled")
     }
-    if (esTiempo) puntosProgreso.style.display = "none"
-    else puntosProgreso.style.display = "flex"
   }
 
-  function pintarCalendario(racha, ultimoISO) {
+  function pintarCalendario(racha, ultimoISO, diasSet = diasCompletadosSet) {
     const inicioMes = new Date(anio, mes, 1)
     const setRacha = new Set()
     if (racha && ultimoISO) {
@@ -181,61 +205,86 @@ document.addEventListener("DOMContentLoaded", () => {
         setRacha.add(d.toISOString().slice(0, 10))
       }
     }
+
     calendario.innerHTML = ""
     const offset = (inicioMes.getDay() + 6) % 7
     for (let i = 0; i < offset; i++) {
       const e = document.createElement("div")
       calendario.appendChild(e)
     }
+
     for (let d = 1; d <= diasMes; d++) {
       const celda = document.createElement("div")
       celda.className = "dia"
       const iso = new Date(anio, mes, d).toISOString().slice(0, 10)
-      if (setRacha.has(iso)) celda.classList.add("activo")
+
+      if (setRacha.has(iso)) {
+        celda.classList.add("dia-racha")
+      } else if (diasSet && diasSet.has(iso)) {
+        celda.classList.add("dia-normal")
+      }
+
       calendario.appendChild(celda)
     }
   }
 
   function actualizarTotalesDeUsuario(payload) {
-    if (plataHeader && payload.dinero != null) plataHeader.textContent = String(payload.dinero)
-    if (rachaActualNum && payload.racha != null) rachaActualNum.textContent = String(payload.racha)
-    if (rachaLarga && payload.rachamaslarga != null) rachaLarga.textContent = String(payload.rachamaslarga)
+    if (plataHeader) plataHeader.textContent = String(payload.dinero ?? 0)
+    if (rachaActualNum) rachaActualNum.textContent = String(payload.racha ?? 0)
+    if (rachaLarga) rachaLarga.textContent = String(payload.rachamaslarga ?? 0)
   }
 
-  function formatearTiempo(seg) {
-    const s = Math.max(0, Math.floor(seg))
-    const m = Math.floor(s / 60)
-    const r = s % 60
-    const mm = String(m).padStart(2, "0")
-    const ss = String(r).padStart(2, "0")
-    return `${mm}:${ss}`
+  function manejarRespuestaCompletar(r) {
+    const nuevoTotal = Number(totalCompletado.textContent) + 1
+    totalCompletado.textContent = String(nuevoTotal)
+    actualizarTotalesDeUsuario(r)
+
+    const isoHoy = hoyISO
+    if (!diasCompletadosSet.has(isoHoy)) {
+      diasCompletadosSet.add(isoHoy)
+      localStorage.setItem(keyDias, JSON.stringify([...diasCompletadosSet]))
+    }
+    diasCompletadosMes = diasCompletadosSet.size
+    if (diasCompletadosMes > diasMes) diasCompletadosMes = diasMes
+
+    grafico.data.datasets[0].data = [
+      diasCompletadosMes,
+      diasMes - diasCompletadosMes
+    ]
+    grafico.update()
+
+    pintarCalendario(r.racha, hoyISO, diasCompletadosSet)
+
+    bloqueadoHoy = true
+    ultimaComplecion = hoyISO
+    localStorage.setItem(keyUltima, hoyISO)
+    estadoCirculo.textContent = "Completado"
+    estadoCirculo.classList.add("disabled")
+    const puntos = puntosProgreso.querySelectorAll(".punto")
+    puntos.forEach((p) => p.classList.add("activo"))
   }
 
-  function finalizarTimerYCompletar() {
-    if (bloqueadoHoy) return
-    postEvent("completarobjetivo", { idusuario, idobjetivo }, (r) => {
-      if (!r?.objok) return
-      const nuevoTotal = Number(totalCompletado.textContent) + 1
-      totalCompletado.textContent = String(nuevoTotal)
-      actualizarTotalesDeUsuario(r)
-      pintarCalendario(r.racha, new Date().toISOString().slice(0, 10))
-
-      diasCompletadosMes = Math.min(diasMes, diasCompletadosMes + 1)
-      localStorage.setItem(keyProgreso, String(diasCompletadosMes))
-      grafico.data.datasets[0].data = [diasCompletadosMes, diasMes - diasCompletadosMes]
-      grafico.update()
-
-      bloqueadoHoy = true
-      ultimaComplecion = hoyISO
-      localStorage.setItem(keyUltima, hoyISO)
-      estadoCirculo.textContent = "Completado"
-      estadoCirculo.classList.add("disabled")
-      timerActivo = false
-      if (timerId) {
+  function iniciarTimer() {
+    if (!timerTotalSegundos || timerEnMarcha) return
+    timerEnMarcha = true
+    timerRestante = timerTotalSegundos
+    estadoCirculo.classList.add("corriendo")
+    estadoCirculo.textContent = formatearSegundos(timerRestante)
+    timerId = setInterval(() => {
+      timerRestante -= 1
+      if (timerRestante < 0) timerRestante = 0
+      estadoCirculo.textContent = formatearSegundos(timerRestante)
+      if (timerRestante <= 0) {
         clearInterval(timerId)
         timerId = null
+        timerEnMarcha = false
+        estadoCirculo.classList.remove("corriendo")
+        postEvent("completarobjetivo", { idusuario, idobjetivo }, (r) => {
+          if (!r?.objok) return
+          manejarRespuestaCompletar(r)
+        })
       }
-    })
+    }, 1000)
   }
 
   function cargarObjetivo() {
@@ -246,23 +295,33 @@ document.addEventListener("DOMContentLoaded", () => {
         window.location.href = "../menu principal/indexMenuPrincipal.html"
         return
       }
-
       setHeroColor(obj.color)
       totalCompletado.textContent = String(obj.vecescompletadas || 0)
 
-      esTiempo = obj.tipodeobjetivo === "tiempo"
+      const esTiempo = obj.tipodeobjetivo === "tiempo"
+      hero.classList.toggle("modo-tiempo", esTiempo)
+
       if (esTiempo) {
-        const minutos = Number(obj.tiempo)
-        timerDuracionSeg = !Number.isNaN(minutos) && minutos > 0 ? minutos * 60 : 0
-        timerRestanteSeg = timerDuracionSeg
         metaPorDia = 1
+        timerTotalSegundos = parseTiempoToSegundos(obj.tiempo)
+        timerRestante = timerTotalSegundos
+        if (timerId) {
+          clearInterval(timerId)
+          timerId = null
+        }
+        timerEnMarcha = false
+        estadoCirculo.textContent = formatearSegundos(timerRestante || 0)
       } else {
         const v = Number(obj.veces)
-        metaPorDia = obj.tipodeobjetivo === "accion" && !Number.isNaN(v) && v > 0 ? v : 4
+        metaPorDia = !Number.isNaN(v) && v > 0 ? v : 4
+        estadoCirculo.textContent = bloqueadoHoy ? "Completado" : "Completar"
       }
 
       construirPuntos()
-      grafico.data.datasets[0].data = [diasCompletadosMes, diasMes - diasCompletadosMes]
+      grafico.data.datasets[0].data = [
+        diasCompletadosMes,
+        diasMes - diasCompletadosMes
+      ]
       grafico.update()
     })
   }
@@ -270,9 +329,15 @@ document.addEventListener("DOMContentLoaded", () => {
   postEvent("devolverusuario", { idusuario }, (r) => {
     if (r?.objok && r.usuario) {
       setHeader(r.usuario)
-      if (rachaActualNum) rachaActualNum.textContent = String(r.usuario.rachaactual ?? 0)
-      if (rachaLarga) rachaLarga.textContent = String(r.usuario.rachamaslarga ?? 0)
-      pintarCalendario(r.usuario.rachaactual || 0, r.usuario.ultimodiaderacha || null)
+      pintarCalendario(
+        r.usuario.rachaactual || 0,
+        r.usuario.ultimodiaderacha || null,
+        diasCompletadosSet
+      )
+      if (rachaActualNum)
+        rachaActualNum.textContent = String(r.usuario.rachaactual || 0)
+      if (rachaLarga)
+        rachaLarga.textContent = String(r.usuario.rachamaslarga || 0)
     }
   })
 
@@ -280,8 +345,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!confirm("¿Borrar este objetivo?")) return
     postEvent("borrarobjetivo", { idobjetivo }, (r) => {
       if (r?.ok || r?.objok?.ok) {
-        localStorage.removeItem(keyUltima)
-        localStorage.removeItem(keyProgreso)
         window.location.href = "../menu principal/indexMenuPrincipal.html"
       }
     })
@@ -289,36 +352,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (btnEditar) {
     btnEditar.addEventListener("click", () => {
+      const sesion = JSON.parse(localStorage.getItem("idusuario") || "null")
+      const idusuario = typeof sesion === "number" ? sesion : sesion?.idusuario ?? null
+      const idobjetivo = JSON.parse(localStorage.getItem("idObjetivo") || "null")
+
+      if (!idusuario || !idobjetivo) return
+
       localStorage.setItem("modoEdicionObjetivo", "1")
-      window.location.href = "../Creacion de Objetivos/IndexCreacionDeObjetivos.html#menu-disenio"
+      localStorage.setItem(
+        "objetivoEnEdicion",
+        JSON.stringify({ idusuario, idobjetivo })
+      )
+
+      window.location.href =
+        "../Creacion de Objetivos/IndexCreacionDeObjetivos.html#menu-disenio"
     })
   }
 
   estadoCirculo.addEventListener("click", () => {
     if (bloqueadoHoy || estadoCirculo.classList.contains("disabled")) return
+    const esTiempo = hero.classList.contains("modo-tiempo")
 
     if (esTiempo) {
-      if (timerDuracionSeg <= 0) return
-      if (!timerActivo) {
-        timerActivo = true
-        if (!timerRestanteSeg || timerRestanteSeg <= 0) timerRestanteSeg = timerDuracionSeg
-        estadoCirculo.textContent = formatearTiempo(timerRestanteSeg)
-        timerId = setInterval(() => {
-          timerRestanteSeg -= 1
-          if (timerRestanteSeg <= 0) {
-            estadoCirculo.textContent = "00:00"
-            finalizarTimerYCompletar()
-          } else {
-            estadoCirculo.textContent = formatearTiempo(timerRestanteSeg)
-          }
-        }, 1000)
-      } else {
-        timerActivo = false
-        if (timerId) {
-          clearInterval(timerId)
-          timerId = null
-        }
-      }
+      iniciarTimer()
       return
     }
 
@@ -332,21 +388,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (progresoHoy === metaPorDia) {
       postEvent("completarobjetivo", { idusuario, idobjetivo }, (r) => {
         if (!r?.objok) return
-        const nuevoTotal = Number(totalCompletado.textContent) + 1
-        totalCompletado.textContent = String(nuevoTotal)
-        actualizarTotalesDeUsuario(r)
-        pintarCalendario(r.racha, new Date().toISOString().slice(0, 10))
-
-        diasCompletadosMes = Math.min(diasMes, diasCompletadosMes + 1)
-        localStorage.setItem(keyProgreso, String(diasCompletadosMes))
-        grafico.data.datasets[0].data = [diasCompletadosMes, diasMes - diasCompletadosMes]
-        grafico.update()
-
-        bloqueadoHoy = true
-        ultimaComplecion = hoyISO
-        localStorage.setItem(keyUltima, hoyISO)
-        estadoCirculo.textContent = "Completado"
-        estadoCirculo.classList.add("disabled")
+        manejarRespuestaCompletar(r)
       })
     }
   })
