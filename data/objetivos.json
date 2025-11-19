@@ -390,8 +390,8 @@
     "tipodeobjetivo": "accion",
     "tiempo": null,
     "veces": 4,
-    "vecescompletadas": 1,
-    "color": "#34C759",
+    "vecescompletadas": 2,
+    "color": "#CB30E0",
     "icono": null
   },
   {
@@ -403,6 +403,83 @@
     "veces": null,
     "vecescompletadas": 0,
     "color": "#CB30E0",
+    "icono": null
+  },
+  {
+    "idusuario": 1762884106180,
+    "idobjetivo": 1763557080119,
+    "titulo": "correr",
+    "tipodeobjetivo": "accion",
+    "tiempo": null,
+    "veces": 3,
+    "vecescompletadas": 1,
+    "color": "#FF383C",
+    "icono": null
+  },
+  {
+    "idusuario": 1763560200190,
+    "idobjetivo": 1763560292454,
+    "titulo": "scdcvsd",
+    "tipodeobjetivo": "accion",
+    "tiempo": null,
+    "veces": 1,
+    "vecescompletadas": 0,
+    "color": "#CB30E0",
+    "icono": null
+  },
+  {
+    "idusuario": 1763560200190,
+    "idobjetivo": 1763560441092,
+    "titulo": "sqasc",
+    "tipodeobjetivo": "tiempo",
+    "tiempo": 2,
+    "veces": null,
+    "vecescompletadas": 1,
+    "color": "#FF383C",
+    "icono": null
+  },
+  {
+    "idusuario": 1763560676353,
+    "idobjetivo": 1763560830762,
+    "titulo": "etr",
+    "tipodeobjetivo": "tiempo",
+    "tiempo": 3,
+    "veces": null,
+    "vecescompletadas": 1,
+    "color": "#002AB8",
+    "icono": null
+  },
+  {
+    "idusuario": 1763560676353,
+    "idobjetivo": 1763561420325,
+    "titulo": "zzxc  sd",
+    "tipodeobjetivo": "tiempo",
+    "tiempo": 1,
+    "veces": null,
+    "vecescompletadas": 0,
+    "color": "#FF383C",
+    "icono": null
+  },
+  {
+    "idusuario": 1763555209628,
+    "idobjetivo": 1763564076813,
+    "titulo": "5 vasos de agua",
+    "tipodeobjetivo": "accion",
+    "tiempo": null,
+    "veces": 5,
+    "vecescompletadas": 1,
+    "color": "#CB30E0",
+    "icono": null
+  },
+  {
+    "idusuario": 1763555209628,
+    "idobjetivo": 1763564126638,
+    "titulo": "estudiar",
+    "tipodeobjetivo": "tiempo",
+    "tiempo": 60,
+    "veces": null,
+    "vecescompletadas": 0,
+    "color": "#FF383C",
     "icono": null
   }
 ]

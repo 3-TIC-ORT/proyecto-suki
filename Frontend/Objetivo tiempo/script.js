@@ -39,6 +39,20 @@ document.addEventListener("DOMContentLoaded", () => {
   let ultimaComplecion = localStorage.getItem(keyUltima) || null
   let bloqueadoHoy = ultimaComplecion === hoyISO
 
+  const fecha = new Date()
+  const anio = fecha.getFullYear()
+  const mes = fecha.getMonth()
+  const diasMes = new Date(anio, mes + 1, 0).getDate()
+
+  const keyDias = `diasCompletados_${idusuario}_${idobjetivo}_${anio}-${String(
+    mes + 1
+  ).padStart(2, "0")}`
+  const keyTimer = `timerTiempo_${idusuario}_${idobjetivo}`
+
+  let diasCompletadosSet = new Set(JSON.parse(localStorage.getItem(keyDias) || "[]"))
+  let diasCompletadosMes = diasCompletadosSet.size
+  if (diasCompletadosMes > diasMes) diasCompletadosMes = diasMes
+
   const nombreHeader = document.getElementById("nombreHeader")
   const imgHeaderSkin = document.getElementById("imgHeaderSkin")
   const plataHeader = document.getElementById("plataHeaderValor")
@@ -57,21 +71,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let metaPorDia = 4
   let progresoHoy = 0
-
-  const fecha = new Date()
-  const anio = fecha.getFullYear()
-  const mes = fecha.getMonth()
-  const diasMes = new Date(anio, mes + 1, 0).getDate()
-
-  const keyDias = `diasCompletados_${idusuario}_${idobjetivo}_${anio}-${String(
-    mes + 1
-  ).padStart(2, "0")}`
-
-  let diasCompletadosSet = new Set(
-    JSON.parse(localStorage.getItem(keyDias) || "[]")
-  )
-  let diasCompletadosMes = diasCompletadosSet.size
-  if (diasCompletadosMes > diasMes) diasCompletadosMes = diasMes
 
   let colorCompletados = "#ffcc00"
   let colorPendientes = "#ff383c"
@@ -162,10 +161,7 @@ document.addEventListener("DOMContentLoaded", () => {
   })
 
   function aplicarColoresPie() {
-    grafico.data.datasets[0].backgroundColor = [
-      colorCompletados,
-      colorPendientes
-    ]
+    grafico.data.datasets[0].backgroundColor = [colorCompletados, colorPendientes]
     grafico.update()
     if (leyendaOk) leyendaOk.style.color = colorCompletados
     if (leyendaPend) leyendaPend.style.color = colorPendientes
@@ -262,18 +258,45 @@ document.addEventListener("DOMContentLoaded", () => {
     estadoCirculo.classList.add("disabled")
     const puntos = puntosProgreso.querySelectorAll(".punto")
     puntos.forEach((p) => p.classList.add("activo"))
+
+    if (hero.classList.contains("modo-tiempo")) {
+      timerEnMarcha = false
+      if (timerId) {
+        clearInterval(timerId)
+        timerId = null
+      }
+      timerRestante = 0
+      localStorage.setItem(
+        keyTimer,
+        JSON.stringify({ restante: 0, fecha: hoyISO, completado: true })
+      )
+    }
+  }
+
+  function guardarEstadoTimer() {
+    localStorage.setItem(
+      keyTimer,
+      JSON.stringify({
+        restante: timerRestante,
+        fecha: hoyISO,
+        completado: false
+      })
+    )
   }
 
   function iniciarTimer() {
-    if (!timerTotalSegundos || timerEnMarcha) return
+    if (!timerTotalSegundos || timerEnMarcha || bloqueadoHoy) return
     timerEnMarcha = true
-    timerRestante = timerTotalSegundos
+    if (!timerRestante || timerRestante <= 0 || timerRestante > timerTotalSegundos) {
+      timerRestante = timerTotalSegundos
+    }
     estadoCirculo.classList.add("corriendo")
     estadoCirculo.textContent = formatearSegundos(timerRestante)
     timerId = setInterval(() => {
       timerRestante -= 1
       if (timerRestante < 0) timerRestante = 0
       estadoCirculo.textContent = formatearSegundos(timerRestante)
+      guardarEstadoTimer()
       if (timerRestante <= 0) {
         clearInterval(timerId)
         timerId = null
@@ -285,6 +308,32 @@ document.addEventListener("DOMContentLoaded", () => {
         })
       }
     }, 1000)
+  }
+
+  function restaurarEstadoTimer() {
+    const guardadoRaw = localStorage.getItem(keyTimer)
+    if (!guardadoRaw) return false
+    let data
+    try {
+      data = JSON.parse(guardadoRaw)
+    } catch {
+      return false
+    }
+    if (!data || data.fecha !== hoyISO) return false
+    if (data.completado) {
+      bloqueadoHoy = true
+      estadoCirculo.textContent = "Completado"
+      estadoCirculo.classList.add("disabled")
+      return true
+    }
+    if (typeof data.restante === "number" && data.restante > 0) {
+      timerRestante = Math.min(data.restante, timerTotalSegundos || data.restante)
+      estadoCirculo.textContent = formatearSegundos(timerRestante)
+      timerEnMarcha = false
+      estadoCirculo.classList.remove("corriendo")
+      return true
+    }
+    return false
   }
 
   function cargarObjetivo() {
@@ -304,13 +353,15 @@ document.addEventListener("DOMContentLoaded", () => {
       if (esTiempo) {
         metaPorDia = 1
         timerTotalSegundos = parseTiempoToSegundos(obj.tiempo)
-        timerRestante = timerTotalSegundos
-        if (timerId) {
-          clearInterval(timerId)
-          timerId = null
+        if (!restaurarEstadoTimer()) {
+          timerRestante = timerTotalSegundos
+          if (bloqueadoHoy) {
+            estadoCirculo.textContent = "Completado"
+            estadoCirculo.classList.add("disabled")
+          } else {
+            estadoCirculo.textContent = formatearSegundos(timerRestante || 0)
+          }
         }
-        timerEnMarcha = false
-        estadoCirculo.textContent = formatearSegundos(timerRestante || 0)
       } else {
         const v = Number(obj.veces)
         metaPorDia = !Number.isNaN(v) && v > 0 ? v : 4
@@ -374,7 +425,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const esTiempo = hero.classList.contains("modo-tiempo")
 
     if (esTiempo) {
-      iniciarTimer()
+      if (timerEnMarcha) {
+        if (timerId) {
+          clearInterval(timerId)
+          timerId = null
+        }
+        timerEnMarcha = false
+        estadoCirculo.classList.remove("corriendo")
+        guardarEstadoTimer()
+      } else {
+        iniciarTimer()
+      }
       return
     }
 
