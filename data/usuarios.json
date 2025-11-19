@@ -176,5 +176,50 @@
     "cantidadobjetivoscreados": 1,
     "skinseleccionada": "suki",
     "objetivoscompletados": 0
+  },
+  {
+    "usuario": "RubberDuck",
+    "id": 1763555209628,
+    "contraseña": "Hola2024",
+    "mail": "RubberDuck@gmail.com",
+    "fecha": "1999-11-11",
+    "racha": 0,
+    "logrosdesbloqueados": 0,
+    "skinscompradas": 0,
+    "dinero": 100000,
+    "fechadecreacion": "2025-11-19",
+    "skins": {
+      "suki": true,
+      "trump": false,
+      "flash": false,
+      "turro": false,
+      "sullivan": false,
+      "bikini": false,
+      "rabino": false,
+      "bizarrap": false,
+      "oro": false,
+      "minecraft": false
+    },
+    "logros": {
+      "primerpaso": false,
+      "racha3": false,
+      "racha7": false,
+      "racha30": false,
+      "iniciador": false,
+      "creador": false,
+      "coleccionista": false,
+      "explorador": false,
+      "legendario": false,
+      "centenario": false,
+      "ganador": false,
+      "extraganador": false,
+      "extasis": false
+    },
+    "rachamaslarga": 0,
+    "rachaactual": 0,
+    "ultimodiaderacha": null,
+    "cantidadobjetivoscreados": 0,
+    "skinseleccionada": "suki",
+    "objetivoscompletados": 0
   }
 ]
