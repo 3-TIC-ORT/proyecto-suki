@@ -283,10 +283,10 @@ subscribePOSTEvent("completarobjetivo",({idusuario, idobjetivo}) =>{
    
     } else if (usuarioelegido.ultimodiaderacha === ayer) {
         usuarioelegido.rachaactual+=1;
-        usuarioelegido.dinero += 25;
+        usuarioelegido.dinero += 100;
     } else {
         usuarioelegido.rachaactual = 1;
-        usuarioelegido.dinero += 25;
+        usuarioelegido.dinero += 100;
     }
 
  if (usuarioelegido.rachaactual > usuarioelegido.rachamaslarga) {
@@ -295,23 +295,37 @@ subscribePOSTEvent("completarobjetivo",({idusuario, idobjetivo}) =>{
 
     usuarioelegido.ultimodiaderacha = hoy;
 
+
+    if (objetivoelegido.ultimodiaderacha === hoy) {
+    } else if (objetivoelegido.ultimodiaderacha === ayer) {
+        objetivoelegido.rachaactual+=1;
+    } else {
+        objetivoelegido.rachaactual = 1;
+    }
+
+ if (objetivoelegido.rachaactual > objetivoelegido.rachamaslarga) {
+        objetivoelegido.rachamaslarga = objetivoelegido.rachaactual;
+    }
+
+    objetivoelegido.ultimodiaderacha = hoy;
+
    
 
     if (usuarioelegido.rachaactual === 3 && !usuarioelegido.logros.racha3) {
         usuarioelegido.logros.racha3 = true;
         usuarioelegido.logrosdesbloqueados++;
-        usuarioelegido.dinero += 20; 
+        usuarioelegido.dinero += 100; 
     }
 
     if (usuarioelegido.rachaactual === 7 && !usuarioelegido.logros.racha7) {
         usuarioelegido.logros.racha7 = true;
         usuarioelegido.logrosdesbloqueados++;
-        usuarioelegido.dinero += 30; 
+        usuarioelegido.dinero += 150; 
     }
     if (usuarioelegido.rachaactual === 30 && !usuarioelegido.logros.racha30) {
         usuarioelegido.logros.racha30 = true;
         usuarioelegido.logrosdesbloqueados++;
-        usuarioelegido.dinero += 50; 
+        usuarioelegido.dinero += 300; 
     }
 
 let totalLogros = 0;
@@ -340,6 +354,11 @@ if (usuarioelegido.objetivoscompletados === 1 && !usuarioelegido.logros.primerpa
     usuarioelegido.logros.primerpaso = true;
     usuarioelegido.logrosdesbloqueados++;
     usuarioelegido.dinero += 10;
+}
+if (usuarioelegido.objetivoscompletados === 100 && !usuarioelegido.logros.centenario) {
+    usuarioelegido.logros.centenario = true;
+    usuarioelegido.logrosdesbloqueados++;
+    usuarioelegido.dinero += 500;
 }
 
 
@@ -482,7 +501,10 @@ subscribePOSTEvent("crearobjetivo", ({idusuario, titulo, tipodeobjetivo, tiempo,
     veces: veces,
     vecescompletadas: 0,
     color: color,
-    icono: icono
+    icono: icono,
+    rachamaslarga: 0,
+    rachaactual: 0,
+    ultimodiaderacha: null
 
 };
     let objetivos = JSON.parse(fs.readFileSync(archivo, "utf-8"));
