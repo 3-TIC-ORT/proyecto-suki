@@ -12,11 +12,12 @@ document.addEventListener("DOMContentLoaded", () => {
     sidebar.classList.remove("open")
     overlay.classList.remove("show")
   })
-  document.getElementById("btnCerrarSesion")?.addEventListener("click", () => {
-    localStorage.removeItem("idusuario")
-    localStorage.removeItem("usuario")
-    window.location.href = "../InicioSesion/IndexInicioSesion.html?logout=1"
-  })
+  const btnCerrarSesion = document.getElementById("btnCerrarSesion");
+  btnCerrarSesion?.addEventListener("click", () => {
+    localStorage.removeItem("idusuario");
+    localStorage.removeItem("usuario");
+    window.location.href = "../InicioSesion/IndexInicioSesion.html?logout=1";
+  });
 
   const rawId = JSON.parse(localStorage.getItem("idusuario") || "null")
   const idusuario = typeof rawId === "number" ? rawId : rawId?.idusuario ?? null

@@ -14,6 +14,14 @@ document.addEventListener("DOMContentLoaded", () => {
     overlay.classList.remove("show")
   })
 
+
+  btnCerrarSesion?.addEventListener("click", () => {
+    localStorage.removeItem("idusuario");
+    localStorage.removeItem("usuario");
+    window.location.href = "../InicioSesion/IndexInicioSesion.html?logout=1";
+  });
+
+
   const raw = JSON.parse(localStorage.getItem("idusuario") || "null")
   const idusuario = typeof raw === "number" ? raw : raw?.idusuario ?? null
   const nombreGuardado =

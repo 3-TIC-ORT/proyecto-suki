@@ -14,11 +14,13 @@ document.addEventListener("DOMContentLoaded", () => {
     overlay.classList.remove("show")
   })
 
-  document.getElementById("btnCerrarSesion")?.addEventListener("click", () => {
-    localStorage.removeItem("idusuario")
-    localStorage.removeItem("usuario")
-    window.location.href = "../InicioSesion/IndexInicioSesion.html?logout=1"
-  })
+  const btnCerrarSesion = document.getElementById("btnCerrarSesion");
+  btnCerrarSesion?.addEventListener("click", () => {
+    localStorage.removeItem("idusuario");
+    localStorage.removeItem("usuario");
+    window.location.href = "../InicioSesion/IndexInicioSesion.html?logout=1";
+  });
+
 
   const sesion = JSON.parse(localStorage.getItem("idusuario") || "null")
   const idusuario = typeof sesion === "number" ? sesion : sesion?.idusuario ?? null

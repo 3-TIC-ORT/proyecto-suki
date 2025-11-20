@@ -20,8 +20,9 @@ document.addEventListener("DOMContentLoaded", () => {
   btnCerrarSesion?.addEventListener("click", () => {
     localStorage.removeItem("idusuario");
     localStorage.removeItem("usuario");
-    window.location.href = "../Login/indexLogin.html?logout=1";
+    window.location.href = "../InicioSesion/IndexInicioSesion.html?logout=1";
   });
+
 
 
   const sesion = JSON.parse(localStorage.getItem("idusuario") || "null");

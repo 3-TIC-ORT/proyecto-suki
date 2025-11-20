@@ -13,12 +13,13 @@ document.addEventListener("DOMContentLoaded", () => {
     overlay.classList.remove("show")
   })
 
-  const cerrarSesion = document.getElementById("btnCerrarSesion")
-  cerrarSesion?.addEventListener("click", () => {
-    localStorage.removeItem("idusuario")
-    localStorage.removeItem("usuario")
-    window.location.href = "../Login/indexLogin.html?logout=1"
-  })
+  const btnCerrarSesion = document.getElementById("btnCerrarSesion");
+  btnCerrarSesion?.addEventListener("click", () => {
+    localStorage.removeItem("idusuario");
+    localStorage.removeItem("usuario");
+    window.location.href = "../InicioSesion/IndexInicioSesion.html?logout=1";
+  });
+
 
   const sesion = JSON.parse(localStorage.getItem("idusuario") || "null")
   const idusuario = typeof sesion === "number" ? sesion : sesion?.idusuario ?? null

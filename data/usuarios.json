@@ -50,9 +50,9 @@
     "mail": "lucasschniper@gmail.com",
     "fecha": "j nku6h5yngbfvcd",
     "racha": 0,
-    "logrosdesbloqueados": 4,
+    "logrosdesbloqueados": 6,
     "skinscompradas": 6,
-    "dinero": 1205,
+    "dinero": 1300,
     "fechadecreacion": "2025-11-11",
     "skins": {
       "suki": true,
@@ -68,7 +68,7 @@
     },
     "logros": {
       "primerpaso": false,
-      "racha3": false,
+      "racha3": true,
       "racha7": false,
       "racha30": false,
       "iniciador": true,
@@ -77,14 +77,14 @@
       "explorador": true,
       "legendario": false,
       "centenario": false,
-      "ganador": false,
+      "ganador": true,
       "extraganador": false,
       "extasis": false
     },
-    "rachamaslarga": 2,
-    "rachaactual": 2,
-    "ultimodiaderacha": "2025-11-19",
-    "cantidadobjetivoscreados": 24,
+    "rachamaslarga": 3,
+    "rachaactual": 3,
+    "ultimodiaderacha": "2025-11-20",
+    "cantidadobjetivoscreados": 25,
     "skinseleccionada": "sullivan"
   },
   {
