@@ -4,28 +4,28 @@ document.addEventListener("DOMContentLoaded", () => {
   const menuBtn = document.getElementById("menuBtn")
   const sidebar = document.getElementById("sidebar")
   const overlay = document.getElementById("overlay")
+  const btnCerrarSesion = document.getElementById("btnCerrarSesion")
 
   menuBtn?.addEventListener("click", () => {
     sidebar.classList.toggle("open")
     overlay.classList.toggle("show")
   })
+
   overlay?.addEventListener("click", () => {
     sidebar.classList.remove("open")
     overlay.classList.remove("show")
   })
 
-
   btnCerrarSesion?.addEventListener("click", () => {
-    localStorage.removeItem("idusuario");
-    localStorage.removeItem("usuario");
-    window.location.href = "../InicioSesion/IndexInicioSesion.html?logout=1";
-  });
+    localStorage.removeItem("idusuario")
+    localStorage.removeItem("usuario")
+    window.location.href = "../InicioSesion/IndexInicioSesion.html?logout=1"
+  })
 
-
-  const raw = JSON.parse(localStorage.getItem("idusuario") || "null")
-  const idusuario = typeof raw === "number" ? raw : raw?.idusuario ?? null
+  const sesion = JSON.parse(localStorage.getItem("idusuario") || "null")
+  const idusuario = typeof sesion === "number" ? sesion : sesion?.idusuario ?? null
   const nombreGuardado =
-    (typeof raw === "object" && raw?.nombre) ||
+    (typeof sesion === "object" && sesion?.nombre) ||
     JSON.parse(localStorage.getItem("usuario") || "{}")?.usuario ||
     "Usuario"
 
@@ -33,6 +33,27 @@ document.addEventListener("DOMContentLoaded", () => {
     window.location.href = "../InicioSesion/IndexInicioSesion.html?force=1"
     return
   }
+
+  const hoy = new Date()
+  const hoyISO = hoy.toISOString().slice(0, 10)
+  const anio = hoy.getFullYear()
+  const mes = hoy.getMonth()
+  const diasMes = new Date(anio, mes + 1, 0).getDate()
+
+  const modalOverlay = document.getElementById("modalOverlay")
+  const modalTitulo = document.getElementById("modalTitulo")
+  const modalInput = document.getElementById("modalInput")
+  const modalCancelar = document.getElementById("modalCancelar")
+  const modalAceptar = document.getElementById("modalAceptar")
+  const modalError = document.getElementById("modalError")
+
+  const modalFechaOverlay = document.getElementById("modalFechaOverlay")
+  const modalFechaInput = document.getElementById("modalFechaInput")
+  const modalFechaCancelar = document.getElementById("modalFechaCancelar")
+  const modalFechaAceptar = document.getElementById("modalFechaAceptar")
+
+  let modalCallback = null
+  let modalFechaCallback = null
 
   const contarActivos = (o) => Object.values(o || {}).filter(Boolean).length
   const total = (o) => Object.keys(o || {}).length
@@ -50,8 +71,8 @@ document.addEventListener("DOMContentLoaded", () => {
       minecraft: "minecraft",
       bikini: "bikini"
     }
-    const nombre = mapa[clave] || "SUKI"
-    return `../imagenes/Imagenesheader/${encodeURIComponent(nombre)}.png`
+    const n = mapa[clave] || "SUKI"
+    return `../imagenes/Imagenesheader/${encodeURIComponent(n)}.png`
   }
 
   const rutaSkin = (clave) => {
@@ -67,8 +88,8 @@ document.addEventListener("DOMContentLoaded", () => {
       bizarrap: "BzRP",
       bikini: "bikini"
     }
-    const nombre = mapa[clave] || "Suki"
-    return `../imagenes/skins/${encodeURIComponent(nombre)}.png`
+    const n = mapa[clave] || "Suki"
+    return `../imagenes/skins/${encodeURIComponent(n)}.png`
   }
 
   const setNombreHeader = (nombre) => {
@@ -92,23 +113,85 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const claveISO = (d) => d.toISOString().slice(0, 10)
 
+  function abrirModalTexto(titulo, valorInicial, tipo, callback) {
+    if (!modalOverlay || !modalTitulo || !modalInput || !modalError) return
+    modalTitulo.textContent = titulo
+    modalInput.type = tipo || "text"
+    modalInput.value = valorInicial || ""
+    modalError.textContent = ""
+    modalCallback = callback
+    modalOverlay.classList.add("abierto")
+    modalInput.focus()
+  }
+
+  function cerrarModalTexto() {
+    if (!modalOverlay || !modalInput || !modalError) return
+    modalOverlay.classList.remove("abierto")
+    modalCallback = null
+    modalInput.value = ""
+    modalError.textContent = ""
+  }
+
+  function abrirModalFecha(valorInicial, callback) {
+    if (!modalFechaOverlay || !modalFechaInput) return
+    modalFechaInput.value = valorInicial || ""
+    modalFechaCallback = callback
+    modalFechaOverlay.classList.add("abierto")
+    modalFechaInput.focus()
+  }
+
+  function cerrarModalFecha() {
+    if (!modalFechaOverlay || !modalFechaInput) return
+    modalFechaOverlay.classList.remove("abierto")
+    modalFechaCallback = null
+    modalFechaInput.value = ""
+  }
+
+  modalCancelar?.addEventListener("click", () => {
+    cerrarModalTexto()
+  })
+
+  modalOverlay?.addEventListener("click", (e) => {
+    if (e.target === modalOverlay) cerrarModalTexto()
+  })
+
+  modalAceptar?.addEventListener("click", () => {
+    if (!modalCallback || !modalInput) {
+      cerrarModalTexto()
+      return
+    }
+    const valor = modalInput.value.trim()
+    modalCallback(valor)
+  })
+
+  modalFechaCancelar?.addEventListener("click", () => {
+    cerrarModalFecha()
+  })
+
+  modalFechaOverlay?.addEventListener("click", (e) => {
+    if (e.target === modalFechaOverlay) cerrarModalFecha()
+  })
+
+  modalFechaAceptar?.addEventListener("click", () => {
+    if (!modalFechaCallback || !modalFechaInput) {
+      cerrarModalFecha()
+      return
+    }
+    const valor = modalFechaInput.value
+    modalFechaCallback(valor)
+  })
+
   function pintarCalendarioUsuario(racha, ultimoISO) {
     const cont = document.getElementById("calendarioDias")
     if (!cont) return
 
-    const hoy = new Date()
-    const hoyISO = claveISO(hoy)
-    const anio = hoy.getFullYear()
-    const mes = hoy.getMonth()
-    const diasMes = new Date(anio, mes + 1, 0).getDate()
     const inicioMes = new Date(anio, mes, 1)
-    const offset = inicioMes.getDay() // 0 = Domingo
-
+    const offset = (inicioMes.getDay() + 6) % 7
     const setRacha = new Set()
+
     if (racha && ultimoISO) {
       const base = new Date(ultimoISO + "T00:00:00")
-      const n = Number(racha || 0)
-      for (let i = 0; i < n; i++) {
+      for (let i = 0; i < Number(racha); i++) {
         const d = new Date(base)
         d.setDate(d.getDate() - i)
         setRacha.add(claveISO(d))
@@ -118,38 +201,25 @@ document.addEventListener("DOMContentLoaded", () => {
     cont.innerHTML = ""
 
     for (let i = 0; i < offset; i++) {
-      const e = document.createElement("div")
-      e.className = "punto vacio"
-      cont.appendChild(e)
+      const vacio = document.createElement("div")
+      cont.appendChild(vacio)
     }
 
     for (let d = 1; d <= diasMes; d++) {
-      const fecha = new Date(anio, mes, d)
-      const iso = claveISO(fecha)
+      const celda = document.createElement("div")
+      celda.className = "dia"
+      const iso = new Date(anio, mes, d).toISOString().slice(0, 10)
 
-      let el
       if (setRacha.has(iso)) {
-        el = document.createElement("div")
-        el.className = "fuego"
-        el.textContent = "🔥"
-      } else {
-        el = document.createElement("div")
-        el.className = "punto"
+        celda.classList.add("dia-racha")
       }
 
-      if (iso === hoyISO && !setRacha.has(iso)) {
-        el.classList.add("hoy")
+      if (iso === hoyISO) {
+        celda.classList.add("dia-hoy")
       }
 
-      cont.appendChild(el)
+      cont.appendChild(celda)
     }
-
-    const num = Number(racha || 0)
-    const ley = document.getElementById("rachaActual")
-    if (ley)
-      ley.innerHTML = `Racha actual: <span>${num} Día${
-        num === 1 ? "" : "s"
-      }</span>`
   }
 
   const setLogrosDestacados = (logrosObj) => {
@@ -173,97 +243,121 @@ document.addEventListener("DOMContentLoaded", () => {
     })
   }
 
-  function cargarPerfil() {
-    postEvent("devolverusuario", { idusuario }, (data) => {
-      if (!data?.objok || !data.usuario) return
-      const u = data.usuario
+function cargarPerfil() {
+  postEvent("devolverusuario", { idusuario }, (data) => {
+    if (!data?.objok || !data.usuario) return
+    const u = data.usuario
 
-      setNombreHeader(u.usuario)
-      setHeaderSkin(u.skinseleccionada)
-      setPlataHeader(u.dinero || 0)
+    setNombreHeader(u.usuario)
+    setHeaderSkin(u.skinseleccionada)
+    setPlataHeader(u.dinero || 0)
 
-      const elNombre = document.getElementById("nombreUsuario")
-      const elMail = document.getElementById("mailUsuario")
-      const elObjetivo = document.getElementById("totalObjetivos")
-      const elCumple = document.getElementById("cumple")
-      const elFechaPerf = document.getElementById("fechaPerfil")
-      const elSkinsCant = document.getElementById("skinsCantidad")
-      const elSkinTxt = document.getElementById("skinTexto")
-      const elPerro = document.getElementById("imgPerro")
-      const elLogrosComp = document.getElementById("logrosCompletados")
-      const elRachaLarga = document.getElementById("rachaLarga")
+    const elNombre = document.getElementById("nombreUsuario")
+    const elMail = document.getElementById("mailUsuario")
+    const elObjetivo = document.getElementById("totalObjetivos")
+    const elCumple = document.getElementById("cumple")
+    const elFechaPerf = document.getElementById("fechaPerfil")
+    const elSkinsCant = document.getElementById("skinsCantidad")
+    const elSkinTxt = document.getElementById("skinTexto")
+    const elPerro = document.getElementById("imgPerro")
+    const elLogrosComp = document.getElementById("logrosCompletados")
+    const elRachaLarga = document.getElementById("rachaLarga")
+    const elRachaActual = document.getElementById("rachaActual")
 
-      if (elNombre) elNombre.textContent = u.usuario
-      if (elMail) elMail.textContent = u.mail || "—"
-      if (elCumple) elCumple.textContent = u.fecha || "—"
-      if (elFechaPerf) elFechaPerf.textContent = u.fechadecreacion || "—"
-      if (elSkinsCant)
-        elSkinsCant.textContent = `${contarActivos(u.skins)}/${total(u.skins)}`
-      if (elSkinTxt) elSkinTxt.textContent = `Skin: ${u.skinseleccionada}`
-      if (elPerro) elPerro.src = rutaSkin(u.skinseleccionada)
-      if (elLogrosComp)
-        elLogrosComp.textContent = `${contarActivos(u.logros)}/${total(u.logros)}`
-      if (elRachaLarga)
-        elRachaLarga.textContent = `${u.rachamaslarga || 0} días`
+    if (elNombre) elNombre.textContent = u.usuario
+    if (elMail) elMail.textContent = u.mail || "—"
+    if (elCumple) elCumple.textContent = u.fecha || "—"
+    if (elFechaPerf) elFechaPerf.textContent = u.fechadecreacion || "—"
+    if (elSkinsCant)
+      elSkinsCant.textContent = `${contarActivos(u.skins)}/${total(u.skins)}`
+    if (elSkinTxt) elSkinTxt.textContent = `Skin: ${u.skinseleccionada}`
+    if (elPerro) elPerro.src = rutaSkin(u.skinseleccionada)
+    if (elLogrosComp)
+      elLogrosComp.textContent = `${contarActivos(u.logros)}/${total(u.logros)}`
 
-      if (elObjetivo) {
-        const obj = data.objetivoactual
-        if (obj) {
-          elObjetivo.textContent = `${data.descripcion} (${data.progreso || 0}/${
-            data.meta || 0
-          })`
-        } else {
-          elObjetivo.textContent = "Ninguno"
-        }
-      }
+    const rachaUsuario = u.rachaactualusuario ?? u.rachaactual ?? 0
+    const ultimaUsuario =
+      u.ultimodiaderachausuario ?? u.ultimodiaderacha ?? null
 
-      pintarCalendarioUsuario(u.rachaactual || 0, u.ultimodiaderacha || null)
-      setLogrosDestacados(u.logros)
-    })
-  }
+    if (elRachaLarga) {
+      const larga = u.rachamaslargausuario ?? u.rachamaslarga ?? 0
+      elRachaLarga.textContent = `${larga} días`
+    }
+
+    if (elRachaActual) {
+      elRachaActual.textContent = `Racha actual: ${rachaUsuario} Días`
+    }
+
+    if (elObjetivo) {
+      const cant = data.cantidadobjetivos ?? null
+      elObjetivo.textContent = String(cant)
+    }
+
+    pintarCalendarioUsuario(rachaUsuario, ultimaUsuario)
+    setLogrosDestacados(u.logros)
+  })
+}
+
 
   const btnCambiarNombre = document.getElementById("btnCambiarNombre")
   const btnMail = document.getElementById("btnMail")
   const btnFecha = document.getElementById("btnFecha")
 
   btnCambiarNombre?.addEventListener("click", () => {
-    const actual =
-      (document.getElementById("nombreUsuario")?.textContent || "").trim()
-    const nuevo = prompt("Nuevo nombre de usuario:", actual)
-    if (!nuevo) return
-    postEvent("modificarusuario", { idusuario, nuevousuario: nuevo }, (resp) => {
-      if (!resp?.objok?.ok) return
-      const v = resp.usuario || nuevo
-      const elNombre = document.getElementById("nombreUsuario")
-      if (elNombre) elNombre.textContent = v
-      setNombreHeader(v)
-      const guardado =
-        typeof raw === "number" ? { idusuario } : { idusuario, nombre: v }
-      localStorage.setItem("idusuario", JSON.stringify(guardado))
+    const elNombre = document.getElementById("nombreUsuario")
+    const actual = (elNombre?.textContent || "").trim()
+    abrirModalTexto("Modificar nombre", actual, "text", (nuevo) => {
+      const v = (nuevo || "").trim()
+      if (!v) {
+        if (modalError) modalError.textContent = "El nombre no puede estar vacío"
+        return
+      }
+      postEvent("modificarusuario", { idusuario, nuevousuario: v }, (resp) => {
+        if (!resp?.objok?.ok) return
+        const nombreFinal = resp.usuario || v
+        if (elNombre) elNombre.textContent = nombreFinal
+        setNombreHeader(nombreFinal)
+        const guardado =
+          typeof sesion === "number" ? { idusuario } : { idusuario, nombre: nombreFinal }
+        localStorage.setItem("idusuario", JSON.stringify(guardado))
+        cerrarModalTexto()
+      })
     })
   })
 
   btnMail?.addEventListener("click", () => {
-    const actual =
-      (document.getElementById("mailUsuario")?.textContent || "").trim()
-    const nuevo = prompt("Nuevo e-mail:", actual === "—" ? "" : actual)
-    if (!nuevo) return
-    postEvent("modificarmail", { idusuario, nuevomail: nuevo }, (resp) => {
-      if (!resp?.objok?.ok) return
-      const elMail = document.getElementById("mailUsuario")
-      if (elMail) elMail.textContent = resp.mail || nuevo
+    const elMail = document.getElementById("mailUsuario")
+    const actual = (elMail?.textContent || "").trim()
+    const inicial = actual === "—" ? "" : actual
+    abrirModalTexto("Modificar e-mail", inicial, "email", (nuevo) => {
+      const v = (nuevo || "").trim()
+      if (!v || !v.endsWith("@gmail.com")) {
+        if (modalError) modalError.textContent = "El e-mail debe terminar en @gmail.com"
+        return
+      }
+      postEvent("modificarmail", { idusuario, nuevomail: v }, (resp) => {
+        if (!resp?.objok?.ok) return
+        if (elMail) elMail.textContent = resp.mail || v
+        cerrarModalTexto()
+      })
     })
   })
 
   btnFecha?.addEventListener("click", () => {
-    const actual =
-      (document.getElementById("cumple")?.textContent || "").trim()
-    const nuevo = prompt("Nueva fecha (YYYY-MM-DD):", actual === "—" ? "" : actual)
-    if (!nuevo) return
-    postEvent("modificarfecha", { idusuario, nuevafecha: nuevo }, (resp) => {
-      if (!resp?.objok?.ok) return
-      const elCumple = document.getElementById("cumple")
-      if (elCumple) elCumple.textContent = resp.fecha || nuevo
+    const elCumple = document.getElementById("cumple")
+    const actualTexto = (elCumple?.textContent || "").trim()
+    const inicial = actualTexto === "—" ? "" : actualTexto
+    abrirModalFecha(inicial, (nuevaFecha) => {
+      const v = nuevaFecha || ""
+      if (!v) {
+        cerrarModalFecha()
+        return
+      }
+      postEvent("modificarfecha", { idusuario, nuevafecha: v }, (resp) => {
+        if (!resp?.objok?.ok) return
+        if (elCumple) elCumple.textContent = resp.fecha || v
+        cerrarModalFecha()
+      })
     })
   })
 
@@ -283,13 +377,6 @@ document.addEventListener("DOMContentLoaded", () => {
       window.actualizarHeaderDesdeServidor()
     })
   }
-
-  const btnCerrarSesion = document.getElementById("btnCerrarSesion")
-  btnCerrarSesion?.addEventListener("click", () => {
-    localStorage.removeItem("idusuario")
-    localStorage.removeItem("usuario")
-    window.location.href = "../Login/indexLogin.html?logout=1"
-  })
 
   setNombreHeader(nombreGuardado)
   cargarPerfil()

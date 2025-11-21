@@ -384,17 +384,6 @@
     "icono": null
   },
   {
-    "idusuario": 1762884106180,
-    "idobjetivo": 1763522728643,
-    "titulo": "Ir al gym",
-    "tipodeobjetivo": "accion",
-    "tiempo": null,
-    "veces": 4,
-    "vecescompletadas": 2,
-    "color": "#CB30E0",
-    "icono": null
-  },
-  {
     "idusuario": 1763522846871,
     "idobjetivo": 1763522982898,
     "titulo": "traer mas contenedores",
@@ -403,17 +392,6 @@
     "veces": null,
     "vecescompletadas": 0,
     "color": "#CB30E0",
-    "icono": null
-  },
-  {
-    "idusuario": 1762884106180,
-    "idobjetivo": 1763557080119,
-    "titulo": "correr",
-    "tipodeobjetivo": "accion",
-    "tiempo": null,
-    "veces": 3,
-    "vecescompletadas": 3,
-    "color": "#FFCC00",
     "icono": null
   },
   {
@@ -484,13 +462,13 @@
   },
   {
     "idusuario": 1762884106180,
-    "idobjetivo": 1763657052916,
-    "titulo": "Correr",
-    "tipodeobjetivo": "tiempo",
-    "tiempo": 1,
-    "veces": null,
+    "idobjetivo": 1763696728204,
+    "titulo": ",",
+    "tipodeobjetivo": "accion",
+    "tiempo": null,
+    "veces": 6,
     "vecescompletadas": 1,
-    "color": "#CB30E0",
+    "color": "#6B2A14",
     "icono": null
   }
 ]

@@ -81,7 +81,6 @@ document.addEventListener("DOMContentLoaded", () => {
   let colorCompletados = "#ffcc00"
   let colorPendientes = "#ff383c"
 
-  /* ---------------------- HEADER Y SKINS ----------------------- */
 
   const rutaIconoHeader = (clave) => {
     const mapa = {

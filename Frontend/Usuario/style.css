@@ -13,7 +13,8 @@ header {
   background: white;
 }
 
-.izquierda, .derecha {
+.izquierda,
+.derecha {
   display: flex;
   align-items: center;
 }
@@ -23,7 +24,6 @@ header {
   height: auto;
   margin-right: 15px;
 }
-
 
 .icono-carrito img {
   width: 28px;
@@ -69,7 +69,9 @@ header {
   transition: transform 0.3s ease;
 }
 
-.sidebar.open { transform: translateX(0); }
+.sidebar.open {
+  transform: translateX(0);
+}
 
 .sidebar a {
   display: block;
@@ -104,13 +106,11 @@ header {
   visibility: visible;
 }
 
-
 main {
   max-width: 1120px;
   margin: 24px auto 40px auto;
   padding: 0 16px;
 }
-
 
 .superior {
   display: flex;
@@ -153,9 +153,11 @@ main {
   font-weight: 600;
   cursor: pointer;
 }
+
 .btn:hover {
   background: #b0b0b0;
 }
+
 .inferior {
   display: grid;
   grid-template-columns: 1.2fr 1fr 1fr;
@@ -171,7 +173,6 @@ main {
   padding: 18px;
   box-shadow: 0 3px 12px rgba(0,0,0,0.06);
 }
-
 
 .columna1 p {
   margin: 6px 0;
@@ -190,59 +191,62 @@ main {
   align-items: center;
   justify-content: center;
 }
+
 .dias {
   display: grid;
-  grid-template-columns: repeat(7, 28px);
-  gap: 10px;
-  justify-content: center;
-  color: #6a6a6a;
-  font-weight: 700;
-  letter-spacing: 1px;
-  user-select: none;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  justify-items: center;
+  margin-bottom: 4px;
+  width: 100%;
+  font-size: 10px;
+  font-weight: 600;
 }
 
 .grilla {
-  margin-top: 6px;
   display: grid;
-  grid-template-columns: repeat(7, 28px);
-  grid-auto-rows: 28px;
-  gap: 10px;
-  justify-content: center;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  justify-items: center;
+  margin-bottom: 14px;
+  width: 100%;
+  flex: 1;
 }
 
-.punto {
-  width: 28px;
-  height: 28px;
+.grilla .dia {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  max-width: 18px;
   border-radius: 50%;
-  background: #d9d9d9;
-}
-.punto.ok {
-  background: #35b24a;
-}
-.punto.negro {
-  background: #000;
-}
-.punto.vacio {
-  background: transparent;
-}
-.fuego {
-  width: 28px;
-  height: 28px;
+  background: #dbd7d4;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
-  line-height: 28px;
-}
-.punto.hoy {
-  background: #2db043;
-  box-shadow: 0 0 0 2px #ffd54a inset;
-}
-.racha span {
-  color: #f6c52d;
-  font-weight: 800;
+  font-size: 8px;
 }
 
+.grilla .dia-racha {
+  background-image: url("DÍA (1).png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: transparent;
+}
+
+.grilla .dia-hoy {
+  background: #000000;
+  color: #ffffff;
+}
+
+.racha {
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.racha span {
+  color: #ffcc33;
+  font-weight: 800;
+}
 
 .columna3 {
   display: flex;
@@ -284,6 +288,14 @@ main {
   font-weight: 700;
 }
 
+.tarjeta small {
+  margin-top: 4px;
+  font-size: 12px;
+}
+
+.tarjeta.hecho {
+  filter: grayscale(0);
+}
 
 .boton-cerrar {
   width: 100%;
@@ -301,6 +313,7 @@ main {
 .boton-cerrar:hover {
   background: #e13b3b;
 }
+
 .plata-header {
   display: flex;
   align-items: center;
@@ -319,4 +332,59 @@ main {
   font-weight: 800;
   font-size: 20px;
   line-height: 1;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1100;
+}
+
+.modal-overlay.abierto {
+  display: flex;
+}
+
+.modal {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 20px 24px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+  max-width: 320px;
+  width: 90%;
+  text-align: center;
+  box-sizing: border-box;
+  font-family: "Signika", sans-serif;
+}
+
+.modal h2 {
+  margin: 0 0 12px 0;
+  font-size: 20px;
+}
+
+.modal input {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-family: "Signika", sans-serif;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.modal-botones {
+  margin-top: 14px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.modal-error {
+  margin-top: 6px;
+  font-size: 12px;
+  color: #ff4444;
+  text-align: left;
 }

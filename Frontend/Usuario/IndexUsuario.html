@@ -1,140 +1,184 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Signika:wght@300..700&display=swap" rel="stylesheet">    
-    <link rel="stylesheet" href="style.css" />
-    <title>SUKI</title>
-  </head>
-  <body>
-    <header>
-    
-  <div class="izquierda">
-    <div class="logo">
-     <a href="../menu principal/indexMenuPrincipal.html"><img src="logo.png" alt="Logo SUKI" /></a>
-    </div>
-    <div class="icono-carrito">
-      <a href="../Inventario/IndexInventario.html"><img src="Vector.png" alt="Carrito de compras" /></a>
-    </div>
-    <div class="plata-header">
-      <img class="plata-icono" src="Plata.png" alt="Plata" />
-      <div id="plataHeaderValor">0</div>
-    </div>
-  </div>
-  <div class="derecha">
-    <div class="nombre-usuario" id="nombreHeader">usuario</div>
-    <div class="foto-perfil">
-      <a href="../Usuario/IndexUsuario.html"><img id="imgHeaderSkin" src="../imagenes/Imagenesheader/SUKI.png" alt="Skin" /></a>
-    </div>
-    <div class="icono-menu" id="menuBtn">&#9776;</div>
-  </div>
-</header>
+    <link href="https://fonts.googleapis.com/css2?family=Signika:wght@300..700&display=swap" rel="stylesheet">
 
+    <link rel="stylesheet" href="style.css" />
+    <title>SUKI - Usuario</title>
+  </head>
+
+  <body>
+  
+    <header>
+      <div class="izquierda">
+        <div class="logo">
+          <a href="../menu principal/indexMenuPrincipal.html">
+            <img src="logo.png" alt="Logo SUKI" />
+          </a>
+        </div>
+
+        <div class="icono-carrito">
+          <a href="../Inventario/IndexInventario.html">
+            <img src="Vector.png" alt="Carrito" />
+          </a>
+        </div>
+
+        <div class="plata-header">
+          <img class="plata-icono" src="Plata.png" alt="Plata" />
+          <div id="plataHeaderValor">0</div>
+        </div>
+      </div>
+
+      <div class="derecha">
+        <div class="nombre-usuario" id="nombreHeader">usuario</div>
+
+        <div class="foto-perfil">
+          <a href="../Usuario/IndexUsuario.html">
+            <img id="imgHeaderSkin" src="../imagenes/Imagenesheader/SUKI.png" alt="Skin" />
+          </a>
+        </div>
+
+        <div class="icono-menu" id="menuBtn">&#9776;</div>
+      </div>
     </header>
-    
-    
+
+    <!-- SIDEBAR -->
     <div class="sidebar" id="sidebar">
       <a href="../menu principal/indexMenuPrincipal.html">Objetivos</a>
       <a href="../Usuario/IndexUsuario.html">Usuario</a>
       <a href="../Inventario/IndexInventario.html">Inventario</a>
       <a href="../Logros/IndexLogros.html">Logros</a>
       <a href="../AcercaDe/IndexAcercaDe.html">Acerca De</a>
-        <button id="btnCerrarSesion" class="boton-cerrar">Cerrar sesión</button>
-      
-      
-        <img src="perroSidebar.png" alt="perroSidebar">
-      
+
+      <button id="btnCerrarSesion" class="boton-cerrar">Cerrar sesión</button>
+
+      <img src="perroSidebar.png" alt="perroSidebar" />
     </div>
 
-    
     <div class="overlay" id="overlay"></div>
-    
-<main id="main">
-  <section class="superior">
-    <div class="perro">
-      <img id="imgPerro" src="../imagenes/skins/normal=Suki.png" alt="skin actual">
-    </div>
-    <div class="usuario">
-      
-      <div class="fila">
-      <p class="nombre" id="nombreUsuario">usuario</p>
-      <button id="btnCambiarNombre" class="btn">Modificar</button>
-      </div>
-      <p id="skinTexto">Skin</p>
-    </div>
-  </section>
 
-  <section class="inferior">
-    <div class="columna1">
-      <div class="fila">
-      <p>E-Mail:</p>
-        <p id="mailUsuario">—</p>
-        <button id="btnMail" class="btn">Modificar</button>
-      </div>
-      <div class="fila">
-      <p>Objetivos creados en total:</p>
-      <p id="totalObjetivos">0</p>
-    </div>
-      <div class="fila">
-      <p>Cumpleaños:</p>
-        <p id="cumple">—</p>
-        <button id="btnFecha" class="btn">Modificar</button>
-      </div>
-      <div class="fila">
-      <p>Logros completados:</p>
-      <p id="logrosCompletados">0/13</p>
-      </div>
-      
-      <div class="fila">
-      <p>Fecha de creación del perfil:</p>
-      <p id="fechaPerfil">—</p>
-      </div>
-      
-      <div class="fila">
-      <p>Skins:</p>
-      <p id="skinsCantidad">0/0</p>
-      </div>
-      
-      <div class="fila">
-      <p>Racha más larga:</p>
-      <p id="rachaLarga">0 días</p>
+    <!-- MAIN -->
+    <main id="main">
+      <section class="superior">
+        <div class="perro">
+          <img id="imgPerro" src="../imagenes/skins/normal=Suki.png" alt="skin actual" />
+        </div>
+
+        <div class="usuario">
+          <div class="fila">
+            <p class="nombre" id="nombreUsuario">usuario</p>
+            <button id="btnCambiarNombre" class="btn">Modificar</button>
+          </div>
+          <p id="skinTexto">Skin</p>
+        </div>
+      </section>
+
+      <section class="inferior">
+        <!-- COLUMNA 1 -->
+        <div class="columna1">
+          <div class="fila">
+            <p>E-Mail:</p>
+            <p id="mailUsuario">—</p>
+            <button id="btnMail" class="btn">Modificar</button>
+          </div>
+
+          <div class="fila">
+            <p>Objetivos creados en total:</p>
+            <p id="totalObjetivos"></p>
+          </div>
+
+          <div class="fila">
+            <p>Cumpleaños:</p>
+            <p id="cumple">—</p>
+            <button id="btnFecha" class="btn">Modificar</button>
+          </div>
+
+          <div class="fila">
+            <p>Logros completados:</p>
+            <p id="logrosCompletados">0/13</p>
+          </div>
+
+          <div class="fila">
+            <p>Fecha de creación del perfil:</p>
+            <p id="fechaPerfil">—</p>
+          </div>
+
+          <div class="fila">
+            <p>Skins:</p>
+            <p id="skinsCantidad">0/0</p>
+          </div>
+
+          <div class="fila">
+            <p>Racha más larga:</p>
+            <p id="rachaLarga">0 días</p>
+          </div>
+        </div>
+
+
+        <div class="columna2">
+          <div class="dias">
+            <div>D</div><div>L</div><div>M</div><div>M</div><div>J</div><div>V</div><div>S</div>
+          </div>
+
+          <div id="calendarioDias" class="grilla"></div>
+
+          <p id="rachaActual" class="racha">Racha actual: 0 Días</p>
+        </div>
+
+        <div class="columna3">
+          <div class="tarjetas">
+            <div class="tarjeta" id="logro1">
+              <img src="../imagenes/Frame 71.png" class="Iconologro" />
+              <p>Nombre objetivo</p>
+            </div>
+
+            <div class="tarjeta" id="logro2">
+              <img src="../imagenes/Frame 71.png" class="Iconologro" />
+              <p>Nombre objetivo</p>
+            </div>
+
+            <div class="tarjeta" id="logro3">
+              <img src="../imagenes/Frame 71.png" class="Iconologro" />
+              <p>Nombre objetivo</p>
+            </div>
+
+            <div class="tarjeta" id="logro4">
+              <img src="../imagenes/Frame 71.png" class="Iconologro" />
+              <p>Nombre objetivo</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- 💛 MODAL PARA TEXTO (NOMBRE / MAIL) -->
+    <div id="modalOverlay" class="modal-overlay">
+      <div class="modal">
+        <h2 id="modalTitulo">Título</h2>
+        <input id="modalInput" type="text" />
+        <p id="modalError" class="modal-error"></p>
+        <div class="modal-botones">
+          <button id="modalCancelar" class="btn">Cancelar</button>
+          <button id="modalAceptar" class="btn">Aceptar</button>
+        </div>
       </div>
     </div>
 
-    <div class="columna2">
-      <div class="dias">
-        <div>D</div><div>L</div><div>M</div><div>M</div><div>J</div><div>V</div><div>S</div>
-      </div>
-      <div id="calendarioDias" class="grilla"></div>
-      <p id="rachaActual" class="racha">Racha actual: 0 Días</p>
-    </div>
 
-    <div class="columna3">
-      <div class="tarjetas">
-        <div class="tarjeta" id="logro1">
-          <img src="../imagenes/Frame 71.png" alt="" class="Iconologro">
-          <p>Nombre objetivo</p>
-        </div>
-        <div class="tarjeta" id="logro2">
-          <img src="../imagenes/Frame 71.png" alt="" class="Iconologro">
-          <p>Nombre objetivo</p>
-        </div>
-        <div class="tarjeta" id="logro3">
-          <img src="../imagenes/Frame 71.png" alt="" class="Iconologro">
-          <p>Nombre objetivo</p>
-        </div>
-        <div class="tarjeta" id="logro4">
-          <img src="../imagenes/Frame 71.png" alt="" class="Iconologro">
-          <p>Nombre objetivo</p>
+    <div id="modalFechaOverlay" class="modal-overlay">
+      <div class="modal">
+        <h2>Cambiar cumpleaños</h2>
+        <input id="modalFechaInput" type="date" />
+        <div class="modal-botones">
+          <button id="modalFechaCancelar" class="btn">Cancelar</button>
+          <button id="modalFechaAceptar" class="btn">Aceptar</button>
         </div>
       </div>
     </div>
-  </section>
-</main>
 
-    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.8.1/socket.io.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/JZylber/SoqueTIC-Client@v1.4.2/soquetic-client.js"></script>
     <script src="script.js"></script>
