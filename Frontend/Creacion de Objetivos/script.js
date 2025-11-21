@@ -14,13 +14,12 @@ document.addEventListener("DOMContentLoaded", () => {
     overlay.classList.remove("show")
   })
 
-  const btnCerrarSesion = document.getElementById("btnCerrarSesion");
+  const btnCerrarSesion = document.getElementById("btnCerrarSesion")
   btnCerrarSesion?.addEventListener("click", () => {
-    localStorage.removeItem("idusuario");
-    localStorage.removeItem("usuario");
-    window.location.href = "../InicioSesion/IndexInicioSesion.html?logout=1";
-  });
-
+    localStorage.removeItem("idusuario")
+    localStorage.removeItem("usuario")
+    window.location.href = "../InicioSesion/IndexInicioSesion.html?logout=1"
+  })
 
   const sesion = JSON.parse(localStorage.getItem("idusuario") || "null")
   const idusuario = typeof sesion === "number" ? sesion : sesion?.idusuario ?? null
@@ -72,6 +71,47 @@ document.addEventListener("DOMContentLoaded", () => {
   const duracionTiempo = document.getElementById("duracionTiempo")
   const descripcionAccion = document.getElementById("descripcionAccion")
   const colorObjetivo = document.getElementById("colorObjetivo")
+  const selectorIconos = document.getElementById("selectorIconos")
+  const iconoSeleccionado = document.getElementById("iconoSeleccionado")
+
+  const listaIconos = []
+  for (let i = 1; i <= 18; i++) {
+    listaIconos.push(`icono${i}`)
+  }
+
+  function seleccionarIcono(nombre) {
+    if (!selectorIconos) return
+    const botones = selectorIconos.querySelectorAll(".icono-btn")
+    botones.forEach((b) => {
+      if (b.dataset.icono === nombre) {
+        b.classList.add("icono-seleccionado")
+      } else {
+        b.classList.remove("icono-seleccionado")
+      }
+    })
+    if (iconoSeleccionado) iconoSeleccionado.value = nombre
+  }
+
+  function crearBotonesIconos() {
+    if (!selectorIconos) return
+    selectorIconos.innerHTML = ""
+    listaIconos.forEach((nombre) => {
+      const btn = document.createElement("button")
+      btn.type = "button"
+      btn.className = "icono-btn"
+      btn.dataset.icono = nombre
+      const img = document.createElement("img")
+      img.src = `../imagenes/Iconos/${nombre}.png`
+      img.alt = nombre
+      btn.appendChild(img)
+      btn.addEventListener("click", () => {
+        seleccionarIcono(nombre)
+      })
+      selectorIconos.appendChild(btn)
+    })
+  }
+
+  crearBotonesIconos()
 
   let objetivoEnEdicion = null
 
@@ -87,7 +127,14 @@ document.addEventListener("DOMContentLoaded", () => {
       if (objetivoEnEdicion && colorObjetivo) {
         if (objetivoEnEdicion.color) colorObjetivo.value = objetivoEnEdicion.color
       }
+      if (objetivoEnEdicion && objetivoEnEdicion.icono) {
+        seleccionarIcono(objetivoEnEdicion.icono)
+      } else {
+        seleccionarIcono(listaIconos[0])
+      }
     })
+  } else {
+    seleccionarIcono(listaIconos[0])
   }
 
   document.getElementById("btnSiguienteSeleccion").addEventListener("click", () => {
@@ -141,23 +188,26 @@ document.addEventListener("DOMContentLoaded", () => {
         alert("Seleccioná un color para tu objetivo")
         return
       }
+      if (!iconoSeleccionado.value) {
+        alert("Elegí un ícono para tu objetivo")
+        return
+      }
 
       if (modoEdicion && idobjetivo) {
         const nuevocolor = colorObjetivo.value
-        const nuevoicono = objetivoEnEdicion ? objetivoEnEdicion.icono : null
-        postEvent(
-          "nuevodiseño",
-          { idobjetivo, nuevoicono, nuevocolor },
-          (data) => {
-            if (data?.objok?.ok || data?.objok) {
-              localStorage.removeItem("modoEdicionObjetivo")
-              window.location.href = "../Objetivo Accion/indexObjetivoAccion.html"
-              window.location.href = "../Objetivo tiempo/indexObjetivoTiempo.html"
-            } else {
-              alert("No se pudo actualizar el objetivo")
-            }
+        const nuevoicono = iconoSeleccionado.value || (objetivoEnEdicion ? objetivoEnEdicion.icono : null)
+        postEvent("nuevodiseño", { idobjetivo, nuevoicono, nuevocolor }, (data) => {
+          if (data?.objok?.ok || data?.objok) {
+            localStorage.removeItem("modoEdicionObjetivo")
+            const ruta =
+              objetivoEnEdicion && objetivoEnEdicion.tipodeobjetivo === "tiempo"
+                ? "../Objetivo tiempo/indexObjetivoTiempo.html"
+                : "../Objetivo Accion/indexObjetivoAccion.html"
+            window.location.href = ruta
+          } else {
+            alert("No se pudo actualizar el objetivo")
           }
-        )
+        })
         return
       }
 
@@ -170,7 +220,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       let tiempo = null
       let veces = null
-      let icono = null
+      const icono = iconoSeleccionado.value
       const color = colorObjetivo.value
 
       if (tipodeobjetivo === "tiempo") {
@@ -185,7 +235,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const n = Number(v)
         veces = Number.isNaN(n) ? v : n
       }
-      
 
       postEvent(
         "crearobjetivo",

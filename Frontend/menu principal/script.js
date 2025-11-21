@@ -4,20 +4,23 @@ document.addEventListener("DOMContentLoaded", () => {
   const menuBtn = document.getElementById("menuBtn")
   const sidebar = document.getElementById("sidebar")
   const overlay = document.getElementById("overlay")
+
   menuBtn?.addEventListener("click", () => {
     sidebar.classList.toggle("open")
     overlay.classList.toggle("show")
   })
+
   overlay?.addEventListener("click", () => {
     sidebar.classList.remove("open")
     overlay.classList.remove("show")
   })
-  const btnCerrarSesion = document.getElementById("btnCerrarSesion");
+
+  const btnCerrarSesion = document.getElementById("btnCerrarSesion")
   btnCerrarSesion?.addEventListener("click", () => {
-    localStorage.removeItem("idusuario");
-    localStorage.removeItem("usuario");
-    window.location.href = "../InicioSesion/IndexInicioSesion.html?logout=1";
-  });
+    localStorage.removeItem("idusuario")
+    localStorage.removeItem("usuario")
+    window.location.href = "../InicioSesion/IndexInicioSesion.html?logout=1"
+  })
 
   const rawId = JSON.parse(localStorage.getItem("idusuario") || "null")
   const idusuario = typeof rawId === "number" ? rawId : rawId?.idusuario ?? null
@@ -29,10 +32,23 @@ document.addEventListener("DOMContentLoaded", () => {
   const nombreHeader = document.getElementById("nombreHeader") || document.querySelector(".nombre-usuario")
   const imgHeader = document.getElementById("imgHeaderSkin") || document.querySelector(".foto-perfil img")
   const plataBox = document.getElementById("plataHeaderValor")
+
   const rutaIconoHeader = (k) => {
-    const map = { suki:"SUKI", trump:"TRUMP", rabino:"rabino", oro:"oro", flash:"FLASH", turro:"TURRO", sullivan:"solivan", bizarrap:"BzRP", minecraft:"minecraft" }
+    const map = {
+      suki: "SUKI",
+      trump: "TRUMP",
+      rabino: "rabino",
+      oro: "oro",
+      flash: "FLASH",
+      turro: "TURRO",
+      sullivan: "solivan",
+      bizarrap: "BzRP",
+      minecraft: "minecraft",
+      bikini: "bikini"
+    }
     return `../imagenes/Imagenesheader/${map[k] || "SUKI"}.png`
   }
+
   postEvent("devolverusuario", { idusuario }, (r) => {
     if (!r?.objok || !r.usuario) return
     const u = r.usuario
@@ -42,7 +58,9 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.setItem("usuario", JSON.stringify({ usuario: u.usuario }))
   })
 
-  const irACrear = () => { window.location.href = "../Creacion de Objetivos/IndexCreacionDeObjetivos.html" }
+  const irACrear = () => {
+    window.location.href = "../Creacion de Objetivos/IndexCreacionDeObjetivos.html"
+  }
   document.getElementById("botonCrear")?.addEventListener("click", irACrear)
   document.getElementById("botonCrearInferior")?.addEventListener("click", irACrear)
 
@@ -57,23 +75,40 @@ document.addEventListener("DOMContentLoaded", () => {
     return "../Objetivo/indexObjetivo.html"
   }
 
+  const rutaIconoObjetivo = (clave) => {
+    if (!clave) return null
+    return `../imagenes/Iconos/${clave}.png`
+  }
+
   function appendObjetivoCard(obj) {
     const titulo = obj?.titulo || obj?.nombre || "Objetivo"
     const color = obj?.color || "#000000"
     const idObj = obj?.idobjetivo ?? obj?.idObjetivo
+    const iconoClave = obj?.icono || null
+    const iconoSrc = rutaIconoObjetivo(iconoClave)
+
     const btn = document.createElement("button")
     btn.type = "button"
     btn.className = "objetivo-card"
     btn.style.backgroundColor = color
+
+    const imgHtml = iconoSrc
+      ? `<img src="${iconoSrc}" alt="" />`
+      : ""
+
     btn.innerHTML = `
-      <span class="bullet"></span>
-      <span class="label">${titulo}</span>
+      <div class="objetivo-left">
+        <span class="bullet">${imgHtml}</span>
+        <span class="label">${titulo}</span>
+      </div>
       <span class="chevron">›</span>
     `
+
     btn.addEventListener("click", () => {
       if (idObj) localStorage.setItem("idObjetivo", JSON.stringify(idObj))
       window.location.href = destinoPorTipo(obj?.tipodeobjetivo || obj?.tipo)
     })
+
     cont.appendChild(btn)
   }
 
@@ -88,7 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
       estadoVacio?.classList.add("oculto")
       listaObjetivos?.classList.remove("oculto")
       cont.innerHTML = ""
-      arr.forEach(o => o && typeof o === "object" && appendObjetivoCard(o))
+      arr.forEach((o) => o && typeof o === "object" && appendObjetivoCard(o))
     })
   }
 

@@ -7,9 +7,7 @@ body {
   flex-direction: column;
   min-height: 100vh;
   background-color: #F3EAE8;
-  
 }
-
 
 header {
   display: flex;
@@ -44,7 +42,8 @@ main {
   align-items: center;
 }
 
-.izquierda, .derecha {
+.izquierda,
+.derecha {
   display: flex;
   align-items: center;
 }
@@ -135,12 +134,12 @@ main {
   visibility: visible;
 }
 
-
 label {
   font-weight: 700;
   font-size: 30px;
   margin-bottom: 8px;
 }
+
 .card {
   display: flex;
   flex-direction: column;
@@ -155,7 +154,9 @@ label {
   width: 90%;
 }
 
-.btn, .obj, .color-select {
+.btn,
+.obj,
+.color-select {
   display: block;
   margin: 8px 0;
   width: 400px;
@@ -170,16 +171,21 @@ label {
   color: #000;
 }
 
-.volver{
+.volver {
   color: #D9D9D9;
   background-color: #877771;
 }
-#nombreObjetivo , #duracionTiempo, #descripcionAccion {
+
+#nombreObjetivo,
+#duracionTiempo,
+#descripcionAccion {
   background-color: #D9D9D9;
   color: #877771;
   text-align: center;
 }
-#tipoObjetivo, .color-select {
+
+#tipoObjetivo,
+.color-select {
   background-color: #000;
   color: #fff;
   text-align: center;
@@ -189,41 +195,46 @@ label {
   background-color: #d3a902;
 }
 
-
 .oculto {
   display: none;
 }
+
 .color-select option {
-    padding: 10px;
-    font-weight: 600;
-  }
-  
-  .color-select option[value="#FFCC00"] {
-    background-color: #FFCC00;
-    color: #000;
-  }
-  
-  .color-select option[value="#CB30E0"] {
-    background-color: #CB30E0;
-    color: #fff;
-  }
-  .color-select option[value="#002AB8"] {
-    background-color: #002AB8;
-    color: #fff;
-  }
-  .color-select option[value="#34C759"] {
-    background-color: #34C759;
-    color: #fff;
-  }
-  .color-select option[value="#FF383C"] {
-    background-color: #FF383C;
-    color: #fff;
-  }
-  .color-select option[value="#6B2A14"] {
-    background-color: #6B2A14;
-    color: #fff;
-  }
-  .boton-cerrar {
+  padding: 10px;
+  font-weight: 600;
+}
+
+.color-select option[value="#FFCC00"] {
+  background-color: #FFCC00;
+  color: #000;
+}
+
+.color-select option[value="#CB30E0"] {
+  background-color: #CB30E0;
+  color: #fff;
+}
+
+.color-select option[value="#002AB8"] {
+  background-color: #002AB8;
+  color: #fff;
+}
+
+.color-select option[value="#34C759"] {
+  background-color: #34C759;
+  color: #fff;
+}
+
+.color-select option[value="#FF383C"] {
+  background-color: #FF383C;
+  color: #fff;
+}
+
+.color-select option[value="#6B2A14"] {
+  background-color: #6B2A14;
+  color: #fff;
+}
+
+.boton-cerrar {
   width: 100%;
   background: #ff4444;
   color: #fff;
@@ -239,6 +250,7 @@ label {
 .boton-cerrar:hover {
   background: #e13b3b;
 }
+
 .plata-header {
   display: flex;
   align-items: center;
@@ -257,4 +269,47 @@ label {
   font-weight: 800;
   font-size: 20px;
   line-height: 1;
+}
+
+.iconos-contenedor {
+  width: 100%;
+  margin-top: 16px;
+}
+
+.texto-iconos {
+  margin: 4px 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.iconos-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 40px);
+  gap: 8px;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.icono-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  background: #ffffff;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.icono-btn img {
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+}
+
+.icono-btn.icono-seleccionado {
+  border-color: #FFCC00;
+  background: #FFF7CC;
 }

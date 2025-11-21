@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-  <header>
+    <header>
       <div class="izquierda">
         <div class="logo">
           <a href="../menu principal/indexMenuPrincipal.html"><img src="logo.png" alt="Logo SUKI" /></a>
@@ -37,9 +37,8 @@
       <a href="../Inventario/IndexInventario.html">Inventario</a>
       <a href="../Logros/IndexLogros.html">Logros</a>
       <a href="../AcercaDe/IndexAcercaDe.html">Acerca De</a>
-       <button id="btnCerrarSesion" class="boton-cerrar">Cerrar sesión</button>
+      <button id="btnCerrarSesion" class="boton-cerrar">Cerrar sesión</button>
       <img src="perroSidebar.png" alt="perroSidebar">
-        
     </div>
 
     <main>
@@ -79,22 +78,20 @@
           <option value="#FF383C">Rojo</option>
           <option value="#6B2A14">Marrón</option>
         </select>
-        <select name="menu-logos" id="colorObjetivo" class="color-select" required>
-          <option value="" disabled selected hidden>Elegí un ícono para tu objetivo</option>
-          <option value="icono1"><img src="../imagenes/Iconos/icono1.png" alt="Icono 1"></option>
-          <option value="icono2">🎯</option>
-          <option value="icono3">🚀</option>
-          <option value="icono4">💡</option>
-          <option value="icono5">📚</option>
-          <option value="icono6">🎵</option>
 
-        </select>
+        <div class="iconos-contenedor">
+          <label class="texto-iconos">Elegí un ícono para tu objetivo</label>
+          <div id="selectorIconos" class="iconos-grid"></div>
+          <input type="hidden" id="iconoSeleccionado" value="">
+        </div>
+
         <button type="button" class="btn volver">Volver</button>
         <button type="button" class="btn listo">Listo</button>
       </div>
     </main>
 
     <div class="overlay" id="overlay"></div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.8.1/socket.io.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/JZylber/SoqueTIC-Client@v1.4.2/soquetic-client.js"></script>
     <script src="script.js"></script>

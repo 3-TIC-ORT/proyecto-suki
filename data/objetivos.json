@@ -492,5 +492,16 @@
     "vecescompletadas": 0,
     "color": "#002AB8",
     "icono": null
+  },
+  {
+    "idusuario": 1762884106180,
+    "idobjetivo": 1763702735890,
+    "titulo": "as",
+    "tipodeobjetivo": "accion",
+    "tiempo": null,
+    "veces": 2,
+    "vecescompletadas": 1,
+    "color": "#002AB8",
+    "icono": "icono15"
   }
 ]
