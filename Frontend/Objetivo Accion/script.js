@@ -15,12 +15,12 @@ document.addEventListener("DOMContentLoaded", () => {
     overlay.classList.remove("show")
   })
 
-  const btnCerrarSesion = document.getElementById("btnCerrarSesion");
+  const btnCerrarSesion = document.getElementById("btnCerrarSesion")
   btnCerrarSesion?.addEventListener("click", () => {
-    localStorage.removeItem("idusuario");
-    localStorage.removeItem("usuario");
-    window.location.href = "../InicioSesion/IndexInicioSesion.html?logout=1";
-  });
+    localStorage.removeItem("idusuario")
+    localStorage.removeItem("usuario")
+    window.location.href = "../InicioSesion/IndexInicioSesion.html?logout=1"
+  })
 
   const sesion = JSON.parse(localStorage.getItem("idusuario") || "null")
   const idusuario = typeof sesion === "number" ? sesion : sesion?.idusuario ?? null
@@ -35,8 +35,6 @@ document.addEventListener("DOMContentLoaded", () => {
     return
   }
 
-  /* ------------------------- FECHAS & KEYS -------------------------- */
-
   const hoyISO = new Date().toISOString().slice(0, 10)
   const fecha = new Date()
   const anio = fecha.getFullYear()
@@ -50,15 +48,11 @@ document.addEventListener("DOMContentLoaded", () => {
   let ultimaComplecion = localStorage.getItem(keyUltima) || null
   let bloqueadoHoy = ultimaComplecion === hoyISO
 
-  // Días completados reales del mes
   let diasCompletadosSet = new Set(JSON.parse(localStorage.getItem(keyDiasMes) || "[]"))
   let diasCompletadosMes = diasCompletadosSet.size
   if (diasCompletadosMes > diasMes) diasCompletadosMes = diasMes
 
-  // puntos presionados hoy
   let progresoHoy = Number(localStorage.getItem(keyPuntosHoy) || 0)
-
-  /* --------------------------- ELEMENTOS ----------------------------- */
 
   const nombreHeader = document.getElementById("nombreHeader")
   const imgHeaderSkin = document.getElementById("imgHeaderSkin")
@@ -75,12 +69,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const btnEditar = document.getElementById("btnEditar")
   const leyendaOk = document.querySelector(".leyenda-torta .ok")
   const leyendaPend = document.querySelector(".leyenda-torta .pend")
+  const tituloObjetivo = document.getElementById("tituloObjetivo")
 
   let metaPorDia = 4
 
   let colorCompletados = "#ffcc00"
   let colorPendientes = "#ff383c"
-
 
   const rutaIconoHeader = (clave) => {
     const mapa = {
@@ -123,8 +117,6 @@ document.addEventListener("DOMContentLoaded", () => {
     heroPerro.src = rutaHeroSkin(u.skinseleccionada)
   }
 
-
-
   const ctx = document.getElementById("graficoProgreso").getContext("2d")
   const grafico = new Chart(ctx, {
     type: "pie",
@@ -165,8 +157,6 @@ document.addEventListener("DOMContentLoaded", () => {
     aplicarColoresPie()
   }
 
-
-
   function construirPuntos() {
     puntosProgreso.innerHTML = ""
 
@@ -185,7 +175,6 @@ document.addEventListener("DOMContentLoaded", () => {
       estadoCirculo.classList.remove("disabled")
     }
   }
-
 
   function pintarCalendario(racha, ultimoISO) {
     const inicioMes = new Date(anio, mes, 1)
@@ -222,8 +211,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-
-
   function cargarObjetivo() {
     postEvent("devolverobjetivos", { idusuario }, (res) => {
       const lista = res?.objetivos || []
@@ -240,11 +227,19 @@ document.addEventListener("DOMContentLoaded", () => {
       const v = Number(obj.veces)
       metaPorDia = !isNaN(v) && v > 0 ? v : 4
 
+      if (tituloObjetivo) {
+        const nombre =
+          obj.descripcion ||
+          obj.nombre ||
+          obj.titulo ||
+          "Nombre del objetivo"
+        tituloObjetivo.textContent = nombre
+      }
+
       construirPuntos()
       actualizarPie()
     })
   }
-
 
   postEvent("devolverusuario", { idusuario }, (r) => {
     if (r?.objok && r.usuario) {
@@ -254,8 +249,6 @@ document.addEventListener("DOMContentLoaded", () => {
       pintarCalendario(r.usuario.rachaactual, r.usuario.ultimodiaderacha)
     }
   })
-
-
 
   estadoCirculo.addEventListener("click", () => {
     if (bloqueadoHoy || progresoHoy >= metaPorDia) return
@@ -288,8 +281,6 @@ document.addEventListener("DOMContentLoaded", () => {
       construirPuntos()
     })
   })
-
-
 
   btnEditar.addEventListener("click", () => {
     localStorage.setItem("modoEdicionObjetivo", "1")

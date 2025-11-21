@@ -15,12 +15,12 @@ document.addEventListener("DOMContentLoaded", () => {
     overlay.classList.remove("show")
   })
 
-  const btnCerrarSesion = document.getElementById("btnCerrarSesion");
+  const btnCerrarSesion = document.getElementById("btnCerrarSesion")
   btnCerrarSesion?.addEventListener("click", () => {
-    localStorage.removeItem("idusuario");
-    localStorage.removeItem("usuario");
-    window.location.href = "../InicioSesion/IndexInicioSesion.html?logout=1";
-  });
+    localStorage.removeItem("idusuario")
+    localStorage.removeItem("usuario")
+    window.location.href = "../InicioSesion/IndexInicioSesion.html?logout=1"
+  })
 
   const sesion = JSON.parse(localStorage.getItem("idusuario") || "null")
   const idusuario = typeof sesion === "number" ? sesion : sesion?.idusuario ?? null
@@ -69,6 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const btnEditar = document.getElementById("btnEditar")
   const leyendaOk = document.querySelector(".leyenda-torta .ok")
   const leyendaPend = document.querySelector(".leyenda-torta .pend")
+  const tituloObjetivo = document.getElementById("tituloObjetivo")
 
   let metaPorDia = 4
   let progresoHoy = 0
@@ -128,7 +129,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const str = String(t).trim()
     if (!str) return 0
     if (str.includes(":")) {
-      const [m, s] = str.split(":").map((n) => Number(n) || 0)
+      const partes = str.split(":")
+      const m = Number(partes[0]) || 0
+      const s = Number(partes[1]) || 0
       return m * 60 + s
     }
     const m = Number(str)
@@ -345,8 +348,18 @@ document.addEventListener("DOMContentLoaded", () => {
         window.location.href = "../menu principal/indexMenuPrincipal.html"
         return
       }
+
       setHeroColor(obj.color)
       totalCompletado.textContent = String(obj.vecescompletadas || 0)
+
+      if (tituloObjetivo) {
+        const nombre =
+          obj.descripcion ||
+          obj.nombre ||
+          obj.titulo ||
+          "Nombre del objetivo"
+        tituloObjetivo.textContent = nombre
+      }
 
       const esTiempo = obj.tipodeobjetivo === "tiempo"
       hero.classList.toggle("modo-tiempo", esTiempo)
