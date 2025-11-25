@@ -350,6 +350,9 @@ if (totalLogros === logroslista.length && !usuarioelegido.logros.extasis) {
     usuarioelegido.logrosdesbloqueados++;
     usuarioelegido.dinero += 200;
 }
+
+usuarioelegido.objetivoscompletados++;
+
 if (usuarioelegido.objetivoscompletados === 1 && !usuarioelegido.logros.primerpaso) {
     usuarioelegido.logros.primerpaso = true;
     usuarioelegido.logrosdesbloqueados++;
@@ -360,6 +363,7 @@ if (usuarioelegido.objetivoscompletados === 100 && !usuarioelegido.logros.centen
     usuarioelegido.logrosdesbloqueados++;
     usuarioelegido.dinero += 500;
 }
+
 
 
 
