@@ -289,8 +289,7 @@ function cargarPerfil() {
     }
 
     if (elObjetivo) {
-      const cant = data.cantidadobjetivos ?? null
-      elObjetivo.textContent = String(cant)
+      elObjetivo.textContent = `${u.cantidadobjetivoscreados ?? u.objetivoscompletados ?? 0}`
     }
 
     pintarCalendarioUsuario(rachaUsuario, ultimaUsuario)
