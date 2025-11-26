@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const idobjetivo = JSON.parse(localStorage.getItem("idObjetivo") || "null")
 
   if (!idusuario) {
-    window.location.href = "../Login/indexLogin.html?force=1"
+    window.location.href = "../InicioSesion/IndexInicioSesion.html?force=1"
     return
   }
   if (!idobjetivo) {
