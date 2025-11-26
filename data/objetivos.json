@@ -54,5 +54,19 @@
     "rachamaslarga": 1,
     "rachaactual": 1,
     "ultimodiaderacha": "2025-11-26"
+  },
+  {
+    "idusuario": 1764178136804,
+    "idobjetivo": 1764178201108,
+    "titulo": "Tomar 2L de agua",
+    "tipodeobjetivo": "accion",
+    "tiempo": null,
+    "veces": 1,
+    "vecescompletadas": 1,
+    "color": "#002AB8",
+    "icono": "icono8",
+    "rachamaslarga": 1,
+    "rachaactual": 1,
+    "ultimodiaderacha": "2025-11-26"
   }
 ]

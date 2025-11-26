@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
   btnCerrarSesion?.addEventListener("click", () => {
     localStorage.removeItem("idusuario")
     localStorage.removeItem("usuario")
-    window.location.href = "../InicioSesion/IndexInicioSesion.html?logout=1"
+    window.location.href = "../crearcuentaoinicarsesion/IndexCrearCuentaInicioSesion.html?logout=1";
   })
 
   const rawId = JSON.parse(localStorage.getItem("idusuario") || "null")

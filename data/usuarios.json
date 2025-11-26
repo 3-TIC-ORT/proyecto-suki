@@ -223,5 +223,50 @@
     "cantidadobjetivoscreados": 0,
     "skinseleccionada": "suki",
     "objetivoscompletados": 0
+  },
+  {
+    "usuario": "Tania",
+    "id": 1764178136804,
+    "contraseña": "Aguilasblancas15",
+    "mail": "tania.lopezobe@gmail.com",
+    "fecha": "2010-09-15",
+    "racha": 0,
+    "logrosdesbloqueados": 2,
+    "skinscompradas": 0,
+    "dinero": 120,
+    "fechadecreacion": "2025-11-26",
+    "skins": {
+      "suki": true,
+      "trump": false,
+      "flash": false,
+      "turro": false,
+      "sullivan": false,
+      "bikini": false,
+      "rabino": false,
+      "bizarrap": false,
+      "oro": false,
+      "minecraft": false
+    },
+    "logros": {
+      "primerpaso": true,
+      "racha3": false,
+      "racha7": false,
+      "racha30": false,
+      "iniciador": true,
+      "creador": false,
+      "coleccionista": false,
+      "explorador": false,
+      "legendario": false,
+      "centenario": false,
+      "ganador": false,
+      "extraganador": false,
+      "extasis": false
+    },
+    "rachamaslarga": 1,
+    "rachaactual": 1,
+    "ultimodiaderacha": "2025-11-26",
+    "cantidadobjetivoscreados": 1,
+    "skinseleccionada": "suki",
+    "objetivoscompletados": 1
   }
 ]
