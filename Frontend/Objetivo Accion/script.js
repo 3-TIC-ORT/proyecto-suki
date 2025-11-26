@@ -42,17 +42,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const diasMes = new Date(anio, mes + 1, 0).getDate()
 
   const keyUltima = `ultimaComplecion_${idobjetivo}`
-  const keyDiasMes = `diasCompletados_${idusuario}_${idobjetivo}_${anio}-${String(mes + 1).padStart(2, "0")}`
   const keyPuntosHoy = `puntosHoy_${idusuario}_${idobjetivo}_${hoyISO}`
 
   let ultimaComplecion = localStorage.getItem(keyUltima) || null
   let bloqueadoHoy = ultimaComplecion === hoyISO
-
-  let diasCompletadosSet = new Set(JSON.parse(localStorage.getItem(keyDiasMes) || "[]"))
-  let diasCompletadosMes = diasCompletadosSet.size
-  if (diasCompletadosMes > diasMes) diasCompletadosMes = diasMes
-
   let progresoHoy = Number(localStorage.getItem(keyPuntosHoy) || 0)
+  let diasCompletadosMes = 0
 
   const nombreHeader = document.getElementById("nombreHeader")
   const imgHeaderSkin = document.getElementById("imgHeaderSkin")
@@ -72,7 +67,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const tituloObjetivo = document.getElementById("tituloObjetivo")
 
   let metaPorDia = 4
-
   let colorCompletados = "#ffcc00"
   let colorPendientes = "#ff383c"
 
@@ -133,6 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
   })
 
   function actualizarPie() {
+    if (diasCompletadosMes > diasMes) diasCompletadosMes = diasMes
     grafico.data.datasets[0].data = [
       diasCompletadosMes,
       diasMes - diasCompletadosMes
@@ -159,14 +154,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function construirPuntos() {
     puntosProgreso.innerHTML = ""
-
     for (let i = 0; i < metaPorDia; i++) {
       const p = document.createElement("div")
       p.className = "punto"
       if (i < progresoHoy || bloqueadoHoy) p.classList.add("activo")
       puntosProgreso.appendChild(p)
     }
-
     if (bloqueadoHoy) {
       estadoCirculo.textContent = "Completado"
       estadoCirculo.classList.add("disabled")
@@ -179,7 +172,6 @@ document.addEventListener("DOMContentLoaded", () => {
   function pintarCalendario(racha, ultimoISO) {
     const inicioMes = new Date(anio, mes, 1)
     const setRacha = new Set()
-
     if (racha && ultimoISO) {
       const base = new Date(ultimoISO + "T00:00:00")
       for (let i = 0; i < Number(racha); i++) {
@@ -188,25 +180,18 @@ document.addEventListener("DOMContentLoaded", () => {
         setRacha.add(d.toISOString().slice(0, 10))
       }
     }
-
     calendario.innerHTML = ""
     const offset = (inicioMes.getDay() + 6) % 7
-
     for (let i = 0; i < offset; i++) {
       calendario.appendChild(document.createElement("div"))
     }
-
     for (let d = 1; d <= diasMes; d++) {
       const celda = document.createElement("div")
       celda.className = "dia"
       const iso = new Date(anio, mes, d).toISOString().slice(0, 10)
-
       if (setRacha.has(iso)) {
         celda.classList.add("dia-racha")
-      } else if (diasCompletadosSet.has(iso)) {
-        celda.classList.add("dia-normal")
       }
-
       calendario.appendChild(celda)
     }
   }
@@ -215,18 +200,14 @@ document.addEventListener("DOMContentLoaded", () => {
     postEvent("devolverobjetivos", { idusuario }, (res) => {
       const lista = res?.objetivos || []
       const obj = lista.find((o) => o.idobjetivo === idobjetivo)
-
       if (!obj) {
         window.location.href = "../menu principal/indexMenuPrincipal.html"
         return
       }
-
       setHeroColor(obj.color)
       totalCompletado.textContent = obj.vecescompletadas
-
       const v = Number(obj.veces)
       metaPorDia = !isNaN(v) && v > 0 ? v : 4
-
       if (tituloObjetivo) {
         const nombre =
           obj.descripcion ||
@@ -235,7 +216,8 @@ document.addEventListener("DOMContentLoaded", () => {
           "Nombre del objetivo"
         tituloObjetivo.textContent = nombre
       }
-
+      diasCompletadosMes = Number(obj.vecescompletadas) || 0
+      if (diasCompletadosMes > diasMes) diasCompletadosMes = diasMes
       construirPuntos()
       actualizarPie()
     })
@@ -252,46 +234,40 @@ document.addEventListener("DOMContentLoaded", () => {
 
   estadoCirculo.addEventListener("click", () => {
     if (bloqueadoHoy || progresoHoy >= metaPorDia) return
-
     progresoHoy++
     localStorage.setItem(keyPuntosHoy, progresoHoy)
     construirPuntos()
-
     if (progresoHoy < metaPorDia) return
-
     postEvent("completarobjetivo", { idusuario, idobjetivo }, (r) => {
       if (!r?.objok) return
-
-      diasCompletadosSet.add(hoyISO)
-      localStorage.setItem(keyDiasMes, JSON.stringify([...diasCompletadosSet]))
-      diasCompletadosMes = diasCompletadosSet.size
+      const nuevoTotal = Number(totalCompletado.textContent) + 1
+      totalCompletado.textContent = nuevoTotal
+      diasCompletadosMes = nuevoTotal
       actualizarPie()
-
       pintarCalendario(r.racha, hoyISO)
-
-      totalCompletado.textContent =
-        Number(totalCompletado.textContent) + 1
-
       rachaActualNum.textContent = r.racha
       rachaLarga.textContent = r.rachamaslarga
-
       bloqueadoHoy = true
       localStorage.setItem(keyUltima, hoyISO)
-
       construirPuntos()
+      if (r.dinero != null) {
+        plataHeader.textContent = String(r.dinero)
+      }
     })
   })
 
   btnEditar.addEventListener("click", () => {
     localStorage.setItem("modoEdicionObjetivo", "1")
-    localStorage.setItem("objetivoEnEdicion", JSON.stringify({ idusuario, idobjetivo }))
+    localStorage.setItem(
+      "objetivoEnEdicion",
+      JSON.stringify({ idusuario, idobjetivo })
+    )
     window.location.href =
       "../Creacion de Objetivos/IndexCreacionDeObjetivos.html#menu-disenio"
   })
 
   btnBorrar.addEventListener("click", () => {
     if (!confirm("¿Borrar este objetivo?")) return
-
     postEvent("borrarobjetivo", { idobjetivo }, (r) => {
       if (r?.ok || r?.objok?.ok) {
         window.location.href = "../menu principal/indexMenuPrincipal.html"

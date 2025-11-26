@@ -51,8 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const keyTimer = `timerTiempo_${idusuario}_${idobjetivo}`
 
   let diasCompletadosSet = new Set(JSON.parse(localStorage.getItem(keyDias) || "[]"))
-  let diasCompletadosMes = diasCompletadosSet.size
-  if (diasCompletadosMes > diasMes) diasCompletadosMes = diasMes
+  let diasCompletadosMes = 0
 
   const nombreHeader = document.getElementById("nombreHeader")
   const imgHeaderSkin = document.getElementById("imgHeaderSkin")
@@ -244,7 +243,8 @@ document.addEventListener("DOMContentLoaded", () => {
       diasCompletadosSet.add(isoHoy)
       localStorage.setItem(keyDias, JSON.stringify([...diasCompletadosSet]))
     }
-    diasCompletadosMes = diasCompletadosSet.size
+
+    diasCompletadosMes = nuevoTotal
     if (diasCompletadosMes > diasMes) diasCompletadosMes = diasMes
 
     grafico.data.datasets[0].data = [
@@ -350,7 +350,11 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       setHeroColor(obj.color)
-      totalCompletado.textContent = String(obj.vecescompletadas || 0)
+
+      const completadas = Number(obj.vecescompletadas) || 0
+      totalCompletado.textContent = String(completadas)
+      diasCompletadosMes = completadas
+      if (diasCompletadosMes > diasMes) diasCompletadosMes = diasMes
 
       if (tituloObjetivo) {
         const nombre =
