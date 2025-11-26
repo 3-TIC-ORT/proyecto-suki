@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const keyPuntosHoy = `puntosHoy_${idusuario}_${idobjetivo}_${hoyISO}`
 
   let ultimaComplecion = localStorage.getItem(keyUltima) || null
-  let bloqueadoHoy = ultimaComplecion === hoyISO
+  let bloqueadoHoy = false
   let progresoHoy = Number(localStorage.getItem(keyPuntosHoy) || 0)
   let diasCompletadosMes = 0
 
@@ -196,6 +196,55 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  function actualizarVistaDesdeObjetivo(obj) {
+    setHeroColor(obj.color)
+
+    const ultimaBack = obj.ultimodiaderacha || null
+    ultimaComplecion = ultimaBack || null
+    bloqueadoHoy = ultimaComplecion === hoyISO
+
+    if (ultimaComplecion) {
+      localStorage.setItem(keyUltima, ultimaComplecion)
+    } else {
+      localStorage.removeItem(keyUltima)
+    }
+
+    const completadas = Number(obj.vecescompletadas) || 0
+    totalCompletado.textContent = completadas
+    diasCompletadosMes = completadas
+    if (diasCompletadosMes > diasMes) diasCompletadosMes = diasMes
+
+    const v = Number(obj.veces)
+    metaPorDia = !isNaN(v) && v > 0 ? v : 4
+
+    if (tituloObjetivo) {
+      const nombre =
+        obj.descripcion ||
+        obj.nombre ||
+        obj.titulo ||
+        "Nombre del objetivo"
+      tituloObjetivo.textContent = nombre
+    }
+
+    const rachaObjActual = Number(obj.rachaactual) || 0
+    const rachaObjMax = Number(obj.rachamaslarga) || 0
+    if (rachaActualNum) rachaActualNum.textContent = String(rachaObjActual)
+    if (rachaLarga) rachaLarga.textContent = String(rachaObjMax)
+
+    pintarCalendario(rachaObjActual, obj.ultimodiaderacha || null)
+
+    if (bloqueadoHoy) {
+      progresoHoy = metaPorDia
+      localStorage.setItem(keyPuntosHoy, metaPorDia)
+    } else {
+      progresoHoy = Number(localStorage.getItem(keyPuntosHoy) || 0)
+      if (progresoHoy > metaPorDia) progresoHoy = metaPorDia
+    }
+
+    construirPuntos()
+    actualizarPie()
+  }
+
   function cargarObjetivo() {
     postEvent("devolverobjetivos", { idusuario }, (res) => {
       const lista = res?.objetivos || []
@@ -204,55 +253,39 @@ document.addEventListener("DOMContentLoaded", () => {
         window.location.href = "../menu principal/indexMenuPrincipal.html"
         return
       }
-      setHeroColor(obj.color)
-      totalCompletado.textContent = obj.vecescompletadas
-      const v = Number(obj.veces)
-      metaPorDia = !isNaN(v) && v > 0 ? v : 4
-      if (tituloObjetivo) {
-        const nombre =
-          obj.descripcion ||
-          obj.nombre ||
-          obj.titulo ||
-          "Nombre del objetivo"
-        tituloObjetivo.textContent = nombre
-      }
-      diasCompletadosMes = Number(obj.vecescompletadas) || 0
-      if (diasCompletadosMes > diasMes) diasCompletadosMes = diasMes
-      construirPuntos()
-      actualizarPie()
+      actualizarVistaDesdeObjetivo(obj)
     })
   }
 
   postEvent("devolverusuario", { idusuario }, (r) => {
     if (r?.objok && r.usuario) {
       setHeader(r.usuario)
-      rachaActualNum.textContent = r.usuario.rachaactual
-      rachaLarga.textContent = r.usuario.rachamaslarga
-      pintarCalendario(r.usuario.rachaactual, r.usuario.ultimodiaderacha)
     }
   })
 
   estadoCirculo.addEventListener("click", () => {
     if (bloqueadoHoy || progresoHoy >= metaPorDia) return
+
     progresoHoy++
+    if (progresoHoy > metaPorDia) progresoHoy = metaPorDia
     localStorage.setItem(keyPuntosHoy, progresoHoy)
     construirPuntos()
+
     if (progresoHoy < metaPorDia) return
+
     postEvent("completarobjetivo", { idusuario, idobjetivo }, (r) => {
       if (!r?.objok) return
-      const nuevoTotal = Number(totalCompletado.textContent) + 1
-      totalCompletado.textContent = nuevoTotal
-      diasCompletadosMes = nuevoTotal
-      actualizarPie()
-      pintarCalendario(r.racha, hoyISO)
-      rachaActualNum.textContent = r.racha
-      rachaLarga.textContent = r.rachamaslarga
-      bloqueadoHoy = true
-      localStorage.setItem(keyUltima, hoyISO)
-      construirPuntos()
+
       if (r.dinero != null) {
         plataHeader.textContent = String(r.dinero)
       }
+
+      bloqueadoHoy = true
+      ultimaComplecion = hoyISO
+      localStorage.setItem(keyUltima, hoyISO)
+      localStorage.setItem(keyPuntosHoy, metaPorDia)
+
+      cargarObjetivo()
     })
   })
 

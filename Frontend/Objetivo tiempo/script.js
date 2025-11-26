@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const hoyISO = new Date().toISOString().slice(0, 10)
   const keyUltima = `ultimaComplecion_${idobjetivo}`
   let ultimaComplecion = localStorage.getItem(keyUltima) || null
-  let bloqueadoHoy = ultimaComplecion === hoyISO
+  let bloqueadoHoy = false
 
   const fecha = new Date()
   const anio = fecha.getFullYear()
@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const rutaHeroSkin = (clave) => {
     const mapa = {
       suki: "Suki",
-      trump: "salchitump",
+      trump: "salchitrump",
       rabino: "salchirabino",
       oro: "de oro",
       flash: "salchiflash",
@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
       minecraft: "SALCHICRAFT",
       bikini: "bikini"
     }
-    const n = mapa[clave] || "suki-grande"
+    const n = mapa[clave] || "Suki"
     return `../imagenes/skins/${n}.png`
   }
 
@@ -187,8 +187,11 @@ document.addEventListener("DOMContentLoaded", () => {
       puntosProgreso.appendChild(p)
     }
     if (bloqueadoHoy) {
+      estadoCirculo.textContent = "Completado"
       estadoCirculo.classList.add("disabled")
     } else {
+      const esTiempo = hero.classList.contains("modo-tiempo")
+      if (!esTiempo) estadoCirculo.textContent = "Completar"
       estadoCirculo.classList.remove("disabled")
     }
   }
@@ -227,37 +230,18 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  function actualizarTotalesDeUsuario(payload) {
-    if (plataHeader) plataHeader.textContent = String(payload.dinero ?? 0)
-    if (rachaActualNum) rachaActualNum.textContent = String(payload.racha ?? 0)
-    if (rachaLarga) rachaLarga.textContent = String(payload.rachamaslarga ?? 0)
-  }
-
   function manejarRespuestaCompletar(r) {
-    const nuevoTotal = Number(totalCompletado.textContent) + 1
-    totalCompletado.textContent = String(nuevoTotal)
-    actualizarTotalesDeUsuario(r)
-
     const isoHoy = hoyISO
+
     if (!diasCompletadosSet.has(isoHoy)) {
       diasCompletadosSet.add(isoHoy)
       localStorage.setItem(keyDias, JSON.stringify([...diasCompletadosSet]))
     }
 
-    diasCompletadosMes = nuevoTotal
-    if (diasCompletadosMes > diasMes) diasCompletadosMes = diasMes
-
-    grafico.data.datasets[0].data = [
-      diasCompletadosMes,
-      diasMes - diasCompletadosMes
-    ]
-    grafico.update()
-
-    pintarCalendario(r.racha, hoyISO, diasCompletadosSet)
-
     bloqueadoHoy = true
-    ultimaComplecion = hoyISO
-    localStorage.setItem(keyUltima, hoyISO)
+    ultimaComplecion = isoHoy
+    localStorage.setItem(keyUltima, isoHoy)
+
     estadoCirculo.textContent = "Completado"
     estadoCirculo.classList.add("disabled")
     const puntos = puntosProgreso.querySelectorAll(".punto")
@@ -272,9 +256,15 @@ document.addEventListener("DOMContentLoaded", () => {
       timerRestante = 0
       localStorage.setItem(
         keyTimer,
-        JSON.stringify({ restante: 0, fecha: hoyISO, completado: true })
+        JSON.stringify({ restante: 0, fecha: isoHoy, completado: true })
       )
     }
+
+    if (r.dinero != null && plataHeader) {
+      plataHeader.textContent = String(r.dinero)
+    }
+
+    cargarObjetivo()
   }
 
   function guardarEstadoTimer() {
@@ -340,6 +330,75 @@ document.addEventListener("DOMContentLoaded", () => {
     return false
   }
 
+  function actualizarDesdeObjetivo(obj) {
+    setHeroColor(obj.color)
+
+    ultimaComplecion = obj.ultimodiaderacha || null
+    bloqueadoHoy = ultimaComplecion === hoyISO
+    if (ultimaComplecion) {
+      localStorage.setItem(keyUltima, ultimaComplecion)
+    } else {
+      localStorage.removeItem(keyUltima)
+    }
+
+    const completadas = Number(obj.vecescompletadas) || 0
+    totalCompletado.textContent = String(completadas)
+    diasCompletadosMes = completadas
+    if (diasCompletadosMes > diasMes) diasCompletadosMes = diasMes
+
+    if (tituloObjetivo) {
+      const nombre =
+        obj.descripcion ||
+        obj.nombre ||
+        obj.titulo ||
+        "Nombre del objetivo"
+      tituloObjetivo.textContent = nombre
+    }
+
+    const esTiempo = obj.tipodeobjetivo === "tiempo"
+    hero.classList.toggle("modo-tiempo", esTiempo)
+
+    if (esTiempo) {
+      metaPorDia = 1
+      timerTotalSegundos = parseTiempoToSegundos(obj.tiempo)
+      if (!restaurarEstadoTimer()) {
+        timerRestante = timerTotalSegundos
+        if (bloqueadoHoy) {
+          estadoCirculo.textContent = "Completado"
+          estadoCirculo.classList.add("disabled")
+        } else {
+          estadoCirculo.textContent = formatearSegundos(timerRestante || 0)
+          estadoCirculo.classList.remove("disabled")
+        }
+      }
+    } else {
+      const v = Number(obj.veces)
+      metaPorDia = !Number.isNaN(v) && v > 0 ? v : 4
+      if (bloqueadoHoy) {
+        estadoCirculo.textContent = "Completado"
+        estadoCirculo.classList.add("disabled")
+      } else {
+        estadoCirculo.textContent = "Completar"
+        estadoCirculo.classList.remove("disabled")
+      }
+    }
+
+    const rachaObjActual = Number(obj.rachaactual) || 0
+    const rachaObjMax = Number(obj.rachamaslarga) || 0
+    if (rachaActualNum) rachaActualNum.textContent = String(rachaObjActual)
+    if (rachaLarga) rachaLarga.textContent = String(rachaObjMax)
+
+    pintarCalendario(rachaObjActual, obj.ultimodiaderacha || null, diasCompletadosSet)
+
+    construirPuntos()
+
+    grafico.data.datasets[0].data = [
+      diasCompletadosMes,
+      diasMes - diasCompletadosMes
+    ]
+    grafico.update()
+  }
+
   function cargarObjetivo() {
     postEvent("devolverobjetivos", { idusuario }, (res) => {
       const lista = Array.isArray(res?.objetivos) ? res.objetivos : []
@@ -348,65 +407,13 @@ document.addEventListener("DOMContentLoaded", () => {
         window.location.href = "../menu principal/indexMenuPrincipal.html"
         return
       }
-
-      setHeroColor(obj.color)
-
-      const completadas = Number(obj.vecescompletadas) || 0
-      totalCompletado.textContent = String(completadas)
-      diasCompletadosMes = completadas
-      if (diasCompletadosMes > diasMes) diasCompletadosMes = diasMes
-
-      if (tituloObjetivo) {
-        const nombre =
-          obj.descripcion ||
-          obj.nombre ||
-          obj.titulo ||
-          "Nombre del objetivo"
-        tituloObjetivo.textContent = nombre
-      }
-
-      const esTiempo = obj.tipodeobjetivo === "tiempo"
-      hero.classList.toggle("modo-tiempo", esTiempo)
-
-      if (esTiempo) {
-        metaPorDia = 1
-        timerTotalSegundos = parseTiempoToSegundos(obj.tiempo)
-        if (!restaurarEstadoTimer()) {
-          timerRestante = timerTotalSegundos
-          if (bloqueadoHoy) {
-            estadoCirculo.textContent = "Completado"
-            estadoCirculo.classList.add("disabled")
-          } else {
-            estadoCirculo.textContent = formatearSegundos(timerRestante || 0)
-          }
-        }
-      } else {
-        const v = Number(obj.veces)
-        metaPorDia = !Number.isNaN(v) && v > 0 ? v : 4
-        estadoCirculo.textContent = bloqueadoHoy ? "Completado" : "Completar"
-      }
-
-      construirPuntos()
-      grafico.data.datasets[0].data = [
-        diasCompletadosMes,
-        diasMes - diasCompletadosMes
-      ]
-      grafico.update()
+      actualizarDesdeObjetivo(obj)
     })
   }
 
   postEvent("devolverusuario", { idusuario }, (r) => {
     if (r?.objok && r.usuario) {
       setHeader(r.usuario)
-      pintarCalendario(
-        r.usuario.rachaactual || 0,
-        r.usuario.ultimodiaderacha || null,
-        diasCompletadosSet
-      )
-      if (rachaActualNum)
-        rachaActualNum.textContent = String(r.usuario.rachaactual || 0)
-      if (rachaLarga)
-        rachaLarga.textContent = String(r.usuario.rachamaslarga || 0)
     }
   })
 

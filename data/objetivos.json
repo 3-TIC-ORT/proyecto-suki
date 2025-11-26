@@ -6,23 +6,9 @@
     "tipodeobjetivo": "accion",
     "tiempo": null,
     "veces": 1,
-    "vecescompletadas": 1,
+    "vecescompletadas": 2,
     "color": "#CB30E0",
     "icono": "icono3",
-    "rachamaslarga": 1,
-    "rachaactual": 1,
-    "ultimodiaderacha": "2025-11-25"
-  },
-  {
-    "idusuario": 1764089402401,
-    "idobjetivo": 1764089791474,
-    "titulo": "Jjajja",
-    "tipodeobjetivo": "accion",
-    "tiempo": null,
-    "veces": 2,
-    "vecescompletadas": 2,
-    "color": "#34C759",
-    "icono": "icono9",
     "rachamaslarga": 2,
     "rachaactual": 2,
     "ultimodiaderacha": "2025-11-26"
@@ -34,11 +20,39 @@
     "tipodeobjetivo": "tiempo",
     "tiempo": 3,
     "veces": null,
-    "vecescompletadas": 0,
+    "vecescompletadas": 1,
     "color": "#002AB8",
     "icono": "icono2",
-    "rachamaslarga": 0,
-    "rachaactual": 0,
-    "ultimodiaderacha": null
+    "rachamaslarga": 1,
+    "rachaactual": 1,
+    "ultimodiaderacha": "2025-11-26"
+  },
+  {
+    "idusuario": 1764089402401,
+    "idobjetivo": 1764177175385,
+    "titulo": "zx",
+    "tipodeobjetivo": "accion",
+    "tiempo": null,
+    "veces": 1,
+    "vecescompletadas": 1,
+    "color": "#34C759",
+    "icono": "icono4",
+    "rachamaslarga": 1,
+    "rachaactual": 1,
+    "ultimodiaderacha": "2025-11-26"
+  },
+  {
+    "idusuario": 1764089402401,
+    "idobjetivo": 1764177206136,
+    "titulo": "ssds",
+    "tipodeobjetivo": "accion",
+    "tiempo": null,
+    "veces": 4,
+    "vecescompletadas": 1,
+    "color": "#FF383C",
+    "icono": "icono8",
+    "rachamaslarga": 1,
+    "rachaactual": 1,
+    "ultimodiaderacha": "2025-11-26"
   }
 ]
