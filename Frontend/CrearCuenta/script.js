@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
     postEvent("crear", {usuario, mail, contraseña, fecha}, (objok) => {
       if (objok.ok === true) {
         alert("El usuario ha sido creado exitosamente");
-        window.location.href = "../crearcuentaoiniciosesion/indexcrear.html";
+        window.location.href = "../crearcuentaoiniciarsesion/IndexCrearCuentaInicioSesion.html";
       } else {
         alert("Hubo un error al crear el usuario");
       }
