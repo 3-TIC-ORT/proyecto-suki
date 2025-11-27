@@ -6,12 +6,12 @@
     "tipodeobjetivo": "accion",
     "tiempo": null,
     "veces": 1,
-    "vecescompletadas": 2,
+    "vecescompletadas": 3,
     "color": "#CB30E0",
     "icono": "icono3",
-    "rachamaslarga": 2,
-    "rachaactual": 2,
-    "ultimodiaderacha": "2025-11-26"
+    "rachamaslarga": 3,
+    "rachaactual": 3,
+    "ultimodiaderacha": "2025-11-27"
   },
   {
     "idusuario": 1764089402401,
@@ -48,12 +48,12 @@
     "tipodeobjetivo": "accion",
     "tiempo": null,
     "veces": 4,
-    "vecescompletadas": 1,
+    "vecescompletadas": 2,
     "color": "#FF383C",
     "icono": "icono8",
-    "rachamaslarga": 1,
-    "rachaactual": 1,
-    "ultimodiaderacha": "2025-11-26"
+    "rachamaslarga": 2,
+    "rachaactual": 2,
+    "ultimodiaderacha": "2025-11-27"
   },
   {
     "idusuario": 1764178136804,
