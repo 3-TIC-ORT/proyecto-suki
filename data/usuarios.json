@@ -43,5 +43,50 @@
     "cantidadobjetivoscreados": 7,
     "skinseleccionada": "trump",
     "objetivoscompletados": 11
+  },
+  {
+    "usuario": "Alex",
+    "id": 1764248091370,
+    "contraseña": "KAAKA23",
+    "mail": "mulleralex204@gmail.com",
+    "fecha": "2010-05-17",
+    "racha": 0,
+    "logrosdesbloqueados": 6,
+    "skinscompradas": 8,
+    "dinero": 1.02e+27,
+    "fechadecreacion": "2025-11-27",
+    "skins": {
+      "suki": true,
+      "trump": true,
+      "flash": true,
+      "turro": true,
+      "sullivan": true,
+      "bikini": false,
+      "rabino": true,
+      "bizarrap": true,
+      "oro": true,
+      "minecraft": true
+    },
+    "logros": {
+      "primerpaso": true,
+      "racha3": false,
+      "racha7": false,
+      "racha30": false,
+      "iniciador": true,
+      "creador": false,
+      "coleccionista": true,
+      "explorador": true,
+      "legendario": true,
+      "centenario": false,
+      "ganador": true,
+      "extraganador": false,
+      "extasis": false
+    },
+    "rachamaslarga": 1,
+    "rachaactual": 1,
+    "ultimodiaderacha": "2025-11-27",
+    "cantidadobjetivoscreados": 3,
+    "skinseleccionada": "rabino",
+    "objetivoscompletados": 3
   }
 ]
