@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
   btnCerrarSesion?.addEventListener("click", () => {
     localStorage.removeItem("idusuario");
     localStorage.removeItem("usuario");
-    window.location.href = "../crearcuentaoinicarsesion/IndexCrearCuentaInicioSesion.html?logout=1";
+    window.location.href = "../cuenta/IndexcuentaI.html?logout=1";
   });
 
 

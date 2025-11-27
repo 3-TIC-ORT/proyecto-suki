@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
   btnCerrarSesion?.addEventListener("click", () => {
     localStorage.removeItem("idusuario")
     localStorage.removeItem("usuario")
-    window.location.href = "../crearcuentaoinicarsesion/IndexCrearCuentaInicioSesion.html?logout=1";
+    window.location.href = "../cuenta/IndexcuentaI.html?logout=1";
   })
 
   const sesion = JSON.parse(localStorage.getItem("idusuario") || "null")
@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const rutaHeroSkin = (clave) => {
     const mapa = {
       suki: "Suki",
-      trump: "salchitump",
+      trump: "salchitrump",
       rabino: "salchirabino",
       oro: "de oro",
       flash: "salchiflash",

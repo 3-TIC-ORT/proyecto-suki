@@ -21,14 +21,14 @@ document.addEventListener("DOMContentLoaded", () => {
   btnCerrarSesion?.addEventListener("click", () => {
     localStorage.removeItem("idusuario");
     localStorage.removeItem("usuario");
-    window.location.href = "../crearcuentaoinicarsesion/IndexCrearCuentaInicioSesion.html?logout=1";
+    window.location.href = "../cuenta/IndexcuentaI.html?logout=1";
   });
 
 
   const sesion = JSON.parse(localStorage.getItem("idusuario") || "null");
   const idusuario = typeof sesion === "number" ? sesion : sesion?.idusuario ?? null;
   if (!idusuario) {
-    window.location.href = "../Login/indexLogin.html?force=1";
+    window.location.href = "../InicioSesion/IndexInicioSesion.html?force=1";
     return;
   }
 
