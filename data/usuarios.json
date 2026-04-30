@@ -1,6 +1,6 @@
 [
   {
-    "usuario": "Demo Nemo",
+    "usuario": "Lucas",
     "id": 1764089402401,
     "contraseña": "Zairaysuki1",
     "mail": "lucasschniper@gmail.com",
@@ -8,7 +8,7 @@
     "racha": 0,
     "logrosdesbloqueados": 6,
     "skinscompradas": 1,
-    "dinero": 360,
+    "dinero": 460,
     "fechadecreacion": "2025-11-25",
     "skins": {
       "suki": true,
@@ -38,11 +38,11 @@
       "extasis": false
     },
     "rachamaslarga": 3,
-    "rachaactual": 3,
-    "ultimodiaderacha": "2025-11-27",
+    "rachaactual": 1,
+    "ultimodiaderacha": "2026-04-23",
     "cantidadobjetivoscreados": 7,
     "skinseleccionada": "trump",
-    "objetivoscompletados": 11
+    "objetivoscompletados": 12
   },
   {
     "usuario": "Alex",
@@ -88,5 +88,95 @@
     "cantidadobjetivoscreados": 3,
     "skinseleccionada": "rabino",
     "objetivoscompletados": 3
+  },
+  {
+    "usuario": "dwdw",
+    "id": 1776915679529,
+    "contraseña": "dfghcasfcA",
+    "mail": "dwsd@gmail.com",
+    "fecha": "2026-04-24",
+    "racha": 0,
+    "logrosdesbloqueados": 2,
+    "skinscompradas": 0,
+    "dinero": 120,
+    "fechadecreacion": "2026-04-23",
+    "skins": {
+      "suki": true,
+      "trump": false,
+      "flash": false,
+      "turro": false,
+      "sullivan": false,
+      "bikini": false,
+      "rabino": false,
+      "bizarrap": false,
+      "oro": false,
+      "minecraft": false
+    },
+    "logros": {
+      "primerpaso": true,
+      "racha3": false,
+      "racha7": false,
+      "racha30": false,
+      "iniciador": true,
+      "creador": false,
+      "coleccionista": false,
+      "explorador": false,
+      "legendario": false,
+      "centenario": false,
+      "ganador": false,
+      "extraganador": false,
+      "extasis": false
+    },
+    "rachamaslarga": 1,
+    "rachaactual": 1,
+    "ultimodiaderacha": "2026-04-23",
+    "cantidadobjetivoscreados": 1,
+    "skinseleccionada": "suki",
+    "objetivoscompletados": 1
+  },
+  {
+    "usuario": "Jose",
+    "id": 1776947429628,
+    "contraseña": "schniperLOLO",
+    "mail": "jose@gmail.com",
+    "fecha": "2000-03-04",
+    "racha": 0,
+    "logrosdesbloqueados": 0,
+    "skinscompradas": 0,
+    "dinero": 0,
+    "fechadecreacion": "2026-04-23",
+    "skins": {
+      "suki": true,
+      "trump": false,
+      "flash": false,
+      "turro": false,
+      "sullivan": false,
+      "bikini": false,
+      "rabino": false,
+      "bizarrap": false,
+      "oro": false,
+      "minecraft": false
+    },
+    "logros": {
+      "primerpaso": false,
+      "racha3": false,
+      "racha7": false,
+      "racha30": false,
+      "iniciador": false,
+      "creador": false,
+      "coleccionista": false,
+      "explorador": false,
+      "legendario": false,
+      "centenario": false,
+      "ganador": false,
+      "extraganador": false,
+      "extasis": false
+    },
+    "rachamaslarga": 0,
+    "rachaactual": 0,
+    "ultimodiaderacha": null,
+    "cantidadobjetivoscreados": 0,
+    "skinseleccionada": "suki",
+    "objetivoscompletados": 0
   }
 ]
