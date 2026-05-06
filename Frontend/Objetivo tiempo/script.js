@@ -70,6 +70,41 @@ document.addEventListener("DOMContentLoaded", () => {
   const leyendaPend = document.querySelector(".leyenda-torta .pend")
   const tituloObjetivo = document.getElementById("tituloObjetivo")
 
+  const timerTexto = document.getElementById("timerTexto")
+  const ringProgress = document.getElementById("ringProgress")
+  const btnComenzar = document.getElementById("btnComenzar")
+  const btnPausaPlay = document.getElementById("btnPausaPlay")
+  const CIRC = 2 * Math.PI * 80
+
+  function setCirculoTexto(txt) {
+    if (timerTexto) timerTexto.textContent = txt
+  }
+
+  function setRingProgress(ratio, instant) {
+    if (!ringProgress) return
+    const offset = CIRC * (1 - Math.max(0, Math.min(1, ratio)))
+    if (instant) {
+      ringProgress.style.transition = "none"
+      ringProgress.style.strokeDashoffset = offset
+      requestAnimationFrame(() => { ringProgress.style.transition = "" })
+    } else {
+      ringProgress.style.strokeDashoffset = offset
+    }
+  }
+
+  function actualizarBotonesTimer() {
+    if (!btnComenzar || !btnPausaPlay) return
+    if (bloqueadoHoy) {
+      btnComenzar.disabled = true
+      btnPausaPlay.disabled = true
+      btnPausaPlay.textContent = "⏸"
+      return
+    }
+    btnComenzar.disabled = timerComenzado
+    btnPausaPlay.disabled = !timerComenzado
+    btnPausaPlay.textContent = timerEnMarcha ? "⏸" : "▶"
+  }
+
   let metaPorDia = 4
   let progresoHoy = 0
 
@@ -80,6 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let timerRestante = 0
   let timerId = null
   let timerEnMarcha = false
+  let timerComenzado = false
 
   const rutaIconoHeader = (clave) => {
     const mapa = {
@@ -187,12 +223,14 @@ document.addEventListener("DOMContentLoaded", () => {
       puntosProgreso.appendChild(p)
     }
     if (bloqueadoHoy) {
-      estadoCirculo.textContent = "Completado"
+      setCirculoTexto("Completado")
       estadoCirculo.classList.add("disabled")
+      setRingProgress(1, true)
     } else {
       const esTiempo = hero.classList.contains("modo-tiempo")
-      if (!esTiempo) estadoCirculo.textContent = "Completar"
+      if (!esTiempo) setCirculoTexto("Completar")
       estadoCirculo.classList.remove("disabled")
+      if (!esTiempo) setRingProgress(0, true)
     }
   }
 
@@ -242,8 +280,9 @@ document.addEventListener("DOMContentLoaded", () => {
     ultimaComplecion = isoHoy
     localStorage.setItem(keyUltima, isoHoy)
 
-    estadoCirculo.textContent = "Completado"
+    setCirculoTexto("Completado")
     estadoCirculo.classList.add("disabled")
+    setRingProgress(1, true)
     const puntos = puntosProgreso.querySelectorAll(".punto")
     puntos.forEach((p) => p.classList.add("activo"))
 
@@ -259,6 +298,8 @@ document.addEventListener("DOMContentLoaded", () => {
         JSON.stringify({ restante: 0, fecha: isoHoy, completado: true })
       )
     }
+
+    actualizarBotonesTimer()
 
     if (r.dinero != null && plataHeader) {
       plataHeader.textContent = String(r.dinero)
@@ -285,17 +326,21 @@ document.addEventListener("DOMContentLoaded", () => {
       timerRestante = timerTotalSegundos
     }
     estadoCirculo.classList.add("corriendo")
-    estadoCirculo.textContent = formatearSegundos(timerRestante)
+    setCirculoTexto(formatearSegundos(timerRestante))
+    setRingProgress(timerRestante / timerTotalSegundos, true)
+    actualizarBotonesTimer()
     timerId = setInterval(() => {
       timerRestante -= 1
       if (timerRestante < 0) timerRestante = 0
-      estadoCirculo.textContent = formatearSegundos(timerRestante)
+      setCirculoTexto(formatearSegundos(timerRestante))
+      setRingProgress(timerRestante / timerTotalSegundos)
       guardarEstadoTimer()
       if (timerRestante <= 0) {
         clearInterval(timerId)
         timerId = null
         timerEnMarcha = false
         estadoCirculo.classList.remove("corriendo")
+        actualizarBotonesTimer()
         postEvent("completarobjetivo", { idusuario, idobjetivo }, (r) => {
           if (!r?.objok) return
           manejarRespuestaCompletar(r)
@@ -316,13 +361,17 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!data || data.fecha !== hoyISO) return false
     if (data.completado) {
       bloqueadoHoy = true
-      estadoCirculo.textContent = "Completado"
+      timerComenzado = true
+      setCirculoTexto("Completado")
       estadoCirculo.classList.add("disabled")
+      setRingProgress(1, true)
       return true
     }
     if (typeof data.restante === "number" && data.restante > 0) {
       timerRestante = Math.min(data.restante, timerTotalSegundos || data.restante)
-      estadoCirculo.textContent = formatearSegundos(timerRestante)
+      timerComenzado = true
+      setCirculoTexto(formatearSegundos(timerRestante))
+      setRingProgress(timerRestante / (timerTotalSegundos || timerRestante), true)
       timerEnMarcha = false
       estadoCirculo.classList.remove("corriendo")
       return true
@@ -364,22 +413,27 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!restaurarEstadoTimer()) {
         timerRestante = timerTotalSegundos
         if (bloqueadoHoy) {
-          estadoCirculo.textContent = "Completado"
+          setCirculoTexto("Completado")
           estadoCirculo.classList.add("disabled")
+          setRingProgress(1, true)
         } else {
-          estadoCirculo.textContent = formatearSegundos(timerRestante || 0)
+          setCirculoTexto(formatearSegundos(timerRestante || 0))
           estadoCirculo.classList.remove("disabled")
+          setRingProgress(1, true)
         }
       }
+      actualizarBotonesTimer()
     } else {
       const v = Number(obj.veces)
       metaPorDia = !Number.isNaN(v) && v > 0 ? v : 4
       if (bloqueadoHoy) {
-        estadoCirculo.textContent = "Completado"
+        setCirculoTexto("Completado")
         estadoCirculo.classList.add("disabled")
+        setRingProgress(1, true)
       } else {
-        estadoCirculo.textContent = "Completar"
+        setCirculoTexto("Completar")
         estadoCirculo.classList.remove("disabled")
+        setRingProgress(0, true)
       }
     }
 
@@ -458,7 +512,9 @@ document.addEventListener("DOMContentLoaded", () => {
         timerEnMarcha = false
         estadoCirculo.classList.remove("corriendo")
         guardarEstadoTimer()
+        actualizarBotonesTimer()
       } else {
+        timerComenzado = true
         iniciarTimer()
       }
       return
@@ -470,12 +526,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
     puntos[progresoHoy].classList.add("activo")
     progresoHoy++
+    setRingProgress(progresoHoy / metaPorDia)
 
     if (progresoHoy === metaPorDia) {
       postEvent("completarobjetivo", { idusuario, idobjetivo }, (r) => {
         if (!r?.objok) return
         manejarRespuestaCompletar(r)
       })
+    }
+  })
+
+  btnComenzar?.addEventListener("click", () => {
+    if (bloqueadoHoy || timerComenzado) return
+    timerComenzado = true
+    iniciarTimer()
+  })
+
+  btnPausaPlay?.addEventListener("click", () => {
+    if (bloqueadoHoy || !timerComenzado) return
+    if (timerEnMarcha) {
+      if (timerId) { clearInterval(timerId); timerId = null }
+      timerEnMarcha = false
+      estadoCirculo.classList.remove("corriendo")
+      guardarEstadoTimer()
+      actualizarBotonesTimer()
+    } else {
+      iniciarTimer()
     }
   })
 

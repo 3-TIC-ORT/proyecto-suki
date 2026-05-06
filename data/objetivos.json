@@ -6,12 +6,12 @@
     "tipodeobjetivo": "accion",
     "tiempo": null,
     "veces": 1,
-    "vecescompletadas": 3,
+    "vecescompletadas": 4,
     "color": "#CB30E0",
     "icono": "icono3",
     "rachamaslarga": 3,
-    "rachaactual": 3,
-    "ultimodiaderacha": "2025-11-27"
+    "rachaactual": 1,
+    "ultimodiaderacha": "2026-04-30"
   },
   {
     "idusuario": 1764089402401,
@@ -20,12 +20,12 @@
     "tipodeobjetivo": "tiempo",
     "tiempo": 3,
     "veces": null,
-    "vecescompletadas": 1,
+    "vecescompletadas": 2,
     "color": "#002AB8",
     "icono": "icono2",
     "rachamaslarga": 1,
     "rachaactual": 1,
-    "ultimodiaderacha": "2025-11-26"
+    "ultimodiaderacha": "2026-04-30"
   },
   {
     "idusuario": 1764089402401,
@@ -34,12 +34,12 @@
     "tipodeobjetivo": "accion",
     "tiempo": null,
     "veces": 1,
-    "vecescompletadas": 1,
+    "vecescompletadas": 2,
     "color": "#34C759",
     "icono": "icono4",
     "rachamaslarga": 1,
     "rachaactual": 1,
-    "ultimodiaderacha": "2025-11-26"
+    "ultimodiaderacha": "2026-05-06"
   },
   {
     "idusuario": 1764089402401,
@@ -110,5 +110,47 @@
     "rachamaslarga": 1,
     "rachaactual": 1,
     "ultimodiaderacha": "2026-04-23"
+  },
+  {
+    "idusuario": 1764089402401,
+    "idobjetivo": 1777549054754,
+    "titulo": "Zeide a laburar",
+    "tipodeobjetivo": "accion",
+    "tiempo": null,
+    "veces": 10,
+    "vecescompletadas": 1,
+    "color": "#FFCC00",
+    "icono": "icono13",
+    "rachamaslarga": 1,
+    "rachaactual": 1,
+    "ultimodiaderacha": "2026-04-30"
+  },
+  {
+    "idusuario": 1764089402401,
+    "idobjetivo": 1777549817743,
+    "titulo": "ss",
+    "tipodeobjetivo": "tiempo",
+    "tiempo": 1,
+    "veces": null,
+    "vecescompletadas": 1,
+    "color": "#FFCC00",
+    "icono": "icono2",
+    "rachamaslarga": 1,
+    "rachaactual": 1,
+    "ultimodiaderacha": "2026-05-06"
+  },
+  {
+    "idusuario": 1764089402401,
+    "idobjetivo": 1778066381717,
+    "titulo": "Lucero",
+    "tipodeobjetivo": "tiempo",
+    "tiempo": 0.2,
+    "veces": null,
+    "vecescompletadas": 1,
+    "color": "#FFCC00",
+    "icono": "icono2",
+    "rachamaslarga": 1,
+    "rachaactual": 1,
+    "ultimodiaderacha": "2026-05-06"
   }
 ]

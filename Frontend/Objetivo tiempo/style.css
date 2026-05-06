@@ -215,16 +215,12 @@ main {
   width: 190px;
   height: 190px;
   border-radius: 50%;
-  background: #d6453b;
   color: #fff;
-  font-size: 28px;
-  font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 12px solid #f3ebe7;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
   cursor: pointer;
+  position: relative;
 }
 
 .estado-circulo.disabled {
@@ -232,11 +228,108 @@ main {
   cursor: default;
 }
 
+.timer-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.ring-bg {
+  fill: none;
+  stroke: #b71c1c;
+  stroke-width: 30;
+}
+
+.ring-progress {
+  fill: none;
+  stroke: #e53935;
+  stroke-width: 30;
+  stroke-dasharray: 502.65;
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 0.9s linear;
+}
+
+.estado-circulo.corriendo .ring-progress {
+  animation: ring-pulse 2s ease-in-out infinite;
+}
+
+@keyframes ring-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+.timer-texto {
+  position: relative;
+  z-index: 1;
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+}
+
 .puntos-progreso {
   margin-top: 18px;
   display: flex;
   gap: 10px;
   justify-content: center;
+}
+
+.timer-controles {
+  display: none;
+  gap: 12px;
+  margin-top: 22px;
+  align-items: center;
+  justify-content: center;
+}
+
+#heroObjetivo.modo-tiempo .timer-controles {
+  display: flex;
+}
+
+.btn-timer {
+  background: rgba(0, 0, 0, 0.22);
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.55);
+  border-radius: 999px;
+  font-family: "Signika", system-ui, sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.18s, opacity 0.18s, transform 0.1s;
+  user-select: none;
+}
+
+.btn-comenzar {
+  padding: 11px 32px;
+  font-size: 16px;
+  letter-spacing: 0.3px;
+}
+
+.btn-pausaplay {
+  width: 50px;
+  height: 50px;
+  font-size: 18px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-timer:hover:not(:disabled) {
+  background: rgba(0, 0, 0, 0.38);
+  transform: scale(1.05);
+}
+
+.btn-timer:active:not(:disabled) {
+  transform: scale(0.96);
+}
+
+.btn-timer:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
 }
 
 .puntos-progreso .punto {
@@ -463,8 +556,10 @@ main {
   .estado-circulo {
     width: 160px;
     height: 160px;
-    font-size: 22px;
-    border-width: 10px;
+  }
+
+  .timer-texto {
+    font-size: 18px;
   }
 
   .hero-perro {
