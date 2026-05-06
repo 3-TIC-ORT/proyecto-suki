@@ -67,16 +67,31 @@ document.addEventListener("DOMContentLoaded", () => {
   
 
     
+  function sukiAlert(msg, cb) {
+    const overlay = document.getElementById("sukiAlertOverlay")
+    const msgEl = document.getElementById("sukiAlertMsg")
+    const okBtn = document.getElementById("sukiAlertOk")
+    msgEl.textContent = msg
+    overlay.classList.add("abierto")
+    const handler = () => {
+      overlay.classList.remove("abierto")
+      okBtn.removeEventListener("click", handler)
+      if (cb) cb()
+    }
+    okBtn.addEventListener("click", handler)
+  }
+
    if(valido){
     postEvent("crear", {usuario, mail, contraseña, fecha}, (objok) => {
       if (objok.ok === true) {
-        alert("El usuario ha sido creado exitosamente");
-        window.location.href = "../cuenta/IndexcuentaI.html";
+        sukiAlert("¡Usuario creado exitosamente!", () => {
+          window.location.href = "../cuenta/IndexcuentaI.html";
+        });
       } else {
-        alert("Hubo un error al crear el usuario");
+        sukiAlert("Hubo un error al crear el usuario. Intentá de nuevo.");
       }
     });
-  
+
   }
 
   });

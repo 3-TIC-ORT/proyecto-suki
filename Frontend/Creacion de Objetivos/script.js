@@ -62,6 +62,20 @@ document.addEventListener("DOMContentLoaded", () => {
     if (r?.objok && r.usuario) setHeader(r.usuario)
   })
 
+  function sukiAlert(msg, cb) {
+    const overlay = document.getElementById("sukiAlertOverlay")
+    const msgEl = document.getElementById("sukiAlertMsg")
+    const okBtn = document.getElementById("sukiAlertOk")
+    msgEl.textContent = msg
+    overlay.classList.add("abierto")
+    const handler = () => {
+      overlay.classList.remove("abierto")
+      okBtn.removeEventListener("click", handler)
+      if (cb) cb()
+    }
+    okBtn.addEventListener("click", handler)
+  }
+
   const formSeleccion = document.getElementById("form-seleccion")
   const formTiempo = document.getElementById("form-tiempo")
   const formAccion = document.getElementById("form-accion")
@@ -140,7 +154,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("btnSiguienteSeleccion").addEventListener("click", () => {
     if (modoEdicion) return
     if (nombreObjetivo.value.trim() === "" || tipoObjetivo.value === "") {
-      alert("Completá todos los campos antes de continuar")
+      sukiAlert("Completá todos los campos antes de continuar")
       return
     }
     if (tipoObjetivo.value === "tiempo") {
@@ -155,7 +169,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("btnSiguienteTiempo").addEventListener("click", () => {
     if (modoEdicion) return
     if (duracionTiempo.value.trim() === "") {
-      alert("Por favor completá la duración del objetivo")
+      sukiAlert("Por favor completá la duración del objetivo")
       return
     }
     formTiempo.classList.add("oculto")
@@ -165,7 +179,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("btnSiguienteAccion").addEventListener("click", () => {
     if (modoEdicion) return
     if (descripcionAccion.value.trim() === "") {
-      alert("Por favor describí tu acción")
+      sukiAlert("Por favor describí tu acción")
       return
     }
     formAccion.classList.add("oculto")
@@ -185,11 +199,11 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".listo").forEach((btn) => {
     btn.addEventListener("click", () => {
       if (!colorObjetivo.value) {
-        alert("Seleccioná un color para tu objetivo")
+        sukiAlert("Seleccioná un color para tu objetivo")
         return
       }
       if (!iconoSeleccionado.value) {
-        alert("Elegí un ícono para tu objetivo")
+        sukiAlert("Elegí un ícono para tu objetivo")
         return
       }
 
@@ -205,7 +219,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 : "../Objetivo Accion/indexObjetivoAccion.html"
             window.location.href = ruta
           } else {
-            alert("No se pudo actualizar el objetivo")
+            sukiAlert("No se pudo actualizar el objetivo")
           }
         })
         return
@@ -214,7 +228,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const titulo = nombreObjetivo.value.trim()
       const tipodeobjetivo = tipoObjetivo.value
       if (!titulo || !tipodeobjetivo) {
-        alert("Completá todos los campos")
+        sukiAlert("Completá todos los campos")
         return
       }
 
@@ -226,7 +240,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (tipodeobjetivo === "tiempo") {
         const n = Number(duracionTiempo.value)
         if (Number.isNaN(n) || n <= 0) {
-          alert("Indicá una duración válida en minutos")
+          sukiAlert("Indicá una duración válida en minutos")
           return
         }
         tiempo = n
@@ -243,7 +257,7 @@ document.addEventListener("DOMContentLoaded", () => {
           if (data?.objok) {
             window.location.href = "../menu principal/indexMenuPrincipal.html"
           } else {
-            alert("No se pudo crear el objetivo.")
+            sukiAlert("No se pudo crear el objetivo.")
           }
         }
       )

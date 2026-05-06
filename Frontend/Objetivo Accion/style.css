@@ -471,3 +471,57 @@ main {
     bottom: 14px;
   }
 }
+
+.suki-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.42);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1100;
+}
+.suki-modal-overlay.abierto {
+  display: flex;
+}
+.suki-modal {
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px 28px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.18);
+  max-width: 320px;
+  width: 90%;
+  text-align: center;
+  box-sizing: border-box;
+  font-family: "Signika", sans-serif;
+}
+.suki-modal-msg {
+  margin: 0 0 20px 0;
+  font-size: 17px;
+  font-weight: 600;
+  color: #222;
+  line-height: 1.4;
+}
+.suki-modal-botones {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+.suki-modal-btn-ok,
+.suki-modal-btn-cancelar,
+.suki-modal-btn-borrar {
+  border: none;
+  border-radius: 999px;
+  padding: 10px 26px;
+  font-size: 15px;
+  font-weight: 700;
+  font-family: "Signika", sans-serif;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.suki-modal-btn-ok { background: #000; color: #fff; }
+.suki-modal-btn-cancelar { background: #ebebeb; color: #444; }
+.suki-modal-btn-borrar { background: #ff4444; color: #fff; }
+.suki-modal-btn-ok:hover,
+.suki-modal-btn-cancelar:hover,
+.suki-modal-btn-borrar:hover { opacity: 0.82; }

@@ -299,12 +299,31 @@ document.addEventListener("DOMContentLoaded", () => {
       "../Creacion de Objetivos/IndexCreacionDeObjetivos.html#menu-disenio"
   })
 
+  function sukiConfirm(cb) {
+    const overlay = document.getElementById("sukiConfirmOverlay")
+    const cancelarBtn = document.getElementById("sukiConfirmCancelar")
+    const okBtn = document.getElementById("sukiConfirmOk")
+    overlay.classList.add("abierto")
+    const close = (result) => {
+      overlay.classList.remove("abierto")
+      cancelarBtn.removeEventListener("click", cancelHandler)
+      okBtn.removeEventListener("click", okHandler)
+      cb(result)
+    }
+    const cancelHandler = () => close(false)
+    const okHandler = () => close(true)
+    cancelarBtn.addEventListener("click", cancelHandler)
+    okBtn.addEventListener("click", okHandler)
+  }
+
   btnBorrar.addEventListener("click", () => {
-    if (!confirm("¿Borrar este objetivo?")) return
-    postEvent("borrarobjetivo", { idobjetivo }, (r) => {
-      if (r?.ok || r?.objok?.ok) {
-        window.location.href = "../menu principal/indexMenuPrincipal.html"
-      }
+    sukiConfirm((ok) => {
+      if (!ok) return
+      postEvent("borrarobjetivo", { idobjetivo }, (r) => {
+        if (r?.ok || r?.objok?.ok) {
+          window.location.href = "../menu principal/indexMenuPrincipal.html"
+        }
+      })
     })
   })
 
