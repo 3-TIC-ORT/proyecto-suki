@@ -247,7 +247,15 @@ document.addEventListener("DOMContentLoaded", () => {
       } else if (tipodeobjetivo === "accion") {
         const v = descripcionAccion.value.trim()
         const n = Number(v)
-        veces = Number.isNaN(n) ? v : n
+        if (Number.isNaN(n) || n <= 0) {
+          sukiAlert("Indicá una cantidad válida de veces")
+          return
+        }
+        if (n > 20) {
+          sukiAlert("El máximo de veces permitido es 20")
+          return
+        }
+        veces = n
       }
 
       postEvent(

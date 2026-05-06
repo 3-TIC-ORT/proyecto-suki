@@ -118,12 +118,12 @@
     "tipodeobjetivo": "accion",
     "tiempo": null,
     "veces": 10,
-    "vecescompletadas": 1,
+    "vecescompletadas": 2,
     "color": "#FFCC00",
     "icono": "icono13",
     "rachamaslarga": 1,
     "rachaactual": 1,
-    "ultimodiaderacha": "2026-04-30"
+    "ultimodiaderacha": "2026-05-06"
   },
   {
     "idusuario": 1764089402401,
@@ -149,6 +149,48 @@
     "vecescompletadas": 1,
     "color": "#FFCC00",
     "icono": "icono2",
+    "rachamaslarga": 1,
+    "rachaactual": 1,
+    "ultimodiaderacha": "2026-05-06"
+  },
+  {
+    "idusuario": 1764089402401,
+    "idobjetivo": 1778068110410,
+    "titulo": "sv sf",
+    "tipodeobjetivo": "accion",
+    "tiempo": null,
+    "veces": 14,
+    "vecescompletadas": 1,
+    "color": "#CB30E0",
+    "icono": "icono1",
+    "rachamaslarga": 1,
+    "rachaactual": 1,
+    "ultimodiaderacha": "2026-05-06"
+  },
+  {
+    "idusuario": 1764089402401,
+    "idobjetivo": 1778068749515,
+    "titulo": "qwsad",
+    "tipodeobjetivo": "accion",
+    "tiempo": null,
+    "veces": 20,
+    "vecescompletadas": 1,
+    "color": "#FFCC00",
+    "icono": "icono1",
+    "rachamaslarga": 1,
+    "rachaactual": 1,
+    "ultimodiaderacha": "2026-05-06"
+  },
+  {
+    "idusuario": 1764089402401,
+    "idobjetivo": 1778068814335,
+    "titulo": "sfds",
+    "tipodeobjetivo": "tiempo",
+    "tiempo": 0.5,
+    "veces": null,
+    "vecescompletadas": 1,
+    "color": "#34C759",
+    "icono": "icono1",
     "rachamaslarga": 1,
     "rachaactual": 1,
     "ultimodiaderacha": "2026-05-06"
