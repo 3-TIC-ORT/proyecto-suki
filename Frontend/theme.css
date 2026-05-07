@@ -1,0 +1,76 @@
+html[data-theme="light"] {
+  color-scheme: light;
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+.theme-toggle-btn {
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  background: #1f1f1f;
+  color: #f3f3f3;
+}
+
+.theme-toggle-btn:hover {
+  background: #2a2a2a;
+}
+
+html[data-theme="dark"] body {
+  background: #121212 !important;
+  color: #efefef !important;
+}
+
+html[data-theme="dark"] header {
+  background: #1a1a1a !important;
+  border-bottom-color: #303030 !important;
+}
+
+html[data-theme="dark"] .sidebar {
+  background: #1f1f1f !important;
+}
+
+html[data-theme="dark"] .overlay {
+  background: rgba(0, 0, 0, 0.65) !important;
+}
+
+html[data-theme="dark"] .card,
+html[data-theme="dark"] .tarjeta,
+html[data-theme="dark"] .tarjeta-skin,
+html[data-theme="dark"] .cuadradosLogros div,
+html[data-theme="dark"] .integrantes,
+html[data-theme="dark"] .columna1,
+html[data-theme="dark"] .columna2,
+html[data-theme="dark"] .columna3,
+html[data-theme="dark"] .modal,
+html[data-theme="dark"] .modal-content {
+  background: #1e1e1e !important;
+  color: #efefef !important;
+}
+
+html[data-theme="dark"] input,
+html[data-theme="dark"] select,
+html[data-theme="dark"] textarea {
+  background: #2a2a2a !important;
+  color: #efefef !important;
+  border-color: #3a3a3a !important;
+}
+
+html[data-theme="dark"] a {
+  color: #9bc9ff;
+}
+
+html[data-theme="dark"] .theme-toggle-btn {
+  background: #ffcc33;
+  color: #111;
+}
+
+html[data-theme="dark"] .theme-toggle-btn:hover {
+  background: #e5b723;
+}
