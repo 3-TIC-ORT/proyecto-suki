@@ -4,6 +4,7 @@ body {
   font-family: "Signika", sans-serif;
   display: flex;
   background-color: #F3EAE8;
+  min-height: 100dvh;
 }
 
 a {
@@ -26,12 +27,17 @@ a:hover {
   height: 100%;
 }
 
+.derecha {
+  width: 50%;
+  display: flex;
+}
+
 .card {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 70%;
+  width: min(70%, 420px);
   border-radius: 20px;
   margin: 45px;
   text-align: center;
@@ -53,7 +59,7 @@ h2{
 .btn {
   display: block;
   margin: 15px;
-  width: 300px;
+  width: min(300px, 100%);
   padding: 12px;
   border-radius: 33.37px;
   border: none;
@@ -84,4 +90,41 @@ h2{
 .tuApp{
   width: 100%;
   height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 900px) {
+  body {
+    flex-direction: column;
+  }
+
+  .izquierda,
+  .derecha {
+    width: 100%;
+  }
+
+  .izquierda {
+    min-height: 100dvh;
+    padding: 16px 12px;
+    box-sizing: border-box;
+  }
+
+  .card {
+    width: 100%;
+    margin: 0;
+    padding: 20px 14px;
+    box-sizing: border-box;
+  }
+
+  .btn {
+    margin: 10px 0;
+  }
+
+  .derecha {
+    min-height: 280px;
+  }
+
+  .tuApp {
+    max-height: 42vh;
+  }
 }

@@ -160,3 +160,37 @@ header {
   font-size: 20px;
   line-height: 1;
 }
+
+@media (max-width: 768px) {
+  header {
+    padding: 8px 10px;
+    gap: 8px;
+  }
+
+  .logo img {
+    width: clamp(90px, 24vw, 120px);
+    margin-right: 8px;
+  }
+
+  .nombre-usuario {
+    display: none;
+  }
+
+  .plata-header {
+    margin-left: 4px;
+    gap: 4px;
+  }
+
+  #plataHeaderValor {
+    font-size: 16px;
+  }
+
+  .sidebar {
+    width: min(78vw, 250px);
+  }
+
+  main {
+    padding: 12px;
+    box-sizing: border-box;
+  }
+}

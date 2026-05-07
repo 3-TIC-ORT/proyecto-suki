@@ -3,10 +3,12 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  min-height: 100dvh;
   font-family: "Signika", sans-serif;
   display: flex;
   background-color: #F3EAE8;
+  padding: 16px;
+  box-sizing: border-box;
 }
 
 .card {
@@ -38,7 +40,7 @@ h2 {
 .btn {
   display: block;
   margin: 15px;
-  width: 300px;
+  width: min(300px, 100%);
   padding: 12px;
   border-radius: 33.37px;
   border: none;
@@ -57,7 +59,7 @@ h2 {
   background-color: #FFCC00;
   color: #000;
   font-weight: 700;
-  width: 324px;
+  width: min(324px, 100%);
 }
 
 #btn-acceder:hover {
@@ -101,4 +103,31 @@ h2 {
   font-size: 18px;
   font-weight: bold;
   cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  body {
+    justify-content: flex-start;
+    padding: 20px 12px;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 420px;
+  }
+
+  .btn,
+  #btn-acceder {
+    margin: 10px 0;
+  }
+
+  .info {
+    position: static;
+    margin-top: 16px;
+  }
+
+  .modal-content {
+    width: 90%;
+    margin: 20% auto;
+  }
 }

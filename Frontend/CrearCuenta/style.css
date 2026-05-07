@@ -3,10 +3,12 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  min-height: 100dvh;
   font-family: "Signika", sans-serif;
   display: flex;
   background-color: #F3EAE8;
+  padding: 16px;
+  box-sizing: border-box;
 }
 
 #textoinfo {
@@ -35,7 +37,7 @@ H2 {
 .btn {
   display: block;
   margin: 15px;
-  width: 300px;
+  width: min(300px, 100%);
   padding: 12px;
   border-radius: 33.37px;
   border: none;
@@ -113,7 +115,7 @@ input:invalid {
   background-color: #FFCC00;
   color: #000;
   font-weight: 700;
-  width: 324px;
+  width: min(324px, 100%);
 }
 
 #btn-acceder:hover {
@@ -173,3 +175,26 @@ input:invalid {
 .suki-modal-btn-ok:hover,
 .suki-modal-btn-cancelar:hover,
 .suki-modal-btn-borrar:hover { opacity: 0.82; }
+
+@media (max-width: 768px) {
+  body {
+    justify-content: flex-start;
+    padding: 20px 12px;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 420px;
+    box-sizing: border-box;
+  }
+
+  .btn,
+  #btn-acceder {
+    margin: 10px 0;
+  }
+
+  .modal-content {
+    width: 90%;
+    margin: 20% auto;
+  }
+}
