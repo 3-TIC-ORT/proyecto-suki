@@ -18,11 +18,15 @@
         <div class="icono-carrito">
           <a href="../Inventario/IndexInventario.html"><img src="Vector.png" alt="Carrito de compras" /></a>
         </div>
+        <div class="plata-header">
+          <img class="plata-icono" src="Plata.png" alt="Plata" />
+          <div id="plataHeaderValor" class="plata-valor">0</div>
+        </div>
       </div>
       <div class="derecha">
-        <div class="nombre-usuario">Usuario</div>
+        <div id="nombreHeader" class="nombre-usuario">Usuario</div>
         <div class="foto-perfil">
-          <a href="../Usuario/IndexUsuario.html"><img src="image 4.png" alt="Foto de perfil" /></a>
+          <a href="../Usuario/IndexUsuario.html"><img id="imgHeaderSkin" src="../imagenes/Imagenesheader/SUKI.png" alt="Foto de perfil" /></a>
         </div>
         <div class="icono-menu" id="menuBtn">&#9776;</div>
       </div>
@@ -46,8 +50,25 @@
   <img id="imgPreviewSkin" alt="skin actual">
 </div>
       <div id="gridSkins" class="skins-grid"></div>
+      <section id="panelRuleta" class="panel-ruleta"></section>
       
     </main>
+    <div id="modalRuleta" class="modal-ruleta" aria-hidden="true">
+      <div class="modal-ruleta-contenido">
+        <button id="btnCerrarRuletaX" class="btn-cerrar-ruleta" type="button" aria-label="Cerrar">×</button>
+        <h2 class="titulo-modal-ruleta">Ruleta misteriosa</h2>
+        <div class="ruleta-tablero">
+          <div class="ruleta-puntero">▼</div>
+          <div id="ruletaDisco" class="ruleta-disco"></div>
+        </div>
+        <p id="ruletaEstado" class="ruleta-estado">Girando...</p>
+        <div id="ruletaPremioMedia" class="ruleta-premio-media" aria-live="polite">
+          <img id="ruletaPremioImg" src="" alt="Premio ruleta" />
+          <div id="ruletaPremioTexto" class="ruleta-premio-texto"></div>
+        </div>
+        <button id="btnCerrarRuleta" class="boton boton-cerrar-ruleta" type="button">Cerrar</button>
+      </div>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.8.1/socket.io.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/JZylber/SoqueTIC-Client@v1.4.2/soquetic-client.js"></script>

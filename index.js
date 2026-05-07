@@ -16,6 +16,62 @@ let skinslista = {
     oro: 1000,
     minecraft: 200
 }
+const costoruleta = 200;
+const skinsruleta = ["trump", "flash", "turro", "sullivan", "rabino", "bizarrap", "oro", "minecraft"];
+const premiospuntosruleta = [200, 500, 1000];
+
+function actualizarLogrosPorSkins(usuarioelegido) {
+if (usuarioelegido.skinscompradas === 1 && !usuarioelegido.logros.coleccionista) {
+    usuarioelegido.logros.coleccionista = true;
+    usuarioelegido.logrosdesbloqueados++;
+    usuarioelegido.dinero += 20; 
+}
+
+if (usuarioelegido.skinscompradas === 4 && !usuarioelegido.logros.explorador) {
+    usuarioelegido.logros.explorador = true;
+    usuarioelegido.logrosdesbloqueados++;
+    usuarioelegido.dinero += 30; 
+}
+if (usuarioelegido.skinscompradas === 8 && !usuarioelegido.logros.legendario) {
+    usuarioelegido.logros.legendario = true;
+    usuarioelegido.logrosdesbloqueados++;
+    usuarioelegido.dinero += 50; 
+}
+}
+
+function actualizarLogrosPorCantidad(usuarioelegido) {
+let totalLogros = 0;
+for (let i = 0; i < logroslista.length; i++) {
+    if (usuarioelegido.logros[logroslista[i]] === true) {
+        totalLogros++;
+    }
+}
+
+if (totalLogros >= 5 && !usuarioelegido.logros.ganador) {
+    usuarioelegido.logros.ganador = true;
+    usuarioelegido.logrosdesbloqueados++;
+    usuarioelegido.dinero += 50;
+}
+if (totalLogros >= 10 && !usuarioelegido.logros.extraganador) {
+    usuarioelegido.logros.extraganador = true;
+    usuarioelegido.logrosdesbloqueados++;
+    usuarioelegido.dinero += 100;
+}
+if (totalLogros === logroslista.length && !usuarioelegido.logros.extasis) {
+    usuarioelegido.logros.extasis = true;
+    usuarioelegido.logrosdesbloqueados++;
+    usuarioelegido.dinero += 200;
+}
+}
+
+function mezclarArray(array) {
+let copia = [...array];
+for (let i = copia.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copia[i], copia[j]] = [copia[j], copia[i]];
+}
+return copia;
+}
 
 subscribePOSTEvent("nuevodiseño", ({idobjetivo, nuevoicono, nuevocolor}) => {
     let objok = {ok: false}
@@ -188,46 +244,8 @@ if (usuarioelegido.dinero < precio) {
   usuarioelegido.dinero -= precio;
   usuarioelegido.skins[skin] = true;
   usuarioelegido.skinscompradas++;
-  
-  if (usuarioelegido.skinscompradas === 1 && !usuarioelegido.logros.coleccionista) {
-    usuarioelegido.logros.coleccionista = true;
-    usuarioelegido.logrosdesbloqueados++;
-    usuarioelegido.dinero += 20; 
-}
-
-if (usuarioelegido.skinscompradas === 4 && !usuarioelegido.logros.explorador) {
-    usuarioelegido.logros.explorador = true;
-    usuarioelegido.logrosdesbloqueados++;
-    usuarioelegido.dinero += 30; 
-}
-if (usuarioelegido.skinscompradas === 8 && !usuarioelegido.logros.legendario) {
-    usuarioelegido.logros.legendario = true;
-    usuarioelegido.logrosdesbloqueados++;
-    usuarioelegido.dinero += 50; 
-}
-
-let totalLogros = 0;
-for (let i = 0; i < logroslista.length; i++) {
-    if (usuarioelegido.logros[logroslista[i]] === true) {
-        totalLogros++;
-    }
-}
-
-if (totalLogros >= 5 && !usuarioelegido.logros.ganador) {
-    usuarioelegido.logros.ganador = true;
-    usuarioelegido.logrosdesbloqueados++;
-    usuarioelegido.dinero += 50;
-}
-if (totalLogros >= 10 && !usuarioelegido.logros.extraganador) {
-    usuarioelegido.logros.extraganador = true;
-    usuarioelegido.logrosdesbloqueados++;
-    usuarioelegido.dinero += 100;
-}
-if (totalLogros === logroslista.length && !usuarioelegido.logros.extasis) {
-    usuarioelegido.logros.extasis = true;
-    usuarioelegido.logrosdesbloqueados++;
-    usuarioelegido.dinero += 200;
-}
+  actualizarLogrosPorSkins(usuarioelegido);
+  actualizarLogrosPorCantidad(usuarioelegido);
 
 
 
@@ -242,6 +260,61 @@ if (totalLogros === logroslista.length && !usuarioelegido.logros.extasis) {
     logrosdesbloqueados: usuarioelegido.logrosdesbloqueados
   };
 })
+
+subscribePOSTEvent("comprarruleta", ({idusuario}) => {
+let objok = {ok: false};
+idusuario = Number(idusuario);
+let usuarios = JSON.parse(fs.readFileSync("data/usuarios.json", "utf-8"));
+let usuarioelegido = null;
+for (let i = 0; i < usuarios.length; i++) {
+    if (usuarios[i].id === idusuario) {
+        usuarioelegido = usuarios[i];
+        break;
+    }
+}
+
+if (!usuarioelegido) {
+    return objok;
+}
+
+if ((usuarioelegido.dinero || 0) < costoruleta) {
+    return objok;
+}
+
+usuarioelegido.dinero -= costoruleta;
+
+const skinstiradas = mezclarArray(skinsruleta).slice(0, 2);
+const premios = [
+    ...skinstiradas.map((skin) => ({ tipo: "skin", valor: skin })),
+    ...premiospuntosruleta.map((puntos) => ({ tipo: "puntos", valor: puntos }))
+];
+const premioelegido = premios[Math.floor(Math.random() * premios.length)];
+
+if (premioelegido.tipo === "skin") {
+    const yatenia = !!usuarioelegido.skins[premioelegido.valor];
+    usuarioelegido.skins[premioelegido.valor] = true;
+    if (!yatenia) {
+        usuarioelegido.skinscompradas++;
+        actualizarLogrosPorSkins(usuarioelegido);
+    }
+} else {
+    usuarioelegido.dinero += premioelegido.valor;
+}
+
+actualizarLogrosPorCantidad(usuarioelegido);
+
+fs.writeFileSync("data/usuarios.json", JSON.stringify(usuarios, null, 2));
+objok = {ok: true};
+return {
+    objok,
+    dinero: usuarioelegido.dinero,
+    skins: usuarioelegido.skins,
+    logros: usuarioelegido.logros,
+    logrosdesbloqueados: usuarioelegido.logrosdesbloqueados,
+    premio: premioelegido,
+    opcionesruleta: premios
+};
+});
 
 subscribePOSTEvent("completarobjetivo",({idusuario, idobjetivo}) =>{
     let objok = {ok:false};

@@ -7,8 +7,8 @@
     "fecha": "2009-05-08",
     "racha": 0,
     "logrosdesbloqueados": 7,
-    "skinscompradas": 4,
-    "dinero": 140,
+    "skinscompradas": 5,
+    "dinero": 5500,
     "fechadecreacion": "2025-11-25",
     "skins": {
       "suki": true,
@@ -19,7 +19,7 @@
       "bikini": false,
       "rabino": true,
       "bizarrap": false,
-      "oro": false,
+      "oro": true,
       "minecraft": false
     },
     "logros": {
@@ -41,7 +41,7 @@
     "rachaactual": 2,
     "ultimodiaderacha": "2026-05-07",
     "cantidadobjetivoscreados": 15,
-    "skinseleccionada": "sullivan",
+    "skinseleccionada": "trump",
     "objetivoscompletados": 27
   },
   {
