@@ -6,21 +6,21 @@
     "mail": "lucasschniper@gmail.com",
     "fecha": "2009-05-08",
     "racha": 0,
-    "logrosdesbloqueados": 7,
-    "skinscompradas": 5,
-    "dinero": 5500,
+    "logrosdesbloqueados": 8,
+    "skinscompradas": 8,
+    "dinero": 29450,
     "fechadecreacion": "2025-11-25",
     "skins": {
       "suki": true,
       "trump": true,
-      "flash": false,
+      "flash": true,
       "turro": true,
       "sullivan": true,
       "bikini": false,
       "rabino": true,
-      "bizarrap": false,
+      "bizarrap": true,
       "oro": true,
-      "minecraft": false
+      "minecraft": true
     },
     "logros": {
       "primerpaso": true,
@@ -31,7 +31,7 @@
       "creador": true,
       "coleccionista": true,
       "explorador": true,
-      "legendario": false,
+      "legendario": true,
       "centenario": false,
       "ganador": true,
       "extraganador": false,
@@ -40,8 +40,8 @@
     "rachamaslarga": 3,
     "rachaactual": 2,
     "ultimodiaderacha": "2026-05-07",
-    "cantidadobjetivoscreados": 15,
-    "skinseleccionada": "trump",
+    "cantidadobjetivoscreados": 16,
+    "skinseleccionada": "minecraft",
     "objetivoscompletados": 27
   },
   {

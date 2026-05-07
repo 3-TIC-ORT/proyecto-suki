@@ -85,6 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
     { clave: "minecraft", nombre: "SALCHICRAFT", precio: 200 }
   ]
   const ruleta = { clave: "ruleta", nombre: "Ruleta misteriosa", precio: 400 }
+  const ICONO_HUESO = "Plata.png"
 
   const nombreSkin = (clave) => {
     const item = catalogoSkins.find((skin) => skin.clave === clave)
@@ -152,12 +153,34 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!premio) return ""
     if (premio.tipo === "skin") return `Ganaste la skin ${nombreSkin(premio.valor)}!`
     if (premio.tipo === "puntos") return `Ganaste ${premio.valor} puntos!`
+    if (premio.tipo === "cero") return "Salió 0"
     return "Ganaste un premio!"
   }
 
   const etiquetaOpcionRuleta = (opcion) => {
-    if (opcion.tipo === "skin") return `Skin ${nombreSkin(opcion.valor)}`
-    return `🪙 ${opcion.valor}`
+    if (opcion.tipo === "skin") return ""
+    if (opcion.tipo === "puntos") return String(opcion.valor)
+    return "0"
+  }
+
+  const imagenOpcionRuleta = (opcion) => {
+    if (opcion.tipo === "skin") return rutaSkinTienda(opcion.valor)
+    return ICONO_HUESO
+  }
+
+  const normalizarOpcionesRuleta = (opciones) => {
+    const lista = Array.isArray(opciones) ? [...opciones] : []
+    const skins = lista.filter((op) => op?.tipo === "skin")
+    const skinA = skins[0] || { tipo: "skin", valor: "trump" }
+    const skinB = skins[1] || skins[0] || { tipo: "skin", valor: "flash" }
+    return [
+      { slot: 0, tipo: "puntos", valor: 1000 },
+      { slot: 1, tipo: "skin", valor: skinA.valor },
+      { slot: 2, tipo: "puntos", valor: 200 },
+      { slot: 3, tipo: "cero", valor: 0 },
+      { slot: 4, tipo: "puntos", valor: 500 },
+      { slot: 5, tipo: "skin", valor: skinB.valor }
+    ]
   }
 
   const limpiarPremioVisual = () => {
@@ -179,10 +202,17 @@ document.addEventListener("DOMContentLoaded", () => {
       ruletaPremioTexto.textContent = `Perro elegido: ${nombreSkin(premio.valor)}`
       return
     }
+    if (premio.tipo === "cero") {
+      ruletaPremioImg.classList.add("puntos")
+      ruletaPremioImg.src = ICONO_HUESO
+      ruletaPremioImg.alt = "Cero"
+      ruletaPremioTexto.textContent = "0 puntos"
+      return
+    }
     ruletaPremioImg.classList.add("puntos")
-    ruletaPremioImg.src = "Plata.png"
-    ruletaPremioImg.alt = "Logo de plata"
-    ruletaPremioTexto.textContent = `+${premio.valor} puntos`
+    ruletaPremioImg.src = ICONO_HUESO
+    ruletaPremioImg.alt = "Puntos"
+    ruletaPremioTexto.textContent = `${premio.valor} puntos`
   }
 
   const cerrarModalRuleta = () => {
@@ -204,30 +234,58 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!ruletaDisco) return
     ruletaDisco.innerHTML = ""
     if (!Array.isArray(opciones) || !opciones.length) return
-    const radio = window.innerWidth <= 768 ? 110 : 125
+    const tamDisco = ruletaDisco.clientWidth || (window.innerWidth <= 768 ? 290 : 320)
+    const inicioRuleta = -120
+    const colorOpcion = (opcion) => {
+      if (opcion?.tipo === "skin") return "#f6c400"
+      if (opcion?.tipo === "cero") return "#ff313a"
+      return "#7b2f14"
+    }
     const paso = 360 / opciones.length
-    const colores = ["#ffd34f", "#3a3a3a", "#ff8a4c", "#2a2a2a", "#ffd34f", "#4a4a4a"]
     const sectores = opciones.map((_, i) => {
       const inicio = i * paso
       const fin = (i + 1) * paso
-      return `${colores[i % colores.length]} ${inicio}deg ${fin}deg`
+      return `${colorOpcion(opciones[i])} ${inicio}deg ${fin}deg`
     }).join(", ")
-    ruletaDisco.style.setProperty("--ruleta-sectores", `conic-gradient(from -90deg, ${sectores})`)
+    ruletaDisco.style.setProperty("--ruleta-sectores", `conic-gradient(from ${inicioRuleta}deg, ${sectores})`)
+    const centro = tamDisco / 2
+    const radioContenido = tamDisco * 0.37
     opciones.forEach((opcion, i) => {
       const etiqueta = document.createElement("div")
-      etiqueta.className = `ruleta-opcion ${opcion.tipo === "puntos" ? "puntos" : "skin"}`
-      etiqueta.textContent = etiquetaOpcionRuleta(opcion)
-      const angulo = i * paso + paso / 2
-      etiqueta.style.transform = `translate(-50%, -50%) rotate(${angulo}deg) translateY(-${radio}px) rotate(${-angulo}deg)`
+      etiqueta.className = `ruleta-opcion ${opcion.tipo} slot-${i}`
+      const texto = etiquetaOpcionRuleta(opcion)
+      etiqueta.innerHTML = `
+        <div class="ruleta-opcion-contenido">
+          <img src="${imagenOpcionRuleta(opcion)}" alt="${texto || "skin"}">
+          ${texto ? `<span>${texto}</span>` : ""}
+        </div>
+      `
+      const anguloSector = inicioRuleta + (i * paso) + (paso / 2)
+      const angulo = (anguloSector * Math.PI) / 180
+      const x = centro + (Math.sin(angulo) * radioContenido)
+      const y = centro - (Math.cos(angulo) * radioContenido)
+      etiqueta.style.left = `${x}px`
+      etiqueta.style.top = `${y}px`
+      etiqueta.style.transform = "translate(-50%, -50%)"
+      etiqueta.style.setProperty("--rot", "0deg")
       ruletaDisco.appendChild(etiqueta)
     })
   }
 
+  const igualarAlturaTarjetaRuleta = () => {
+    if (!rejilla || !panelRuleta) return
+    const tarjetaRuleta = panelRuleta.querySelector(".tarjeta-ruleta")
+    const tarjetaReferencia = rejilla.querySelector(".tarjeta-skin, .card-skin")
+    if (!tarjetaRuleta || !tarjetaReferencia) return
+    tarjetaRuleta.style.height = `${tarjetaReferencia.offsetHeight}px`
+  }
+
   const animarRuleta = (opciones, premio) => {
     if (!ruletaDisco || !ruletaEstado || !btnCerrarRuleta || !Array.isArray(opciones) || !opciones.length) return
-    const indiceGanador = opciones.findIndex(
-      (op) => op.tipo === premio?.tipo && op.valor === premio?.valor
-    )
+    const indiceGanador = opciones.findIndex((op) => {
+      if (premio?.slot != null && op?.slot != null) return op.slot === premio.slot
+      return op.tipo === premio?.tipo && op.valor === premio?.valor
+    })
     if (indiceGanador < 0) {
       ruletaGirando = false
       ruletaEstado.textContent = formatearPremio(premio)
@@ -235,9 +293,10 @@ document.addEventListener("DOMContentLoaded", () => {
       btnCerrarRuleta.style.display = "inline-flex"
       return
     }
+    const inicioRuleta = -120
     const paso = 360 / opciones.length
-    const centroGanador = (indiceGanador * paso) + (paso / 2)
-    const objetivo = (360 - (centroGanador % 360)) % 360
+    const anguloGanador = inicioRuleta + (indiceGanador * paso) + (paso / 2)
+    const objetivo = (360 - (((anguloGanador % 360) + 360) % 360)) % 360
     const vueltas = 8 + Math.floor(Math.random() * 3)
     const desde = rotacionRuletaActual
     const deltaObjetivo = ((objetivo - (desde % 360)) + 360) % 360
@@ -294,16 +353,23 @@ document.addEventListener("DOMContentLoaded", () => {
     tarjetaRuleta.className = "card-skin tarjeta-skin tarjeta-ruleta"
     tarjetaRuleta.dataset.clave = ruleta.clave
     tarjetaRuleta.innerHTML = `
-      <div class="imagen-skin ruleta-icono">🎰</div>
-      <div class="skin-title titulo-skin">${ruleta.nombre}</div>
-      <div class="premio-ruleta">Premios: 2 skins aleatorias o 200 / 500 / 1000 puntos</div>
-      <div class="skin-actions acciones-skin">
-        <button class="btn boton girar"${(usuario.dinero||0) < ruleta.precio ? " disabled" : ""}>
-          Girar <img src="Plata.png" class="icono-hueso" alt=""> <b class="monto">${ruleta.precio}</b>
-        </button>
+      <div class="ruleta-caja-contenido">
+        <div class="ruleta-caja-texto">
+          <div class="skin-title titulo-skin">¡${ruleta.nombre}!</div>
+          <div class="premio-ruleta">Arriesgate por skins o puntos del 200 hasta los 1000!</div>
+          <div class="skin-actions acciones-skin acciones-ruleta-caja">
+            <button class="btn boton girar boton-ruleta-caja"${(usuario.dinero||0) < ruleta.precio ? " disabled" : ""}>
+              Comprar <img src="Plata.png" class="icono-hueso icono-hueso-ruleta" alt=""> <b class="monto">${ruleta.precio}</b>
+            </button>
+          </div>
+        </div>
+        <div class="ruleta-caja-vista" aria-hidden="true">
+          <img class="ruleta-caja-imagen" src="ruleta.png" alt="Ruleta misteriosa">
+        </div>
       </div>
     `
     panelRuleta.appendChild(tarjetaRuleta)
+    requestAnimationFrame(igualarAlturaTarjetaRuleta)
   }
 
   rejilla?.addEventListener("click", (e) => {
@@ -352,8 +418,9 @@ document.addEventListener("DOMContentLoaded", () => {
         setDinero(usuario.dinero)
         pintarTienda()
         abrirModalRuleta()
-        renderizarOpcionesRuleta(resp.opcionesruleta || [])
-        animarRuleta(resp.opcionesruleta || [], resp.premio)
+        const opcionesRuleta = normalizarOpcionesRuleta(resp.opcionesruleta || [])
+        renderizarOpcionesRuleta(opcionesRuleta)
+        animarRuleta(opcionesRuleta, resp.premio)
       })
     }
   })
@@ -375,5 +442,6 @@ document.addEventListener("DOMContentLoaded", () => {
     })
   }
 
+  window.addEventListener("resize", igualarAlturaTarjetaRuleta)
   cargarUsuario()
 })

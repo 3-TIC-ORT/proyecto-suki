@@ -204,21 +204,94 @@ header {
 }
 
 .tarjeta-ruleta {
-  background: linear-gradient(160deg, #2f2f2f, #151515);
+  width: min(100%, 640px);
+  background: linear-gradient(90deg, #2f2f2f 0%, #262626 100%);
   color: #fff;
-  width: min(100%, 520px);
+  border-radius: 20px;
+  padding: 14px;
+  overflow: hidden;
+}
+
+.ruleta-caja-contenido {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.ruleta-caja-texto {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 6px;
+}
+
+.tarjeta-ruleta .titulo-skin {
+  text-align: left;
+  margin: 0;
+  font-size: clamp(24px, 2.6vw, 44px);
+  line-height: 1.04;
+  color: #f4f4f4;
+  font-weight: 700;
+}
+
+.premio-ruleta {
+  text-align: left;
+  font-size: clamp(16px, 1.55vw, 30px);
+  line-height: 1.18;
+  font-weight: 700;
+  margin: 4px 0 8px 0;
+  color: #f4f4f4;
+}
+
+.acciones-skin.acciones-ruleta-caja {
+  justify-content: flex-start;
+}
+
+.boton-ruleta-caja {
+  min-width: 0;
+  border-radius: 32px;
+  padding: 8px 20px;
+  font-size: clamp(24px, 2.1vw, 40px);
+  font-weight: 600;
+  gap: 10px;
+  background: #000;
+  width: fit-content;
+}
+
+.icono-hueso-ruleta {
+  width: clamp(40px, 3.4vw, 68px);
+  height: clamp(40px, 3.4vw, 68px);
+  margin: 0;
+}
+
+.boton-ruleta-caja .monto {
+  font-size: inherit;
+}
+
+.ruleta-caja-vista {
+  width: min(40%, 240px);
+  min-width: 180px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.ruleta-caja-imagen {
+  width: 100%;
+  max-width: 220px;
+  height: auto;
+  display: block;
 }
 
 .ruleta-icono {
   font-size: 64px;
   line-height: 1;
   margin-top: 6px;
-}
-
-.premio-ruleta {
-  text-align: center;
-  font-weight: 600;
-  margin: 8px 0 14px 0;
 }
 
 .modal-ruleta {
@@ -273,14 +346,17 @@ header {
 
 .ruleta-puntero {
   position: absolute;
-  top: -18px;
+  top: -10px;
   left: 50%;
-  transform: translateX(-50%);
-  color: #ffcc33;
-  font-size: 28px;
-  font-weight: 800;
+  transform: translateX(-50%) rotate(180deg);
+  width: 0;
+  height: 0;
+  border-left: 42px solid transparent;
+  border-right: 42px solid transparent;
+  border-bottom: 66px solid #f6c400;
+  font-size: 0;
   z-index: 2;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  filter: drop-shadow(0 1px 0 #f2f2f2);
 }
 
 .ruleta-tablero.girando .ruleta-puntero {
@@ -288,39 +364,43 @@ header {
 }
 
 @keyframes puntero-vibra {
-  0% { transform: translateX(-50%) rotate(0deg); }
-  50% { transform: translateX(-50%) rotate(-7deg); }
-  100% { transform: translateX(-50%) rotate(0deg); }
+  0% { transform: translateX(-50%) rotate(180deg); }
+  50% { transform: translateX(-50%) rotate(173deg); }
+  100% { transform: translateX(-50%) rotate(180deg); }
 }
 
 .ruleta-disco {
-  --ruleta-sectores: radial-gradient(circle at 50% 45%, #4b4b4b 0%, #232323 72%);
+  --ruleta-sectores: conic-gradient(from -120deg, #7b2f14 0deg 60deg, #f6c400 60deg 120deg, #7b2f14 120deg 180deg, #ff313a 180deg 240deg, #7b2f14 240deg 300deg, #f6c400 300deg 360deg);
   width: 320px;
   height: 320px;
   border-radius: 50%;
   background: var(--ruleta-sectores);
-  border: 7px solid #ffcc33;
+  border: 12px solid #c4c4c4;
   position: relative;
   will-change: transform;
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.38);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
 }
 
 .ruleta-disco::before {
   content: "";
   position: absolute;
-  inset: -1px;
+  inset: 0;
   border-radius: 50%;
-  background: radial-gradient(circle at 30% 24%, rgba(255, 255, 255, 0.3), transparent 48%);
+  background: repeating-conic-gradient(
+    from -120deg,
+    #c4c4c4 0deg 2deg,
+    transparent 2deg 60deg
+  );
   pointer-events: none;
 }
 
 .ruleta-disco::after {
   content: "";
   position: absolute;
-  width: 26px;
-  height: 26px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
-  background: #ffcc33;
+  background: #c4c4c4;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -332,24 +412,41 @@ header {
 
 .ruleta-opcion {
   position: absolute;
-  left: 50%;
-  top: 50%;
-  min-width: 100px;
-  padding: 6px 9px;
-  border-radius: 11px;
-  background: rgba(255, 255, 255, 0.93);
-  color: #121212;
-  font-weight: 700;
-  font-size: 12px;
-  transform-origin: center center;
-  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.24);
-  text-align: center;
+  left: 0;
+  top: 0;
+  font-family: "Signika", sans-serif;
+  color: #f6c400;
 }
 
-.ruleta-opcion.puntos {
-  background: #1f1f1f;
-  color: #ffcc33;
-  border: 1px solid rgba(255, 204, 51, 0.42);
+.ruleta-opcion-contenido {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  transform: rotate(var(--rot, 0deg));
+}
+
+.ruleta-opcion img {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+}
+
+.ruleta-opcion span {
+  font-size: 30px;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: 0;
+  color: #f6c400;
+}
+
+.ruleta-opcion.skin img {
+  width: 64px;
+  height: 64px;
+}
+
+.ruleta-opcion.skin .ruleta-opcion-contenido {
+  transform: rotate(var(--rot, 0deg));
 }
 
 .ruleta-estado {
@@ -495,9 +592,43 @@ header {
     margin: 0 12px 20px;
   }
 
+  .tarjeta-ruleta {
+    padding: 16px 14px;
+  }
+
+  .ruleta-caja-contenido {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ruleta-caja-vista {
+    width: 100%;
+    min-width: 0;
+    justify-content: center;
+  }
+
+  .ruleta-caja-imagen {
+    max-width: min(76vw, 320px);
+  }
+
+  .boton-ruleta-caja {
+    width: auto;
+    font-size: clamp(24px, 8vw, 44px);
+    padding: 10px 20px;
+  }
+
+  .icono-hueso-ruleta {
+    width: 34px;
+    height: 34px;
+  }
+
   .boton {
     min-width: 0;
     width: 100%;
+  }
+
+  .acciones-ruleta-caja .boton-ruleta-caja {
+    width: auto;
   }
 
   .ruleta-tablero,
@@ -506,9 +637,23 @@ header {
     height: min(75vw, 290px);
   }
 
-  .ruleta-opcion {
-    min-width: 92px;
-    font-size: 12px;
-    padding: 5px 8px;
+  .ruleta-puntero {
+    border-left-width: 34px;
+    border-right-width: 34px;
+    border-bottom-width: 56px;
+  }
+
+  .ruleta-opcion img {
+    width: 22px;
+    height: 22px;
+  }
+
+  .ruleta-opcion span {
+    font-size: 24px;
+  }
+
+  .ruleta-opcion.skin img {
+    width: 48px;
+    height: 48px;
   }
 }

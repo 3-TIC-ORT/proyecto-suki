@@ -16,7 +16,7 @@ let skinslista = {
     oro: 1000,
     minecraft: 200
 }
-const costoruleta = 200;
+const costoruleta = 400;
 const skinsruleta = ["trump", "flash", "turro", "sullivan", "rabino", "bizarrap", "oro", "minecraft"];
 const premiospuntosruleta = [200, 500, 1000];
 
@@ -71,6 +71,14 @@ for (let i = copia.length - 1; i > 0; i--) {
     [copia[i], copia[j]] = [copia[j], copia[i]];
 }
 return copia;
+}
+
+function elegirPremioPonderado(premios) {
+if (!Array.isArray(premios) || premios.length === 0) {
+    return null;
+}
+const indice = Math.floor(Math.random() * premios.length);
+return premios[indice];
 }
 
 subscribePOSTEvent("nuevodiseño", ({idobjetivo, nuevoicono, nuevocolor}) => {
@@ -285,10 +293,14 @@ usuarioelegido.dinero -= costoruleta;
 
 const skinstiradas = mezclarArray(skinsruleta).slice(0, 2);
 const premios = [
-    ...skinstiradas.map((skin) => ({ tipo: "skin", valor: skin })),
-    ...premiospuntosruleta.map((puntos) => ({ tipo: "puntos", valor: puntos }))
+    { slot: 0, tipo: "puntos", valor: 1000 },
+    { slot: 1, tipo: "skin", valor: skinstiradas[0] },
+    { slot: 2, tipo: "puntos", valor: 200 },
+    { slot: 3, tipo: "cero", valor: 0 },
+    { slot: 4, tipo: "puntos", valor: 500 },
+    { slot: 5, tipo: "skin", valor: skinstiradas[1] }
 ];
-const premioelegido = premios[Math.floor(Math.random() * premios.length)];
+const premioelegido = elegirPremioPonderado(premios);
 
 if (premioelegido.tipo === "skin") {
     const yatenia = !!usuarioelegido.skins[premioelegido.valor];
@@ -298,7 +310,9 @@ if (premioelegido.tipo === "skin") {
         actualizarLogrosPorSkins(usuarioelegido);
     }
 } else {
+    if (premioelegido.tipo === "puntos") {
     usuarioelegido.dinero += premioelegido.valor;
+    }
 }
 
 actualizarLogrosPorCantidad(usuarioelegido);
