@@ -4,34 +4,31 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SUKI</title>
-  <link rel="icon" type="image/png" href="logof.png">
+  <link rel="icon" type="image/png" href="logof copy.png">
   <link href="https://fonts.googleapis.com/css2?family=Signika:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="../theme.css" />
 </head>
 <body>
-
-    
+    <header class="brand">
+      <img src="logof.png" alt="Suki Logo" class="logo">
+    </header>
     <div class="card">
         <h2>Bienvenido</h2>
-         <P id="textoinfo"> ¡Inicia sesión para acceder a tus objetivos!</P>
+         <p id="textoinfo"> ¡Inicia sesión para acceder a tus objetivos!</p>
         <form id="loginForm">
             <input type="text" placeholder="Mail" id="email" class="btn">
-            <input type="password" placeholder="Contraseña" id="contraseña" class="btn">
-            <button type="submit" id="btn-acceder" class="btn">Acceder</button>
+            <input type="password" placeholder="contraseña" id="contraseña" class="btn">
+            <button type="submit" id="btn-acceder" class="btn">Iniciar sesión</button>
             <p>¿No tienes una cuenta? <a href="../CrearCuenta/IndexCrearCuenta.html">Crea tu cuenta</a></p>
             <a href=""></a>
         </form>
         <p id="mensaje"></p>
     </div>
-    
-    
-</footer>
-<div class="info">
-  <p>Tus datos nunca se comparten. No hay mensajes de spam.</p>
-  <label>
-    <div id="terminos"> Al continuar, aceptas los <a href="#" id="ver-terminos">Terminos de uso</a> 
-  </label>
+    <div class="info">
+      <p>Tus datos nunca se comparten. No hay mensajes de spam.</p>
+      <div id="terminos">Al continuar, aceptas los <a href="#" id="ver-terminos">Terminos de uso</a> y la <a href="#">Política de Privacidad</a></div>
+    </div>
 
 <div id="modal-terminos" class="modal">
   <div class="modal-content">
@@ -75,8 +72,6 @@ Estos Términos se rigen por las leyes de la República Argentina. Cualquier con
     
   </div>
 </div>
-</div>
-</footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.8.1/socket.io.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/JZylber/SoqueTIC-Client@v1.4.2/soquetic-client.js"></script>
     <script src="../theme.js"></script>

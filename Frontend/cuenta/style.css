@@ -1,10 +1,10 @@
 body {
-  margin: 0px;
-  padding: 0%;
+  margin: 0;
+  min-height: 100dvh;
   font-family: "Signika", sans-serif;
   display: flex;
-  background-color: #F3EAE8;
-  min-height: 100dvh;
+  flex-wrap: wrap;
+  background: #f3efee;
 }
 
 a {
@@ -12,85 +12,134 @@ a {
   color: inherit;
 }
 
-a:hover {
-  text-decoration: none;
+.brand {
+  position: fixed;
+  top: 22px;
+  left: 24px;
+  z-index: 5;
 }
 
-.izquierda{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  text-decoration: none;
+.logo {
+  width: 220px;
+  height: auto;
+  display: block;
+}
+
+.izquierda {
   width: 50%;
-  height: 100%;
+  min-height: calc(100dvh - 62px);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 64px 34px 0;
+  box-sizing: border-box;
 }
 
 .derecha {
   width: 50%;
+  min-height: calc(100dvh - 62px);
   display: flex;
+  align-items: stretch;
 }
 
 .card {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: min(70%, 420px);
-  border-radius: 20px;
-  margin: 45px;
+  width: min(100%, 480px);
+  border-radius: 18px;
+  margin-top: 72px;
+  padding: 22px 44px 26px;
   text-align: center;
-  text-decoration: none;
-  background-color: #fff;
-  filter: drop-shadow(0px 4px 20px rgba(0, 0, 0, 0.233));
+  background: #ffffff;
+  box-sizing: border-box;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14);
 }
 
-h2{
-  font-weight: bold;
-  font-size: 30px;
-  margin-bottom: 0px;
+h2 {
+  font-weight: 700;
+  font-size: 56px;
+  margin: 0;
+  line-height: 1.05;
 }
 
-#textoinfo{
-  margin-top: 0px;
+#textoinfo {
+  margin: 10px 0 24px;
+  font-size: 15px;
+  line-height: 1.2;
 }
 
 .btn {
-  display: block;
-  margin: 15px;
-  width: min(300px, 100%);
-  padding: 12px;
-  border-radius: 33.37px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 18px;
+  width: 100%;
+  max-width: 386px;
+  min-height: 46px;
+  padding: 8px 14px;
   border: none;
-  border-radius: 6px;
-  font-size: 16px;
+  border-radius: 14px;
+  font-size: 18px;
+  line-height: 1;
   cursor: pointer;
+  font-family: "Signika", sans-serif;
 }
 
-#button-entrar{
-  background-color: #FFCC00;
+#button-entrar {
+  background: #e8c848;
   color: #000;
 }
 
-#button-registrar{
-  background-color: #000000;
+#button-registrar {
+  background: #000;
   color: #fff;
 }
 
-.btn:hover {
-  background-color: #333;
+#button-entrar:hover {
+  background: #ddbe45;
 }
 
-.info {
-  font-size: 14px;
-  text-align: center;
+#button-registrar:hover {
+  background: #1d1d1d;
 }
 
-.tuApp{
+.card > p {
+  margin: 16px 0 0;
+  font-size: 13px;
+  line-height: 1.1;
+}
+
+.card > p a {
+  color: #e1bd4c;
+  text-decoration: underline;
+}
+
+.tuApp {
   width: 100%;
-  height: 100%;
+  height: calc(100dvh - 62px);
   object-fit: cover;
+  object-position: center;
+}
+
+.legal {
+  width: 100%;
+  min-height: 62px;
+  text-align: center;
+  color: #252525;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 6px 10px 10px;
+  box-sizing: border-box;
+}
+
+.legal p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.2;
+}
+
+.legal a {
+  color: #d5b241;
+  text-decoration: underline;
 }
 
 @media (max-width: 900px) {
@@ -98,33 +147,50 @@ h2{
     flex-direction: column;
   }
 
+  .brand {
+    position: static;
+    padding: 16px 16px 0;
+  }
+
+  .logo {
+    width: 180px;
+  }
+
   .izquierda,
   .derecha {
     width: 100%;
+    min-height: auto;
   }
 
   .izquierda {
-    min-height: 100dvh;
-    padding: 16px 12px;
-    box-sizing: border-box;
+    padding: 16px 12px 0;
+    justify-content: center;
   }
 
   .card {
-    width: 100%;
-    margin: 0;
-    padding: 20px 14px;
-    box-sizing: border-box;
+    margin-top: 0;
+    padding: 18px 14px 20px;
+  }
+
+  h2 {
+    font-size: 44px;
   }
 
   .btn {
-    margin: 10px 0;
+    font-size: 18px;
+    max-width: none;
   }
 
-  .derecha {
-    min-height: 280px;
+  .card > p {
+    font-size: 13px;
   }
 
   .tuApp {
-    max-height: 42vh;
+    height: auto;
+    max-height: 55vh;
+  }
+
+  .legal p {
+    font-size: 14px;
   }
 }

@@ -1,89 +1,143 @@
 body {
   margin: 0;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   min-height: 100dvh;
   font-family: "Signika", sans-serif;
   display: flex;
-  background-color: #F3EAE8;
-  padding: 16px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f3ecec;
+  padding: 24px 16px 110px;
   box-sizing: border-box;
 }
 
-.card {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border-radius: 25px;
-  text-align: center;
-  background-color: #fff;
-  box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.15);
-
-  max-width: 420px;
-  width: 90%;
+.brand {
+  position: fixed;
+  top: 22px;
+  left: 24px;
+  z-index: 5;
 }
 
-h2 {
-  font-weight: 700;
+.logo {
+  width: 170px;
+  height: auto;
+  display: block;
+}
+
+.card {
+  width: 90%;
+  max-width: 400px;
+  border-radius: 18px;
+  text-align: center;
+  background-color: #ffffff;
+  box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.15);
+  padding: 16px 18px;
+  box-sizing: border-box;
+}
+
+.card h2 {
+  margin: 0;
   font-size: 30px;
-  margin-bottom: 8px;
+  line-height: 1.05;
+  font-weight: 700;
 }
 
 #textoinfo {
+  margin: 0 0 20px;
   font-size: 15px;
-  color: #4b4b4b;
-  margin-bottom: 25px;
+  line-height: 1.2;
+}
+
+#loginForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .btn {
   display: block;
-  margin: 15px;
-  width: min(300px, 100%);
-  padding: 12px;
-  border-radius: 33.37px;
+  width: min(280px, 100%);
+  margin: 4px auto;
+  padding: 10px;
   border: none;
   border-radius: 6px;
+  font-family: "Signika", sans-serif;
   font-size: 16px;
   cursor: pointer;
+  box-sizing: border-box;
 }
 
-#email, #contraseña {
-  background-color: #D9D9D9;
-  color: #877771;
+#email,
+#contraseña {
+  background-color: #c7c7c9;
+  color: #857a77;
   text-align: center;
+  font-size: 16px;
+}
+
+#email::placeholder,
+#contraseña::placeholder {
+  color: #857a77;
 }
 
 #btn-acceder {
-  background-color: #FFCC00;
+  margin-top: 6px;
+  background-color: #ffd000;
   color: #000;
   font-weight: 700;
-  width: min(324px, 100%);
+  font-size: 18px;
+  line-height: 1;
+  border-radius: 14px;
 }
 
 #btn-acceder:hover {
-  background-color: #e6b800;
+  background-color: #e4bb00;
 }
 
+#loginForm > p {
+  margin: 18px 0 0;
+  font-size: 13px;
+}
 
+#loginForm > p a {
+  color: #FFCC00;
+  text-decoration: underline;
+}
+
+#mensaje {
+  margin: 0;
+}
 
 .info {
-  text-align: center;
-  position: absolute;
-  bottom: 25px;
   width: 100%;
+  text-align: center;
+  position: fixed;
+  left: 0;
+  bottom: 28px;
+}
+
+.info p,
+.info #terminos {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.15;
+  color: #111;
+}
+
+.info a {
+  color: #FFCC00;
+  text-decoration: underline;
 }
 
 .modal {
-  display: none; 
-  position: fixed; 
-  z-index: 10; 
+  display: none;
+  position: fixed;
+  z-index: 10;
   left: 0;
   top: 0;
-  width: 100%; 
-  height: 100%; 
-  background-color: rgba(0,0,0,0.5);
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
   overflow: auto;
 }
 
@@ -95,7 +149,12 @@ h2 {
   width: 60%;
   max-width: 500px;
   text-align: left;
-  
+}
+
+.modal-content h2 {
+  margin: 0 0 12px;
+  font-size: 28px;
+  line-height: 1.1;
 }
 
 .close {
@@ -108,22 +167,63 @@ h2 {
 @media (max-width: 768px) {
   body {
     justify-content: flex-start;
-    padding: 20px 12px;
+    padding: 16px 12px 22px;
+  }
+
+  .brand {
+    position: static;
+    width: 100%;
+    padding: 0 4px 12px;
+    box-sizing: border-box;
+  }
+
+  .logo {
+    width: 150px;
   }
 
   .card {
     width: 100%;
-    max-width: 420px;
+    max-width: 400px;
+    border-radius: 14px;
+    padding: 14px 12px;
   }
 
-  .btn,
+  .card h2 {
+    font-size: 30px;
+  }
+
+  #textoinfo {
+    font-size: 15px;
+    margin: 0 0 16px;
+  }
+
+  .btn {
+    width: min(280px, 100%);
+  }
+
+  #email,
+  #contraseña {
+    font-size: 16px;
+  }
+
   #btn-acceder {
-    margin: 10px 0;
+    font-size: 18px;
+    border-radius: 14px;
+  }
+
+  #loginForm > p {
+    margin-top: 18px;
+    font-size: 13px;
   }
 
   .info {
     position: static;
     margin-top: 16px;
+  }
+
+  .info p,
+  .info #terminos {
+    font-size: 14px;
   }
 
   .modal-content {

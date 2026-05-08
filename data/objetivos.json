@@ -194,5 +194,47 @@
     "rachamaslarga": 2,
     "rachaactual": 2,
     "ultimodiaderacha": "2026-05-07"
+  },
+  {
+    "idusuario": 1764089402401,
+    "idobjetivo": 1778238818479,
+    "titulo": "tata",
+    "tipodeobjetivo": "accion",
+    "tiempo": null,
+    "veces": 6,
+    "vecescompletadas": 1,
+    "color": "#34C759",
+    "icono": "icono4",
+    "rachamaslarga": 1,
+    "rachaactual": 1,
+    "ultimodiaderacha": "2026-05-08"
+  },
+  {
+    "idusuario": 1778260291960,
+    "idobjetivo": 1778260398200,
+    "titulo": "IVO",
+    "tipodeobjetivo": "accion",
+    "tiempo": null,
+    "veces": 7,
+    "vecescompletadas": 1,
+    "color": "#002AB8",
+    "icono": "icono2",
+    "rachamaslarga": 1,
+    "rachaactual": 1,
+    "ultimodiaderacha": "2026-05-08"
+  },
+  {
+    "idusuario": 1778260291960,
+    "idobjetivo": 1778260476856,
+    "titulo": "zcas",
+    "tipodeobjetivo": "tiempo",
+    "tiempo": 1,
+    "veces": null,
+    "vecescompletadas": 0,
+    "color": "#002AB8",
+    "icono": "icono1",
+    "rachamaslarga": 0,
+    "rachaactual": 0,
+    "ultimodiaderacha": null
   }
 ]
