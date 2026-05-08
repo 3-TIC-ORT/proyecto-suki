@@ -66,6 +66,14 @@ html[data-theme="dark"] a {
   color: #9bc9ff;
 }
 
+html[data-theme="dark"] .sidebar,
+html[data-theme="dark"] .sidebar a,
+html[data-theme="dark"] .sidebar p,
+html[data-theme="dark"] .sidebar span,
+html[data-theme="dark"] .sidebar button {
+  color: #ffffff !important;
+}
+
 html[data-theme="dark"] .theme-toggle-btn {
   background: #ffcc33;
   color: #111;
