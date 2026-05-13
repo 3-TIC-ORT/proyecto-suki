@@ -164,6 +164,29 @@ body {
   cursor: pointer;
 }
 
+/* ── DARK MODE ── */
+html[data-theme="dark"] .brand {
+  background: transparent !important;
+}
+
+
+html[data-theme="dark"] .info p,
+html[data-theme="dark"] .info #terminos {
+  color: #efefef;
+}
+
+html[data-theme="dark"] .info a {
+  color: #ffd000;
+}
+
+html[data-theme="dark"] #loginForm > p {
+  color: #efefef;
+}
+
+html[data-theme="dark"] #loginForm > p a {
+  color: #ffd000;
+}
+
 @media (max-width: 768px) {
   body {
     justify-content: flex-start;

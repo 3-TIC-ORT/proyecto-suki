@@ -142,6 +142,28 @@ h2 {
   text-decoration: underline;
 }
 
+/* ── DARK MODE ── */
+html[data-theme="dark"] .brand {
+  background: transparent !important;
+}
+
+
+html[data-theme="dark"] .card > p {
+  color: #efefef;
+}
+
+html[data-theme="dark"] .card > p a {
+  color: #ffd000;
+}
+
+html[data-theme="dark"] .legal {
+  color: #aaa;
+}
+
+html[data-theme="dark"] .legal a {
+  color: #ffd000;
+}
+
 @media (max-width: 900px) {
   body {
     flex-direction: column;

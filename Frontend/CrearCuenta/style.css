@@ -245,6 +245,29 @@ input:invalid {
 .suki-modal-btn-cancelar:hover,
 .suki-modal-btn-borrar:hover { opacity: 0.82; }
 
+/* ── DARK MODE ── */
+html[data-theme="dark"] .brand {
+  background: transparent !important;
+}
+
+
+html[data-theme="dark"] .info p,
+html[data-theme="dark"] .info #terminos {
+  color: #efefef;
+}
+
+html[data-theme="dark"] .info a {
+  color: #ffd000;
+}
+
+html[data-theme="dark"] #form-registro > p {
+  color: #efefef;
+}
+
+html[data-theme="dark"] #form-registro > p a {
+  color: #ffd000;
+}
+
 @media (max-width: 768px) {
   body {
     justify-content: flex-start;

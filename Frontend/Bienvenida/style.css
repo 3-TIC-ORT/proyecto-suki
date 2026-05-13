@@ -371,6 +371,18 @@ a {
 }
 
 /* ── DARK MODE ── */
+html[data-theme="dark"] .brand {
+  background: transparent !important;
+}
+
+html[data-theme="dark"] body a {
+  color: #efefef;
+}
+
+html[data-theme="dark"] .legal a,
+html[data-theme="dark"] .cta-login a {
+  color: #ffd000;
+}
 html[data-theme="dark"] .section-white {
   background: #1a1a1a;
 }
