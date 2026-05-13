@@ -179,6 +179,17 @@ a {
   padding: 32px 28px;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
   text-align: center;
+  opacity: 0;
+  transform: translateY(28px) scale(0.93);
+  transition:
+    opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.25s ease;
+}
+
+.step.in-view {
+  opacity: 1;
+  transform: translateY(0) scale(1);
 }
 
 .step-num {
@@ -221,12 +232,22 @@ a {
   background: #f3efee;
   border-radius: 16px;
   padding: 28px 24px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  opacity: 0;
+  transform: translateY(28px) scale(0.94);
+  transition:
+    opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.25s ease;
+}
+
+.feature-card.in-view {
+  opacity: 1;
+  transform: translateY(0) scale(1);
 }
 
 .feature-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.09);
+  transform: translateY(-5px) scale(1.01);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.1);
 }
 
 .feat-icon {
@@ -264,6 +285,26 @@ a {
   flex-wrap: wrap;
 }
 
+@keyframes skin-pop {
+  0%   { opacity: 0; transform: translateY(30px) scale(0.88); }
+  65%  { opacity: 1; transform: translateY(-5px) scale(1.04); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes shine-sweep {
+  0%   { left: -80%; opacity: 1; }
+  100% { left: 130%; opacity: 1; }
+}
+
+@keyframes gold-pulse {
+  0%, 100% {
+    box-shadow: 0 4px 12px rgba(255, 208, 0, 0.3), 0 0 0 0 rgba(255, 208, 0, 0);
+  }
+  50% {
+    box-shadow: 0 8px 28px rgba(255, 208, 0, 0.6), 0 0 0 5px rgba(255, 208, 0, 0.12);
+  }
+}
+
 .skin-card {
   background: #ffffff;
   border-radius: 16px;
@@ -273,12 +314,44 @@ a {
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  transition: transform 0.2s ease;
   cursor: default;
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(30px) scale(0.88);
+  transition: box-shadow 0.25s ease;
+  will-change: transform, opacity;
+}
+
+.skin-card.in-view {
+  animation: skin-pop 0.52s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* shine pseudo-element */
+.skin-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -80%;
+  width: 45%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.55),
+    transparent
+  );
+  transform: skewX(-12deg);
+  pointer-events: none;
+  opacity: 0;
 }
 
 .skin-card:hover {
-  transform: translateY(-5px);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.13);
+}
+
+.skin-card:hover::before {
+  animation: shine-sweep 0.5s ease forwards;
 }
 
 .skin-card img {
@@ -286,12 +359,19 @@ a {
   height: 96px;
   object-fit: contain;
   display: block;
+  transition: transform 0.25s ease;
+  pointer-events: none;
+}
+
+.skin-card:hover img {
+  transform: scale(1.1) translateY(-3px);
 }
 
 .skin-card span {
   font-size: 13px;
   font-weight: 600;
   color: #444;
+  transition: color 0.2s;
 }
 
 .skin-gold {
@@ -299,8 +379,27 @@ a {
   border: 2px solid #ffd000;
 }
 
+.skin-gold.in-view {
+  animation:
+    skin-pop 0.52s cubic-bezier(0.34, 1.56, 0.64, 1) both,
+    gold-pulse 2.4s ease-in-out 0.55s infinite;
+}
+
 .skin-gold span {
   color: #a07a00;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skin-card,
+  .skin-card.in-view,
+  .skin-gold.in-view {
+    opacity: 1;
+    transform: none;
+    animation: none;
+    transition: box-shadow 0.15s;
+  }
+  .skin-card::before { display: none; }
+  .skin-card img { transition: none; }
 }
 
 /* ── CTA FINAL ── */
@@ -317,12 +416,23 @@ a {
   max-width: 580px;
   width: 100%;
   box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+  opacity: 0;
+  transform: translateY(30px) scale(0.95);
+  transition:
+    opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.cta-card.in-view {
+  opacity: 1;
+  transform: translateY(0) scale(1);
 }
 
 .cta-dog {
   width: 200px;
   height: auto;
   margin-bottom: 20px;
+  animation: float-bounce 3.4s ease-in-out infinite;
 }
 
 .cta-card h2 {
@@ -368,6 +478,110 @@ a {
 .legal a {
   color: #ffd000;
   text-decoration: underline;
+}
+
+/* ═══════════════════════════════════════
+   SCROLL & LOAD ANIMATIONS
+══════════════════════════════════════════ */
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-from-left {
+  from { opacity: 0; transform: translateX(-38px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fade-from-right {
+  from { opacity: 0; transform: translateX(38px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes float-bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-11px); }
+}
+
+@keyframes icon-bounce {
+  0%, 100% { transform: translateY(0) scale(1); }
+  40%       { transform: translateY(-8px) scale(1.2); }
+  70%       { transform: translateY(-2px) scale(1.06); }
+}
+
+/* ── Hero: page-load animations ── */
+.hero-content h1 {
+  animation: fade-up 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.08s both;
+}
+
+.hero-desc {
+  animation: fade-up 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.22s both;
+}
+
+.hero-content .btn-cta {
+  animation: fade-up 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.38s both;
+}
+
+.hero-visual {
+  animation: fade-from-right 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+}
+
+/* ── Scroll-triggered elements ── */
+.anim-up {
+  opacity: 0;
+  transform: translateY(26px);
+}
+
+.anim-left {
+  opacity: 0;
+  transform: translateX(-34px);
+}
+
+.anim-right {
+  opacity: 0;
+  transform: translateX(34px);
+}
+
+.anim-up.in-view {
+  animation: fade-up         0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.anim-left.in-view {
+  animation: fade-from-left  0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.anim-right.in-view {
+  animation: fade-from-right 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ── Interactive icon effects ── */
+.step:hover .step-num {
+  animation: icon-bounce 0.42s ease;
+}
+
+.feature-card:hover .feat-icon {
+  animation: icon-bounce 0.42s ease;
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .hero-content h1,
+  .hero-desc,
+  .hero-content .btn-cta,
+  .hero-visual,
+  .anim-up,
+  .anim-left,
+  .anim-right,
+  .step,
+  .feature-card,
+  .cta-card,
+  .cta-dog {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: box-shadow 0.2s ease !important;
+  }
 }
 
 /* ── DARK MODE ── */

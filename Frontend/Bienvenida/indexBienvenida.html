@@ -182,6 +182,63 @@
 
   <script src="../theme.js"></script>
   <script>
+    // ── Observer helper ──
+    function observe(els, cls, staggerMs = 0, threshold = 0.15) {
+      els.forEach((el, i) => {
+        const io = new IntersectionObserver(([entry]) => {
+          if (!entry.isIntersecting) return;
+          setTimeout(() => entry.target.classList.add('in-view'), i * staggerMs);
+          io.unobserve(entry.target);
+        }, { threshold });
+        io.observe(el);
+      });
+    }
+
+    // ── Assign animation classes via JS ──
+    document.querySelectorAll('.section-title').forEach(el => el.classList.add('anim-up'));
+    document.querySelectorAll('.section-sub').forEach(el => el.classList.add('anim-up'));
+    document.querySelectorAll('.what-text').forEach(el => el.classList.add('anim-left'));
+    document.querySelectorAll('.dog-hero').forEach(el => el.classList.add('anim-right'));
+    document.querySelectorAll('.legal').forEach(el => el.classList.add('anim-up'));
+
+    // ── Observe each group ──
+    observe(document.querySelectorAll('.anim-up'),       'in-view', 0);
+    observe(document.querySelectorAll('.anim-left'),     'in-view', 0);
+    observe(document.querySelectorAll('.anim-right'),    'in-view', 0);
+    observe(document.querySelectorAll('.step'),          'in-view', 90);
+    observe(document.querySelectorAll('.feature-card'),  'in-view', 65);
+    observe(document.querySelectorAll('.cta-card'),      'in-view', 0);
+
+    // ── Skins: staggered entrance ──
+    const skinsRow = document.querySelector('.skins-row');
+    if (skinsRow) {
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          entry.target.querySelectorAll('.skin-card').forEach((card, i) => {
+            setTimeout(() => card.classList.add('in-view'), i * 95);
+          });
+          obs.unobserve(entry.target);
+        });
+      }, { threshold: 0.15 });
+      obs.observe(skinsRow);
+    }
+
+    // ── Skins: 3D tilt on hover ──
+    document.querySelectorAll('.skin-card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width  - 0.5;
+        const y = (e.clientY - r.top)  / r.height - 0.5;
+        card.style.transform =
+          `translateY(-6px) scale(1.06) rotateY(${x * 16}deg) rotateX(${-y * 16}deg)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+      });
+    });
+
+    // ── Random skin ──
     const skins = [
       "../imagenes/skins/Suki.png",
       "../imagenes/skins/Bzrp.png",
