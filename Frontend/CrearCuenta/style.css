@@ -66,13 +66,12 @@ H2 {
   display: block;
   margin: 4px auto;
   width: min(280px, 100%);
-  padding: 9px;
-  border-radius: 33.37px;
+  padding: 10px;
   border: none;
   border-radius: 6px;
   font-size: 16px;
   cursor: pointer;
-  background-color: #D9D9D9;
+  background-color: #c7c7c9;
   color: #877771;
   text-align: center;
   box-sizing: border-box;
@@ -102,7 +101,7 @@ H2 {
 }
 
 .info a {
-  color: #dfbb45;
+  color: #ffd000;
   text-decoration: underline;
 }
 
@@ -162,9 +161,12 @@ input:invalid {
 
 
 #btn-acceder {
+  margin-top: 6px;
   background-color: #FFCC00;
   color: #000;
   font-weight: 700;
+  font-size: 18px;
+  border-radius: 14px;
   width: min(280px, 100%);
   -webkit-appearance: none;
   appearance: none;
@@ -185,7 +187,7 @@ input:invalid {
 }
 
 #form-registro > p a {
-  color: #dfbb45;
+  color: #ffd000;
   text-decoration: underline;
 }
 
@@ -268,11 +270,13 @@ input:invalid {
     padding: 14px 12px;
   }
 
-  .btn,
+  .btn {
+    width: min(280px, 100%);
+  }
+
   #btn-acceder {
-    margin: 10px auto;
-    font-size: 16px;
-    width: min(320px, 100%);
+    font-size: 18px;
+    border-radius: 14px;
   }
 
   .info {

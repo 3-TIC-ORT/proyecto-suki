@@ -236,5 +236,61 @@
     "rachamaslarga": 0,
     "rachaactual": 0,
     "ultimodiaderacha": null
+  },
+  {
+    "idusuario": 1778264772179,
+    "idobjetivo": 1778264866443,
+    "titulo": "cambiar figuritas",
+    "tipodeobjetivo": "accion",
+    "tiempo": null,
+    "veces": 10,
+    "vecescompletadas": 1,
+    "color": "#002AB8",
+    "icono": "icono11",
+    "rachamaslarga": 1,
+    "rachaactual": 1,
+    "ultimodiaderacha": "2026-05-08"
+  },
+  {
+    "idusuario": 1778264772179,
+    "idobjetivo": 1778264995107,
+    "titulo": ",",
+    "tipodeobjetivo": "accion",
+    "tiempo": null,
+    "veces": 7,
+    "vecescompletadas": 1,
+    "color": "#FF383C",
+    "icono": "icono10",
+    "rachamaslarga": 1,
+    "rachaactual": 1,
+    "ultimodiaderacha": "2026-05-08"
+  },
+  {
+    "idusuario": 1778264772179,
+    "idobjetivo": 1778265032854,
+    "titulo": "k",
+    "tipodeobjetivo": "tiempo",
+    "tiempo": 3,
+    "veces": null,
+    "vecescompletadas": 0,
+    "color": "#FF383C",
+    "icono": "icono3",
+    "rachamaslarga": 0,
+    "rachaactual": 0,
+    "ultimodiaderacha": null
+  },
+  {
+    "idusuario": 1778264772179,
+    "idobjetivo": 1778587983255,
+    "titulo": "Hacer 10 flexiones",
+    "tipodeobjetivo": "accion",
+    "tiempo": null,
+    "veces": 10,
+    "vecescompletadas": 1,
+    "color": "#CB30E0",
+    "icono": "icono2",
+    "rachamaslarga": 1,
+    "rachaactual": 1,
+    "ultimodiaderacha": "2026-05-12"
   }
 ]
