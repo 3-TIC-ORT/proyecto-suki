@@ -1,0 +1,518 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Signika", sans-serif;
+  background: #f3efee;
+  color: #222;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ── HEADER ── */
+.brand {
+  position: fixed;
+  top: 22px;
+  left: 24px;
+  z-index: 10;
+}
+
+.logo {
+  width: 180px;
+  height: auto;
+  display: block;
+}
+
+/* ── HERO ── */
+.hero {
+  min-height: 100dvh;
+  display: flex;
+  align-items: stretch;
+}
+
+.hero-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 110px 60px 60px;
+  max-width: 50%;
+}
+
+.hero-content h1 {
+  font-size: 52px;
+  font-weight: 700;
+  line-height: 1.1;
+  margin: 0 0 20px;
+}
+
+.highlight {
+  color: #ffd000;
+}
+
+.hero-desc {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #555;
+  margin: 0 0 32px;
+}
+
+.btn-cta {
+  display: inline-block;
+  align-self: flex-start;
+  padding: 14px 38px;
+  border-radius: 14px;
+  background: #ffd000;
+  color: #000;
+  font-size: 18px;
+  font-weight: 600;
+  font-family: "Signika", sans-serif;
+  cursor: pointer;
+  border: none;
+  transition: background 0.2s ease;
+}
+
+.btn-cta:hover {
+  background: #e6bb00;
+}
+
+.btn-cta-dark {
+  background: #000;
+  color: #fff;
+  display: inline-block;
+}
+
+.btn-cta-dark:hover {
+  background: #1d1d1d;
+}
+
+.hero-visual {
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+}
+
+.app-mockup {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* ── SECTION BASES ── */
+.section-white {
+  background: #ffffff;
+  padding: 80px 60px;
+}
+
+.section-beige {
+  background: #f3efee;
+  padding: 80px 60px;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 36px;
+  font-weight: 700;
+  margin: 0 0 40px;
+}
+
+.section-sub {
+  text-align: center;
+  font-size: 16px;
+  color: #666;
+  margin: -28px 0 40px;
+  line-height: 1.5;
+}
+
+/* ── QUÉ ES SUKI ── */
+.what-wrap {
+  max-width: 920px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 64px;
+}
+
+.dog-hero {
+  width: 200px;
+  height: auto;
+  flex-shrink: 0;
+
+}
+
+.what-text h2 {
+  font-size: 36px;
+  font-weight: 700;
+  margin: 0 0 18px;
+}
+
+.what-text p {
+  font-size: 17px;
+  line-height: 1.7;
+  color: #555;
+  margin: 0 0 14px;
+}
+
+.what-text p:last-child {
+  margin-bottom: 0;
+}
+
+/* ── STEPS ── */
+.steps {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  gap: 24px;
+}
+
+.step {
+  flex: 1;
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 32px 28px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  text-align: center;
+}
+
+.step-num {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #ffd000;
+  color: #000;
+  font-size: 24px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+}
+
+.step h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 10px;
+}
+
+.step p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #666;
+  margin: 0;
+}
+
+/* ── FEATURES ── */
+.features-grid {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.feature-card {
+  background: #f3efee;
+  border-radius: 16px;
+  padding: 28px 24px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.09);
+}
+
+.feat-icon {
+  width: 34px;
+  height: 34px;
+  color: #ffd000;
+  display: block;
+  margin-bottom: 14px;
+}
+
+.feature-card h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 8px;
+}
+
+.feature-card p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #666;
+  margin: 0;
+}
+
+/* ── SKINS ── */
+.section-skins {
+  text-align: center;
+}
+
+.skins-row {
+  max-width: 860px;
+  margin: 0 auto;
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.skin-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  transition: transform 0.2s ease;
+  cursor: default;
+}
+
+.skin-card:hover {
+  transform: translateY(-5px);
+}
+
+.skin-card img {
+  width: 96px;
+  height: 96px;
+  object-fit: contain;
+  display: block;
+}
+
+.skin-card span {
+  font-size: 13px;
+  font-weight: 600;
+  color: #444;
+}
+
+.skin-gold {
+  background: linear-gradient(145deg, #fff8e0, #fff2b8);
+  border: 2px solid #ffd000;
+}
+
+.skin-gold span {
+  color: #a07a00;
+}
+
+/* ── CTA FINAL ── */
+.section-cta {
+  display: flex;
+  justify-content: center;
+}
+
+.cta-card {
+  background: #f3efee;
+  border-radius: 24px;
+  padding: 60px 72px;
+  text-align: center;
+  max-width: 580px;
+  width: 100%;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+}
+
+.cta-dog {
+  width: 200px;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.cta-card h2 {
+  font-size: 36px;
+  font-weight: 700;
+  margin: 0 0 12px;
+}
+
+.cta-card > p {
+  font-size: 17px;
+  color: #666;
+  margin: 0 0 28px;
+  line-height: 1.5;
+}
+
+.cta-login {
+  margin-top: 18px !important;
+  margin-bottom: 0 !important;
+  font-size: 14px !important;
+  color: #888 !important;
+}
+
+.cta-login a {
+  color: #ffd000;
+  text-decoration: underline;
+}
+
+/* ── FOOTER ── */
+.legal {
+  padding: 18px 24px 20px;
+  text-align: center;
+  color: #666;
+  background: #f3efee;
+  border-top: 1px solid #e7dfdb;
+}
+
+.legal p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.legal a {
+  color: #ffd000;
+  text-decoration: underline;
+}
+
+/* ── DARK MODE ── */
+html[data-theme="dark"] .section-white {
+  background: #1a1a1a;
+}
+
+html[data-theme="dark"] .section-beige,
+html[data-theme="dark"] .hero,
+html[data-theme="dark"] .legal {
+  background: #121212;
+}
+
+html[data-theme="dark"] .hero-content h1,
+html[data-theme="dark"] .what-text h2,
+html[data-theme="dark"] .section-title,
+html[data-theme="dark"] .step h3,
+html[data-theme="dark"] .feature-card h3,
+html[data-theme="dark"] .cta-card h2 {
+  color: #efefef;
+}
+
+html[data-theme="dark"] .hero-desc,
+html[data-theme="dark"] .what-text p,
+html[data-theme="dark"] .step p,
+html[data-theme="dark"] .feature-card p,
+html[data-theme="dark"] .cta-card > p,
+html[data-theme="dark"] .section-sub {
+  color: #aaa;
+}
+
+html[data-theme="dark"] .step {
+  background: #1e1e1e;
+  color: #efefef;
+}
+
+html[data-theme="dark"] .feature-card {
+  background: #252525;
+}
+
+html[data-theme="dark"] .skin-card {
+  background: #1e1e1e;
+}
+
+html[data-theme="dark"] .skin-card span {
+  color: #ccc;
+}
+
+html[data-theme="dark"] .skin-gold {
+  background: linear-gradient(145deg, #2a2200, #352900);
+  border-color: #ffd000;
+}
+
+html[data-theme="dark"] .skin-gold span {
+  color: #ffd000;
+}
+
+html[data-theme="dark"] .cta-card {
+  background: #1e1e1e;
+}
+
+html[data-theme="dark"] .legal {
+  color: #888;
+  border-top-color: #303030;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .brand {
+    position: static;
+    padding: 16px 16px 0;
+  }
+
+  .hero {
+    flex-direction: column;
+    min-height: auto;
+  }
+
+  .hero-content {
+    max-width: 100%;
+    padding: 32px 24px 40px;
+    text-align: center;
+  }
+
+  .hero-content h1 {
+    font-size: 36px;
+  }
+
+  .hero-visual {
+    width: 100%;
+    height: 55vw;
+    min-height: 260px;
+    max-height: 55vh;
+  }
+
+  .app-mockup {
+    height: 100%;
+  }
+
+  .section-white,
+  .section-beige {
+    padding: 60px 24px;
+  }
+
+  .what-wrap {
+    flex-direction: column;
+    text-align: center;
+    gap: 32px;
+  }
+
+  .steps {
+    flex-direction: column;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .cta-card {
+    padding: 40px 24px;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-content h1 {
+    font-size: 30px;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .skins-row {
+    gap: 12px;
+  }
+
+  .skin-card img {
+    width: 76px;
+    height: 76px;
+  }
+}

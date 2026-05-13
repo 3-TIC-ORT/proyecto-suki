@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../theme.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Signika:wght@300..700&display=swap" rel="stylesheet">
+  <title>SUKI - Tu app de objetivos</title>
+  <link rel="icon" type="image/png" href="../AcercaDe/logof.png">
+</head>
+<body>
+
+  <header class="brand">
+    <img src="../AcercaDe/logo.png" alt="SUKI Logo" class="logo">
+  </header>
+
+  <!-- ── HERO ── -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Cumplí tus objetivos,<br><span class="highlight">un día a la vez</span></h1>
+      <p class="hero-desc">
+        SUKI es tu compañero de hábitos. Creá objetivos, mantené tu racha,
+        ganá puntos y desbloqueá skins de perros salchicha únicos.
+      </p>
+      <a href="../cuenta/IndexcuentaI.html" class="btn-cta">Empezar ahora</a>
+    </div>
+    <div class="hero-visual">
+      <img src="../cuenta/TuApp.png" alt="Vista previa de la app SUKI" class="app-mockup">
+    </div>
+  </section>
+
+  <!-- ── QUÉ ES SUKI ── -->
+  <section class="section-white">
+    <div class="what-wrap">
+      <div class="what-text">
+        <h2>¿Qué es SUKI?</h2>
+        <p>
+          SUKI es una app para plantear y cumplir objetivos personales. Su nombre viene de Suki,
+          el perro salchicha de Lucas. Cada objetivo completado suma un día a tu racha, te da puntos
+          y desbloquea recompensas. El progreso acá se celebra, no se ignora.
+        </p>
+        <p>
+          Podés crear objetivos de <strong>tiempo</strong> (ej. estudiar 1 hora al día, con cronómetro incluido)
+          o de <strong>acción</strong> (ej. tomar 8 vasos de agua, con contador de pulsaciones).
+        </p>
+      </div>
+      <img src="../imagenes/skins/Suki.png" alt="Mascota SUKI" class="dog-hero" id="random-dog">
+    </div>
+  </section>
+
+  <!-- ── CÓMO FUNCIONA ── -->
+  <section class="section-beige">
+    <h2 class="section-title">¿Cómo funciona?</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Creá tu objetivo</h3>
+        <p>Elegí entre objetivo por tiempo (cronómetro) o por acción (contador). Dale un nombre y configurá la meta diaria.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Completalo cada día</h3>
+        <p>Cuando terminás el tiempo o alcanzás la cantidad de acciones, el objetivo se marca como cumplido y tu racha crece.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Ganá recompensas</h3>
+        <p>Con los puntos acumulados comprás skins exclusivas en la tienda y desbloqueás logros únicos por tus hitos.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FEATURES ── -->
+  <section class="section-white">
+    <h2 class="section-title">Todo lo que encontrás en SUKI</h2>
+    <div class="features-grid">
+
+      <div class="feature-card">
+        <svg class="feat-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+        </svg>
+        <h3>Objetivos de tiempo</h3>
+        <p>Usá el cronómetro integrado. Cuando llega a cero, el objetivo del día queda cumplido automáticamente.</p>
+      </div>
+
+      <div class="feature-card">
+        <svg class="feat-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>
+        </svg>
+        <h3>Objetivos de acción</h3>
+        <p>Presioná el botón cada vez que realizás la acción. Al llegar a la cantidad configurada, listo.</p>
+      </div>
+
+      <div class="feature-card">
+        <svg class="feat-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M8.5 14.5A2.5 2.5 0 0011 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 11-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 002.5 3z"/>
+        </svg>
+        <h3>Rachas diarias</h3>
+        <p>Cada día que cumplís sumás un día a tu racha. ¡No la rompas y llegá a nuevos récords personales!</p>
+      </div>
+
+      <div class="feature-card">
+        <svg class="feat-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 4h14l-1 7a5 5 0 01-12 0L5 4z"/>
+          <polyline points="8 21 12 17 16 21"/>
+          <line x1="12" y1="17" x2="12" y2="11"/>
+        </svg>
+        <h3>Logros</h3>
+        <p>Desbloqueá insignias especiales por hitos: tu primer objetivo, 7 días seguidos, 30 días y mucho más.</p>
+      </div>
+
+      <div class="feature-card">
+        <svg class="feat-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/>
+          <path d="M16 10a4 4 0 01-8 0"/>
+        </svg>
+        <h3>Tienda de skins</h3>
+        <p>Gastá tus puntos en skins de perros salchicha de distintas rarezas: comunes, raras, épicas y legendarias.</p>
+      </div>
+
+      <div class="feature-card">
+        <svg class="feat-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/>
+        </svg>
+        <h3>Tu perfil</h3>
+        <p>Personalizá tu avatar con la skin que elegiste y llevá el registro completo de tu progreso.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── SKINS SHOWCASE ── -->
+  <section class="section-beige section-skins">
+    <h2 class="section-title">Skins que podés conseguir</h2>
+    <p class="section-sub">Cada skin tiene su rareza y personalidad. ¿Cuál vas a desbloquear primero?</p>
+    <div class="skins-row">
+      <div class="skin-card">
+        <img src="../imagenes/skins/Suki.png" alt="Skin Suki">
+        <span>Suki</span>
+      </div>
+      <div class="skin-card">
+        <img src="../imagenes/skins/Bzrp.png" alt="Skin BzRP">
+        <span>BzRP</span>
+      </div>
+      <div class="skin-card">
+        <img src="../imagenes/skins/salchivan.png" alt="Skin Solivan">
+        <span>Solivan</span>
+      </div>
+      <div class="skin-card skin-gold">
+        <img src="../imagenes/skins/De%20oro.png" alt="Skin De Oro">
+        <span>De Oro</span>
+      </div>
+      <div class="skin-card">
+        <img src="../imagenes/skins/salchiflash.png" alt="Skin Flash">
+        <span>Flash</span>
+      </div>
+      <div class="skin-card">
+        <img src="../imagenes/skins/SALCHICRAFT.png" alt="Skin Salchicraft">
+        <span>Salchicraft</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA FINAL ── -->
+  <section class="section-white section-cta">
+    <div class="cta-card">
+      <img src="../imagenes/skins/Suki.png" alt="Mascota SUKI" class="cta-dog">
+      <h2>¿Listo para empezar?</h2>
+      <p>Creá tu cuenta gratis y empezá a cumplir tus objetivos hoy mismo.</p>
+      <a href="../cuenta/IndexcuentaI.html" class="btn-cta btn-cta-dark">Crear mi cuenta</a>
+      <p class="cta-login">¿Ya tenés cuenta? <a href="../InicioSesion/IndexInicioSesion.html">Iniciá sesión</a></p>
+    </div>
+  </section>
+
+  <footer class="legal">
+    <p>Tus datos nunca se comparten. No hay mensajes de spam.</p>
+    <p>Al continuar, aceptás los <a href="#">Términos de Uso</a> y la <a href="#">Política de Privacidad</a></p>
+  </footer>
+
+  <script src="../theme.js"></script>
+  <script>
+    const skins = [
+      "../imagenes/skins/Suki.png",
+      "../imagenes/skins/Bzrp.png",
+      "../imagenes/skins/salchivan.png",
+      "../imagenes/skins/De%20oro.png",
+      "../imagenes/skins/salchiflash.png",
+      "../imagenes/skins/SALCHICRAFT.png",
+      "../imagenes/skins/Salchirabino.png",
+      "../imagenes/skins/salchitrump.png",
+      "../imagenes/skins/salchiturro.png",
+    ];
+    const img = document.getElementById("random-dog");
+    img.src = skins[Math.floor(Math.random() * skins.length)];
+  </script>
+</body>
+</html>
