@@ -178,5 +178,50 @@
     "cantidadobjetivoscreados": 0,
     "skinseleccionada": "suki",
     "objetivoscompletados": 0
+  },
+  {
+    "usuario": "Juan Bernanrdo",
+    "id": 1779142376976,
+    "contraseña": null,
+    "mail": "e1zeid3@gmail.com",
+    "fecha": null,
+    "racha": 0,
+    "logrosdesbloqueados": 1,
+    "skinscompradas": 0,
+    "dinero": 10,
+    "fechadecreacion": "2026-05-18",
+    "skins": {
+      "suki": true,
+      "trump": false,
+      "flash": false,
+      "turro": false,
+      "sullivan": false,
+      "bikini": false,
+      "rabino": false,
+      "bizarrap": false,
+      "oro": false,
+      "minecraft": false
+    },
+    "logros": {
+      "primerpaso": false,
+      "racha3": false,
+      "racha7": false,
+      "racha30": false,
+      "iniciador": true,
+      "creador": false,
+      "coleccionista": false,
+      "explorador": false,
+      "legendario": false,
+      "centenario": false,
+      "ganador": false,
+      "extraganador": false,
+      "extasis": false
+    },
+    "rachamaslarga": 0,
+    "rachaactual": 0,
+    "ultimodiaderacha": null,
+    "cantidadobjetivoscreados": 1,
+    "skinseleccionada": "suki",
+    "objetivoscompletados": 0
   }
 ]

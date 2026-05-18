@@ -11,6 +11,54 @@ cerrarModal.addEventListener("click", () => {
 });
 
 connect2Server(3000);
+function handleCredentialResponse(response) {
+
+  const token = response.credential;
+
+  const data = parseJwt(token);
+
+  const mail = data.email;
+  const nombre = data.name;
+
+  postEvent("logingoogle", {
+    mail,
+    nombre
+  }, (respuesta) => {
+
+    if (respuesta?.ok === true) {
+
+      localStorage.setItem(
+        "idusuario",
+        JSON.stringify({
+          idusuario: respuesta.idusuario,
+          nombre: respuesta.nombre
+        })
+      );
+
+      window.location.href =
+      "../menu principal/indexMenuPrincipal.html";
+
+    } else {
+
+      alert("Error al iniciar sesión con Google");
+
+    }
+
+  });
+
+}
+
+function parseJwt(token) {
+
+  const base64Url = token.split('.')[1];
+
+  const base64 = base64Url
+    .replace(/-/g, '+')
+    .replace(/_/g, '/');
+
+  return JSON.parse(atob(base64));
+
+}
 
 const existente = JSON.parse(localStorage.getItem("idusuario") || "null");
 if (existente) {

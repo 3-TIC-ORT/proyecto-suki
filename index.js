@@ -491,6 +491,110 @@ if (datosusuario[i].mail === mail && datosusuario[i].contraseña === contraseña
 }
     return objok;
 })
+subscribePOSTEvent("logingoogle", ({mail, nombre}) => {
+
+    let usuarios =
+    JSON.parse(
+      fs.readFileSync("data/usuarios.json", "utf-8")
+    );
+
+    // BUSCAR SI YA EXISTE
+
+    for (let i = 0; i < usuarios.length; i++) {
+
+        if (usuarios[i].mail === mail) {
+
+            return {
+                ok: true,
+                idusuario: usuarios[i].id,
+                nombre: usuarios[i].usuario
+            };
+
+        }
+
+    }
+
+    // SI NO EXISTE → CREAR USUARIO
+
+    let nuevousuario = {
+
+        usuario: nombre,
+
+        id: Date.now(),
+
+        contraseña: null,
+
+        mail: mail,
+
+        fecha: null,
+
+        racha: 0,
+
+        logrosdesbloqueados: 0,
+
+        skinscompradas: 0,
+
+        dinero: 0,
+
+        fechadecreacion:
+        new Date().toISOString().split("T")[0],
+
+        skins: {
+            suki: true,
+            trump: false,
+            flash: false,
+            turro: false,
+            sullivan: false,
+            bikini: false,
+            rabino: false,
+            bizarrap: false,
+            oro: false,
+            minecraft: false
+        },
+
+        logros:{
+            primerpaso: false,
+            racha3: false,
+            racha7: false,
+            racha30: false,
+            iniciador: false,
+            creador: false,
+            coleccionista: false,
+            explorador: false,
+            legendario: false,
+            centenario: false,
+            ganador: false,
+            extraganador: false,
+            extasis: false
+        },
+
+        rachamaslarga: 0,
+        rachaactual: 0,
+        ultimodiaderacha: null,
+        cantidadobjetivoscreados: 0,
+        skinseleccionada: "suki",
+        objetivoscompletados: 0
+
+    };
+
+    usuarios.push(nuevousuario);
+
+    fs.writeFileSync(
+      "data/usuarios.json",
+      JSON.stringify(usuarios, null, 2)
+    );
+
+    return {
+
+        ok: true,
+
+        idusuario: nuevousuario.id,
+
+        nombre: nuevousuario.usuario
+
+    };
+
+});
 
 subscribePOSTEvent("crearobjetivo", ({idusuario, titulo, tipodeobjetivo, tiempo, veces, icono, color}) => {
     let objok = {ok:false};

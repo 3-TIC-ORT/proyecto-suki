@@ -194,5 +194,19 @@
     "rachamaslarga": 1,
     "rachaactual": 1,
     "ultimodiaderacha": "2026-05-06"
+  },
+  {
+    "idusuario": 1779142376976,
+    "idobjetivo": 1779142388284,
+    "titulo": "SADASD",
+    "tipodeobjetivo": "accion",
+    "tiempo": null,
+    "veces": 2,
+    "vecescompletadas": 0,
+    "color": "#CB30E0",
+    "icono": "icono2",
+    "rachamaslarga": 0,
+    "rachaactual": 0,
+    "ultimodiaderacha": null
   }
 ]

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SUKI</title>
@@ -18,6 +19,12 @@
             <input type="text" placeholder="Mail" id="email" class="btn">
             <input type="password" placeholder="Contraseña" id="contraseña" class="btn">
             <button type="submit" id="btn-acceder" class="btn">Acceder</button>
+            <div id="g_id_onload"
+     data-client_id="677688990250-l94b9l3vphfju15pna70f71cifif79ke.apps.googleusercontent.com"
+     data-callback="handleCredentialResponse">
+</div>
+
+<div class="g_id_signin"></div>
             <p>¿No tienes una cuenta? <a href="../CrearCuenta/IndexCrearCuenta.html">Crea tu cuenta</a></p>
             <a href=""></a>
         </form>
