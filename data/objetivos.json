@@ -244,12 +244,12 @@
     "tipodeobjetivo": "accion",
     "tiempo": null,
     "veces": 10,
-    "vecescompletadas": 1,
-    "color": "#002AB8",
-    "icono": "icono11",
+    "vecescompletadas": 2,
+    "color": "#6B2A14",
+    "icono": "icono10",
     "rachamaslarga": 1,
     "rachaactual": 1,
-    "ultimodiaderacha": "2026-05-08"
+    "ultimodiaderacha": "2026-05-13"
   },
   {
     "idusuario": 1778264772179,
@@ -286,11 +286,11 @@
     "tipodeobjetivo": "accion",
     "tiempo": null,
     "veces": 10,
-    "vecescompletadas": 1,
+    "vecescompletadas": 2,
     "color": "#CB30E0",
     "icono": "icono2",
-    "rachamaslarga": 1,
-    "rachaactual": 1,
-    "ultimodiaderacha": "2026-05-12"
+    "rachamaslarga": 2,
+    "rachaactual": 2,
+    "ultimodiaderacha": "2026-05-13"
   }
 ]
